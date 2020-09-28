@@ -75,4 +75,4 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 * Restart (?restart, ?stopbot, ?shutdown)
 
 
-![reactions](https://i.imgur.com/ON9MZYU.png)
+* **[Picture](https://imgur.com/a/tuYdEv1)**
