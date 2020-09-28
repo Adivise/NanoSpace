@@ -1,3 +1,9 @@
+## Have Problem
+
+✈ Join Discord:  [NanoSpace ♪♪](https://discord.gg/4pk97A2)
+   mention me in chat #main and ask problem okay! 👌
+
+
 ## Requirements
 
 1. Discord Bot Token **[Guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)**
