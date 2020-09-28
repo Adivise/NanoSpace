@@ -41,8 +41,8 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 
 > Note: The default prefix is '?'
 
-* 🎶 **Music Commands!**
-* Play (?play, ?p, ?pplay)
+* 🎶 **Music Commands!** 
+* Play (?play, ?p, ?pplay) can play song from youtube, soundcloud and twitch
 * Nowplaying (?nowplaying, ?np, ?now)
 * Queue (?q)
 * Repeat (?loop (current, all), ?repeat (current, all))
