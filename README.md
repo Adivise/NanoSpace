@@ -14,7 +14,7 @@ git clone https://github.com/Adivise/quality-musicbot-lavalink
 cd quality-musicbot-lavalink
 npm install
 ```
-After installation finishes you can use `node .` to start the bot.
+After installation finishes you can use `node .` to start the bot. or `Run Start.bat`
 
 ## Configuration
 
