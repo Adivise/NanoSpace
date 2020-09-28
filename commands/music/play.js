@@ -33,6 +33,7 @@ module.exports = {
                 case "TRACK_LOADED":
                     player.queue.add(res.tracks[0]);
                     msg.edit(`Starting playing... \`${res.tracks[0].title}\` \`${Utils.formatTime(res.tracks[0].duration, true)}\``);
+                        console.log(chalk.magenta(`  [Command]: Play used by ${message.author.tag} from ${message.guild.name}`));
                     if (!player.playing) player.play()
                     break;
                 
