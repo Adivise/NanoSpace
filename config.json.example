@@ -1,0 +1,8 @@
+{
+	"prefix": "?",
+	"token": "YOUR_TOKEN_BOT",
+	"ownerid": "YOUR_CLIENT_ID",
+	"nodes": [
+		{ "host": "localhost", "port": 8000, "password": "changeyourpassword" }
+	]
+}
