@@ -41,38 +41,48 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 
 > Note: The default prefix is '?'
 
-* 🎶 **Music Commands!** 
-* Play (?play, ?p, ?pplay) can play song from youtube, soundcloud and twitch
-* Nowplaying (?nowplaying, ?np, ?now)
-* Queue (?q)
-* Repeat (?loop (current, all), ?repeat (current, all))
-* Loopqueue (?loopall, ?lq, repeatall)
-* Shuffle (?shuffle, mix)
-* Volume control (?vol, ?v)
-* Pause (?pause, ?pa)
-* Resume (?resume, ?r)
-* Skip (?skip, #s)
-* Skipto (?skipto, ?st)
-* Clear (?clear)
-* Join (?join, ?summon)
-* Leave (?leave, ?dc, ?lev, ?stop)
-* Forward (?forward)
-* Seek (?seek)
-* Rewind (?rewind)
-* Replay (?replay)
+🎶 **Music Commands!** 
+- Play (?play, ?p, ?pplay) can play song from youtube, soundcloud and twitch
+- Nowplaying (?nowplaying, ?np, ?now)
+- Queue (?q)
+- Repeat (?loop (current, all), ?repeat (current, all))
+- Loopqueue (?loopall, ?lq, repeatall)
+- Shuffle (?shuffle, mix)
+- Volume control (?vol, ?v)
+- Pause (?pause, ?pa)
+- Resume (?resume, ?r)
+- Skip (?skip, #s)
+- Skipto (?skipto, ?st)
+- Clear (?clear)
+- Join (?join, ?summon)
+- Leave (?leave, ?dc, ?lev, ?stop)
+- Forward (?forward)
+- Seek (?seek)
+- Rewind (?rewind)
+- Replay (?replay)
 
-* ⏺ **Filter Commands!**
-* Bass (?bass)
-* Superbass (?superbass, >sb)
-* Pop (?pop)
-* Treblebass (?treblebass, ?tb)
-* Soft (?soft)
-* Earrape (?earrape, ?ear)
-* Reset (?reset)
+⏺ **Filter Commands!**
+- Bass (?bass)
+- Superbass (?superbass, >sb)
+- Pop (?pop)
+- Treblebass (?treblebass, ?tb)
+- Soft (?soft)
+- Earrape (?earrape, ?ear)
+- Reset (?reset)
 
-* 📑 **Utilities Commands!**
-* Help (?help, ?h, ?halp, ?commands)
-* Restart (?restart, ?stopbot, ?shutdown)
+📑 **Utilities Commands!**
+- Help (?help, ?h, ?halp, ?commands)
+- Restart (?restart, ?stopbot, ?shutdown)
 
+## Picture
 
-## **[Picture](https://imgur.com/a/tuYdEv1)**
+- [CLICK ME!](https://imgur.com/a/qzgEhTd)
+
+![see](https://i.imgur.com/wvSDhJ0.png)
+![see](https://i.imgur.com/XjVuX8K.png)
+![see](https://i.imgur.com/ThSvWPx.png)
+![see](https://i.imgur.com/jncxeNu.png)
+![see](https://i.imgur.com/7mDFd30.png)
+![see](https://i.imgur.com/jL1IMeW.png)
+![see](https://i.imgur.com/5461gRn.png)
+![see](https://i.imgur.com/42PavqR.png)
