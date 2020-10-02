@@ -15,14 +15,14 @@ module.exports = {
     run: async (client, message, args) => {
         const embed = new MessageEmbed()
             .setColor('#000001')
-            .setAuthor(`${message.guild.me.displayName} Help Command!`, message.guild.iconURL)
-            .setThumbnail(client.user.displayAvatarURL);
+            .setAuthor(`${message.guild.me.displayName} Help Command!`, message.guild.iconURL({ dynamic: true }))
+            .setThumbnail(client.user.displayAvatarURL({ dynamic: true, size: 2048 }));
 
         if(!args[0]) {
             const categories = readdirSync("./commands/")
 
-            embed.setDescription(`The client prefix is: **${prefix}**`)
-            embed.setFooter(`© ${message.guild.me.displayName} | Total Commands: ${client.commands.size}`, client.user.displayAvatarURL);
+            embed.setDescription(`The bot prefix is: **${prefix}**`)
+            embed.setFooter(`© ${message.guild.me.displayName} | Total Commands: ${client.commands.size}`, client.user.displayAvatarURL({ dynamic: true }));
 
             categories.forEach(category => {
                 const dir = client.commands.filter(c => c.config.category === category)

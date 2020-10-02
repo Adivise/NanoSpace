@@ -24,13 +24,12 @@ module.exports = {
         if(!channel || channel.id !== player.voiceChannel.id) return msg.edit("You need to be in a voice channel to use the skip command.");
 
 		if ((args[0] > player.queue.length) || (args[0] && !player.queue[args[0] - 1])) return msg.edit('Song not found');
-		const { title } = player.queue[args[0] - 1];
 		if (args[0] == 1) player.stop();
 		player.queue.splice(0, args[0] - 1);
         player.stop();
         
         const skipto = new MessageEmbed()
-            .setDescription("\`⏭\` | **Song has been:** " + `\`Skipto | ${title}\``)
+            .setDescription("\`⏭\` | **Song has been:** " + `\`Skipto\``)
             .setColor('#000001');
 
         msg.edit('', skipto);
