@@ -1,4 +1,5 @@
 const chalk = require('chalk');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
     config: {
@@ -9,18 +10,22 @@ module.exports = {
         category: "music",
         usage: "<input>"
     },
-    run: async (bot, message) => {
+    run: async (client, message) => {
         const msg = await message.channel.send(`**Loading please wait...**`);
 
-        const player = bot.music.players.get(message.guild.id);
+        const player = client.music.players.get(message.guild.id);
         if(!player) return msg.edit("No song/s currently playing in this guild.");
 
-        const { voiceChannel } = message.member;
-        if(!voiceChannel || voiceChannel.id !== player.voiceChannel.id) return msg.edit("You need to be in a voice channel to use the skip command.");
+        const { channel } = message.member.voice;
+        if(!channel || channel.id !== player.voiceChannel.id) return msg.edit("You need to be in a voice channel to use the skip command.");
 
-		player.queue.clear();
+        player.queue.clear();
+        
+        const cleared = new MessageEmbed()
+            .setDescription("\`📛\` | **Queue has been:** `Cleared`")
+            .setColor('#000001');
 
-        msg.edit("\`📛\` | **Queue has been:** `Cleared`");
+        msg.edit('', cleared);
             console.log(chalk.magenta(`  [Command]: Clear used by ${message.author.tag} from ${message.guild.name}`));
     }
 }

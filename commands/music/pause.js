@@ -1,4 +1,5 @@
 const chalk = require('chalk');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
     config: {
@@ -14,12 +15,16 @@ module.exports = {
         const player = bot.music.players.get(message.guild.id);
         if (!player) return message.channel.send("No song/s currently playing in this guild.");
 
-        const { voiceChannel } = message.member;
-        if (!voiceChannel || voiceChannel.id !== player.voiceChannel.id) return message.channel.send("You need to be in a voice channel to pause music.");
+        const { channel } = message.member.voice;
+        if (!channel || channel.id !== player.voiceChannel.id) return message.channel.send("You need to be in a voice channel to pause music.");
         
         player.pause(player.playing);
 
-        msg.edit(`\`⏯\` | **Song has been:** \`${player.playing ? "Resumed" : "Paused"}\``)
+        const embed = new MessageEmbed()
+        .setDescription(`\`⏯\` | **Song has been:** \`${player.playing ? "Resumed" : "Paused"}\``)
+        .setColor('#000001');
+
+        msg.edit('', embed);
             console.log(chalk.magenta(`  [Command]: ${player.playing ? "Resumed" : "Paused"} used by ${message.author.tag} from ${message.guild.name}`))
     }
 }

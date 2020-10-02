@@ -8,21 +8,21 @@ module.exports = {
         accessableby: "Member",
         category: "music",
     },
-    run: async (bot, message, args) => {
+    run: async (client, message, args) => {
         const msg = await message.channel.send(`**Loading please wait...**`);
 
-        const { voiceChannel } = message.member;
+        const { channel } = message.member.voice;
 
-        const player = bot.music.players.spawn({
+        const player = client.music.players.spawn({
             guild: message.guild,
 			selfDeaf: true,
             textChannel: message.channel,
-            voiceChannel
+            voiceChannel: channel,
         });
 
-        if(!voiceChannel || voiceChannel.id !== player.voiceChannel.id) return msg.edit("You need to be in a voice channel to use the join command.");
+        if(!channel || channel.id !== player.voiceChannel.id) return msg.edit("You need to be in a voice channel to use the join command.");
 
-        msg.edit(`\`🔊\` | **Joined:** \`Success\` | ${voiceChannel.id}`)
-            console.log(chalk.green(`    [Joined]: ${voiceChannel.id}`, chalk.yellow`[GuildID]: ${message.guild.id}`));
+        msg.edit(`\`🔊\` | **Joined:** \`Success\` | ${channel.id}`)
+            console.log(chalk.green(`    [Joined]: ${channel.id}`, chalk.yellow`[GuildID]: ${message.guild.id}`));
     }
 }

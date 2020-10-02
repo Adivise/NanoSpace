@@ -1,5 +1,5 @@
 {
-  "name": "lavalink-music-v11",
+  "name": "lavalink-music-v12",
   "version": "1.5.2",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "chalk": "^4.1.0",
     "common-tags": "^1.8.0",
     "delay": "^4.4.0",
-    "discord.js": "^11.6.4",
+    "discord.js": "^12.3.1",
     "erela.js": "^1.1.8",
     "figlet": "^1.5.0",
     "node-fetch": "^2.6.0"

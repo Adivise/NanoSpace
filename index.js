@@ -1,8 +1,8 @@
 const { Client, Collection } = require("discord.js");
 const { token } = require("./config.json");
-const bot = new Client();
+const client = new Client();
 
-["aliases", "commands"].forEach(x => bot[x] = new Collection());
-["console", "command", "event"].forEach(x => require(`./handlers/${x}`)(bot));
+["aliases", "commands"].forEach(x => client[x] = new Collection());
+["console", "command", "event"].forEach(x => require(`./handlers/${x}`)(client));
 
-bot.login(token);
+client.login(token);
