@@ -16,8 +16,8 @@
 ## Installation
 
 ```
-git clone https://github.com/Adivise/quality-musicbot-lavalink
-cd quality-musicbot-lavalink
+git clone https://github.com/Adivise/NanoSpace
+cd NanoSpace
 npm install
 ```
 After installation finishes you can use `node .` to start the bot. or `Run Start.bat`
