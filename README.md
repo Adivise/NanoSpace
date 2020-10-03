@@ -11,7 +11,7 @@
 
 ## Super Requirements 
 
-1. Java 11-13 **[Download JDK13](https://www.oracle.com/java/technologies/javase-jdk13-downloads.html)**
+1. Java 11-13 **[Download JDK13](https://www.oracle.com/java/technologies/javase-jdk13-downloads.html)** (i use this here version)
 
 ## Installation
 
