@@ -7,7 +7,9 @@
 ## Requirements
 
 1. Discord Bot Token **[Guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)**
-2. Lavalink **[Guide](https://github.com/Frederikam/Lavalink)**
+2. Lavalink Original don't exit **[Guide](https://github.com/Frederikam/Lavalink)** 
+	please use CustomLavalink **[NEW  CLICK HERE](https://github.com/MeLike2D/lavalink)**
+3. Get YoutubeAPI V3 **[Guide](https://console.developers.google.com)** pt. use gmail and to create api key!
 
 ## Super Requirements 
 
@@ -29,8 +31,9 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 ```json
 {
 	"prefix": "?",
-	"token": "YOUR_TOKEN_BOT",
-	"ownerid": "YOUR_CLIENT_ID",
+	"token": "TOKENHERE",
+	"ownerid": "YOURIDHERE",
+	"api_key": "YOUTUBEAPIHERE",
 	"nodes": [
 		{ "host": "localhost", "port": 8000, "password": "changeyourpassword" }
 	]
@@ -86,3 +89,5 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 ![see](https://i.imgur.com/jL1IMeW.png)
 ![see](https://i.imgur.com/5461gRn.png)
 ![see](https://i.imgur.com/42PavqR.png)
+![New Png](https://prnt.sc/10427bt)
+![New Png](https://prnt.sc/104286p)
