@@ -89,5 +89,5 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 ![see](https://i.imgur.com/jL1IMeW.png)
 ![see](https://i.imgur.com/5461gRn.png)
 ![see](https://i.imgur.com/42PavqR.png)
-![New Png](https://prnt.sc/10427bt)
-![New Png](https://prnt.sc/104286p)
+![see](https://prnt.sc/10427bt)
+![see](https://prnt.sc/104286p)
