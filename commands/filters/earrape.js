@@ -12,8 +12,8 @@ module.exports = {
         aliases: ["ear"]
     },
 
-    run: async (client, message, filter) => {
-        const msg = await message.channel.send("Turning on `Earrape` please wait...");
+    run: async (client, message) => {
+        const msg = await message.channel.send("Turning on **Earrape**. This may take a few seconds...");
 
         const player = client.music.players.get(message.guild.id);
         if(!player) return msg.edit("No song/s currently playing in this guild.");
@@ -22,7 +22,7 @@ module.exports = {
         if (!channel) return message.channel.send("You need to be in a voice channel to play music.");
 
         player.setVolume(earrape);
-        player.setEQ(...Array(6).fill(0).map((n, i) => ([{ band: i, gain: 0.5 }])));
+        player.setEQ(Array(6).fill(0).map((n, i) => ([{ band: i, gain: 0.5 }])));
 
         const earrapped = new MessageEmbed()
             .setAuthor("Turn on filter: Earrape", 'https://cdn.discordapp.com/emojis/758423098885275748.gif')

@@ -42,7 +42,7 @@ module.exports = async (client) => {
                 .setThumbnail(`https://img.youtube.com/vi/${identifier}/hqdefault.jpg`)
                 .addField('Author:', author, true)
                 .addField('Requester:', requester, true)
-                .addField('Current Volume:', player.volume, true)
+                .addField('Current Volume:', player.volume + "%", true)
                 .addField('Queue Length:', player.queue.length, true)
                 .addField('Duration:', `${Utils.formatTime(duration, true)}`, true)
                 .addField('Total Duration:', qduration, true)

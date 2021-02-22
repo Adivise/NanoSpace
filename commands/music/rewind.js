@@ -1,7 +1,7 @@
 const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 const { prefix } = require('../../config.json');
-const formatDuration = require('../../handlers/formatduration.js')
+const formatDuration = require('../../structures/formatduration.js')
 
 const rewindNum = 10;
 

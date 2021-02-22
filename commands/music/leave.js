@@ -1,4 +1,5 @@
 const chalk = require('chalk');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
     config: {
@@ -17,8 +18,12 @@ module.exports = {
         if(!player) return msg.edit("No song/s currently playing in this guild.");
         if(!channel || channel.id !== player.voiceChannel.id) return msg.edit("You need to be in a voice channel to use the leave command.");
 
+        const embed = new MessageEmbed()
+            .setDescription(`\`🚫\` | **Leaved:** | \`${channel.name}\``)
+            .setColor('#000001');
+
         client.music.players.destroy(message.guild.id);
-        msg.edit(`\`🚫\` | **Leaved:** \`Success\` | ${channel.id}`)
+        msg.edit('', embed)
                 console.log(chalk.red(`    [Leaved]: ${channel.id}`, chalk.yellow(`[GuildID]: ${message.guild.id}`)));
     }
 }

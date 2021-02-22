@@ -1,7 +1,8 @@
 {
-	"prefix": "?",
-	"token": "YOUR_TOKEN_BOT",
-	"ownerid": "YOUR_CLIENT_ID",
+	"prefix": "#",
+	"token": "TOKENHERE",
+	"ownerid": "YOURIDHERE",
+	"api_key": "YOUTUBEAPIHERE",
 	"nodes": [
 		{ "host": "localhost", "port": 8000, "password": "changeyourpassword" }
 	]

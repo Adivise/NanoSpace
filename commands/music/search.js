@@ -1,15 +1,16 @@
 const { Utils } = require("erela.js")
 const chalk = require('chalk');
 const { MessageEmbed } = require("discord.js");
+const formatDuration = require('../../structures/formatduration')
 
 module.exports = { 
     config: {
-        name: "play",
+        name: "search",
         description: "Play a song/playlist or search for a song from youtube",
         usage: "<results>",
         category: "music",
         accessableby: "Member",
-        aliases: ["p", "pplay"]
+        aliases: []
     },
     run: async (client, message, args) => {
         const msg = await message.channel.send('Loading please wait...')
@@ -39,24 +40,49 @@ module.exports = {
                     .setColor('#000001')
 
                     msg.edit('', embed);
-                        console.log(chalk.magenta(`  [Command]: Play used by ${message.author.tag} from ${message.guild.name}`));
+                        console.log(chalk.magenta(`  [Command]: Search used by ${message.author.tag} from ${message.guild.name}`));
                     if (!player.playing) player.play()
                     break;
                 
                 case "SEARCH_RESULT":
-                const res1 = await client.music.search(
-                    message.content.slice(6),
-                    message.author
-                );
-                    player.queue.add(res1.tracks[0]);
+                    let index = 1;
+                    const tracks = res.tracks.slice(0, 5);
 
-                    const embed1 = new MessageEmbed()
-                        .setDescription(`**Queued • [${res1.tracks[0].title}](${res1.tracks[0].uri})** \`${Utils.formatTime(res1.tracks[0].duration, true)}\` • ${res1.tracks[0].requester}`)
+                    const results = res.tracks
+                        .slice(0, 5)
+                        .map(video => `**(${index++}.) [${video.title}](${video.uri})** \`${formatDuration(video.duration)}\` Author: \`${video.author}\``)
+                        .join("\n");
+
+                    const playing = new MessageEmbed()
+                        .setAuthor(`Song Selection...`, message.guild.iconURL({ dynamic: true }))
                         .setColor('#000001')
-            
-                      msg.edit('', embed1);
-                        console.log(chalk.magenta(`  [Command]: Play used by ${message.author.tag} from ${message.guild.name}`));
-                      if (!player.playing) player.play()
+                        .setDescription(results)
+                        .setFooter(`Please type 1-5 select the song in 30s type cancel to Cancel`);
+
+                    await msg.edit('', playing)
+
+                    const collector = message.channel.createMessageCollector(m => {
+                        return m.author.id === message.author.id && new RegExp(`^([1-5]|cancel)$`, "i").test(m.content)
+                    }, { time: 30000, max: 1 });
+
+                    collector.on("collect", m => {
+                        if (/cancel/i.test(m.content)) return collector.stop("cancelled")
+
+                        const track = tracks[Number(m.content) - 1];
+                        player.queue.add(track)
+
+                        const embed = new MessageEmbed()
+                            .setDescription(`**Queued • [${track.title}](${track.uri})** \`${formatDuration(track.duration)}\` • ${track.requester}`)
+                            .setColor('#000001');
+
+                        msg.edit('', embed);
+                            console.log(chalk.magenta(`  [Command]: Search used by ${message.author.tag} from ${message.guild.name}`));
+                        if(!player.playing) player.play();
+                    });
+
+                    collector.on("end", (_, reason) => {
+                        if(["time", "cancelled"].includes(reason)) return msg.edit("Cancelled selection.")
+                    });
                     break;
 
                 case "PLAYLIST_LOADED":
@@ -68,7 +94,7 @@ module.exports = {
                         .setColor('#000001')
 
                     msg.edit('', playlist);
-                        console.log(chalk.magenta(`  [Command]: Play used by ${message.author.tag} from ${message.guild.name}`));
+                        console.log(chalk.magenta(`  [Command]: Search used by ${message.author.tag} from ${message.guild.name}`));
                         if(!player.playing) player.play()
                     break;
             }

@@ -1,19 +1,19 @@
 const delay = require('delay');
 const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const { soft } = require('../../config/filter');
+const { nightcore } = require('../../config/filter')
 
 module.exports = { 
     config: {
-        name: "soft",
-        description: "Turning on soft filter",
+        name: "nightcore",
+        description: "Turning on nightcore filter",
         category: "filters",
         accessableby: "Member",
         aliases: []
     },
 
     run: async (client, message) => {
-        const msg = await message.channel.send("Turning on **Soft**. This may take a few seconds...");
+        const msg = await message.channel.send("Turning on **Nightcore**. This may take a few seconds...");
 
         const player = client.music.players.get(message.guild.id);
         if(!player) return msg.edit("No song/s currently playing in this guild.");
@@ -21,14 +21,14 @@ module.exports = {
         const { channel } = message.member.voice;
         if (!channel) return message.channel.send("You need to be in a voice channel to play music.");
 
-        player.setFilter('filters', soft);
+        player.setFilter('filters', nightcore);
 
-        const softed = new MessageEmbed()
-            .setAuthor("Turned on: Soft", 'https://cdn.discordapp.com/emojis/758423098885275748.gif')
+        const nightcored = new MessageEmbed()
+            .setAuthor("Turned on: Nightcore", 'https://cdn.discordapp.com/emojis/758423098885275748.gif')
             .setColor('#000001');
 
         await delay(5000);
-        msg.edit('', softed);
-            console.log(chalk.magenta(`  [Command]: Soft used by ${message.author.tag} from ${message.guild.name}`));
+        msg.edit('', nightcored);
+            console.log(chalk.magenta(`  [Command]: Nightcore used by ${message.author.tag} from ${message.guild.name}`));
    }
 };

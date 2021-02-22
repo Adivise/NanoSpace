@@ -1,4 +1,5 @@
 const chalk = require('chalk');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
     config: {
@@ -22,7 +23,11 @@ module.exports = {
 
         if(!channel || channel.id !== player.voiceChannel.id) return msg.edit("You need to be in a voice channel to use the join command.");
 
-        msg.edit(`\`🔊\` | **Joined:** \`Success\` | ${channel.id}`)
+        const embed = new MessageEmbed()
+            .setDescription(`\`🔊\` | **Joined:** \`${channel.name}\``)
+            .setColor('#000001')
+
+        msg.edit('', embed)
             console.log(chalk.green(`    [Joined]: ${channel.id}`, chalk.yellow`[GuildID]: ${message.guild.id}`));
     }
 }
