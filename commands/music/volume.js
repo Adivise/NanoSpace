@@ -20,7 +20,7 @@ module.exports = {
         if (!channel || channel.id !== player.voiceChannel.id) return msg.edit("You need to be in a voice channel to adjust the volume.");
 
         if (!args[0]) return msg.edit(`Current Volume: ${player.volume}`);
-        if (Number(args[0]) <= 0 || Number(args[0]) > 100) return message.author.send("You may only set the volume to 1-100");
+        if (Number(args[0]) <= 0 || Number(args[0]) > 100) return message.channel.send("You may only set the volume to 1-100");
 
         player.setVolume(Number(args[0]));
 
