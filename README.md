@@ -10,7 +10,6 @@
 2. Lavalink Original don't exit **[Guide](https://github.com/Frederikam/Lavalink)** 
 	please use CustomLavalink **[NEW  CLICK HERE](https://github.com/MeLike2D/lavalink)**
 3. Get YoutubeAPI V3 **[Guide](https://console.developers.google.com)** pt. use gmail and to create api key!
-4. Download Erala.js **[Download](http://www.mediafire.com/file/9wb3hp7uxf57p7y/erela.js.rar/file)** pt. replace file to node_module
 
 ## Super Requirements 
 
@@ -93,4 +92,5 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 
 - **New Picture**
 [CLICK HERE](https://prnt.sc/10427bt)
+
 [CLICK HERE](https://prnt.sc/104286p)
