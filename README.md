@@ -30,7 +30,7 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 
 ```json
 {
-	"prefix": "?",
+	"prefix": "#",
 	"token": "TOKENHERE",
 	"ownerid": "YOURIDHERE",
 	"api_key": "YOUTUBEAPIHERE",
@@ -42,40 +42,47 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 
 ## Features & Commands
 
-> Note: The default prefix is '?'
+> Note: The default prefix is '#'
 
 🎶 **Music Commands!** 
-- Play (?play, ?p, ?pplay) can play song from youtube, soundcloud and twitch
-- Nowplaying (?nowplaying, ?np, ?now)
-- Queue (?q)
-- Repeat (?loop (current, all), ?repeat (current, all))
-- Loopqueue (?loopall, ?lq, repeatall)
-- Shuffle (?shuffle, mix)
-- Volume control (?vol, ?v)
-- Pause (?pause, ?pa)
-- Resume (?resume, ?r)
-- Skip (?skip, #s)
-- Skipto (?skipto, ?st)
-- Clear (?clear)
-- Join (?join, ?summon)
-- Leave (?leave, ?dc, ?lev, ?stop)
-- Forward (?forward)
-- Seek (?seek)
-- Rewind (?rewind)
-- Replay (?replay)
+- Play (#play, #p, #pplay) can play song from youtube, soundcloud and twitch
+- Nowplaying (#nowplaying, #np, #now)
+- Queue (#q)
+- Repeat (#loop (current, all), #repeat (current, all))
+- Loopqueue (#loopall, #lq, repeatall)
+- Shuffle (#shuffle, mix)
+- Volume control (#vol, #v)
+- Pause (#pause, #pa)
+- Resume (#resume, #r)
+- Skip (#skip, #s)
+- Skipto (#skipto, #st)
+- Clear (#clear)
+- Join (#join, #summon)
+- Leave (#leave, #dc, #lev, #stop)
+- Forward (#forward)
+- Seek (#seek)
+- Rewind (#rewind)
+- Replay (#replay)
+- Search (#search)
 
 ⏺ **Filter Commands!**
-- Bass (?bass)
-- Superbass (?superbass, >sb)
-- Pop (?pop)
-- Treblebass (?treblebass, ?tb)
-- Soft (?soft)
-- Earrape (?earrape, ?ear)
-- Reset (?reset)
+- Bass (#bass)
+- Superbass (#superbass, #sb)
+- Pop (#pop)
+- Treblebass (#treblebass, #tb)
+- Soft (#soft)
+- Earrape (#earrape, #ear)
+- Equalizer (#eq <custom>)
+- Speed (#speed)
+- Picth (#pitch)
+- Vaporwave (#vaporwave)
+- Nightcore (#nightcore)
+- Bassboost (#bassboost <number -10 - 10>, #bb <number -10 - 10>)
+- Reset (#reset)
 
 📑 **Utilities Commands!**
-- Help (?help, ?h, ?halp, ?commands)
-- Restart (?restart, ?stopbot, ?shutdown)
+- Help (#help, #h, #halp, #commands)
+- Restart (#restart, #stopbot, #shutdown)
 
 ## Picture
 
