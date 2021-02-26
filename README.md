@@ -73,11 +73,12 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 - Soft (#soft)
 - Earrape (#earrape, #ear)
 - Equalizer (#eq <custom>)
-- Speed (#speed)
+- Speed (#speed )
 - Picth (#pitch)
 - Vaporwave (#vaporwave)
 - Nightcore (#nightcore)
 - Bassboost (#bassboost <number -10 - 10>, #bb <number -10 - 10>)
+- Rate (#rate)
 - Reset (#reset)
 
 📑 **Utilities Commands!**
