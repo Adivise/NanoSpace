@@ -91,6 +91,7 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 ![see](https://i.imgur.com/42PavqR.png)
 
 - **New Picture**
+
 [CLICK HERE](https://prnt.sc/10427bt)
 
 [CLICK HERE](https://prnt.sc/104286p)
