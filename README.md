@@ -7,8 +7,8 @@
 ## Requirements
 
 1. Discord Bot Token **[Guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)**
-2. Lavalink Original don't exit **[Guide](https://github.com/Frederikam/Lavalink)** 
-	please use CustomLavalink **[NEW CLICK HERE](https://github.com/MeLike2D/lavalink)**
+2. CustomLavalink **[NEW CLICK HERE](https://github.com/MeLike2D/lavalink)**
+3. SpotifyID & SpotifySecret **[GO CREATE](https://developer.spotify.com/dashboard/applications)**
 
 ## Super Requirements 
 

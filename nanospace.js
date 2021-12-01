@@ -1,7 +1,10 @@
 const { Client, Intents, Collection } = require("discord.js");
 const { Manager } = require("erela.js");
-const { nodes, token } = require("./config.json"); 
-require("./structures/PlayerBase.js")
+const spotify = require("erela.js-spotify");
+const deezer = require("erela.js-deezer");
+const apple = require("erela.js-apple");
+const facebook = require("erela.js-facebook");
+const { nodes, token, SpotifyID, SpotifySecret } = require("./config.json"); 
 
 class MainClient extends Client {
 	 constructor() {
@@ -29,6 +32,15 @@ class MainClient extends Client {
 
     this.manager = new Manager({
       nodes: nodes,
+      plugins: [
+        new spotify({
+            clientID: SpotifyID,
+            clientSecret: SpotifySecret,
+        }),
+        new deezer(),
+        new facebook(),
+        new apple(),
+      ],
       send(id, payload) {
         const guild = client.guilds.cache.get(id);
         if (guild) guild.shard.send(payload);

@@ -2,6 +2,8 @@
 	"prefix": "#",
 	"token": "TOKENHERE",
 	"ownerid": "YOURIDHERE",
+	"SpotifyID": "CLIENTID",
+	"SpotifySecret": "CLIENTSECRET",
 	"nodes": [
 		{ "host": "localhost", "port": 8000, "password": "changeyourpassword" }
 	]
