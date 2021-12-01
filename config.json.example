@@ -1,9 +1,0 @@
-{
-	"prefix": "#",
-	"token": "TOKENHERE",
-	"ownerid": "YOURIDHERE",
-	"api_key": "YOUTUBEAPIHERE",
-	"nodes": [
-		{ "host": "localhost", "port": 8000, "password": "changeyourpassword" }
-	]
-}
