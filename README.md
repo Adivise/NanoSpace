@@ -100,6 +100,9 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 
 - **New Picture**
 
-[CLICK HERE](https://prnt.sc/10427bt)
-
-[CLICK HERE](https://prnt.sc/104286p)
+![see](https://i.imgur.com/a98lPlm.png)
+![see](https://i.imgur.com/bxeyPUl.png)
+![see](https://i.imgur.com/xUurYDJ.png)
+![see](https://i.imgur.com/hxSCmeP.png)
+![see](https://i.imgur.com/P3GNCbQ.png)
+![see](https://i.imgur.com/9Plhzar.png)
