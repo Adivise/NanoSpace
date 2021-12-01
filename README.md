@@ -32,6 +32,8 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 	"prefix": "#",
 	"token": "TOKENHERE",
 	"ownerid": "YOURIDHERE",
+	"SpotifyID": "CLIENTID",
+	"SpotifySecret": "CLIENTSECRET",
 	"nodes": [
 		{ "host": "localhost", "port": 8000, "password": "changeyourpassword" }
 	]
