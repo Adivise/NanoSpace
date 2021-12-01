@@ -1,6 +1,6 @@
 @echo off
 
-title Lavalink Bot v11
+title NanoSpace
 
 :StartBot
 

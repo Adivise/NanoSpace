@@ -1,0 +1,8 @@
+{
+	"prefix": "#",
+	"token": "TOKENHERE",
+	"ownerid": "YOURIDHERE",
+	"nodes": [
+		{ "host": "localhost", "port": 8000, "password": "changeyourpassword" }
+	]
+}
