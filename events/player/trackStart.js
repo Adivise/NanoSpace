@@ -63,37 +63,62 @@ module.exports = async (client, player, track, payload) => {
       const id = message.customId;
       if(id === "pause") {
       if(!player) {
-        return collector.stop();
+          collector.stop();
       }
         await player.pause(!player.paused);
         const uni = player.paused ? "Paused" : "Resumed";
-        message.reply({ content: `Song has been ${uni}`, ephemeral: true });
+
+        const embed = new MessageEmbed()
+            .setDescription(`\`⏯\` **Song has been:** \`${uni}\``)
+            .setColor('#000001');
+
+        message.reply({ embeds: [embed], ephemeral: true });
       } else if (id === "skip") {
         if(!player) {
-          return collector.stop();
+          collector.stop();
         }
         await player.stop();
-        message.reply({ content: "Song has been skipped", ephemeral: true });
+
+        const embed = new MessageEmbed()
+            .setDescription("\`⏭\` | **Song has been:** `Skipped`")
+            .setColor('#000001');
+
+        message.reply({ embeds: [embed], ephemeral: true });
       } else if(id === "stop") {
         if(!player) {
-          return collector.stop();
+          collector.stop();
         }
         await player.stop();
         await player.destroy();
-        message.reply({ content: "Song has been stopped", ephemeral: true });
+
+        const embed = new MessageEmbed()
+            .setDescription(`\`🚫\` | **Song has been:** | \`Stopped\``)
+            .setColor('#000001');
+
+        message.reply({ embeds: [embed], ephemeral: true });
       } else if(id === "shuffle") {
         if(!player) {
-          return collector.stop();
+          collector.stop();
         }
         await player.queue.shuffle();
-        message.reply({ content: "Queue has been shuffled", ephemeral: true });
+
+        const embed = new MessageEmbed()
+            .setDescription(`\`🔀\` **Queue has been:** \`Shuffle\``)
+            .setColor('#000001');
+
+        message.reply({ embeds: [embed], ephemeral: true });
       } else if(id === "loop") {
         if(!player) {
-          return collector.stop();
+          collector.stop();
         }
         await player.setTrackRepeat(!player.trackRepeat);
         const uni = player.trackRepeat ? "Enabled" : "Disabled";
-        message.reply({ content: `Loop has been ${uni}`, ephemeral: true });
+
+        const embed = new MessageEmbed()
+            .setDescription(`\`🔁\` **Loop has been:** \`${uni}\``)
+            .setColor('#000001');
+
+        message.reply({ embeds: [embed], ephemeral: true });
       }
     });
 }
