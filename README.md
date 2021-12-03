@@ -120,8 +120,6 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 
 - **New Picture**
 
-![see](https://i.imgur.com/a98lPlm.png)
-![see](https://i.imgur.com/bxeyPUl.png)
 ![see](https://i.imgur.com/xUurYDJ.png)
 ![see](https://i.imgur.com/hxSCmeP.png)
 ![see](https://i.imgur.com/P3GNCbQ.png)
