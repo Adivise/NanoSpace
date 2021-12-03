@@ -27,7 +27,7 @@
 
 1. Discord Bot Token **[Guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)**
 2. CustomLavalink **[Lavalink](https://github.com/MeLike2D/lavalink)**
-PT. Use my application.yml [PasteBin](https://pastebin.com/FwekJDuX) Fixed the issue of songs not matching the ones specified. 
+- PT. Use my application.yml [PasteBin](https://pastebin.com/FwekJDuX) Fixed the issue of songs not matching the ones specified. 
 3. SpotifyID & SpotifySecret **[Dashboard](https://developer.spotify.com/dashboard/applications)**
 
 ## 🛑 Super Requirements 
