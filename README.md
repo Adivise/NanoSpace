@@ -108,3 +108,8 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 ![see](https://i.imgur.com/P3GNCbQ.png)
 ![see](https://i.imgur.com/9Plhzar.png)
 ![see](https://i.imgur.com/k2Sp8zo.png)
+
+
+##THANK LIST
+[Some Handler](https://github.com/brblacky/lavamusic)
+[Queue Page](https://github.com/Tetracyl/EarTensifier)
