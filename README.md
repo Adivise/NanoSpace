@@ -1,21 +1,40 @@
-## Have Problem
+## 📑 Short Feature
+- [x] Music
+- [x] Custom Filters
+- [x] No Database Requirement
+- [x] Easy to use
+
+## 🎶 Support Source
+- [x] Youtube
+- [x] SoundCloud
+- [x] Spotify
+- [x] Deezer
+- [x] Twitch
+- [x] Facebook
+- [x] Apple
+- [x] Bandcamp
+- [x] Vimeo
+- [x] Mixer
+- [x] Https (Radio)
+
+## 🚨 Have a Problem
 
 ✈ Join Discord:  [NanoSpace ♪♪](https://discord.gg/SNG3dh3MbR)
    mention me in chat #general or #javascript and ask problem okay! 👌
 
 
-## Requirements
+## 📎 Requirements
 
 1. Discord Bot Token **[Guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)**
 2. CustomLavalink **[Lavalink](https://github.com/MeLike2D/lavalink)**
 PT. Use my application.yml [PasteBin](https://pastebin.com/FwekJDuX) Fixed the issue of songs not matching the ones specified. 
 3. SpotifyID & SpotifySecret **[Dashboard](https://developer.spotify.com/dashboard/applications)**
 
-## Super Requirements 
+## 🛑 Super Requirements 
 
 1. Java 11-13 **[Download JDK13](http://www.mediafire.com/file/m6gk7aoq96db8g0/file)** (i use this here version)
 
-## Installation
+## 📚 Installation
 
 ```
 git clone https://github.com/Adivise/NanoSpace
@@ -24,7 +43,7 @@ npm install
 ```
 After installation finishes you can use `node .` to start the bot. or `Run Start.bat`
 
-## Configuration
+## 📄 Configuration
 
 Copy or Rename `config.json.example` to `config.json` and fill out the values:
 
@@ -110,6 +129,7 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 ![see](https://i.imgur.com/k2Sp8zo.png)
 
 
-##THANK LIST
-[Some Handler](https://github.com/brblacky/lavamusic)
-[Queue Page](https://github.com/Tetracyl/EarTensifier)
+## THANK
+- [Some Handler](https://github.com/brblacky/lavamusic)
+	
+- [Queue Page](https://github.com/Tetracyl/EarTensifier)
