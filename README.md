@@ -60,7 +60,7 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 }
 ```
 
-## Features & Commands
+## 🔩 Features & Commands
 
 > Note: The default prefix is '#'
 
@@ -105,7 +105,7 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 - Help (#help, #h, #halp, #commands)
 - Restart (#restart, #stopbot, #shutdown)
 
-## Picture
+## 🖼 Picture & ScreenShots
 
 - [CLICK ME!](https://imgur.com/a/qzgEhTd)
 
@@ -129,7 +129,7 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 ![see](https://i.imgur.com/k2Sp8zo.png)
 
 
-## THANK
+## 👏 THANK
 - [Some Handler](https://github.com/brblacky/lavamusic)
 	
 - [Queue Page](https://github.com/Tetracyl/EarTensifier)
