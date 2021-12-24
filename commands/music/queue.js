@@ -13,9 +13,9 @@ module.exports = {
     },
     run: async (client, message, args) => {
 		const player = client.manager.get(message.guild.id);
-		if (!player) return msg.edit("No song/s currently playing within this guild.");
+		if (!player) return message.channel.send("No song/s currently playing within this guild.");
         const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
+        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return message.channel.send("You need to be in a same/voice channel.")
 
 		console.log(chalk.magenta(`[COMMAND] Queue used by ${message.author.tag} from ${message.guild.name}`));
 
