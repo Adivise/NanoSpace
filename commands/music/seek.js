@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const { prefix } = require('../../config.json');
+const { PREFIX } = require('../../config.json');
 const formatDuration = require('../../structures/formatduration.js')
 
 module.exports = { 
@@ -14,7 +14,7 @@ module.exports = {
     },
     run: async (client, message, args) => {
         const msg = await message.channel.send(`**Loading please wait...**`);
-        if(isNaN(args[0])) return msg.edit(`Invalid number. Please provide a number in seconds.\nCorrect Usage: \`${prefix}seek <seconds>\``);
+        if(isNaN(args[0])) return msg.edit(`Invalid number. Please provide a number in seconds.\nCorrect Usage: \`${PREFIX}seek <seconds>\``);
         
 		const player = client.manager.get(message.guild.id);
 		if (!player) return msg.edit("No song/s currently playing within this guild.");

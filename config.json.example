@@ -1,9 +1,11 @@
 {
-	"prefix": "#",
-	"token": "TOKENHERE",
-	"ownerid": "YOURIDHERE",
-	"SpotifyID": "CLIENTID",
-	"SpotifySecret": "CLIENTSECRET",
+	"PREFIX": "#",
+	"TOKEN": "TOKEN_HERE",
+	"OWNER_ID": "YOUR_CLIENT_ID",
+	"SpotifyID": "CLIENT_ID",
+	"SpotifySecret": "CLIENT_SECRET",
+	"CLIENT_ID": "PUT_BOT_CLIENT_ID",
+	"GUILD_ID": "PUT_YOUR_GUILD_ID_TO_REGISTER_SLASHCOMMAND",
 	"nodes": [
 		{ "host": "localhost", "port": 8000, "password": "changeyourpassword" }
 	]

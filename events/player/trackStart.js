@@ -88,6 +88,7 @@ module.exports = async (client, player, track, payload) => {
         if(!player) {
           collector.stop();
         }
+
         await player.stop();
         await player.destroy();
 

@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const { prefix } = require("../../config.json");
+const { PREFIX } = require("../../config.json");
 const { readdirSync } = require("fs");
 const { stripIndents } = require("common-tags");
 const chalk = require("chalk");
@@ -23,7 +23,7 @@ module.exports = {
         if(!args[0]) {
             const categories = readdirSync("./commands/")
 
-            embed.setDescription(`The bot prefix is: **${prefix}**`)
+            embed.setDescription(`The bot prefix is: **${PREFIX}**`)
             embed.setFooter(`© ${message.guild.me.displayName} | Total Commands: ${client.commands.size}`, client.user.displayAvatarURL({ dynamic: true }));
 
             categories.forEach(category => {
@@ -39,13 +39,13 @@ module.exports = {
             return message.channel.send({ embeds: [embed] })
         } else {
             let command = client.commands.get(client.aliases.get(args[0].toLowerCase()) || args[0].toLowerCase())
-            if(!command) return message.channel.send({ embeds: [embed.setTitle("Invalid Command.").setDescription(`Do \`${prefix}help\` for the list of the commands.`)] })
+            if(!command) return message.channel.send({ embeds: [embed.setTitle("Invalid Command.").setDescription(`Do \`${PREFIX}help\` for the list of the commands.`)] })
             command = command.config
 
-            embed.setDescription(stripIndents`The client's prefix is: \`${prefix}\`\n
+            embed.setDescription(stripIndents`The client's prefix is: \`${PREFIX}\`\n
             **Command:** ${command.name.slice(0, 1).toUpperCase() + command.name.slice(1)}
             **Description:** ${command.description || "No Description provided."}
-            **Usage:** ${command.usage ? `\`${prefix}${command.name} ${command.usage}\`` : "No Usage"}
+            **Usage:** ${command.usage ? `\`${PREFIX}${command.name} ${command.usage}\`` : "No Usage"}
             **Accessible by:** ${command.accessableby || "Members"}
             **Aliases:** ${command.aliases ? command.aliases.join(", ") : "None."}`)
 

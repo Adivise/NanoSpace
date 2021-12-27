@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const { prefix } = require('../../config.json');
+const { PREFIX } = require('../../config.json');
 const formatDuration = require('../../structures/formatduration.js')
 
 const fastForwardNum = 10;
@@ -42,7 +42,7 @@ module.exports = {
             }
 		}
 		else if (args[0] && isNaN(args[0])) { 
-            return message.reply(`Invalid argument, must be a number.\nCorrect Usage: \`${prefix}forward <seconds>\``); 
+            return message.reply(`Invalid argument, must be a number.\nCorrect Usage: \`${PREFIX}forward <seconds>\``); 
         }
 
 		if (!args[0]) {

@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const { prefix } = require('../../config.json');
+const { PREFIX } = require('../../config.json');
 const formatDuration = require('../../structures/formatduration.js')
 
 const rewindNum = 10;
@@ -40,7 +40,7 @@ module.exports = {
 			}
 		}
 		else if(args[0] && isNaN(args[0])) {
-			return msg.edit(`Invalid argument, must be a number.\nCorrect Usage: \`${prefix}forward <seconds>\``);
+			return msg.edit(`Invalid argument, must be a number.\nCorrect Usage: \`${PREFIX}rewind <seconds>\``);
 		}
 
 		if(!args[0]) {

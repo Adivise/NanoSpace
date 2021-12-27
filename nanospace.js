@@ -4,7 +4,7 @@ const spotify = require("erela.js-spotify");
 const deezer = require("erela.js-deezer");
 const apple = require("erela.js-apple");
 const facebook = require("erela.js-facebook");
-const { nodes, token, SpotifyID, SpotifySecret } = require("./config.json"); 
+const { nodes, TOKEN, SpotifyID, SpotifySecret } = require("./config.json"); 
 
 class MainClient extends Client {
 	 constructor() {
@@ -23,7 +23,7 @@ class MainClient extends Client {
             ]
         });
 
-    if(!this.token) this.token = token;
+    if(!this.token) this.token = TOKEN;
 
     process.on('unhandledRejection', error => console.log(error));
     process.on('uncaughtException', error => console.log(error));
@@ -47,8 +47,8 @@ class MainClient extends Client {
       },
     });
 
-    ["aliases", "commands"].forEach(x => client[x] = new Collection());
-    ["command", "event", "player"].forEach(x => require(`./handlers/${x}`)(client));
+    ["aliases", "slash", "commands"].forEach(x => client[x] = new Collection());
+    ["loadCommand", "loadSlashCommand", "loadEvent", "loadPlayer"].forEach(x => require(`./handlers/${x}`)(client));
 
 	}
 		connect() {

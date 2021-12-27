@@ -1,6 +1,5 @@
 const figlet = require('figlet');
 const chalk = require('chalk');
-const { prefix } = require("../../config.json");
 
 module.exports = async (client) => {
     client.manager.init(client.user.id);
@@ -12,5 +11,5 @@ module.exports = async (client) => {
         }
         console.log(chalk.red.bold(data));
     });
-    client.user.setActivity(`${prefix}help | ${client.guilds.cache.size} servers`, { type: "WATCHING" });
+    client.user.setActivity(`/play | ${client.guilds.cache.size} servers`, { type: "WATCHING" });
 };

@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const pagequeue = require('../../structures/pagequeue');
+const pagequeue = require('../../structures/NQueue');
 const formatDuration = require('../../structures/formatduration');
 
 module.exports = { 

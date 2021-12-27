@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 const Discord = require('discord.js');
-const { prefix } = require('../../config.json')
+const { PREFIX } = require('../../config.json')
 const { reset } = require('../../config/filter')
 
 module.exports = { 
@@ -24,8 +24,8 @@ module.exports = {
 				.setAuthor('Custom Equalizer', "https://cdn.discordapp.com/emojis/758423098885275748.gif")
 				.setColor('#000001')
 				.setDescription('There are 14 bands that can be set from -10 to 10. Not all bands have to be filled out.')
-				.addField('Example Equalizer:', `${prefix}eq 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n${prefix}eq 2 3 0 8 0 5 0 -5 0 0`)
-				.addField('Reset Equalizer', `Typing : ${prefix}reset`)
+				.addField('Example Equalizer:', `${PREFIX}eq 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n${PREFIX}eq 2 3 0 8 0 5 0 -5 0 0`)
+				.addField('Reset Equalizer', `Typing : ${PREFIX}reset`)
 			return message.channel.send({ embeds: [embed] });
 		}
 		else if (args[0] == 'off' || args[0] == 'reset') {
@@ -36,8 +36,8 @@ module.exports = {
 		let bandsStr = '';
 		for (let i = 0; i < bands.length; i++) {
 			if (i > 13) break;
-			if (isNaN(bands[i])) return message.channel.send(`Band #${i + 1} is not a valid number. Please type \`${prefix}eq\` for info on the equalizer command.`);
-			if (bands[i] > 10) return message.channel.send(`Band #${i + 1} must be less than 10. Please type \`${prefix}eq\` for info on the equalizer command.`);
+			if (isNaN(bands[i])) return message.channel.send(`Band #${i + 1} is not a valid number. Please type \`${PREFIX}eq\` for info on the equalizer command.`);
+			if (bands[i] > 10) return message.channel.send(`Band #${i + 1} must be less than 10. Please type \`${PREFIX}eq\` for info on the equalizer command.`);
 		}
 
 		for (let i = 0; i < bands.length; i++) {
@@ -51,7 +51,7 @@ module.exports = {
 		const embed = new Discord.MessageEmbed()
 			.setAuthor(message.guild.name, message.guild.iconURL({ dynamic: true }))
 			.setDescription(`Custom Equalizer: \`${bandsStr}\``)
-			.setFooter(`Reset Equalizer, Typing: ${prefix}reset`)
+			.setFooter(`Reset Equalizer, Typing: ${PREFIX}reset`)
 			.setColor('#000001');
 
 		await delay(5000);

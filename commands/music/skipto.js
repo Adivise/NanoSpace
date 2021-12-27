@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const { prefix } = require('../../config.json')
+const { PREFIX } = require('../../config.json')
 
 module.exports = { 
     config: {
@@ -15,7 +15,7 @@ module.exports = {
         const msg = await message.channel.send("Loading please wait...")
 
         if (isNaN(args[0])) return msg.edit('Invalid number');
-		if (args[0] === 0) return msg.edit(`Cannot skip to a song that is already playing. To skip the current playing song type: \`${prefix}skip\``);
+		if (args[0] === 0) return msg.edit(`Cannot skip to a song that is already playing. To skip the current playing song type: \`${PREFIX}skip\``);
 
 		const player = client.manager.get(message.guild.id);
 		if (!player) return msg.edit("No song/s currently playing within this guild.");

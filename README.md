@@ -1,66 +1,50 @@
-## 📑 Short Feature
-- [x] Music
-- [x] Custom Filters
-- [x] No Database Requirement
-- [x] Easy to use
-
-## 🎶 Support Source
-- [x] Youtube
-- [x] SoundCloud
-- [x] Spotify
-- [x] Deezer
-- [x] Twitch
-- [x] Facebook
-- [x] Apple
-- [x] Bandcamp
-- [x] Vimeo
-- [x] Mixer
-- [x] Https (Radio)
-
-## 🚨 Have a Problem
+## Have Problem
 
 ✈ Join Discord:  [NanoSpace ♪♪](https://discord.gg/SNG3dh3MbR)
    mention me in chat #general or #javascript and ask problem okay! 👌
 
 
-## 📎 Requirements
+## Requirements
 
 1. Discord Bot Token **[Guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)**
-2. CustomLavalink **[Lavalink](https://github.com/MeLike2D/lavalink)**
-- PT. Use my application.yml [PasteBin](https://pastebin.com/FwekJDuX) Fixed the issue of songs not matching the ones specified. 
-3. SpotifyID & SpotifySecret **[Dashboard](https://developer.spotify.com/dashboard/applications)**
+2. Lavalink Original don't exit **[Guide](https://github.com/Frederikam/Lavalink)** 
+	please use CustomLavalink **[NEW CLICK HERE](https://github.com/MeLike2D/lavalink)**
 
-## 🛑 Super Requirements 
+## Super Requirements 
 
 1. Java 11-13 **[Download JDK13](http://www.mediafire.com/file/m6gk7aoq96db8g0/file)** (i use this here version)
+2. Invite **[Access SlashCommand](https://discord.com/api/oauth2/authorize?client_id=CLIENT_ID&permissions=0&scope=bot%20applications.commands)** (replace client id of bot to `CLIENT_ID` in link!)
 
-## 📚 Installation
+## Installation
 
 ```
 git clone https://github.com/Adivise/NanoSpace
 cd NanoSpace
 npm install
+node registerSlash.js
 ```
 After installation finishes you can use `node .` to start the bot. or `Run Start.bat`
 
-## 📄 Configuration
+## Configuration
 
 Copy or Rename `config.json.example` to `config.json` and fill out the values:
 
 ```json
 {
-	"prefix": "#",
-	"token": "TOKENHERE",
-	"ownerid": "YOURIDHERE",
-	"SpotifyID": "CLIENTID",
-	"SpotifySecret": "CLIENTSECRET",
+	"PREFIX": "#",
+	"TOKEN": "TOKEN_HERE",
+	"OWNER_ID": "YOUR_CLIENT_ID",
+	"SpotifyID": "CLIENT_ID",
+	"SpotifySecret": "CLIENT_SECRET",
+	"CLIENT_ID": "PUT_BOT_CLIENT_ID",
+	"GUILD_ID": "PUT_YOUR_GUILD_ID_TO_REGISTER_SLASHCOMMAND",
 	"nodes": [
-		{ "host": "localhost", "port": 8000, "password": "changeyourpassword" }
+		{ "host": "localhost", "port": 5555, "password": "123456" }
 	]
 }
 ```
 
-## 🔩 Features & Commands
+## Features & Commands
 
 > Note: The default prefix is '#'
 
@@ -105,7 +89,7 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 - Help (#help, #h, #halp, #commands)
 - Restart (#restart, #stopbot, #shutdown)
 
-## 🖼 Picture & ScreenShots
+## Picture
 
 - [CLICK ME!](https://imgur.com/a/qzgEhTd)
 
@@ -120,14 +104,6 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 
 - **New Picture**
 
-![see](https://i.imgur.com/xUurYDJ.png)
-![see](https://i.imgur.com/hxSCmeP.png)
-![see](https://i.imgur.com/P3GNCbQ.png)
-![see](https://i.imgur.com/9Plhzar.png)
-![see](https://i.imgur.com/k2Sp8zo.png)
+[CLICK HERE](https://prnt.sc/10427bt)
 
-
-## 👏 THANK
-- [Some Handler](https://github.com/brblacky/lavamusic)
-	
-- [Queue Page](https://github.com/Tetracyl/EarTensifier)
+[CLICK HERE](https://prnt.sc/104286p)

@@ -4,18 +4,15 @@ const { MessageEmbed } = require("discord.js");
 const ytsr = require("youtube-sr").default;
 
 module.exports = { 
-    config: {
-        name: "nowplaying",
-        aliases: ["np", "now"],
-        description: "Displays what the bot is currently playing.",
-        accessableby: "Member",
-        category: "music",
-    },
+    name: "nowplaying",
+    description: "Displays what the bot is currently playing.",
+    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
 
-    run: async (client, message, args) => {
-        const msg = await message.channel.send('Loading please wait...');
+    run: async (interaction, client) => {
+        await interaction.deferReply({ ephemeral: false });
+        const msg = await interaction.editReply('**Loading please wait...**');
 
-		const player = client.manager.get(message.guild.id);
+		const player = client.manager.get(interaction.guild.id);
 		if (!player) return msg.edit("No song/s currently playing within this guild.");
         
         const song = player.queue.current;
@@ -45,6 +42,6 @@ module.exports = {
             .setTimestamp();
             
             msg.edit({ content: " ", embeds: [embed] })
-                console.log(chalk.magenta(`[COMMAND] Nowplaying used by ${message.author.tag} from ${message.guild.name}`));
+                console.log(chalk.magenta(`[SLASHCOMMAND] Nowplaying used by ${interaction.user.tag} from ${interaction.guild.name}`));
     }
 }
