@@ -1,5 +1,7 @@
 ## 📑 Short Feature
 - [x] Music
+- [x] Custom Prefix
+- [x] SlashCommand
 - [x] Custom Filters
 - [x] No Database Requirement
 - [x] Easy to use
@@ -76,6 +78,7 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 > Note: The default prefix is '#'
 
 🎶 **Music Commands!** 
+
 - Play (#play, #p, #pplay) can play song from youtube, soundcloud and twitch
 - Nowplaying (#nowplaying, #np, #now)
 - Queue (#q)
@@ -95,6 +98,7 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 - Rewind (#rewind)
 - Replay (#replay)
 - Search (#search)
+
 ⏺ **Filter Commands!**
 - Bass (#bass)
 - Superbass (#superbass, #sb)
@@ -110,7 +114,10 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 - Bassboost (#bassboost <number -10 - 10>, #bb <number -10 - 10>)
 - Rate (#rate)
 - Reset (#reset)
+	
 📑 **Utilities Commands!**
+- restart (#restart, #stopbot)
+- help (#help, #halp)
 
 ## 🖼 Picture & ScreenShots
 
