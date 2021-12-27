@@ -58,13 +58,15 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 
 ```json
 {
-	"prefix": "#",
-	"token": "TOKENHERE",
-	"ownerid": "YOURIDHERE",
-	"SpotifyID": "CLIENTID",
-	"SpotifySecret": "CLIENTSECRET",
+	"PREFIX": "#",
+	"TOKEN": "TOKEN_HERE",
+	"OWNER_ID": "YOUR_CLIENT_ID",
+	"SpotifyID": "CLIENT_ID",
+	"SpotifySecret": "CLIENT_SECRET",
+	"CLIENT_ID": "YOUR_BOT_ID",
+	"GUILD_ID": "YOUR_GUILD_ID",
 	"nodes": [
-		{ "host": "localhost", "port": 8000, "password": "changeyourpassword" }
+		{ "host": "localhost", "port": 5555, "password": "123456" }
 	]
 }
 ```
