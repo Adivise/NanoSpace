@@ -98,6 +98,7 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 - Rewind (#rewind)
 - Replay (#replay)
 - Search (#search)
+- 247 (#247)
 
 ⏺ **Filter Commands!**
 - Bass (#bass)
