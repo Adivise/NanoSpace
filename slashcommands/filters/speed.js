@@ -32,7 +32,7 @@ module.exports = {
 		});
 		const msg = await interaction.editReply(`Setting **Speed** to **${value}x**. This may take a few seconds...`);
 		const embed = new MessageEmbed()
-			.setAuthor(`Speed set to: ${value}x`, 'https://cdn.discordapp.com/emojis/758423098885275748.gif')
+			.setAuthor({ name: `Speed set to: ${value}x`, iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif'})
 			.setColor('#000001');
 		await delay(5000);
 		msg.edit({ content: " ", embeds: [embed] });

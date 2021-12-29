@@ -25,7 +25,7 @@ module.exports = {
 			player.setEQ(Array(6).fill(0).map((n, i) => ({ band: i, gain: 0.65 })));
 			const msg1 = await interaction.editReply(`Turning on **Bassboost**. This may take a few seconds...`);
 			const embed = new MessageEmbed()
-				.setAuthor('Turned on: Bassboost', 'https://cdn.discordapp.com/emojis/758423098885275748.gif')
+				.setAuthor({ name: 'Turned on: Bassboost', iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif' })
                 .setColor('#000001');
                 
 			await delay(5000);
@@ -42,7 +42,7 @@ module.exports = {
 
 		const msg2 = await interaction.editReply(`Setting **Bassboost** to **${value}dB**. This may take a few seconds...`);
 		const embed = new MessageEmbed()
-			.setAuthor(`Bassboost set to: ${value}`, 'https://cdn.discordapp.com/emojis/758423098885275748.gif')
+			.setAuthor({ name: `Bassboost set to: ${value}`, iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif' })
             .setColor('#000001');
             
 		await delay(5000);

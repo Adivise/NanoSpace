@@ -53,7 +53,7 @@ module.exports = {
                         .join("\n");
 
                     const playing = new MessageEmbed()
-                        .setAuthor(`Song Selection...`, message.guild.iconURL({ dynamic: true }))
+                        .setAuthor({ name: `Song Selection...`, iconURL: message.guild.iconURL({ dynamic: true }) })
                         .setColor('#000001')
                         .setDescription(results)
                         .setFooter(`Please type 1-5 select the song in 30s type cancel to Cancel`);

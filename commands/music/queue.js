@@ -39,7 +39,7 @@ module.exports = {
 			const str = songStrings.slice(i * 10, i * 10 + 10).join('');
 
 			const embed = new MessageEmbed()
-                .setAuthor(`Queue - ${message.guild.name}`, message.guild.iconURL({ dynamic: true }))
+                .setAuthor({ name: `Queue - ${message.guild.name}`, iconURL: message.guild.iconURL({ dynamic: true }) })
                 .setThumbnail(thumbnail)
 				.setColor('#000001')
 				.setDescription(`**Currently Playing**\n**1.** [${song.title}](${song.uri}) \`[${formatDuration(song.duration)}]\` • ${song.requester}\n\n**Rest of queue**:${str == '' ? '  Nothing' : '\n' + str}`)

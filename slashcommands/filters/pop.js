@@ -20,7 +20,7 @@ module.exports = {
         player.setFilter('filters', pop);
 
         const popped = new MessageEmbed()
-            .setAuthor("Turned on: Pop", 'https://cdn.discordapp.com/emojis/758423098885275748.gif')
+            .setAuthor({ name: "Turned on: Pop", iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif' })
             .setColor('#000001');
 
         await delay(5000);

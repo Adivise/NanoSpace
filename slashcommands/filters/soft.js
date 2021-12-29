@@ -20,7 +20,7 @@ module.exports = {
         await player.setFilter('filters', soft);
 
         const softed = new MessageEmbed()
-            .setAuthor("Turned on: Soft", 'https://cdn.discordapp.com/emojis/758423098885275748.gif')
+            .setAuthor({ name: "Turned on: Soft", iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif' })
             .setColor('#000001');
 
         await delay(5000);

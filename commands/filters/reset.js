@@ -25,7 +25,7 @@ module.exports = {
         await player.setVolume(normal);
         
         const resetted = new MessageEmbed()
-            .setAuthor("Filter has been: Reseted", 'https://cdn.discordapp.com/emojis/758423099178745876.gif')
+            .setAuthor({ name: "Filter has been: Reseted", iconURL: 'https://cdn.discordapp.com/emojis/758423099178745876.gif' })
             .setColor('#000001');
 
         await delay(5000);

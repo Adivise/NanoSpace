@@ -25,7 +25,7 @@ module.exports = {
 
 		if (!value) {
 			const embed = new MessageEmbed()
-				.setAuthor('Custom Equalizer', "https://cdn.discordapp.com/emojis/758423098885275748.gif")
+				.setAuthor({ name: 'Custom Equalizer', iconURL: "https://cdn.discordapp.com/emojis/758423098885275748.gif" })
 				.setColor('#000001')
 				.setDescription('There are 14 bands that can be set from -10 to 10. Not all bands have to be filled out.')
 				.addField('Example Equalizer:', `/equalizer 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n/equalizer 2 3 0 8 0 5 0 -5 0 0`)
@@ -53,7 +53,7 @@ module.exports = {
 		const delay = ms => new Promise(res => setTimeout(res, ms));
 		const msg = await interaction.editReply(`Setting equalizer to... \`${bandsStr}\` Please wait...`);
 		const embed = new MessageEmbed()
-			.setAuthor(interaction.guild.name, interaction.guild.iconURL({ dynamic: true }))
+			.setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
 			.setDescription(`Custom Equalizer: \`${bandsStr}\``)
 			.setFooter(`Reset Equalizer, Typing: ${prefix}reset`)
 			.setColor('#000001');
