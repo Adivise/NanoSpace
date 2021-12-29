@@ -23,6 +23,8 @@ module.exports = {
         const { channel } = interaction.member.voice;
         if (!channel) return msg.edit("You need to be in a voice channel to use command.");
 
+        if (value.startsWith("https://open.spotify.com/artist/")) return msg.edit("Please use spotify `playlists, album or track` this `artist` not support!");
+
         const player = client.manager.create({
             guild: interaction.guild.id,
             voiceChannel: interaction.member.voice.channel.id,
