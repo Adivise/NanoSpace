@@ -1,5 +1,7 @@
 ## 📑 Short Feature
 - [x] Music
+- [x] Custom Prefix
+- [x] SlashCommand
 - [x] Custom Filters
 - [x] No Database Requirement
 - [x] Easy to use
@@ -33,7 +35,7 @@
 ## 🛑 Super Requirements 
 
 1. Java 11-13 **[Download JDK13](http://www.mediafire.com/file/m6gk7aoq96db8g0/file)** (i use this here version)
-2. Invite **[Access Invite](https://discord.com/api/oauth2/authorize?client_id=CLIENT_ID&permissions=0&scope=bot%20applications.commands)** (replace CLIENT_ID to your bot client id!)
+2. Invite **[Access Invite](https://discord.com/api/oauth2/authorize?client_id=CLIENT_ID&permissions=8&scope=bot%20applications.commands)** (replace CLIENT_ID to your bot client id!) for slashcommand!
 
 ## 📚 Installation
 
@@ -45,10 +47,10 @@ npm install
 
 ## 🤖 Register SlashCommand
 
-Invite **[Access Invite](https://discord.com/api/oauth2/authorize?client_id=CLIENT_ID&permissions=0&scope=bot%20applications.commands)** (replace CLIENT_ID to your bot client id!)
+Invite **[Access Invite](https://discord.com/api/oauth2/authorize?client_id=CLIENT_ID&permissions=8&scope=bot%20applications.commands)** (replace CLIENT_ID to your bot client id!) for slashcommand!
 
-1. type node registerSlash to register in one guild!
-2. type node registerSlashGlobal to register all guild! (but to need wait 1 - 2 hrs. or you can't wait pls kick bot and invite new!)
+1. type `node registerSlash` to register in one guild!
+2. type `node registerSlashGlobal` to register all guild! (but to need wait 1 - 2 hrs. or you can't wait pls kick bot and invite new!)
 
 After installation finishes you can use `node .` to start the bot. or `Run Start.bat`
 
@@ -58,13 +60,15 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 
 ```json
 {
-	"prefix": "#",
-	"token": "TOKENHERE",
-	"ownerid": "YOURIDHERE",
-	"SpotifyID": "CLIENTID",
-	"SpotifySecret": "CLIENTSECRET",
+	"PREFIX": "#",
+	"TOKEN": "TOKEN_HERE",
+	"OWNER_ID": "YOUR_CLIENT_ID",
+	"SpotifyID": "CLIENT_ID",
+	"SpotifySecret": "CLIENT_SECRET",
+	"CLIENT_ID": "YOUR_BOT_ID",
+	"GUILD_ID": "YOUR_GUILD_ID",
 	"nodes": [
-		{ "host": "localhost", "port": 8000, "password": "changeyourpassword" }
+		{ "host": "localhost", "port": 5555, "password": "123456" }
 	]
 }
 ```
@@ -74,6 +78,7 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 > Note: The default prefix is '#'
 
 🎶 **Music Commands!** 
+
 - Play (#play, #p, #pplay) can play song from youtube, soundcloud and twitch
 - Nowplaying (#nowplaying, #np, #now)
 - Queue (#q)
@@ -93,6 +98,8 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 - Rewind (#rewind)
 - Replay (#replay)
 - Search (#search)
+- 247 (#247)
+
 ⏺ **Filter Commands!**
 - Bass (#bass)
 - Superbass (#superbass, #sb)
@@ -108,7 +115,10 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 - Bassboost (#bassboost <number -10 - 10>, #bb <number -10 - 10>)
 - Rate (#rate)
 - Reset (#reset)
+	
 📑 **Utilities Commands!**
+- restart (#restart, #stopbot)
+- help (#help, #halp)
 
 ## 🖼 Picture & ScreenShots
 
