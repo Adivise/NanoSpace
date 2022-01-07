@@ -153,3 +153,5 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 - [Some Handler](https://github.com/brblacky/lavamusic)
 
 - [Queue Page](https://github.com/Tetracyl/EarTensifier)
+	
+- [Some Filters](https://github.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js)
