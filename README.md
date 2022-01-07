@@ -9,7 +9,7 @@
 ## 🎶 Support Source
 - [x] Youtube
 - [x] SoundCloud
-- [x] Spotify
+- [x] Spotify (no api key anymore!)
 - [x] Deezer
 - [x] Twitch
 - [x] Facebook
