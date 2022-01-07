@@ -112,6 +112,16 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 - Bassboost (#bassboost <number -10 - 10>, #bb <number -10 - 10>)
 - Rate (#rate)
 - Reset (#reset)
+- 3d (#3d)
+- China (#china)
+- Dance (#dance)
+- Chipmunk (#chipmunk)
+- Darthvader (#darthvader)
+- DoubleTime (#doubletime)
+- SlowMotion (#slowmotion)
+- Tremolo (#tremolo)
+- Vibrate (#vibrate)
+- Vibrato (#vibrato)
 	
 📑 **Utilities Commands!**
 - restart (#restart, #stopbot)
