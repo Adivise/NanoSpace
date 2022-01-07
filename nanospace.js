@@ -1,10 +1,10 @@
 const { Client, Intents, Collection } = require("discord.js");
 const { Manager } = require("erela.js");
-const spotify = require("erela.js-spotify");
+const spotify = require("better-erela.js-spotify").default;
 const deezer = require("erela.js-deezer");
 const apple = require("erela.js-apple");
 const facebook = require("erela.js-facebook");
-const { nodes, TOKEN, SpotifyID, SpotifySecret } = require("./config.json"); 
+const { NODES, TOKEN } = require("./config.json"); 
 
 class MainClient extends Client {
 	 constructor() {
@@ -16,8 +16,8 @@ class MainClient extends Client {
             },
             intents: [
                 Intents.FLAGS.GUILDS,
-                Intents.FLAGS.GUILD_MESSAGES, 
-                Intents.FLAGS.GUILD_MEMBERS, 
+                Intents.FLAGS.GUILD_MESSAGES,
+                Intents.FLAGS.GUILD_MEMBERS,
                 Intents.FLAGS.GUILD_VOICE_STATES,
                 Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
             ]
@@ -31,12 +31,9 @@ class MainClient extends Client {
 	const client = this;
 
     this.manager = new Manager({
-      nodes: nodes,
+      nodes: NODES,
       plugins: [
-        new spotify({
-            clientID: SpotifyID,
-            clientSecret: SpotifySecret,
-        }),
+        new spotify(),
         new deezer(),
         new facebook(),
         new apple(),

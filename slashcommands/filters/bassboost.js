@@ -22,7 +22,7 @@ module.exports = {
         if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return interaction.editReply("You need to be in a same/voice channel.")
 
 		if (!value) {
-			player.setEQ(Array(6).fill(0).map((n, i) => ({ band: i, gain: 0.65 })));
+			player.setFilter('filters', Array(6).fill(0).map((n, i) => ({ band: i, gain: 0.65 })));
 			const msg1 = await interaction.editReply(`Turning on **Bassboost**. This may take a few seconds...`);
 			const embed = new MessageEmbed()
 				.setAuthor({ name: 'Turned on: Bassboost', iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif' })
@@ -36,9 +36,9 @@ module.exports = {
 		if (isNaN(value)) return interaction.editReply('Amount must be a real number.');
 
 		if (value > 10 || value < -10) {
-			player.setEQ(Array(6).fill(0).map((n, i) => ({ band: i, gain: value / 10 })));
+			player.setFilter('filters', Array(6).fill(0).map((n, i) => ({ band: i, gain: value / 10 })));
 		}
-		else player.setEQ(Array(6).fill(0).map((n, i) => ({ band: i, gain: value / 10 })));
+		else player.setFilter('filters', Array(6).fill(0).map((n, i) => ({ band: i, gain: value / 10 })));
 
 		const msg2 = await interaction.editReply(`Setting **Bassboost** to **${value}dB**. This may take a few seconds...`);
 		const embed = new MessageEmbed()

@@ -1,4 +1,5 @@
 const figlet = require('figlet');
+const { PREFIX } = require('../../config.json');
 const chalk = require('chalk');
 
 module.exports = async (client) => {
@@ -11,5 +12,19 @@ module.exports = async (client) => {
         }
         console.log(chalk.red.bold(data));
     });
-    client.user.setActivity(`/play | ${client.guilds.cache.size} servers`, { type: "WATCHING" });
+
+    let guilds = client.guilds.cache.size;
+    let users = client.users.cache.size;
+    let channels = client.channels.cache.size;
+
+    const activities = [
+        `${PREFIX}help | ${guilds} servers`,
+        `${PREFIX}play <input> | ${users} users`,
+        `${PREFIX}doubletime | ${channels} channels`,
+    ]
+
+    setInterval(() => {
+        client.user.setActivity(`${activities[Math.floor(Math.random() * activities.length)]}`, { type: 'WATCHING' });
+    }, 15000)
+
 };

@@ -3,7 +3,7 @@ module.exports = async (client, msg, pages, emojiList, timeout, queueLength, que
     if (!pages) throw new Error('Pages are not given.');
     if (emojiList.length !== 2) throw new Error('Need two emojis.');
     let page = 0;
-    const curPage = await msg.channel.send({ embeds: [pages[page].setFooter(`Page • ${page + 1}/${pages.length} | ${queueLength} • Songs | ${queueDuration} • Total duration`)] });
+    const curPage = await msg.channel.send({ embeds: [pages[page].setFooter({ text: `Page • ${page + 1}/${pages.length} | ${queueLength} • Songs | ${queueDuration} • Total duration`})] });
     if(pages.length == 0) return;
 
     const permissions = msg.channel.permissionsFor(client.user);
@@ -23,7 +23,7 @@ module.exports = async (client, msg, pages, emojiList, timeout, queueLength, que
             default:
                 break;
         }
-        curPage.edit({ embeds: [pages[page].setFooter(`Page • ${page + 1}/${pages.length} | ${queueLength} • Song | ${queueDuration} • Total duration`)]});
+        curPage.edit({ embeds: [pages[page].setFooter({ text: `Page • ${page + 1}/${pages.length} | ${queueLength} • Song | ${queueDuration} • Total duration`})]});
     });
     reactionCollector.on('end', () => curPage.reactions.removeAll());
     return curPage;

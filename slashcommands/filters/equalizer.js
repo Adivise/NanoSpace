@@ -40,13 +40,13 @@ module.exports = {
 		let bandsStr = '';
 		for (let i = 0; i < bands.length; i++) {
 			if (i > 13) break;
-			if (isNaN(bands[i])) return interaction.editReply(`Band #${i + 1} is not a valid number. Please type \`${prefix}eq\` for info on the equalizer command.`);
-			if (bands[i] > 10) return interaction.editReply(`Band #${i + 1} must be less than 10. Please type \`${prefix}eq\` for info on the equalizer command.`);
+			if (isNaN(bands[i])) return interaction.editReply(`Band #${i + 1} is not a valid number. Please type \`/equalizer\` for info on the equalizer command.`);
+			if (bands[i] > 10) return interaction.editReply(`Band #${i + 1} must be less than 10. Please type \`/equalizer\` for info on the equalizer command.`);
 		}
 
 		for (let i = 0; i < bands.length; i++) {
 			if (i > 13) break;
-			player.setEQ([{ band: i, gain: (bands[i]) / 10 }]);
+			player.setFilter('filters', [{ band: i, gain: (bands[i]) / 10 }]);
 			bandsStr += `${bands[i]} `;
 		}
 
@@ -55,7 +55,7 @@ module.exports = {
 		const embed = new MessageEmbed()
 			.setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
 			.setDescription(`Custom Equalizer: \`${bandsStr}\``)
-			.setFooter(`Reset Equalizer, Typing: ${prefix}reset`)
+			.setFooter({ text: `Reset Equalizer, Typing: /reset`})
 			.setColor('#000001');
 
 		await delay(5000);

@@ -18,8 +18,6 @@ module.exports = {
         if (!channel) return msg.edit("You need to be in a voice channel to play music.");
         if (!args[0]) return msg.edit("Please provide a song name or link to search.");
 
-        if (args.join(" ").startsWith("https://open.spotify.com/artist/")) return msg.edit("Please use spotify `playlists, album or track` this `artist` not support!");
-
         const player = client.manager.create({
             guild: message.guild.id,
             voiceChannel: message.member.voice.channel.id,
@@ -56,7 +54,7 @@ module.exports = {
                         .setAuthor({ name: `Song Selection...`, iconURL: message.guild.iconURL({ dynamic: true }) })
                         .setColor('#000001')
                         .setDescription(results)
-                        .setFooter(`Please type 1-5 select the song in 30s type cancel to Cancel`);
+                        .setFooter({ text: `Please type 1-5 select the song in 30s type cancel to Cancel`});
 
                     await msg.edit({ content: " ", embeds: [playing] })
 

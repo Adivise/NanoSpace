@@ -43,7 +43,7 @@ module.exports = {
                 .setThumbnail(thumbnail)
 				.setColor('#000001')
 				.setDescription(`**Currently Playing**\n**1.** [${song.title}](${song.uri}) \`[${formatDuration(song.duration)}]\` • ${song.requester}\n\n**Rest of queue**:${str == '' ? '  Nothing' : '\n' + str}`)
-				.setFooter(`Page • ${i + 1}/${pagesNum} | ${player.queue.length} • Song | ${qduration} • Total duration`);
+				.setFooter({ text: `Page • ${i + 1}/${pagesNum} | ${player.queue.length} • Song | ${qduration} • Total duration`});
 
 			pages.push(embed);
 		}

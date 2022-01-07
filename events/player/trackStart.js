@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
+const { MessageEmbed, MessageActionRow, MessageButton, Interaction } = require("discord.js");
 const formatduration = require('../../structures/formatduration');
     
 module.exports = async (client, player, track, payload) => {
@@ -216,7 +216,7 @@ module.exports = async (client, player, track, payload) => {
             .setThumbnail(thumbnail)
             .setColor('#000001')
             .setDescription(`**Currently Playing**\n**1.** [${song.title}](${song.uri}) \`[${formatduration(song.duration)}]\` • ${song.requester}\n\n**Rest of queue**:${str == '' ? '  Nothing' : '\n' + str}`)
-            .setFooter(`Page • ${i + 1}/${pagesNum} | ${player.queue.length} • Song | ${qduration} • Total duration`);
+            .setFooter({ text: `Page • ${i + 1}/${pagesNum} | ${player.queue.length} • Song | ${qduration} • Total duration`});
     
           pages.push(embed);
         }

@@ -1,10 +1,11 @@
 {
   "name": "nanospacex",
-  "version": "4.0.0",
+  "version": "4.8.0",
   "description": "✈ Join Discord: https://discord.gg/4pk97A2 👌",
   "main": "index.js",
   "dependencies": {
     "@discordjs/rest": "^0.2.0-canary.0",
+    "better-erela.js-spotify": "^1.2.3",
     "chalk": "^4.1.0",
     "common-tags": "^1.8.0",
     "delay": "^4.4.0",
@@ -14,7 +15,6 @@
     "erela.js-apple": "^1.2.6",
     "erela.js-deezer": "^1.0.7",
     "erela.js-facebook": "^1.0.4",
-    "erela.js-spotify": "^1.2.0",
     "figlet": "^1.5.0",
     "youtube-sr": "^4.1.9"
   },

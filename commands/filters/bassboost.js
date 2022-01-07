@@ -19,10 +19,10 @@ module.exports = {
         if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return message.channel.send("You need to be in a same/voice channel.")
 
 		if (!args[0]) {
-			player.setEQ(Array(6).fill(0).map((n, i) => ({ band: i, gain: 0.65 })));
+			player.setFilter('filters', Array(6).fill(0).map((n, i) => ({ band: i, gain: 0.65 })));
 			const msg1 = await message.channel.send(`Turning on **Bassboost**. This may take a few seconds...`);
 			const embed = new MessageEmbed()
-				.setAuthor({ name: 'Turned on: Bassboost', iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif' })
+				.setAuthor({ name: 'Turned on: Bassboost', iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif'})
                 .setColor('#000001');
                 
 			await delay(5000);
@@ -33,13 +33,13 @@ module.exports = {
 		if (isNaN(args[0])) return message.channel.send('Amount must be a real number.');
 
 		if (args[0] > 10 || args[0] < -10) {
-			player.setEQ(Array(6).fill(0).map((n, i) => ({ band: i, gain: args[0] / 10 })));
+			player.setFilter('filters', Array(6).fill(0).map((n, i) => ({ band: i, gain: args[0] / 10 })));
 		}
-		else player.setEQ(Array(6).fill(0).map((n, i) => ({ band: i, gain: args[0] / 10 })));
+		else player.setFilter('filters', Array(6).fill(0).map((n, i) => ({ band: i, gain: args[0] / 10 })));
 
 		const msg2 = await message.channel.send(`Setting **Bassboost** to **${args[0]}dB**. This may take a few seconds...`);
 		const embed = new MessageEmbed()
-			.setAuthor({ name: `Bassboost set to: ${args[0]}`, iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif' })
+			.setAuthor({ name: `Bassboost set to: ${args[0]}`, iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif'})
             .setColor('#000001');
             
 		await delay(5000);

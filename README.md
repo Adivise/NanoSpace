@@ -28,9 +28,8 @@
 ## 📎 Requirements
 
 1. Discord Bot Token **[Guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)**
-2. CustomLavalink **[Lavalink](https://github.com/MeLike2D/lavalink)**
+2. Lavalink **[Guide](https://github.com/freyacodes/lavalink)**
 - PT. Use my application.yml [PasteBin](https://pastebin.com/FwekJDuX) Fixed the issue of songs not matching the ones specified. 
-3. SpotifyID & SpotifySecret **[Dashboard](https://developer.spotify.com/dashboard/applications)**
 
 ## 🛑 Super Requirements 
 
@@ -63,11 +62,9 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 	"PREFIX": "#",
 	"TOKEN": "TOKEN_HERE",
 	"OWNER_ID": "YOUR_CLIENT_ID",
-	"SpotifyID": "CLIENT_ID",
-	"SpotifySecret": "CLIENT_SECRET",
 	"CLIENT_ID": "YOUR_BOT_ID",
 	"GUILD_ID": "YOUR_GUILD_ID",
-	"nodes": [
+	"NODES": [
 		{ "host": "localhost", "port": 5555, "password": "123456" }
 	]
 }

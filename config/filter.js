@@ -92,12 +92,16 @@ module.exports = {
         ],
     },
     'nightcore': {
-        equalizer: [
-            { band: 1, gain: 0.3 },
-            { band: 0, gain: 0.3 },
-        ],
-        timescale: { pitch: 1.2 },
-        tremolo: { depth: 0.3, frequency: 14 },
+        timescale: {
+            "speed": 1.165,
+            "pitch": 1.125,
+            "rate": 1.05
+        },
+    },
+    'doubletime': {
+        timescale: {
+            "speed": 1.165
+        },
     },
     'vaporwave': {
         equalizer: [
@@ -106,5 +110,67 @@ module.exports = {
         ],
         timescale: { pitch: 0.5 },
         tremolo: { depth: 0.3, frequency: 14 },
+    },
+    'china': {
+        timescale: { 
+            "speed": 0.75, 
+            "pitch": 1.25, 
+            "rate": 1.25 
+        },
+    },
+    'threed': {
+        rotation: {
+            "rotationHz": 0.2, 
+        },
+    },
+    'dance': {
+        timescale: {
+            "speed": 1.25,
+            "pitch": 1.25,
+            "rate": 1.25
+        },
+    },
+    'slowmotion': {
+        timescale: {
+            "speed": 0.5,
+            "pitch": 1.0,
+            "rate": 0.8
+        },
+    },
+    'chipmunk': {
+        timescale: {
+            "speed": 1.05,
+            "pitch": 1.35,
+            "rate": 1.25
+        },
+    },
+    'darthvader': {
+        timescale: {
+            "speed": 0.975,
+            "pitch": 0.5,
+            "rate": 0.8
+        },
+    },
+    'vibrate': {
+        vibrato: {
+            "frequency": 4.0,
+            "depth": 0.75
+        },
+        tremolo: {
+            "frequency": 4.0,
+            "depth": 0.75
+        },
+    },
+    'vibrato': {
+        vibrato: {
+            "frequency": 4.0,
+            "depth": 0.75
+        },
+    },
+    'tremolo': {
+        tremolo: {
+            "frequency": 4.0,
+            "depth": 0.75
+        },
     },
 };

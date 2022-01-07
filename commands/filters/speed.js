@@ -28,7 +28,7 @@ module.exports = {
 		});
 		const msg = await message.channel.send(`Setting **Speed** to **${args[0]}x**. This may take a few seconds...`);
 		const embed = new MessageEmbed()
-			.setAuthor({ name: `Speed set to: ${args[0]}x`, iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif' })
+			.setAuthor({ name: `Speed set to: ${args[0]}x`, iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif'})
 			.setColor('#000001');
 		await delay(5000);
 		msg.edit({ content: " ", embeds: [embed] });

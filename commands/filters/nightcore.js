@@ -23,7 +23,7 @@ module.exports = {
         await player.setFilter('filters', nightcore);
 
         const nightcored = new MessageEmbed()
-            .setAuthor({ name: "Turned on: Nightcore", iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif' })
+            .setAuthor({ name: "Turned on: Nightcore", iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif'})
             .setColor('#000001');
 
         await delay(5000);
