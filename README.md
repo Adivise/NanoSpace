@@ -76,7 +76,7 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 
 🎶 **Music Commands!** 
 
-- Play (#play, #p, #pplay) can play song from youtube, soundcloud and twitch
+- Play (#play, #p, #pplay)
 - Nowplaying (#nowplaying, #np, #now)
 - Queue (#q)
 - Repeat (#loop (current, all), #repeat (current, all))
