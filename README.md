@@ -27,8 +27,9 @@
 
 ## 📎 Requirements
 
-1. Discord Bot Token **[Guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)**
-2. Lavalink **[Guide](https://github.com/freyacodes/lavalink)** (switch back to default lavalink!)
+1. Node.js Version 16+ **[Download](https://nodejs.org/en/download/)**
+2. Discord Bot Token **[Guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)**
+3. Lavalink **[Guide](https://github.com/freyacodes/lavalink)** (switch back to default lavalink!)
 - PT. Use my application.yml [PasteBin](https://pastebin.com/FwekJDuX) Fixed the issue of songs not matching the ones specified. 
 
 ## 🛑 Super Requirements 
