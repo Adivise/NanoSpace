@@ -1,3 +1,6 @@
+
+[![Run on Repl.it](https://repl.it/badge/github/Adivise/NanoSpace)](https://repl.it/github/Adivise/NanoSpace)
+
 ## 📑 Short Feature
 - [x] Music
 - [x] Custom Prefix
