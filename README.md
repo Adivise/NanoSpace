@@ -1,5 +1,10 @@
+## 📸 Short Tutorial
 
-[![Run on Repl.it](https://repl.it/badge/github/Adivise/NanoSpace)](https://repl.it/github/Adivise/NanoSpace)
+Coming soon..
+
+## ☔ Fork
+
+ [![Run on Repl.it](https://repl.it/badge/github/Adivise/NanoSpace)](https://repl.it/github/Adivise/NanoSpace) (add more soon!)
 
 ## 📑 Short Feature
 - [x] Music
