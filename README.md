@@ -9,7 +9,7 @@
 ## 🎶 Support Source
 - [x] Youtube
 - [x] SoundCloud
-- [x] Spotify
+- [x] Spotify (no api key anymore!)
 - [x] Deezer
 - [x] Twitch
 - [x] Facebook
@@ -27,8 +27,9 @@
 
 ## 📎 Requirements
 
-1. Discord Bot Token **[Guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)**
-2. Lavalink **[Guide](https://github.com/freyacodes/lavalink)**
+1. Node.js Version 16+ **[Download](https://nodejs.org/en/download/)**
+2. Discord Bot Token **[Guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)**
+3. Lavalink **[Guide](https://github.com/freyacodes/lavalink)** (switch back to default lavalink!)
 - PT. Use my application.yml [PasteBin](https://pastebin.com/FwekJDuX) Fixed the issue of songs not matching the ones specified. 
 
 ## 🛑 Super Requirements 
@@ -51,24 +52,48 @@ Invite **[Access Invite](https://discord.com/api/oauth2/authorize?client_id=CLIE
 1. type `node registerSlash` to register in one guild!
 2. type `node registerSlashGlobal` to register all guild! (but to need wait 1 - 2 hrs. or you can't wait pls kick bot and invite new!)
 
-After installation finishes you can use `node .` to start the bot. or `Run Start.bat`
-
 ## 📄 Configuration
 
-Copy or Rename `config.json.example` to `config.json` and fill out the values:
+> **OPTION 1️⃣**
 
-```json
-{
-	"PREFIX": "#",
-	"TOKEN": "TOKEN_HERE",
-	"OWNER_ID": "YOUR_CLIENT_ID",
-	"CLIENT_ID": "YOUR_BOT_ID",
-	"GUILD_ID": "YOUR_GUILD_ID",
-	"NODES": [
-		{ "host": "localhost", "port": 5555, "password": "123456" }
-	]
+Copy or Rename `.env.example` to `.env` and fill out the values:
+
+```.env
+TOKEN=replace_your_bot_token
+PREFIX=#
+OWNER_ID=replace_your_client_id
+CLIENT_ID=replace_your_bot_client_id
+GUILD_ID=replace_your_guild_want_to_register_slashcommand
+
+NODE_HOST=localhost
+NODE_PORT=5555
+NODE_PASSWORD=123456
+```
+
+> **OPTION 2️⃣**
+
+Go to folder `settings` edit `config.js` and you can fill out the values:
+
+```js
+require("dotenv").config();
+
+module.exports = {
+    TOKEN: process.env.TOKEN || "YOUR_TOKEN",  // your bot token
+    PREFIX: process.env.PREFIX || "#", //<= default is #  // bot prefix
+    OWNER_ID: process.env.OWNER_ID || "YOUR_CLIENT_ID", //your client id
+    CLIENT_ID: process.env.CLIENT_ID || "YOUR_BOT_CLIENT_ID", // you bot client id
+    GUILD_ID: process.env.GUILD_ID || "YOUR_GUILD_ID", // your guild id want to use slashcommand
+    NODES: [ 
+      { 
+        host: process.env.NODE_HOST || "localhost",
+        port: parseInt(process.env.NODE_PORT || "5555"),
+        password: process.env.NODE_PASSWORD || "123456",
+      } 
+    ],
 }
 ```
+
+After installation or finishes all you can use `node .` to start the bot. or `Run Start.bat`
 
 ## 🔩 Features & Commands
 
@@ -76,7 +101,7 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 
 🎶 **Music Commands!** 
 
-- Play (#play, #p, #pplay) can play song from youtube, soundcloud and twitch
+- Play (#play, #p, #pplay)
 - Nowplaying (#nowplaying, #np, #now)
 - Queue (#q)
 - Repeat (#loop (current, all), #repeat (current, all))
@@ -112,6 +137,16 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 - Bassboost (#bassboost <number -10 - 10>, #bb <number -10 - 10>)
 - Rate (#rate)
 - Reset (#reset)
+- 3d (#3d)
+- China (#china)
+- Dance (#dance)
+- Chipmunk (#chipmunk)
+- Darthvader (#darthvader)
+- DoubleTime (#doubletime)
+- SlowMotion (#slowmotion)
+- Tremolo (#tremolo)
+- Vibrate (#vibrate)
+- Vibrato (#vibrato)
 	
 📑 **Utilities Commands!**
 - restart (#restart, #stopbot)
@@ -143,3 +178,5 @@ Copy or Rename `config.json.example` to `config.json` and fill out the values:
 - [Some Handler](https://github.com/brblacky/lavamusic)
 
 - [Queue Page](https://github.com/Tetracyl/EarTensifier)
+	
+- [Some Filters](https://github.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js)

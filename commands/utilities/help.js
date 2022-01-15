@@ -1,5 +1,4 @@
 const { MessageEmbed } = require("discord.js");
-const { PREFIX } = require("../../config.json");
 const { readdirSync } = require("fs");
 const { stripIndents } = require("common-tags");
 const chalk = require("chalk");
@@ -14,6 +13,7 @@ module.exports = {
         accessableby: "Members"
     },
     run: async (client, message, args) => {
+        const PREFIX = client.prefix;
         console.log(chalk.magenta(`[COMMAND] Help used by ${message.author.tag} from ${message.guild.name}`));
         const embed = new MessageEmbed()
             .setColor('#000001')

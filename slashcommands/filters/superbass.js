@@ -1,7 +1,7 @@
 const delay = require('delay');
 const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const { superbass } = require('../../config/filter');
+const { superbass } = require('../../settings/filter');
 
 module.exports = { 
     name: "superbass",

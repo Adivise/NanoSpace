@@ -1,7 +1,7 @@
 const delay = require('delay');
 const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const { soft } = require('../../config/filter');
+const { soft } = require('../../settings/filter');
 
 module.exports = { 
     config: {

@@ -1,6 +1,5 @@
 const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const { PREFIX } = require('../../config.json');
 const formatDuration = require('../../structures/formatduration.js')
 
 module.exports = { 
@@ -13,6 +12,7 @@ module.exports = {
         usage: "<seconds>"
     },
     run: async (client, message, args) => {
+        const PREFIX = client.prefix;
         const msg = await message.channel.send(`**Loading please wait...**`);
         if(isNaN(args[0])) return msg.edit(`Invalid number. Please provide a number in seconds.\nCorrect Usage: \`${PREFIX}seek <seconds>\``);
         

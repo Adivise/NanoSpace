@@ -1,6 +1,5 @@
 const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const { ownerid } = require('../../config.json');
 
 module.exports = {
     config: {
@@ -12,7 +11,7 @@ module.exports = {
         aliases: ["stopbot"]
     },
     run: async (client, message, args) => {
-    if(message.author.id != ownerid) return message.channel.send("You're the client the owner!")
+    if(message.author.id != client.owner) return message.channel.send("You're the client the owner!")
 
     const restart = new MessageEmbed()
         .setDescription("**Account has been**: `Shutting down...`")

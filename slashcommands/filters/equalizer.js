@@ -1,7 +1,6 @@
 const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const { prefix } = require('../../config.json')
-const { reset } = require('../../config/filter')
+const { reset } = require('../../settings/filter')
 
 module.exports = { 
 	name: 'equalizer',

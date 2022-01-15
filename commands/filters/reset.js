@@ -1,6 +1,6 @@
 const delay = require('delay');
-const { normal } = require('../../config/volume.js');
-const { reset } = require('../../config/filter')
+const { normal } = require('../../settings/volume.js');
+const { reset } = require('../../settings/filter')
 const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 

@@ -1,7 +1,6 @@
 const delay = require('delay');
 const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const { reset } = require('../../config/filter');
 
 module.exports = { 
 	name: "speed",

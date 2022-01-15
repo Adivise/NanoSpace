@@ -1,7 +1,7 @@
 const delay = require('delay');
 const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const { chipmunk } = require('../../config/filter');
+const { chipmunk } = require('../../settings/filter');
 
 module.exports = { 
     name: "chipmunk",

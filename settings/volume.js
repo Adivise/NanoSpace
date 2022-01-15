@@ -1,4 +1,4 @@
 module.exports = {
-    'earrape': '1000',
+    'earrape': '500',
     'normal': '100',
 };

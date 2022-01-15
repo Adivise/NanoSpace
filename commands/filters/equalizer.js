@@ -1,7 +1,6 @@
 const chalk = require('chalk');
 const Discord = require('discord.js');
-const { PREFIX } = require('../../config.json')
-const { reset } = require('../../config/filter')
+const { reset } = require('../../settings/filter')
 
 module.exports = { 
     config: {
@@ -13,7 +12,8 @@ module.exports = {
         aliases: ["eq"]
     },
 
-	run: async (client, message, args) => {        
+	run: async (client, message, args) => {
+		const PREFIX = client.prefix;
         const player = client.manager.get(message.guild.id);
         if(!player) return message.channel.send("No song/s currently playing in this guild.");
         const { channel } = message.member.voice;

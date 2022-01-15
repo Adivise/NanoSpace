@@ -3,7 +3,7 @@ const formatduration = require('../../structures/formatduration');
     
 module.exports = async (client, player, track, payload) => {
   
-    const embed = new MessageEmbed()
+    const embeded = new MessageEmbed()
       .setAuthor({ name: `Starting playing...`, iconURL: 'https://cdn.discordapp.com/emojis/741605543046807626.gif'})
       .setDescription(`**[${track.title}](${track.uri})**`)
       .setColor('#000001')
@@ -81,7 +81,7 @@ module.exports = async (client, player, track, payload) => {
           .setStyle("DANGER")
       )
    
-    const nplaying = await client.channels.cache.get(player.textChannel).send({ embeds: [embed], components: [row, row2] });
+    const nplaying = await client.channels.cache.get(player.textChannel).send({ embeds: [embeded], components: [row, row2] });
 
     const filter = (message) => {
       if(message.guild.me.voice.channel && message.guild.me.voice.channelId === message.member.voice.channelId) return true;
@@ -127,7 +127,8 @@ module.exports = async (client, player, track, payload) => {
         const embed = new MessageEmbed()
             .setDescription(`\`🚫\` | **Song has been:** | \`Stopped\``)
             .setColor('#000001');
-
+        
+        await nplaying.edit({ embeds: [embeded], components: [] });
         message.reply({ embeds: [embed], ephemeral: true });
       } else if(id === "shuffle") {
         if(!player) {
@@ -233,6 +234,11 @@ module.exports = async (client, player, track, payload) => {
             .setColor('#000001');
 
         message.reply({ embeds: [embed], ephemeral: true });
+      }
+    });
+    collector.on('end', async (collected, reason) => {
+      if(reason === "time") {
+        nplaying.edit({ embeds: [embeded], components: [] })
       }
     });
 }

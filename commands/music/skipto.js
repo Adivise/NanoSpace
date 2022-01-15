@@ -1,6 +1,5 @@
 const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const { PREFIX } = require('../../config.json')
 
 module.exports = { 
     config: {
@@ -12,6 +11,7 @@ module.exports = {
         usage: "<positions>"
     },
     run: async (client, message, args) => {
+        const PREFIX = client.prefix;
         const msg = await message.channel.send("Loading please wait...")
 
         if (isNaN(args[0])) return msg.edit('Invalid number');

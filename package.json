@@ -11,6 +11,7 @@
     "delay": "^4.4.0",
     "discord-api-types": "^0.26.0",
     "discord.js": "^13.4.0",
+    "dotenv": "^12.0.3",
     "erela.js": "github:Adivise/erela.js-custom",
     "erela.js-apple": "^1.2.6",
     "erela.js-deezer": "^1.0.7",
@@ -19,9 +20,11 @@
     "youtube-sr": "^4.1.9"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "register": "node registerSlash.js",
+    "registerGlobal": "node registerSlashGlobal.js"
   },
-  "author": "nanotect",
+  "author": "Adivise",
   "license": "ISC",
   "repository": {
     "type": "git",
@@ -30,5 +33,8 @@
   "bugs": {
     "url": "https://github.com/Adivise/NanoSpace/issues"
   },
-  "homepage": "https://github.com/Adivise/NanoSpace#readme"
+  "homepage": "https://github.com/Adivise/NanoSpace#readme",
+  "devDependencies": {
+    "node": "^17.0.1"
+  }
 }

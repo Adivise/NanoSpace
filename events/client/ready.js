@@ -1,5 +1,4 @@
 const figlet = require('figlet');
-const { PREFIX } = require('../../config.json');
 const chalk = require('chalk');
 
 module.exports = async (client) => {
@@ -18,9 +17,9 @@ module.exports = async (client) => {
     let channels = client.channels.cache.size;
 
     const activities = [
-        `${PREFIX}help | ${guilds} servers`,
-        `${PREFIX}play <input> | ${users} users`,
-        `${PREFIX}doubletime | ${channels} channels`,
+        `${client.prefix}help | ${guilds} servers`,
+        `${client.prefix}play <input> | ${users} users`,
+        `${client.prefix}doubletime | ${channels} channels`,
     ]
 
     setInterval(() => {

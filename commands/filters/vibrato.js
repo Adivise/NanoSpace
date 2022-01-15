@@ -1,7 +1,7 @@
 const delay = require('delay');
 const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const { vibrato } = require('../../config/filter')
+const { vibrato } = require('../../settings/filter')
 
 module.exports = { 
     config: {

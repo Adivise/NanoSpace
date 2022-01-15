@@ -1,6 +1,5 @@
 const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const { prefix } = require('../../config.json');
 const formatDuration = require('../../structures/formatduration.js')
 
 module.exports = { 

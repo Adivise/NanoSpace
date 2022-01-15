@@ -4,7 +4,6 @@ const spotify = require("better-erela.js-spotify").default;
 const deezer = require("erela.js-deezer");
 const apple = require("erela.js-apple");
 const facebook = require("erela.js-facebook");
-const { NODES, TOKEN } = require("./config.json"); 
 
 class MainClient extends Client {
 	 constructor() {
@@ -23,7 +22,10 @@ class MainClient extends Client {
             ]
         });
 
-    if(!this.token) this.token = TOKEN;
+    this.config = require("./settings/config.js");
+    this.prefix = this.config.PREFIX;
+    this.owner = this.config.OWNER_ID;
+    if(!this.token) this.token = this.config.TOKEN;
 
     process.on('unhandledRejection', error => console.log(error));
     process.on('uncaughtException', error => console.log(error));
@@ -31,7 +33,7 @@ class MainClient extends Client {
 	const client = this;
 
     this.manager = new Manager({
-      nodes: NODES,
+      nodes: this.config.NODES,
       plugins: [
         new spotify(),
         new deezer(),

@@ -1,6 +1,5 @@
 const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const { prefix } = require('../../config.json')
 
 module.exports = { 
     name: "skipto",

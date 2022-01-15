@@ -1,6 +1,5 @@
 const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const { PREFIX } = require('../../config.json');
 const formatDuration = require('../../structures/formatduration.js')
 
 const fastForwardNum = 10;
@@ -16,6 +15,7 @@ module.exports = {
     },
 
     run: async (client, message, args) => {
+        const PREFIX = client.prefix;
         const msg = await message.channel.send(`**Loading please wait...**`);
            
 		const player = client.manager.get(message.guild.id);

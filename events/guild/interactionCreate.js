@@ -1,5 +1,3 @@
-const { OWNER_ID } = require('../../config.json');
-
 module.exports = async(client, interaction) => {
     if (interaction.isCommand()) {
         if (!client.slash.has(interaction.commandName)) return;
@@ -20,7 +18,7 @@ module.exports = async(client, interaction) => {
         }
 
             if (command.ownerOnly) {
-                if (interaction.user.id !== OWNER_ID) {
+                if (interaction.user.id !== client.owner) {
                     return interaction.editReply({ content: "You not owner the bot can't use this command!" });
                 }
             }
