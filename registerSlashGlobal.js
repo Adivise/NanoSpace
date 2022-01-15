@@ -2,7 +2,7 @@ const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
 const { readdirSync } = require("fs");
 const path = require("path");
-const { CLIENT_ID, GUILD_ID, TOKEN } = require("./config.json");
+const { CLIENT_ID, TOKEN } = require("./settings/config.js");
 
 const commands = [];
 readdirSync("./slashcommands/").map(async dir => {
