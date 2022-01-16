@@ -1,7 +1,7 @@
 ## 📸 Tutorial
 
-How to run on Replit? [Click Here](https://youtu.be/PvWHuYA8kpU)
-How to run on your own? [Coming Next...]
+- [x] How to run on Replit? [Click Here](https://youtu.be/PvWHuYA8kpU)
+- [x] How to run on your own? [Coming Next...]
 
 ## ☔ Fork
 
