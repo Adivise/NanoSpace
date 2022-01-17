@@ -1,6 +1,6 @@
 const { convertTime } = require("../../structures/convert.js")
 const chalk = require('chalk');
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed, Permissions } = require("discord.js");
 
 module.exports = { 
     config: {
@@ -12,11 +12,13 @@ module.exports = {
         aliases: ["p", "pplay"]
     },
     run: async (client, message, args) => {
+        console.log(chalk.magenta(`[COMMAND] Play used by ${message.author.tag} from ${message.guild.name}`));
         const msg = await message.channel.send('Loading please wait...')
         const { channel } = message.member.voice;
+        if (!message.guild.me.permissions.has([Permissions.FLAGS.CONNECT, Permissions.FLAGS.SPEAK])) return msg.edit({ embed: { description: "I don't have perm `CONNECT` or `SPEAK` to execute command!", color: "#000001" } });
+        if (!message.guild.me.permissionsIn(channel).has([Permissions.FLAGS.CONNECT, Permissions.FLAGS.SPEAK])) return msg.edit({ embed : { description: `I don't have perm \`CONNECT\` or \`SPEAK\` in ${channel.name} to join voice!`, color: "#000001" } });
         if (!channel) return msg.edit("You need to be in a voice channel to use command.");
         if (!args[0]) return msg.edit("Please provide a song name or link to search.");
-      //  if (args.join(" ").startsWith("https://open.spotify.com/artist/")) return msg.edit("Please use spotify `playlists, album or track` this `artist` not support!");
 
         const player = client.manager.create({
             guild: message.guild.id,
@@ -24,10 +26,12 @@ module.exports = {
             textChannel: message.channel.id,
             selfDeafen: true,
         });
+
+        const search = args.join(" ");
         
         const state = player.state;
         if (state != "CONNECTED") await player.connect();
-        client.manager.search(args.join(" "), message.author).then(async res => {
+        client.manager.search(search, message.author).then(async res => {
             switch (res.loadType) {
                 case "TRACK_LOADED":
                     player.queue.add(res.tracks[0]);
@@ -66,8 +70,11 @@ module.exports = {
                         .setColor('#000001')
 
                     msg.edit({ content: " ", embeds: [playlist] });
-                        console.log(chalk.magenta(`[COMMAND] Play used by ${message.author.tag} from ${message.guild.name}`));
                         if(!player.playing) player.play()
+                    break;
+
+                case "NO_MATCHES":
+                    msg.edit({ content: "No results found.", embeds: [] });
                     break;
             }
         }).catch(err => msg.edit(err.message))
