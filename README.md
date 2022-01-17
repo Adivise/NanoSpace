@@ -184,7 +184,7 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 
 
 ## 👏 THANK
-- [Some Handler](https://github.com/brblacky/lavamusic)
+- [Some Events](https://github.com/brblacky/lavamusic)
 
 - [Queue Page](https://github.com/Tetracyl/EarTensifier)
 	
