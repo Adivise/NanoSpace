@@ -25,7 +25,7 @@
     "registerGlobal": "node registerSlashGlobal.js"
   },
   "author": "Adivise",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Adivise/NanoSpace.git"
