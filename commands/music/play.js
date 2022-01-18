@@ -20,7 +20,7 @@ module.exports = {
         if (!channel) return msg.edit("You need to be in a voice channel to use command.");
         if (!args[0]) return msg.edit("Please provide a song name or link to search.");
 
-        const player = client.manager.create({
+        const player = await client.manager.create({
             guild: message.guild.id,
             voiceChannel: message.member.voice.channel.id,
             textChannel: message.channel.id,
@@ -34,30 +34,29 @@ module.exports = {
         client.manager.search(search, message.author).then(async res => {
             switch (res.loadType) {
                 case "TRACK_LOADED":
-                    player.queue.add(res.tracks[0]);
+                    await player.queue.add(res.tracks[0]);
 
                 const embed = new MessageEmbed()
                     .setDescription(`**Queued • [${res.tracks[0].title}](${res.tracks[0].uri})** \`${convertTime(res.tracks[0].duration, true)}\` • ${res.tracks[0].requester}`)
                     .setColor('#000001')
 
                     msg.edit({ content: " ", embeds: [embed] });
-                        console.log(chalk.magenta(`[COMMAND] Play used by ${message.author.tag} from ${message.guild.name}`));
                     if (!player.playing) player.play()
                     break;
                 
                 case "SEARCH_RESULT":
+                const resulted = args.join(" ");
                 const res1 = await client.manager.search(
-                    message.content.slice(6),
+                    resulted,
                     message.author
                 );
-                    player.queue.add(res1.tracks[0]);
+                    await player.queue.add(res1.tracks[0]);
 
                     const embed1 = new MessageEmbed()
                         .setDescription(`**Queued • [${res1.tracks[0].title}](${res1.tracks[0].uri})** \`${convertTime(res1.tracks[0].duration, true)}\` • ${res1.tracks[0].requester}`)
                         .setColor('#000001')
             
                       msg.edit({ content: " ", embeds: [embed1] });
-                        console.log(chalk.magenta(`[COMMAND] Play used by ${message.author.tag} from ${message.guild.name}`));
                       if (!player.playing) player.play()
                     break;
 
