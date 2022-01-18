@@ -74,6 +74,11 @@ module.exports = {
                         console.log(chalk.magenta(`[SLASHCOMMAND] Play used by ${interaction.user.tag} from ${interaction.guild.name}`));
                         if(!player.playing) player.play()
                     break;
+
+                case "NO_MATCHES":
+                    msg.edit({ content: "No results found.", embeds: [] });
+                    break;
+                
             }
         }).catch(err => msg.edit(err.message))
     }
