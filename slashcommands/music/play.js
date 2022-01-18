@@ -48,7 +48,7 @@ module.exports = {
 
                 case "SEARCH_RESULT":
                 const res1 = await client.manager.search(
-                    value.slice(6),
+                    value,
                     interaction.user
                 );
                     player.queue.add(res1.tracks[0]);
