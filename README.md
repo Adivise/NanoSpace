@@ -73,6 +73,7 @@ PREFIX=#
 OWNER_ID=replace_your_client_id
 CLIENT_ID=replace_your_bot_client_id
 GUILD_ID=replace_your_guild_want_to_register_slashcommand
+NP_REALTIME=true
 
 NODE_HOST=localhost
 NODE_PORT=5555
@@ -92,7 +93,8 @@ module.exports = {
     OWNER_ID: process.env.OWNER_ID || "YOUR_CLIENT_ID", //your client id
     CLIENT_ID: process.env.CLIENT_ID || "YOUR_BOT_CLIENT_ID", // you bot client id
     GUILD_ID: process.env.GUILD_ID || "YOUR_GUILD_ID", // your guild id want to use slashcommand
-    NODES: [ 
+    NP_REALTIME: process.env.NP_REALTIME || "BOOLEAN", // "true" = realtime, "false" = not realtime :3 // WARNING: on set to "true" = laggy
+    NODES: [
       { 
         host: process.env.NODE_HOST || "localhost",
         port: parseInt(process.env.NODE_PORT || "5555"),
@@ -185,8 +187,4 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 
 
 ## 👏 THANK
-- [Some Events](https://github.com/brblacky/lavamusic)
-
-- [Queue Page](https://github.com/Tetracyl/EarTensifier)
-	
-- [Some Filters](https://github.com/Tomato6966/discord-js-lavalink-Music-Bot-erela-js)
+- [Some Source](https://github.com/brblacky/lavamusic)
