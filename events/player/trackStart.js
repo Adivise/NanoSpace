@@ -22,63 +22,63 @@ module.exports = async (client, player, track, payload) => {
         new MessageButton()
           .setCustomId("pause")
           .setEmoji("⏯")
-          .setStyle("SECONDARY")
+          .setStyle("SUCCESS")
       )
       .addComponents(
         new MessageButton()
-          .setCustomId("skip")
-          .setEmoji("⏭")
-          .setStyle("SECONDARY")
-      )
-      .addComponents(
-        new MessageButton()
-          .setCustomId("shuffle")
-          .setEmoji("🔀")
-          .setStyle("SECONDARY")
-      )
-      .addComponents(
-        new MessageButton()
-          .setCustomId("loop")
-          .setEmoji("🔁")
-          .setStyle("SECONDARY")
+          .setCustomId("replay")
+          .setEmoji("⬅")
+          .setStyle("PRIMARY")
       )
       .addComponents(
         new MessageButton()
           .setCustomId("stop")
-          .setEmoji("⏹")
+          .setEmoji("✖")
           .setStyle("DANGER")
+      )
+      .addComponents(
+        new MessageButton()
+          .setCustomId("skip")
+          .setEmoji("➡")
+          .setStyle("PRIMARY")
+      )
+      .addComponents(
+        new MessageButton()
+          .setCustomId("loop")
+          .setEmoji("🔄")
+          .setStyle("SUCCESS")
       )
     
     const row2 = new MessageActionRow()
       .addComponents(
         new MessageButton()
-          .setCustomId("volup")
-          .setEmoji("🔊")
-          .setStyle("SECONDARY")
+          .setCustomId("shuffle")
+          .setEmoji("🔀")
+          .setStyle("SUCCESS")
       )
       .addComponents(
         new MessageButton()
           .setCustomId("voldown")
           .setEmoji("🔉")
-          .setStyle("SECONDARY")
+          .setStyle("PRIMARY")
       )
       .addComponents(
         new MessageButton()
-          .setCustomId("replay")
-          .setEmoji("🔂")
-          .setStyle("SECONDARY")
+          .setCustomId("clear")
+          .setEmoji("🗑")
+          .setStyle("DANGER")
+      )
+      .addComponents(
+        new MessageButton()
+          .setCustomId("volup")
+          .setEmoji("🔊")
+          .setStyle("PRIMARY")
       )
       .addComponents(
         new MessageButton()
           .setCustomId("queue")
           .setEmoji("📋")
-          .setStyle("SECONDARY")
-      )
-      .addComponents(
-        new MessageButton()
-          .setCustomId("clear")
-          .setEmoji("📛")
-          .setStyle("DANGER")
+          .setStyle("SUCCESS")
       )
    
     const nplaying = await client.channels.cache.get(player.textChannel).send({ embeds: [embeded], components: [row, row2] });
@@ -201,7 +201,7 @@ module.exports = async (client, player, track, payload) => {
         if(pagesNum === 0) pagesNum = 1;
     
         const songStrings = [];
-        for (let i = 1; i < player.queue.length; i++) {
+        for (let i = 0; i < player.queue.length; i++) {
           const song = player.queue[i];
           songStrings.push(
             `**${i + 1}.** [${song.title}](${song.uri}) \`[${formatduration(song.duration)}]\` • ${song.requester}
@@ -216,7 +216,7 @@ module.exports = async (client, player, track, payload) => {
             .setAuthor({ name: `Queue - ${message.guild.name}`, iconURL: message.guild.iconURL({ dynamic: true }) })
             .setThumbnail(thumbnail)
             .setColor('#000001')
-            .setDescription(`**Currently Playing**\n**1.** [${song.title}](${song.uri}) \`[${formatduration(song.duration)}]\` • ${song.requester}\n\n**Rest of queue**:${str == '' ? '  Nothing' : '\n' + str}`)
+            .setDescription(`**Currently Playing**\n**[${song.title}](${song.uri})** \`[${formatduration(song.duration)}]\` • ${song.requester}\n\n**Rest of queue**:${str == '' ? '  Nothing' : '\n' + str}`)
             .setFooter({ text: `Page • ${i + 1}/${pagesNum} | ${player.queue.length} • Song | ${qduration} • Total duration`});
     
           pages.push(embed);
