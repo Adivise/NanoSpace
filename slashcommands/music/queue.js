@@ -32,7 +32,7 @@ module.exports = {
 		if(pagesNum === 0) pagesNum = 1;
 
 		const songStrings = [];
-		for (let i = 1; i < player.queue.length; i++) {
+		for (let i = 0; i < player.queue.length; i++) {
 			const song = player.queue[i];
 			songStrings.push(
 				`**${i + 1}.** [${song.title}](${song.uri}) \`[${formatDuration(song.duration)}]\` • ${song.requester}
@@ -47,14 +47,14 @@ module.exports = {
                 .setAuthor({ name: `Queue - ${interaction.guild.name}`, iconURL: interaction.guild.iconURL({ dynamic: true }) })
                 .setThumbnail(thumbnail)
 				.setColor('#000001')
-				.setDescription(`**Currently Playing**\n**1.** [${song.title}](${song.uri}) \`[${formatDuration(song.duration)}]\` • ${song.requester}\n\n**Rest of queue**:${str == '' ? '  Nothing' : '\n' + str}`)
+				.setDescription(`**Currently Playing:**\n**[${song.title}](${song.uri})** \`[${formatDuration(song.duration)}]\` • ${song.requester}\n\n**Rest of queue**:${str == '' ? '  Nothing' : '\n' + str}`)
 				.setFooter({ text: `Page • ${i + 1}/${pagesNum} | ${player.queue.length} • Song | ${qduration} • Total duration`});
 
 			pages.push(embed);
 		}
 
 		if (!value) {
-			if (pages.length == pagesNum && player.queue.length > 10) pagequeue(client, interaction, pages, ['⏮', '⏭'], 120000, player.queue.length, qduration);
+			if (pages.length == pagesNum && player.queue.length > 10) pagequeue(client, interaction, pages, 60000, player.queue.length, qduration);
 			else return interaction.editReply({ embeds: [pages[0]] });
 		}
 		else {
