@@ -23,11 +23,11 @@ module.exports = {
         const { channel } = message.member.voice;
         if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
 
+        const song = player.queue.current;
         const CurrentDuration = formatDuration(player.position);
-        const { duration } = player.queue[0];
 
 		if (args[0] && !isNaN(args[0])) {
-			if((player.position + args[0] * 1000) < duration) {
+			if((player.position + args[0] * 1000) < song.duration) {
                 player.seek(player.position + args[0] * 1000);
                 
                 const forward1 = new MessageEmbed()
@@ -46,7 +46,7 @@ module.exports = {
         }
 
 		if (!args[0]) {
-			if((player.position + fastForwardNum * 1000) < duration) {
+			if((player.position + fastForwardNum * 1000) < song.duration) {
                 player.seek(player.position + fastForwardNum * 1000);
                 
                 const forward2 = new MessageEmbed()

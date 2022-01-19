@@ -27,10 +27,10 @@ module.exports = {
         if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
 
         const CurrentDuration = formatDuration(player.position);
-        const { duration } = player.queue[0];
+        const song = player.queue.current;
 
 		if (value && !isNaN(value)) {
-			if((player.position + value * 1000) < duration) {
+			if((player.position + value * 1000) < song.duration) {
                 player.seek(player.position + value * 1000);
                 
                 const forward1 = new MessageEmbed()
@@ -49,7 +49,7 @@ module.exports = {
         }
 
 		if (!value) {
-			if((player.position + fastForwardNum * 1000) < duration) {
+			if((player.position + fastForwardNum * 1000) < song.duration) {
                 player.seek(player.position + fastForwardNum * 1000);
                 
                 const forward2 = new MessageEmbed()
@@ -57,7 +57,7 @@ module.exports = {
                 .setColor('#000001');
 
                 msg.edit({ content: " ", embeds: [forward2] });
-                    console.log(chalk.magenta(`[SLASHCOMMAND] Forward used by ${interaction.author.tag} from ${interaction.guild.name}`));
+                    console.log(chalk.magenta(`[SLASHCOMMAND] Forward used by ${interaction.user.tag} from ${interaction.guild.name}`));
 
 			} else {
 				return msg.edit('Cannot forward beyond the song\'s duration.');
