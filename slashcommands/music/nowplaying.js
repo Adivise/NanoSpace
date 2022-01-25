@@ -72,10 +72,11 @@ module.exports = {
                 .setStyle("PRIMARY")
             )
 
-        const NEmbed = await msg.edit({ embeds: [embeded], components: [row] });
+        const NEmbed = await msg.edit({ content: " ", embeds: [embeded], components: [row] });
+        var interval = null;
 
         if (realtime === 'true') {
-        setInterval(async () => {
+        interval = setInterval(async () => {
             if (!player.playing) return;
             const CurrentDuration = formatDuration(player.position);
             const Part = Math.floor(player.position / song.duration * 30);
@@ -141,7 +142,8 @@ module.exports = {
                 .setDescription(`\`🚫\` | **Song has been:** | \`Stopped\``)
                 .setColor('#000001');
               
-            if (NEmbed) await NEmbed.edit({ embeds: [embeded], components: [] });
+            clearInterval(interval);
+            if (NEmbed) await NEmbed.edit({ components: [] });
             interaction.reply({ embeds: [embed], ephemeral: true });
             } else if (id === "skip") {
             if(!player) {
@@ -152,7 +154,9 @@ module.exports = {
             const embed = new MessageEmbed()
                 .setDescription("\`⏭\` | **Song has been:** `Skipped`")
                 .setColor('#000001');
-      
+
+            clearInterval(interval);
+            if (NEmbed) await NEmbed.edit({ components: [] });
             interaction.reply({ embeds: [embed], ephemeral: true });
             } else if(id === "loop") {
             if(!player) {
@@ -171,7 +175,8 @@ module.exports = {
 
         collector.on('end', async (collected, reason) => {
             if(reason === "time") {
-                if (NEmbed) await NEmbed.edit({ embeds: [embeded], components: [] });
+                if (NEmbed) await NEmbed.edit({ components: [] });
+				clearInterval(interval);
             }
         });
     }

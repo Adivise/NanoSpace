@@ -13,7 +13,7 @@ module.exports = async (client) => {
     });
 
     let guilds = client.guilds.cache.size;
-    let users = client.users.cache.size;
+    let users = client.guilds.cache.reduce((a, b) => a + b.memberCount, 0);
     let channels = client.channels.cache.size;
 
     const activities = [

@@ -11,7 +11,7 @@ module.exports = async (client) => {
             if (pull.config.aliases) pull.config.aliases.forEach(a => client.aliases.set(a, pull.config.name));
           };
         };
-        ["music", "filters", "utilities"].forEach(x => load(x));
+        ["music", "filters", "utilities", "playlist"].forEach(x => load(x));
         await delay(4000);
         console.log(chalk.greenBright(`[INFORMATION] Command Events Loaded`));
 };

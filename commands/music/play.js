@@ -14,10 +14,12 @@ module.exports = {
     run: async (client, message, args) => {
         console.log(chalk.magenta(`[COMMAND] Play used by ${message.author.tag} from ${message.guild.name}`));
         const msg = await message.channel.send('Loading please wait...')
+        
         const { channel } = message.member.voice;
-        if (!message.guild.me.permissions.has([Permissions.FLAGS.CONNECT, Permissions.FLAGS.SPEAK])) return msg.edit({ embed: { description: "I don't have perm `CONNECT` or `SPEAK` to execute command!", color: "#000001" } });
-        if (!message.guild.me.permissionsIn(channel).has([Permissions.FLAGS.CONNECT, Permissions.FLAGS.SPEAK])) return msg.edit({ embed : { description: `I don't have perm \`CONNECT\` or \`SPEAK\` in ${channel.name} to join voice!`, color: "#000001" } });
-        if (!channel) return msg.edit("You need to be in a voice channel to use command.");
+		if (!channel) return message.channel.send("You need to be in a voice channel to use command.");
+		if (!channel.permissionsFor(message.guild.me).has(Permissions.FLAGS.CONNECT)) return message.channel.send("I don't have permission to join your voice channel.");
+		if (!channel.permissionsFor(message.guild.me).has(Permissions.FLAGS.SPEAK)) return message.channel.send("I don't have permission to speak in your voice channel.");
+
         if (!args[0]) return msg.edit("Please provide a song name or link to search.");
 
         const player = await client.manager.create({

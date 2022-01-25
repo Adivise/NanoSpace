@@ -7,7 +7,7 @@ module.exports = {
         description: "shuts down the client!",
         usage: "shutdown",
         category: "utilities",
-        accessableby: "client Owner",
+        accessableby: "Owner",
         aliases: ["stopbot"]
     },
     run: async (client, message, args) => {

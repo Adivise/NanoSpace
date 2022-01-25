@@ -19,7 +19,7 @@ module.exports = {
         await player.destroy();
 
         const embed = new MessageEmbed()
-            .setDescription(`\`🚫\` | **Leaved:** | \`${channel.name}\``)
+            .setDescription(`\`🚫\` | **Left:** | \`${channel.name}\``)
             .setColor('#000001');
 
         msg.edit({ content: " ", embeds: [embed] })

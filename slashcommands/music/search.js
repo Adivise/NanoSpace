@@ -19,10 +19,11 @@ module.exports = {
         await interaction.deferReply({ ephemeral: false });
         const value = interaction.options.get("input").value;
         const msg = await interaction.editReply(`**Searching \`${value}\` please wait...**`)
+        
         const { channel } = interaction.member.voice;
-        if (!interaction.guild.me.permissions.has([Permissions.FLAGS.CONNECT, Permissions.FLAGS.SPEAK])) return msg.edit({ embed: { description: "I don't have perm `CONNECT` or `SPEAK` to execute command!", color: "#000001" } });
-        if (!interaction.guild.me.permissionsIn(channel).has([Permissions.FLAGS.CONNECT, Permissions.FLAGS.SPEAK])) return msg.edit({ embed : { description: `I don't have perm \`CONNECT\` or \`SPEAK\` in ${channel.name} to join voice!`, color: "#000001" } });
         if (!channel) return msg.edit("You need to be in a voice channel to play music.");
+        if (!channel.permissionsFor(interaction.guild.me).has(Permissions.FLAGS.CONNECT)) return msg.edit("I don't have permission to join your voice channel.");
+		if (!channel.permissionsFor(interaction.guild.me).has(Permissions.FLAGS.SPEAK)) return msg.edit("I don't have permission to speak in your voice channel.");
 
         const player = client.manager.create({
             guild: interaction.guild.id,

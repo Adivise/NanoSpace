@@ -22,6 +22,8 @@ module.exports = {
 
         const { channel } = interaction.member.voice;
         if (!channel) return msg.edit("You need to be in a voice channel to use command.");
+        if (!channel.permissionsFor(interaction.guild.me).has(Permissions.FLAGS.CONNECT)) return msg.edit("I don't have permission to join your voice channel.");
+		if (!channel.permissionsFor(interaction.guild.me).has(Permissions.FLAGS.SPEAK)) return msg.edit("I don't have permission to speak in your voice channel.");
 
         const player = client.manager.create({
             guild: interaction.guild.id,

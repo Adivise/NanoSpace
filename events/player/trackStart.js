@@ -115,6 +115,7 @@ module.exports = async (client, player, track, payload) => {
             .setDescription("\`⏭\` | **Song has been:** `Skipped`")
             .setColor('#000001');
 
+        await nplaying.edit({ embeds: [embeded], components: [] });
         message.reply({ embeds: [embed], ephemeral: true });
       } else if(id === "stop") {
         if(!player) {

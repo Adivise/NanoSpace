@@ -3,7 +3,6 @@ const { Manager } = require("erela.js");
 const spotify = require("better-erela.js-spotify").default;
 const deezer = require("erela.js-deezer");
 const apple = require("erela.js-apple");
-const facebook = require("erela.js-facebook");
 
 class MainClient extends Client {
 	 constructor() {
@@ -18,13 +17,13 @@ class MainClient extends Client {
                 Intents.FLAGS.GUILD_MESSAGES,
                 Intents.FLAGS.GUILD_MEMBERS,
                 Intents.FLAGS.GUILD_VOICE_STATES,
-                Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
             ]
         });
 
     this.config = require("./settings/config.js");
     this.prefix = this.config.PREFIX;
     this.owner = this.config.OWNER_ID;
+    this.dev = this.config.DEV_ID;
     if(!this.token) this.token = this.config.TOKEN;
 
     process.on('unhandledRejection', error => console.log(error));
@@ -37,7 +36,6 @@ class MainClient extends Client {
       plugins: [
         new spotify(),
         new deezer(),
-        new facebook(),
         new apple(),
       ],
       send(id, payload) {
@@ -47,7 +45,7 @@ class MainClient extends Client {
     });
 
     ["aliases", "slash", "commands"].forEach(x => client[x] = new Collection());
-    ["loadCommand", "loadSlashCommand", "loadEvent", "loadPlayer"].forEach(x => require(`./handlers/${x}`)(client));
+    ["loadCommand", "loadSlashCommand", "loadEvent", "loadPlayer", "loadDatabase"].forEach(x => require(`./handlers/${x}`)(client));
 
 	}
 		connect() {
