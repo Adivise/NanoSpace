@@ -4,6 +4,7 @@ module.exports = async(client, interaction) => {
         if (!interaction.guild) return;
         const command = client.slash.get(interaction.commandName);
         if(!command) return;
+        if (!client.dev.includes(interaction.user.id) && client.dev.length > 0) { interaction.reply("The bot is under maintenance. (Please come back again later)"); console.log(`[INFOMATION] ${interaction.user.tag} trying request the command!`); return;}
 
         try {
             if (command.userPerms) {

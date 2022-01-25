@@ -20,6 +20,7 @@ module.exports = async (client, message) => {
     const cmd = args.shift().toLowerCase();
     const command = client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
     if(!command) return;
+    if (!client.dev.includes(message.author.id) && client.dev.length > 0) { message.channel.send("The bot is under maintenance. (Please come back again later)"); console.log(`[INFOMATION] ${message.author.tag} trying request the command!`); return;}
     
     if(!message.guild.me.permissions.has(Permissions.FLAGS.SEND_MESSAGES)) return await message.author.dmChannel.send({ content: `I don't have perm  **\`SEND_MESSAGES\`** permission in <#${message.channelId}> to execute command!` }).catch(() => {});
     if(!message.guild.me.permissions.has(Permissions.FLAGS.VIEW_CHANNEL)) return;
