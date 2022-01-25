@@ -122,6 +122,9 @@ module.exports = {
 
 After installation or finishes all you can use `node .` to start the bot. or `Run Start.bat`
 
+<details><summary>AllCommands (CLICK ME)</summary>
+<p>
+
 ## 🔩 Features & Commands
 
 > Note: The default prefix is '#'
@@ -188,6 +191,9 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 - Premium (#premium <mention>)
 - Help (#help, #halp)
 
+</p>
+</details>
+
 <details><summary>Picture (CLICK ME)</summary>
 <p>
 
@@ -209,7 +215,8 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 
 <details><summary>New Picture (CLICK ME)</summary>
 <p>
-- **New Picture**
+
+## 🖼 Picture & ScreenShots
 
 ![see](https://i.imgur.com/xUurYDJ.png)
 ![see](https://i.imgur.com/hxSCmeP.png)
