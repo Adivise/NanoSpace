@@ -9,10 +9,10 @@
 
 ## 📑 Short Feature
 - [x] Music
+- [x] Playlists Sysytem
 - [x] Custom Prefix
 - [x] SlashCommand
 - [x] Custom Filters
-- [x] No Database Requirement
 - [x] Easy to use
 
 ## 🎶 Support Source
