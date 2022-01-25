@@ -18,14 +18,12 @@
 ## 🎶 Support Source
 - [x] Youtube
 - [x] SoundCloud
-- [x] Spotify (no api key anymore!)
+- [x] Spotify
 - [x] Deezer
 - [x] Twitch
-- [x] Facebook
 - [x] Apple
 - [x] Bandcamp
 - [x] Vimeo
-- [x] Mixer
 - [x] Https (Radio)
 
 ## 🚨 Have a Problem
@@ -67,13 +65,22 @@ Invite **[Access Invite](https://discord.com/api/oauth2/authorize?client_id=CLIE
 Copy or Rename `.env.example` to `.env` and fill out the values:
 
 ```.env
-TOKEN=replace_your_bot_token
+# Bot
+TOKEN=REPLACE_HERE
 PREFIX=#
-OWNER_ID=replace_your_client_id
-CLIENT_ID=replace_your_bot_client_id
-GUILD_ID=replace_your_guild_want_to_register_slashcommand
+CLIENT_ID=REPLACE_HERE
+GUILD_ID=REPLACE_HERE
 NP_REALTIME=true
 
+# Devloper
+OWNER_ID=REPLACE_HERE
+
+# Database
+MONGO_URI=mongodb://127.0.0.1:27017/playlist
+LITMIT_TRACK=100
+LITMIT_PLAYLIST=10
+
+# Lavalink
 NODE_HOST=localhost
 NODE_PORT=5555
 NODE_PASSWORD=123456
@@ -89,10 +96,20 @@ require("dotenv").config();
 module.exports = {
     TOKEN: process.env.TOKEN || "YOUR_TOKEN",  // your bot token
     PREFIX: process.env.PREFIX || "#", //<= default is #  // bot prefix
+
     OWNER_ID: process.env.OWNER_ID || "YOUR_CLIENT_ID", //your client id
+
     CLIENT_ID: process.env.CLIENT_ID || "YOUR_BOT_CLIENT_ID", // you bot client id
     GUILD_ID: process.env.GUILD_ID || "YOUR_GUILD_ID", // your guild id want to use slashcommand
+
     NP_REALTIME: process.env.NP_REALTIME || "BOOLEAN", // "true" = realtime, "false" = not realtime :3 // WARNING: on set to "true" = laggy
+
+    DEV_ID: [], // if you want to use command bot only, you can put your id here // example: ["515490955801919488", "543595284345782296"]
+
+    MONGO_URI: process.env.MONGO_URI || "YOUR_MONGO_URI", // your mongo uri
+    LIMIT_TRACK: process.env.LIMIT_TRACK || "100",  //<= dafault is "100" // limit track in playlist
+    LIMIT_PLAYLIST: process.env.LIMIT_PLAYLIST || "10", //<= default is "10" // limit can create playlist
+
     NODES: [
       { 
         host: process.env.NODE_HOST || "localhost",
@@ -159,9 +176,20 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 - Vibrate (#vibrate)
 - Vibrato (#vibrato)
 	
+💌 **Playlist Commands!**
+- Create (#create <link> <name>) <= Work all link? use same name to add! went your have!
+- Delete (#delete <name>)
+- Import (#import <name>)
+- Show (#show)
+- Show (#showall)
+	
 📑 **Utilities Commands!**
-- restart (#restart, #stopbot)
-- help (#help, #halp)
+- Restart (#restart, #stopbot)
+- Premium (#premium <mention>)
+- Help (#help, #halp)
+
+<details><summary>Picture (CLICK ME)</summary>
+<p>
 
 ## 🖼 Picture & ScreenShots
 
@@ -176,6 +204,11 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 ![see](https://i.imgur.com/5461gRn.png)
 ![see](https://i.imgur.com/42PavqR.png)
 
+</p>
+</details>
+
+<details><summary>New Picture (CLICK ME)</summary>
+<p>
 - **New Picture**
 
 ![see](https://i.imgur.com/xUurYDJ.png)
@@ -184,6 +217,9 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 ![see](https://i.imgur.com/9Plhzar.png)
 ![see](https://i.imgur.com/k2Sp8zo.png)
 
+</p>
+</details>
 
 ## 👏 THANK
-- [Some Source](https://github.com/brblacky/lavamusic)
+- [lavamusic](https://github.com/brblacky/lavamusic)
+- [EarTensifier](https://github.com/Tetracyl/EarTensifier) (made me to create this bot!)
