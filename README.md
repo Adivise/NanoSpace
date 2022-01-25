@@ -9,7 +9,7 @@
 
 ## 📑 Short Feature
 - [x] Music
-- [x] Playlists Sysytem
+- [x] Playlists System
 - [x] Custom Prefix
 - [x] SlashCommand
 - [x] Custom Filters
