@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const pagequeue = require('../../structures/SQueue');
+const { SlashPage } = require('../../structures/PageQueue.js');
 const formatDuration = require('../../structures/formatduration');
 
 module.exports = { 
@@ -54,7 +54,7 @@ module.exports = {
 		}
 
 		if (!value) {
-			if (pages.length == pagesNum && player.queue.length > 10) pagequeue(client, interaction, pages, 60000, player.queue.length, qduration);
+			if (pages.length == pagesNum && player.queue.length > 10) SlashPage(client, interaction, pages, 60000, player.queue.length, qduration);
 			else return interaction.editReply({ embeds: [pages[0]] });
 		}
 		else {

@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 const { MessageEmbed, MessageButton } = require('discord.js');
-const pagequeue = require('../../structures/NQueue');
+const { NormalPage } = require('../../structures/PageQueue.js');
 const formatDuration = require('../../structures/formatduration');
 
 module.exports = { 
@@ -49,7 +49,7 @@ module.exports = {
 		}
 
 		if (!args[0]) {
-			if (pages.length == pagesNum && player.queue.length > 10) pagequeue(client, message, pages, 60000, player.queue.length, qduration);
+			if (pages.length == pagesNum && player.queue.length > 10) NormalPage(client, message, pages, 60000, player.queue.length, qduration);
 			else return message.channel.send({ embeds: [pages[0]] });
 		}
 		else {
