@@ -1,6 +1,6 @@
 const { convertTime } = require("../../structures/convert.js")
 const chalk = require('chalk');
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed, Permissions } = require("discord.js");
 
 module.exports = { 
     name: "play",
