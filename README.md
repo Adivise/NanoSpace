@@ -41,7 +41,6 @@
 ## 🛑 Super Requirements 
 
 1. Java 11-13 **[Download JDK13](http://www.mediafire.com/file/m6gk7aoq96db8g0/file)** (i use this here version)
-2. Invite **[Access Invite](https://discord.com/api/oauth2/authorize?client_id=CLIENT_ID&permissions=8&scope=bot%20applications.commands)** (replace CLIENT_ID to your bot client id!) for slashcommand!
 
 ## 📚 Installation
 
@@ -51,12 +50,8 @@ cd NanoSpace
 npm install
 ```
 
-## 🤖 Register SlashCommand
-
-Invite **[Access Invite](https://discord.com/api/oauth2/authorize?client_id=CLIENT_ID&permissions=8&scope=bot%20applications.commands)** (replace CLIENT_ID to your bot client id!) for slashcommand!
-
-1. type `node registerSlash` to register in one guild!
-2. type `node registerSlashGlobal` to register all guild! (but to need wait 1 - 2 hrs. or you can't wait pls kick bot and invite new!)
+<details><summary>Configuration [CLICK ME]</summary>
+<p>
 
 ## 📄 Configuration
 
@@ -120,9 +115,12 @@ module.exports = {
 }
 ```
 
+</p>
+</details>
+
 After installation or finishes all you can use `node .` to start the bot. or `Run Start.bat`
 
-<details><summary>AllCommands (CLICK ME)</summary>
+<details><summary>AllCommands [CLICK ME]</summary>
 <p>
 
 ## 🔩 Features & Commands
@@ -194,26 +192,8 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 </p>
 </details>
 
-<details><summary>Picture (CLICK ME)</summary>
-<p>
 
-## 🖼 Picture & ScreenShots
-
-- [CLICK ME!](https://imgur.com/a/qzgEhTd)
-
-![see](https://i.imgur.com/wvSDhJ0.png)
-![see](https://i.imgur.com/XjVuX8K.png)
-![see](https://i.imgur.com/ThSvWPx.png)
-![see](https://i.imgur.com/jncxeNu.png)
-![see](https://i.imgur.com/7mDFd30.png)
-![see](https://i.imgur.com/jL1IMeW.png)
-![see](https://i.imgur.com/5461gRn.png)
-![see](https://i.imgur.com/42PavqR.png)
-
-</p>
-</details>
-
-<details><summary>New Picture (CLICK ME)</summary>
+<details><summary>Picture [CLICK ME]</summary>
 <p>
 
 ## 🖼 Picture & ScreenShots
@@ -227,6 +207,12 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 </p>
 </details>
 
+<details><summary>Credits [CLICK ME]</summary>
+<p>
+
 ## 👏 THANK
 - [lavamusic](https://github.com/brblacky/lavamusic)
 - [EarTensifier](https://github.com/Tetracyl/EarTensifier) (made me to create this bot!)
+
+</p>
+</details>
