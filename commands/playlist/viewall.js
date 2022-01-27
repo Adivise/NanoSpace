@@ -6,15 +6,15 @@ const { NormalPlaylist } = require('../../structures/PageQueue.js');
 
 module.exports = { 
     config: {
-        name: "showall",
+        name: "view",
         aliases: [],
-        description: "Show all public's playlists",
+        description: "View all public's playlists",
         accessableby: "Owner",
         category: "playlist",
     },
     run: async (client, message, args) => {
         if(message.author.id != client.owner) return message.channel.send("You're the client the owner!")
-        console.log(chalk.magenta(`[COMMAND] Show-All used by ${message.author.tag} from ${message.guild.name}`));
+        console.log(chalk.magenta(`[COMMAND] Viewall used by ${message.author.tag} from ${message.guild.name}`));
         
         const playlists = await Playlist.find({});
         if(!playlists) return message.channel.send(`**Don't have any playlists!**`);

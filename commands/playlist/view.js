@@ -7,14 +7,14 @@ const Premium = require('../../settings/models/Premium.js');
 
 module.exports = { 
     config: {
-        name: "show",
+        name: "view",
         aliases: [],
-        description: "Show my playlists",
+        description: "View my playlists",
         accessableby: "Member",
         category: "playlist",
     },
     run: async (client, message, args) => {
-        console.log(chalk.magenta(`[COMMAND] Show used by ${message.author.tag} from ${message.guild.name}`));
+        console.log(chalk.magenta(`[COMMAND] View used by ${message.author.tag} from ${message.guild.name}`));
 
         const premium = await Premium.findOne({ member: message.author.id });
         if(!premium) return message.channel.send(`**You need to be premium to use this command!**`);

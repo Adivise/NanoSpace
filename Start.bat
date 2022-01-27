@@ -4,6 +4,6 @@ title NanoSpace
 
 :StartBot
 
-node index.js
+node --no-warnings index.js
 
 goto StartBot

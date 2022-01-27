@@ -7,6 +7,7 @@ module.exports = {
     config: {
         name: "delete",
         aliases: [],
+        usage: "delete <playlist name>",
         description: "Delete a playlist",
         accessableby: "Member",
         category: "playlist",

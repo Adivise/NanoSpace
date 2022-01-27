@@ -8,6 +8,7 @@ module.exports = {
     config: {
         name: "create",
         aliases: [],
+        usage: "create <playlist link> <playlist name>",
         description: "Create or add to a playlist",
         accessableby: "Member",
         category: "playlist",
@@ -19,8 +20,8 @@ module.exports = {
 
         const msg = await message.channel.send('Loading please wait...')
 
-        if(!args[0]) return msg.edit("Please provide a playlist link.");
-        if(!args[1]) return msg.edit("Please provide a playlist name.");
+        if(!args[0]) return msg.edit("Please provide a playlist link. Example: #create <playlist link> <playlist name>");
+        if(!args[1]) return msg.edit("Please provide a playlist name. Example: #create <playlist link> <playlist name>");
         if(args[1].length > 16) return msg.edit("Playlist name can't be longer than 16 characters.");
 
         const PlaylistName = args[1].replace(/_/g, ' ');

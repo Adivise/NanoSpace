@@ -1,6 +1,6 @@
 {
   "name": "nanospacex",
-  "version": "5.5.0",
+  "version": "5.5.5",
   "description": "✈ Join Discord: https://discord.gg/4pk97A2 👌",
   "main": "index.js",
   "dependencies": {
@@ -21,7 +21,7 @@
     "youtube-sr": "^4.1.9"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node --no-warnings index.js"
   },
   "author": "Adivise",
   "license": "MIT",

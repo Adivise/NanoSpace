@@ -7,6 +7,7 @@ module.exports = {
     config: {
         name: "import",
         aliases: ["load"],
+		usage: "import <playlist name>",
         description: "Import a playlist to the queue",
         accessableby: "Member",
         category: "playlist",
