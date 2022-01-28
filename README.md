@@ -172,12 +172,18 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 - Vibrate (#vibrate)
 - Vibrato (#vibrato)
 	
-💌 **Playlist Commands!**
+📦 **Playlist Commands!**
 - Create (#create <link> <name>) <= Work all link? use same name to add! went your have!
 - Delete (#delete <name>)
 - Import (#import <name>)
-- Show (#show)
-- Show (#showall)
+- View (#view)
+- Show (#viewall)
+	
+💎 **Premium Commands!**
+- Premium (#premium <user id>)
+- Premiumguild (#premiumguild <guild id>)
+- Viewserver (#viewserver)
+- Viewmember (#viewmember)
 	
 📑 **Utilities Commands!**
 - Restart (#restart, #stopbot)
