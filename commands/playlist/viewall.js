@@ -6,7 +6,7 @@ const { NormalPlaylist } = require('../../structures/PageQueue.js');
 
 module.exports = { 
     config: {
-        name: "view",
+        name: "viewall",
         aliases: [],
         description: "View all public's playlists",
         accessableby: "Owner",
@@ -29,6 +29,7 @@ module.exports = {
 
         playlistStrings.push(`**\`${playlist.name}\`** • (${playlist.tracks.length} tracks) | Release: \`[${created} ago.]\` By: ${client.users.cache.get(playlist.owner).tag}
         `);
+    }
 
         const pages = [];
         for (let i = 0; i < pagesNum; i++) {
@@ -50,6 +51,6 @@ module.exports = {
 			if (args[0] > pagesNum) return message.channel.send(`There are only ${pagesNum} pages available.`);
 			const pageNum = args[0] == 0 ? 1 : args[0] - 1;
 			return message.channel.send({ embeds: [pages[pageNum]] });
-        }};
+        }
     }
 };
