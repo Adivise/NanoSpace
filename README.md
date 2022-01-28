@@ -124,25 +124,25 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 
 🎶 **Music Commands!** 
 
-- Play (#play, #p, #pplay)
+- Play (#play, #p, #pplay <song/url>)
 - Nowplaying (#nowplaying, #np, #now)
-- Queue (#q)
+- Queue (#queue <page>)
 - Repeat (#loop (current, all), #repeat (current, all))
 - Loopqueue (#loopall, #lq, repeatall)
 - Shuffle (#shuffle, mix)
-- Volume control (#vol, #v)
+- Volume control (#vol, #v <10 - 100>)
 - Pause (#pause, #pa)
 - Resume (#resume, #r)
 - Skip (#skip, #s)
-- Skipto (#skipto, #st)
+- Skipto (#skipto, #st <position>)
 - Clear (#clear)
 - Join (#join, #summon)
 - Leave (#leave, #dc, #lev, #stop)
-- Forward (#forward)
-- Seek (#seek)
-- Rewind (#rewind)
+- Forward (#forward <second>)
+- Seek (#seek <second>)
+- Rewind (#rewind <second>)
 - Replay (#replay)
-- Search (#search)
+- Search (#search <song>)
 - 247 (#247)
 - Previous (#previous)
 
@@ -154,11 +154,11 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 - Soft (#soft)
 - Earrape (#earrape, #ear)
 - Equalizer (#eq <custom>)
-- Speed (#speed )
-- Picth (#pitch)
+- Speed (#speed <amount>)
+- Picth (#pitch <amount>)
 - Vaporwave (#vaporwave)
 - Nightcore (#nightcore)
-- Bassboost (#bassboost <number -10 - 10>, #bb <number -10 - 10>)
+- Bassboost (#bassboost, #bb <number -10 - 10>)
 - Rate (#rate)
 - Reset (#reset)
 - 3d (#3d)
@@ -177,7 +177,7 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 - Delete (#delete <name>)
 - Import (#import <name>)
 - View (#view)
-- Show (#viewall)
+- Viewall (#viewall)
 	
 💎 **Premium Commands!**
 - Premium (#premium <user id>)
@@ -187,8 +187,10 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 	
 📑 **Utilities Commands!**
 - Restart (#restart, #stopbot)
-- Premium (#premium <mention>)
-- Help (#help, #halp)
+- DeploySlash (#deploy, #dps) <= only one guild
+- ClearSlash (#cdps) <= work only deployslash
+- DeploySlashGlobal (#deployglobal, #dpsg) <= want change need wait 1 - 2 hrs.
+- Help (#help, #halp <command>)
 
 </p>
 </details>
