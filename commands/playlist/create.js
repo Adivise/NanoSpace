@@ -69,7 +69,7 @@ module.exports = {
             if(playlist) {
                 if(playlist.owner !== message.author.id) return message.channel.send("You can't add to this playlist.");
                 const LimitTrack = playlist.tracks.length + TrackAdd.length;
-                if(LimitTrack > client.config.LIMIT_TRACK) return message.channel.send(`You can't add more than ${client.config.LIMIT_TRACK} tracks to this playlist.`);
+                if(LimitTrack >= client.config.LIMIT_TRACK) return message.channel.send(`You can't add more than ${client.config.LIMIT_TRACK} tracks to this playlist.`);
                 for (let songs = 0; songs < TrackAdd.length; songs++) {
                     playlist.tracks.push(TrackAdd[songs]);
                 }
@@ -82,8 +82,8 @@ module.exports = {
                 TrackAdd.length = 0;
             }
             else {
-                const LimitTrack = playlist.tracks.length + TrackAdd.length;
-                if(LimitTrack > client.config.LIMIT_TRACK) return message.channel.send(`You can't create more than ${client.config.LIMIT_TRACK} songs in a playlist.`);
+                const LimitTrack = TrackAdd.length;
+                if(LimitTrack >= client.config.LIMIT_TRACK) return message.channel.send(`You can't add more than ${client.config.LIMIT_TRACK} tracks to this playlist.`);
                 if(LimitPlaylist >= client.config.LIMIT_PLAYLIST) return message.channel.send(`You can't have playlist more than ${client.config.LIMIT_PLAYLIST} playlists.`);
                 const CreateNew = new Playlist({
                     name: PlaylistName,
