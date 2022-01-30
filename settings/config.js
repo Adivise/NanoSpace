@@ -11,8 +11,8 @@ module.exports = {
     DEV_ID: [], // if you want to use command bot only, you can put your id here // example: ["515490955801919488", "543595284345782296"]
 
     MONGO_URI: process.env.MONGO_URI || "YOUR_MONGO_URI", // your mongo uri
-    LIMIT_TRACK: process.env.LIMIT_TRACK || "100",  //<= dafault is "100" // limit track in playlist
-    LIMIT_PLAYLIST: process.env.LIMIT_PLAYLIST || "10", //<= default is "10" // limit can create playlist
+    LIMIT_TRACK: parseInt(process.env.LIMIT_TRACK || "100"),  //<= dafault is "100" // limit track in playlist
+    LIMIT_PLAYLIST: parseInt(process.env.LIMIT_PLAYLIST || "10"), //<= default is "10" // limit can create playlist
 
     NODES: [
       { 
