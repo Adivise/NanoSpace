@@ -37,7 +37,10 @@ module.exports = {
                 const embed = new MessageEmbed()
                     .setDescription(`Searched • **[${res.tracks[0].title}](${res.tracks[0].uri})** • **${message.author}**`)
                     .setColor('#000001')
-                msg.edit({ content: " ", embeds: [embed] });
+                msg.edit({ content: " ", embeds: [embed] }).then(msg => {
+                    message.delete()
+                    setTimeout(() => msg.delete(), 5000)
+                  });
             }
             else if(res.loadType == "PLAYLIST_LOADED") {
                 for (let t = 0; t < res.tracks.length; t++) {
@@ -46,14 +49,20 @@ module.exports = {
                 const embed = new MessageEmbed()
                     .setDescription(`Searched • **[${res.playlist.name}](${args[0]})** (${res.tracks.length} tracks) • **${message.author}**`)
                     .setColor('#000001')
-                msg.edit({ content: " ", embeds: [embed] });
+                msg.edit({ content: " ", embeds: [embed] }).then(msg => {
+                    message.delete()
+                    setTimeout(() => msg.delete(), 5000)
+                  })
             }
             else if(res.loadType == "SEARCH_RESULT") {
                 TrackAdd.push(res.tracks[0]);
                 const embed = new MessageEmbed()
                     .setDescription(`Searched • **[${res.tracks[0].title}](${res.tracks[0].uri})** • **${message.author}**`)
                     .setColor('#000001')
-                msg.edit({ content: " ", embeds: [embed] });
+                msg.edit({ content: " ", embeds: [embed] }).then(msg => {
+                    message.delete()
+                    setTimeout(() => msg.delete(), 5000)
+                  })
             }
             else if(res.loadType == "LOAD_FAILED") {
                 return msg.edit("Error loading playlist.");
@@ -69,21 +78,21 @@ module.exports = {
             if(playlist) {
                 if(playlist.owner !== message.author.id) return message.channel.send("You can't add to this playlist.");
                 const LimitTrack = playlist.tracks.length + TrackAdd.length;
-                if(LimitTrack >= client.config.LIMIT_TRACK) return message.channel.send(`You can't add more than ${client.config.LIMIT_TRACK} tracks to this playlist.`);
+                if(LimitTrack > client.config.LIMIT_TRACK) return message.channel.send(`You can't add more than ${client.config.LIMIT_TRACK} tracks to this playlist.`);
                 for (let songs = 0; songs < TrackAdd.length; songs++) {
                     playlist.tracks.push(TrackAdd[songs]);
                 }
-                playlist.save().catch(err => console.log(err));
+                playlist.save().then(() => {
                 const embed = new MessageEmbed()
-                    .setDescription(`**Added • ${TrackAdd.length} songs to playlist • ${PlaylistName}**`)
+                    .setDescription(`**Added • [\`${TrackAdd.length} track's\`] | Playlist • ${PlaylistName}**`)
                     .setColor('#000001')
                 message.channel.send({ content: " ", embeds: [embed] });
 
                 TrackAdd.length = 0;
+                }).catch(err => console.log(err));
             }
             else {
-                const LimitTrack = TrackAdd.length;
-                if(LimitTrack >= client.config.LIMIT_TRACK) return message.channel.send(`You can't add more than ${client.config.LIMIT_TRACK} tracks to this playlist.`);
+                if(TrackAdd.length > client.config.LIMIT_TRACK)  return message.channel.send(`You can't add more than ${client.config.LIMIT_TRACK} tracks to this playlist.`);
                 if(LimitPlaylist >= client.config.LIMIT_PLAYLIST) return message.channel.send(`You can't have playlist more than ${client.config.LIMIT_PLAYLIST} playlists.`);
                 const CreateNew = new Playlist({
                     name: PlaylistName,
@@ -91,13 +100,16 @@ module.exports = {
                     tracks: TrackAdd,
                     created: Date.now()
                 });
-                CreateNew.save().catch(err => console.log(err));
-                const embed = new MessageEmbed()
-                    .setDescription(`**Created • ${PlaylistName}**`)
+                CreateNew.save().then(() => {
+                    const embed = new MessageEmbed()
+                    .setDescription(`**Created • ${PlaylistName} | Added • [\`${TrackAdd.length} track's\`]**`)
                     .setColor('#000001')
                 message.channel.send({ content: " ", embeds: [embed] });
-
-                TrackAdd.length = 0;
+                    TrackAdd.length = 0;
+                }).catch(err => {
+                    console.log(err);
+                    msg.edit("Error adding tracks to playlist.");
+                });
             }
         }).catch(err => console.log(err));
     }
