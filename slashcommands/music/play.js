@@ -34,7 +34,7 @@ module.exports = {
         
         const state = player.state;
         if (state != "CONNECTED") await player.connect();
-        const res = await client.manager.search(value, message.author);
+        const res = await client.manager.search(value, interaction.user);
         if(res.loadType != "NO_MATCHES") {
             if(res.loadType == "TRACK_LOADED") {
                 player.queue.add(res.tracks[0]);
