@@ -1,11 +1,16 @@
 const { Permissions, MessageEmbed } = require("discord.js");
+const GPrefix = require('../../settings/models/Prefix.js');
 
 module.exports = async (client, message) => { 
     if(message.author.bot || message.channel.type === "dm") return;
 
-    const PREFIX = client.prefix;
+    let PREFIX = client.prefix;
 
     const mention = new RegExp(`^<@!?${client.user.id}>( |)$`);
+    
+    const GuildPrefix = await GPrefix.findOne({ guild: message.guild.id });
+    if(GuildPrefix && GuildPrefix.prefix) PREFIX = GuildPrefix.prefix;
+
     if (message.content.match(mention)) {
       const embed = new MessageEmbed()
         .setColor("#000001")
