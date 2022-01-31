@@ -20,6 +20,7 @@
 - [x] SoundCloud
 - [x] Spotify
 - [x] Deezer
+- [x] Facebook 
 - [x] Twitch
 - [x] Apple
 - [x] Bandcamp
