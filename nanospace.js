@@ -3,6 +3,7 @@ const { Manager } = require("erela.js");
 const spotify = require("better-erela.js-spotify").default;
 const deezer = require("erela.js-deezer");
 const apple = require("erela.js-apple");
+const facebook = require("erela.js-facebook");
 const { readdirSync } = require("fs");
 const path = require("path");
 
@@ -38,6 +39,7 @@ class MainClient extends Client {
       nodes: this.config.NODES,
       plugins: [
         new spotify(),
+		new facebook(),
         new deezer(),
         new apple(),
       ],
