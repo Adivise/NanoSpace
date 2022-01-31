@@ -5,7 +5,7 @@
 
 ## ☔ Fork
 
- [![Run on Repl.it](https://repl.it/badge/github/Adivise/NanoSpace)](https://repl.it/github/Adivise/NanoSpace) (add more soon!)
+ [![Run on Repl.it](https://repl.it/badge/github/Adivise/NanoSpace)](https://repl.it/github/Adivise/NanoSpace)
 
 ## 📑 Short Feature
 - [x] Music
@@ -70,8 +70,8 @@ OWNER_ID=REPLACE_HERE
 
 # Database
 MONGO_URI=mongodb://127.0.0.1:27017/playlist
-LITMIT_TRACK=100
-LITMIT_PLAYLIST=10
+LIMIT_TRACK=100
+LIMIT_PLAYLIST=10
 
 # Lavalink
 NODE_HOST=localhost
