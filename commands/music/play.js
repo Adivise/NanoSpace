@@ -21,6 +21,7 @@ module.exports = {
 		if (!channel.permissionsFor(message.guild.me).has(Permissions.FLAGS.SPEAK)) return message.channel.send("I don't have permission to speak in your voice channel.");
 
         if (!args[0]) return msg.edit("Please provide a song name or link to search.");
+       // if (args[0].includes("deezer.com") && args[0].includes("artist")) return msg.edit("Artist not supported yet.");
 
         const player = await client.manager.create({
             guild: message.guild.id,
@@ -33,51 +34,38 @@ module.exports = {
         
         const state = player.state;
         if (state != "CONNECTED") await player.connect();
-        client.manager.search(search, message.author).then(async res => {
-            switch (res.loadType) {
-                case "TRACK_LOADED":
-                    await player.queue.add(res.tracks[0]);
-
+        const res = await client.manager.search(search, message.author);
+        if(res.loadType != "NO_MATCHES") {
+            if(res.loadType == "TRACK_LOADED") {
+                player.queue.add(res.tracks[0]);
                 const embed = new MessageEmbed()
                     .setDescription(`**Queued • [${res.tracks[0].title}](${res.tracks[0].uri})** \`${convertTime(res.tracks[0].duration, true)}\` • ${res.tracks[0].requester}`)
                     .setColor('#000001')
-
-                    msg.edit({ content: " ", embeds: [embed] });
-                    if (!player.playing) player.play()
-                    break;
-                
-                case "SEARCH_RESULT":
-                const resulted = args.join(" ");
-                const res1 = await client.manager.search(
-                    resulted,
-                    message.author
-                );
-                    await player.queue.add(res1.tracks[0]);
-
-                    const embed1 = new MessageEmbed()
-                        .setDescription(`**Queued • [${res1.tracks[0].title}](${res1.tracks[0].uri})** \`${convertTime(res1.tracks[0].duration, true)}\` • ${res1.tracks[0].requester}`)
-                        .setColor('#000001')
-            
-                      msg.edit({ content: " ", embeds: [embed1] });
-                      if (!player.playing) player.play()
-                    break;
-
-                case "PLAYLIST_LOADED":
-                    let search = await player.search(args.join(" "), message.author);
-                    player.queue.add(search.tracks)
-
-                    const playlist = new MessageEmbed()
-                        .setDescription(`**Queued** • [${search.playlist.name}](${args.join(" ")}) \`${convertTime(search.playlist.duration)}\` (${search.tracks.length} tracks) • ${search.tracks[0].requester}`)
-                        .setColor('#000001')
-
-                    msg.edit({ content: " ", embeds: [playlist] });
-                        if(!player.playing) player.play()
-                    break;
-
-                case "NO_MATCHES":
-                    msg.edit({ content: "No results found.", embeds: [] });
-                    break;
+                msg.edit({ content: " ", embeds: [embed] });
+                if(!player.playing) player.play();
             }
-        }).catch(err => msg.edit(err.message))
+            else if(res.loadType == "PLAYLIST_LOADED") {
+                player.queue.add(res.tracks)
+                const embed = new MessageEmbed()
+                    .setDescription(`**Queued** • [${res.playlist.name}](${search}) \`${convertTime(res.playlist.duration)}\` (${res.tracks.length} tracks) • ${res.tracks[0].requester}`)
+                    .setColor('#000001')
+                msg.edit({ content: " ", embeds: [embed] });
+                if(!player.playing) player.play();
+            }
+            else if(res.loadType == "SEARCH_RESULT") {
+                player.queue.add(res.tracks[0]);
+                const embed = new MessageEmbed()
+                    .setDescription(`**Queued • [${res.tracks[0].title}](${res.tracks[0].uri})** \`${convertTime(res.tracks[0].duration, true)}\` • ${res.tracks[0].requester}`)
+                    .setColor('#000001')
+                msg.edit({ content: " ", embeds: [embed] });
+                if(!player.playing) player.play();
+            }
+            else if(res.loadType == "LOAD_FAILED") {
+                return msg.edit("Error loading track.");
+            }
+        }
+        else {
+            return msg.edit("Error loading track.");
+        }
     }
 }
