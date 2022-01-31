@@ -66,9 +66,9 @@ module.exports = {
 
         const state = player.state;
         if (state != "CONNECTED") await player.connect();
-        client.manager.search(value, interaction.user).then(async res => {
-            switch (res.loadType) {
-                case "TRACK_LOADED":
+        const res = await client.manager.search(value, interaction.user);
+        if(res.loadType != "NO_MATCHES") {
+            if(res.loadType == "TRACK_LOADED") {
                     player.queue.add(res.tracks[0]);
 
                 const embed = new MessageEmbed()
@@ -77,9 +77,9 @@ module.exports = {
 
                     msg.edit({ content: " ", embeds: [embed] });
                     if (!player.playing) player.play()
-                    break;
-                
-                case "SEARCH_RESULT":
+                    
+                }
+                 else if(res.loadType == "SEARCH_RESULT") {
                     let index = 1;
 
                     const results = res.tracks
@@ -154,24 +154,22 @@ module.exports = {
                             msg.edit({ content: "No response", embeds: [], components: [] });
                         }
                     });
-                    break;
-
-                case "PLAYLIST_LOADED":
-                    let search = await player.search(args.join(" "), interaction.user);
-                    player.queue.add(search.tracks)
-
+                }
+                else if(res.loadType == "PLAYLIST_LOADED") {
+                    player.queue.add(res.tracks)
                     const playlist = new MessageEmbed()
-                        .setDescription(`**Queued** • [${search.playlist.name}](${args.join(" ")}) \`${convertTime(search.playlist.duration)}\` (${search.tracks.length} tracks) • ${search.tracks[0].requester}`)
+                        .setDescription(`**Queued** • [${res.playlist.name}](${value}) \`${convertTime(res.playlist.duration)}\` (${res.tracks.length} tracks) • ${res.tracks[0].requester}`)
                         .setColor('#000001')
 
                     msg.edit({ content: " ", embeds: [playlist] });
                         if(!player.playing) player.play()
-                    break;
-                
-                case "NO_MATCHES":
-                    msg.edit({ content: "No results found.", embeds: [] });
-                break;
+                    }
+                    else if(res.loadType == "LOAD_FAILED") {
+                        return msg.edit("Error loading track.");
+                    }
+                }
+                else {
+                    return msg.edit("Error loading track.");
+                }
             }
-        }).catch(err => msg.edit(err.message))
-    }
-}
+        }

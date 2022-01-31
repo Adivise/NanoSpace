@@ -34,54 +34,38 @@ module.exports = {
         
         const state = player.state;
         if (state != "CONNECTED") await player.connect();
-        client.manager.search(value, interaction.user).then(async res => {
-            switch (res.loadType) {
-                case "TRACK_LOADED":
-                    player.queue.add(res.tracks[0]);
-
+        const res = await client.manager.search(value, message.author);
+        if(res.loadType != "NO_MATCHES") {
+            if(res.loadType == "TRACK_LOADED") {
+                player.queue.add(res.tracks[0]);
                 const embed = new MessageEmbed()
                     .setDescription(`**Queued • [${res.tracks[0].title}](${res.tracks[0].uri})** \`${convertTime(res.tracks[0].duration, true)}\` • ${res.tracks[0].requester}`)
                     .setColor('#000001')
-
-                    msg.edit({ content: " ", embeds: [embed] });
-                        console.log(chalk.magenta(`[SLASHCOMMAND] Play used by ${interaction.user.tag} from ${interaction.guild.name}`));
-                    if (!player.playing) player.play()
-                    break;
-
-                case "SEARCH_RESULT":
-                const res1 = await client.manager.search(
-                    value,
-                    interaction.user
-                );
-                    player.queue.add(res1.tracks[0]);
-
-                    const embed1 = new MessageEmbed()
-                        .setDescription(`**Queued • [${res1.tracks[0].title}](${res1.tracks[0].uri})** \`${convertTime(res1.tracks[0].duration, true)}\` • ${res1.tracks[0].requester}`)
-                        .setColor('#000001')
-            
-                      msg.edit({ content: " ", embeds: [embed1] });
-                        console.log(chalk.magenta(`[SLASHCOMMAND] Play used by ${interaction.user.tag} from ${interaction.guild.name}`));
-                      if (!player.playing) player.play()
-                    break;
-
-                case "PLAYLIST_LOADED":
-                    let search = await player.search(value, interaction.user);
-                    player.queue.add(search.tracks)
-
-                    const playlist = new MessageEmbed()
-                        .setDescription(`**Queued** • [${search.playlist.name}](${value}) \`${convertTime(search.playlist.duration)}\` (${search.tracks.length} tracks) • ${search.tracks[0].requester}`)
-                        .setColor('#000001')
-
-                    msg.edit({ content: " ", embeds: [playlist] });
-                        console.log(chalk.magenta(`[SLASHCOMMAND] Play used by ${interaction.user.tag} from ${interaction.guild.name}`));
-                        if(!player.playing) player.play()
-                    break;
-
-                case "NO_MATCHES":
-                    msg.edit({ content: "No results found.", embeds: [] });
-                    break;
-                
+                msg.edit({ content: " ", embeds: [embed] });
+                if(!player.playing) player.play();
             }
-        }).catch(err => msg.edit(err.message))
+            else if(res.loadType == "PLAYLIST_LOADED") {
+                player.queue.add(res.tracks)
+                const embed = new MessageEmbed()
+                    .setDescription(`**Queued** • [${res.playlist.name}](${value}) \`${convertTime(res.playlist.duration)}\` (${res.tracks.length} tracks) • ${res.tracks[0].requester}`)
+                    .setColor('#000001')
+                msg.edit({ content: " ", embeds: [embed] });
+                if(!player.playing) player.play();
+            }
+            else if(res.loadType == "SEARCH_RESULT") {
+                player.queue.add(res.tracks[0]);
+                const embed = new MessageEmbed()
+                    .setDescription(`**Queued • [${res.tracks[0].title}](${res.tracks[0].uri})** \`${convertTime(res.tracks[0].duration, true)}\` • ${res.tracks[0].requester}`)
+                    .setColor('#000001')
+                msg.edit({ content: " ", embeds: [embed] });
+                if(!player.playing) player.play();
+            }
+            else if(res.loadType == "LOAD_FAILED") {
+                return msg.edit("Error loading track.");
+            }
+        }
+        else {
+            return msg.edit("Error loading track.");
+        }
     }
 }
