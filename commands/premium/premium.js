@@ -11,7 +11,7 @@ module.exports = {
         category: "premium",
     },
     run: async (client, message, args) => {
-        if(message.author.id != client.owner) return message.channel.send("You're the client the owner!")
+        if(message.author.id != client.owner) return message.channel.send("You're NOT the client owner!")
         console.log(chalk.magenta(`[COMMAND] Premium used by ${message.author.tag} from ${message.guild.name}`));
 
         if(!args[0]) return message.channel.send(`**Please specify a member id** Example: \`${client.prefix}premium <member id>\``);
