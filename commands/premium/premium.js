@@ -14,7 +14,7 @@ module.exports = {
         if(message.author.id != client.owner) return message.channel.send("You're the client the owner!")
         console.log(chalk.magenta(`[COMMAND] Premium used by ${message.author.tag} from ${message.guild.name}`));
 
-        if(!args[0]) return message.channel.send(`**Please specify a member id** Example: \`${client.config.prefix}premium <member id>\``);
+        if(!args[0]) return message.channel.send(`**Please specify a member id** Example: \`${client.prefix}premium <member id>\``);
 
         const member = args[0];
         if(member != client.users.cache.get(member)) return message.channel.send(`**Please give me the user's id!**`);
