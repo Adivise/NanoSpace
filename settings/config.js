@@ -4,7 +4,7 @@ module.exports = {
     TOKEN: process.env.TOKEN || "YOUR_TOKEN",  // your bot token
     PREFIX: process.env.PREFIX || "#", //<= default is #  // bot prefix
 
-    OWNER_ID: process.env.OWNER_ID || "YOUR_OWNER_ID", //your owner id
+    OWNER_ID: process.env.OWNER_ID || "YOUR_OWNER_ID", //your owner discord id example 515490955801919488 this is not id like *Stylish.#4078
 
     NP_REALTIME: process.env.NP_REALTIME || "BOOLEAN", // "true" = realtime, "false" = not realtime :3 // WARNING: on set to "true" = laggy
 
