@@ -13,7 +13,7 @@ module.exports = {
         category: "premium",
     },
     run: async (client, message, args) => {
-        if(message.author.id != client.owner) return message.channel.send("You're the client the owner!")
+        if(message.author.id != client.owner) return message.channel.send("You're NOT the client owner!")
         console.log(chalk.magenta(`[COMMAND] Viewmember used by ${message.author.tag} from ${message.guild.name}`));
 
         const premium = await Premium.find({});
