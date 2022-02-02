@@ -15,18 +15,35 @@ module.exports = {
         if(!args[0]) return message.channel.send(`**Please specify a prefix!**`);
         if(args[0].length > 10) return message.channel.send(`**The prefix can't be longer than 10 characters!**`);
 
-        const newPrefix = new GPrefix({
-            guild: message.guild.id,
-            prefix: args[0]
-        });
+        const newPrefix = await GPrefix.findOne({ guild: message.guild.id });
+        if(!newPrefix) {
+            const newPrefix = new GPrefix({
+                guild: message.guild.id,
+                prefix: args[0]
+            });
+            newPrefix.save().then(() => {
+                const embed = new MessageEmbed()
+                .setDescription(`**The prefix has been set to \`${args[0]}\`!**`)
+                .setColor('#000001')
 
-        await newPrefix.save().then(() => {
-        const embed = new MessageEmbed()
-            .setDescription(`**Prefix changed to \`${args.join(" ")}\`**`)
-            .setColor('#000001')
-
-        message.channel.send({ embeds: [embed] });
-
-        }).catch(err => console.log(err));
+                message.channel.send({ embeds: [embed] });
+            }
+            ).catch(() => {
+                message.channel.send(`**An error occured while setting the prefix!**`);
+            });
+        }
+        else if(newPrefix) {
+            newPrefix.prefix = args[0];
+            newPrefix.save().then(() => {
+                const embed = new MessageEmbed()
+                .setDescription(`**The prefix has been changed to \`${args[0]}\`!**`)
+                .setColor('#000001')
+    
+                message.channel.send({ embeds: [embed] });
+            }
+            ).catch(() => {
+                message.channel.send(`**An error occured while changing the prefix!**`);
+            });
+        }
     }
 }
