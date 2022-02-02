@@ -11,7 +11,7 @@ module.exports = {
         aliases: ["stopbot"]
     },
     run: async (client, message, args) => {
-    if(message.author.id != client.owner) return message.channel.send("You're the client the owner!")
+    if(message.author.id != client.owner) return message.channel.send("You're NOT the client owner!")
 
     const restart = new MessageEmbed()
         .setDescription("**Account has been**: `Shutting down...`")
