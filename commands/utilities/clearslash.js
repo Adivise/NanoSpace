@@ -13,7 +13,7 @@ module.exports = {
         aliases: ["cdps"]
     },
     run: async (client, message, args) => {
-    if(message.author.id != client.owner) return message.channel.send("You're the client the owner!")
+    if(message.author.id != client.owner) return message.channel.send("You're NOT the client owner!")
     console.log(chalk.red(`[COMMAND] ClearSlash used by ${message.author.tag} from ${message.guild.name}`));
 
     const rest = new REST({ version: "9" }).setToken(client.token);
