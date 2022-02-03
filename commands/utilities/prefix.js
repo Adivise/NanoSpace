@@ -12,6 +12,7 @@ module.exports = {
     },
     run: async (client, message, args) => {
         if (!message.member.permissions.has('MANAGE_GUILD')) return message.reply('You need the `MANAGE_GUILD` permission to use this command.');
+        console.log(chalk.magenta(`[COMMAND] Prefix used by ${message.author.tag} from ${message.guild.name}`));
         if(!args[0]) return message.channel.send(`**Please specify a prefix!**`);
         if(args[0].length > 10) return message.channel.send(`**The prefix can't be longer than 10 characters!**`);
 

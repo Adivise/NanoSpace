@@ -13,7 +13,7 @@ module.exports = {
         aliases: ["dps"]
     },
     run: async (client, message, args) => {
-    if(message.author.id != client.owner) return message.channel.send("You're the client the owner!")
+    if(message.author.id != client.owner) return message.channel.send("You're not the client owner!")
     console.log(chalk.red(`[COMMAND] Deploy used by ${message.author.tag} from ${message.guild.name}`));
 
     const rest = new REST({ version: "9" }).setToken(client.token);

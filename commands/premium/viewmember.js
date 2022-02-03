@@ -1,7 +1,7 @@
 const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const Premium = require('../../settings/models/Premium.js');
-const humanizeDuration = require('humanize-duration');
+const Premium = require('../../settings/models/PremiumUser.js');
+const moment = require('moment');
 const { NormalMemberCount } = require('../../structures/PageQueue.js');
 
 module.exports = { 
@@ -13,7 +13,7 @@ module.exports = {
         category: "premium",
     },
     run: async (client, message, args) => {
-        if(message.author.id != client.owner) return message.channel.send("You're the client the owner!")
+        if(message.author.id != client.owner) return message.channel.send("You're not the client owner!")
         console.log(chalk.magenta(`[COMMAND] Viewmember used by ${message.author.tag} from ${message.guild.name}`));
 
         const premium = await Premium.find({});
@@ -25,9 +25,9 @@ module.exports = {
         const premiumStrings = [];
         for(let i = 0; i < premium.length; i++) {
             const premiums = premium[i];
-            const created = humanizeDuration(Date.now() - premium[i].created, { largest: 1 })
+            const expires = moment(premiums.premium.expiresAt).format('dddd, MMMM Do YYYY HH:mm:ss');
 
-        premiumStrings.push(`• ** ${client.users.cache.get(premiums.member).tag} ** (${client.users.cache.get(premiums.member).id}) | Since: \`[${created} ago.]\`
+        premiumStrings.push(`• ** ${client.users.cache.get(premiums.Id).tag} ** | Expires At: \`[${expires}]\`
         `);
     }
 
@@ -36,7 +36,7 @@ module.exports = {
         const str = premiumStrings.slice(i * 10, i * 10 + 10).join('');
         const embed = new MessageEmbed()
             .setAuthor({ name: `Premium's Member`, iconURL: client.user.displayAvatarURL() })
-            .setDescription(`${str == '' ? '  **There are no premium members!**' : '\n' + str}`)
+            .setDescription(`${str == '' ? '  *There are no premium members!*' : '\n' + str}`)
             .setColor('#000001')
             .setFooter({ text: `Page • ${i + 1}/${pagesNum} | ${premium.length} • Total members` });
 

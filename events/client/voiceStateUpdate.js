@@ -26,10 +26,8 @@ module.exports = async (client, oldState, newState) => {
   if (oldState.channel !== null && newState.channel !== null)
     stateChange.type = "MOVE";
   if (oldState.channel === null && newState.channel === null) return;
-  if (newState.serverMute == true && oldState.serverMute == false)
-    return player.pause(true);
-  if (newState.serverMute == false && oldState.serverMute == true)
-    return player.pause(false);
+  if (newState.serverMute == true && oldState.serverMute == false) return;
+  if (newState.serverMute == false && oldState.serverMute == true) return;
 
   if (stateChange.type === "MOVE") {
     if (oldState.channel.id === player.voiceChannel) stateChange.type = "LEAVE";

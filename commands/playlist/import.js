@@ -1,8 +1,6 @@
 const chalk = require('chalk');
 const { MessageEmbed, Permissions } = require('discord.js');
 const Playlist = require('../../settings/models/Playlist.js');
-const Premium = require('../../settings/models/Premium.js');
-const PremiumGuild = require('../../settings/models/PremiumGuild.js');
 
 module.exports = { 
     config: {
@@ -13,19 +11,17 @@ module.exports = {
         accessableby: "Member",
         category: "playlist",
     },
-    run: async (client, message, args) => {
+    run: async (client, message, args, user) => {
 		console.log(chalk.magenta(`[COMMAND] Import used by ${message.author.tag} from ${message.guild.name}`));
-
-        const premiummember = await Premium.findOne({ member: message.author.id });
-        const premiumguild = await PremiumGuild.findOne({ guild: message.guild.id });
-        if(!premiummember && !premiumguild) return message.channel.send(`You need to be a premium member/guild to use this command.`);
 
 		const { channel } = message.member.voice;
 		if (!channel) return message.channel.send("You need to be in a voice channel to use command.");
 		if (!channel.permissionsFor(message.guild.me).has(Permissions.FLAGS.CONNECT)) return message.channel.send("I don't have permission to join your voice channel.");
 		if (!channel.permissionsFor(message.guild.me).has(Permissions.FLAGS.SPEAK)) return message.channel.send("I don't have permission to speak in your voice channel.");
 
-		if(!args[0]) return message.channel.send(`**Please specify a playlist name!**`);
+		try {
+			if (user && user.isPremium) {
+			if(!args[0]) return message.channel.send(`**Please specify a playlist name!**`);
 
 		let player = client.manager.get(message.guild.id);
 		if(!player) { player = await client.manager.create({
@@ -86,5 +82,18 @@ module.exports = {
 				if (!player.playing) { player.play(); }
 			}
 		}
+		} else {
+			const Premiumed = new MessageEmbed()
+				.setAuthor({ name: "Only Premium!", iconURL: client.user.displayAvatarURL() })
+				.setDescription(`*You need to be a premium to use this command.*`)
+				.setColor("#000001")
+				.setTimestamp()
+
+			return message.channel.send({ embeds: [Premiumed] });
+	  	}
+	    } catch (err) {
+		  	console.log(err)
+		 	message.channel.send({ content: "Something went wrong, try again later." })
+	    }
 	}
 };

@@ -1,8 +1,6 @@
 const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 const Playlist = require('../../settings/models/Playlist.js');
-const Premium = require('../../settings/models/Premium.js');
-const PremiumGuild = require('../../settings/models/PremiumGuild.js');
 const TrackAdd = [];
 
 module.exports = { 
@@ -14,17 +12,16 @@ module.exports = {
         accessableby: "Member",
         category: "playlist",
     },
-    run: async (client, message, args) => {
+    run: async (client, message, args, user) => {
         console.log(chalk.magenta(`[COMMAND] Create used by ${message.author.tag} from ${message.guild.name}`));
 
-        const premiummember = await Premium.findOne({ member: message.author.id });
-        const premiumguild = await PremiumGuild.findOne({ guild: message.guild.id });
-        if(!premiummember && !premiumguild) return message.channel.send(`You need to be a premium member/guild to use this command.`);
+        try {
+            if (user && user.isPremium) {
 
         const msg = await message.channel.send('Loading please wait...')
 
-        if(!args[0]) return msg.edit("Please provide a playlist link. Example: #create <playlist link> <playlist name>");
-        if(!args[1]) return msg.edit("Please provide a playlist name. Example: #create <playlist link> <playlist name>");
+        if(!args[0]) return msg.edit(`Please provide a playlist link. Example: ${client.prefix}create <playlist link> <playlist name>`);
+        if(!args[1]) return msg.edit(`Please provide a playlist name. Example: ${client.prefix}create <playlist link> <playlist name>`);
         if(args[1].length > 16) return msg.edit("Playlist name can't be longer than 16 characters.");
 
         const PlaylistName = args[1].replace(/_/g, ' ');
@@ -112,5 +109,18 @@ module.exports = {
                 });
             }
         }).catch(err => console.log(err));
+    } else {
+        const Premiumed = new MessageEmbed()
+            .setAuthor({ name: "Only Premium!", iconURL: client.user.displayAvatarURL() })
+            .setDescription(`*You need to be a premium to use this command.*`)
+            .setColor("#000001")
+            .setTimestamp()
+
+        return message.channel.send({ embeds: [Premiumed] });
+      }
+    } catch (err) {
+        console.log(err)
+        message.channel.send({ content: "Something went wrong, try again later." })
+        }
     }
-}
+};

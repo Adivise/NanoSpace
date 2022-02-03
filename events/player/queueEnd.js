@@ -6,6 +6,6 @@ module.exports = async (client, player) => {
 		.setColor("#000001")
 		.setDescription(`\`📛\` | **Song has been:** \`Ended\``)
 
-	player.destroy();
 	channel.send({ embeds: [embed] });
+	return player.destroy(false);
 }

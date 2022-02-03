@@ -39,7 +39,7 @@ class MainClient extends Client {
       nodes: this.config.NODES,
       plugins: [
         new spotify(),
-		new facebook(),
+        new facebook(),
         new deezer(),
         new apple(),
       ],
@@ -49,8 +49,8 @@ class MainClient extends Client {
       },
     });
 
-    ["aliases", "slash", "commands"].forEach(x => client[x] = new Collection());
-    ["loadCommand", "loadSlashCommand", "loadEvent", "loadPlayer", "loadDatabase"].forEach(x => require(`./handlers/${x}`)(client));
+    ["aliases", "slash", "commands", "premiums"].forEach(x => client[x] = new Collection());
+    ["loadCommand", "loadSlashCommand", "loadEvent", "loadPlayer", "loadDatabase", "loadPremium"].forEach(x => require(`./handlers/${x}`)(client));
 
     readdirSync("./slashcommands/").map(async dir => {
         readdirSync(`./slashcommands/${dir}`).map(async (cmd) => {
