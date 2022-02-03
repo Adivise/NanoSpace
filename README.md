@@ -129,17 +129,17 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 
 🎶 **Music Commands!** 
 
-- Play (#play, #p, #pplay <song/url>)
+- Play (#play, #p, #pplay [song/url])
 - Nowplaying (#nowplaying, #np, #now)
 - Queue (#queue <page>)
 - Repeat (#loop (current, all), #repeat (current, all))
 - Loopqueue (#loopall, #lq, repeatall)
 - Shuffle (#shuffle, mix)
-- Volume control (#vol, #v <10 - 100>)
+- Volume control (#vol, #v [10 - 100])
 - Pause (#pause, #pa)
 - Resume (#resume, #r)
 - Skip (#skip, #s)
-- Skipto (#skipto, #st <position>)
+- Skipto (#skipto, #st [position])
 - Clear (#clear)
 - Join (#join, #summon)
 - Leave (#leave, #dc, #lev, #stop)
@@ -147,7 +147,7 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 - Seek (#seek <second>)
 - Rewind (#rewind <second>)
 - Replay (#replay)
-- Search (#search <song>)
+- Search (#search [songname])
 - 247 (#247)
 - Previous (#previous)
 
@@ -163,7 +163,7 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 - Picth (#pitch <amount>)
 - Vaporwave (#vaporwave)
 - Nightcore (#nightcore)
-- Bassboost (#bassboost, #bb <number -10 - 10>)
+- Bassboost (#bassboost, #bb [-10 - 10])
 - Rate (#rate)
 - Reset (#reset)
 - 3d (#3d)
@@ -178,24 +178,26 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 - Vibrato (#vibrato)
 	
 📦 **Playlist Commands!**
-- Create (#create <link> <name>) <= Work all link? use same name to add! went your have!
-- Delete (#delete <name>)
-- Import (#import <name>)
+- Create (#create [link] [name]) <= Work all link? use same name to add! went your have!
+- Delete (#delete [name])
+- Import (#import [name])
+- Detail (#detail [name])
 - View (#view)
-- Viewall (#viewall)
 	
 💎 **Premium Commands!**
-- Premium (#premium <user id>)
-- Premiumguild (#premiumguild <guild id>)
-- Viewserver (#viewserver)
+- Premium (#premium [plan] [user id])
 - Viewmember (#viewmember)
+- Generate (#generate [plan] [amount])
+- Redeem (#redeem [code])
+- Profile (#profile)
 	
 📑 **Utilities Commands!**
 - Restart (#restart, #stopbot)
 - DeploySlash (#deploy, #dps) <= only one guild
 - ClearSlash (#cdps) <= work only deployslash
+- Prefix (#prefix [new prefix])
 - DeploySlashGlobal (#deployglobal, #dpsg) <= want change need wait 1 - 2 hrs.
-- Help (#help, #halp <command>)
+- Help (#help, #halp [command])
 
 </p>
 </details>
