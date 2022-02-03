@@ -32,6 +32,8 @@
 ✈ Join Discord:  [NanoSpace ♪♪](https://discord.gg/SNG3dh3MbR)
    mention me in chat #general or #javascript and ask problem okay! 👌
 
+<details><summary>📎 Requirements [CLICK ME]</summary>
+<p>
 
 ## 📎 Requirements
 
@@ -41,7 +43,10 @@
 
 ## 🛑 Super Requirements 
 
-1. Java 11-13 **[Download JDK13](http://www.mediafire.com/file/m6gk7aoq96db8g0/file)** (i use this here version)
+1. Java 11-13 **[Download JDK13](http://www.mediafire.com/file/m6gk7aoq96db8g0/file)** (i use this version)
+
+</p>
+</details>
 
 ## 📚 Installation
 
@@ -51,7 +56,7 @@ cd NanoSpace
 npm install
 ```
 
-<details><summary>Configuration [CLICK ME]</summary>
+<details><summary>📄 Configuration [CLICK ME]</summary>
 <p>
 
 ## 📄 Configuration
@@ -110,13 +115,12 @@ module.exports = {
     ],
 }
 ```
+After installation or finishes all you can use `node .` to start the bot. or `Run Start.bat`
 
 </p>
 </details>
 
-After installation or finishes all you can use `node .` to start the bot. or `Run Start.bat`
-
-<details><summary>AllCommands [CLICK ME]</summary>
+<details><summary>🔩 Features & Commands [CLICK ME]</summary>
 <p>
 
 ## 🔩 Features & Commands
@@ -197,7 +201,7 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 </details>
 
 
-<details><summary>Picture [CLICK ME]</summary>
+<details><summary>🖼 Picture [CLICK ME]</summary>
 <p>
 
 ## 🖼 Picture & ScreenShots
@@ -211,12 +215,12 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 </p>
 </details>
 
-<details><summary>Credits [CLICK ME]</summary>
+<details><summary>👏 Credits [CLICK ME]</summary>
 <p>
 
 ## 👏 THANK
 - [lavamusic](https://github.com/brblacky/lavamusic)
-- [EarTensifier](https://github.com/Tetracyl/EarTensifier) (made me to create this bot!)
+- [EarTensifier](https://github.com/Tetracyl/EarTensifier)
 
 </p>
 </details>
