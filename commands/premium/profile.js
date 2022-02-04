@@ -22,7 +22,7 @@ module.exports = {
 		if (user && user.isPremium) {
             const embed = new MessageEmbed()
                 .setAuthor({ name: "Premium Profile", iconURL: client.user.displayAvatarURL() })
-                .setDescription(`*Plan*: \`${PremiumPlan.premium.plan}\`\n*Expires at*: \`${expires}\``)
+                .setDescription(`*User*: \`${message.author.tag}\`\n*Plan*: \`${PremiumPlan.premium.plan}\`\n*Expires at*: \`${expires}\``)
                 .setColor("#000001")
                 .setTimestamp()
 

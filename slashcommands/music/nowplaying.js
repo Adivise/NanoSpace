@@ -175,8 +175,8 @@ module.exports = {
 
         collector.on('end', async (collected, reason) => {
             if(reason === "time") {
+                clearInterval(interval);
                 if (NEmbed) await NEmbed.edit({ components: [] });
-				clearInterval(interval);
             }
         });
     }

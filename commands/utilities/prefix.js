@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const GPrefix = require('../../settings/models/Prefix.js');
+const chalk = require('chalk');
 
 module.exports = {
     config: {
@@ -11,7 +12,7 @@ module.exports = {
         accessableby: "Members"
     },
     run: async (client, message, args) => {
-        if (!message.member.permissions.has('MANAGE_GUILD')) return message.reply('You need the `MANAGE_GUILD` permission to use this command.');
+        if (!message.member.permissions.has('MANAGE_GUILD')) return message.channel.send('You need the `MANAGE_GUILD` permission to use this command.');
         console.log(chalk.magenta(`[COMMAND] Prefix used by ${message.author.tag} from ${message.guild.name}`));
         if(!args[0]) return message.channel.send(`**Please specify a prefix!**`);
         if(args[0].length > 10) return message.channel.send(`**The prefix can't be longer than 10 characters!**`);
@@ -24,7 +25,7 @@ module.exports = {
             });
             newPrefix.save().then(() => {
                 const embed = new MessageEmbed()
-                .setDescription(`**The prefix has been set to \`${args[0]}\`!**`)
+                .setDescription(`**The prefix has been set to \`${args[0]}\`**`)
                 .setColor('#000001')
 
                 message.channel.send({ embeds: [embed] });
@@ -37,7 +38,7 @@ module.exports = {
             newPrefix.prefix = args[0];
             newPrefix.save().then(() => {
                 const embed = new MessageEmbed()
-                .setDescription(`**The prefix has been changed to \`${args[0]}\`!**`)
+                .setDescription(`**The prefix has been changed to \`${args[0]}\`**`)
                 .setColor('#000001')
     
                 message.channel.send({ embeds: [embed] });

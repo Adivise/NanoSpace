@@ -1,59 +1,41 @@
-const { VoiceState } = require("discord.js");
-const { MainClient } = require("../../nanospace.js")
-
-/**
- * 
- * @param {MainClient} client 
- * @param {VoiceState} oldState 
- * @param {VoiceState} newState 
- * @param {Promise<void>}
- * @returns
- */
+const { MessageEmbed } = require("discord.js");
+const delay = require("delay");
 
 module.exports = async (client, oldState, newState) => {
+		const player = client.manager?.players.get(newState.guild.id);
 
-  let guildId = newState.guild.id;
-  const player = client.manager.get(guildId);
+		if (!player) return;
+		if (!newState.guild.members.cache.get(client.user.id).voice.channelId) player.destroy();
 
-  if (!player || player.state !== "CONNECTED") return;
+		if (oldState.id === client.user.id) return;
+		if (!oldState.guild.members.cache.get(client.user.id).voice.channelId) return;
 
-  const stateChange = {};
+		if (player.twentyFourSeven) return;
+    	const leaveEmbed = client.channels.cache.get(player.textChannel);
 
-  if (oldState.channel === null && newState.channel !== null)
-    stateChange.type = "JOIN";
-  if (oldState.channel !== null && newState.channel === null)
-    stateChange.type = "LEAVE";
-  if (oldState.channel !== null && newState.channel !== null)
-    stateChange.type = "MOVE";
-  if (oldState.channel === null && newState.channel === null) return;
-  if (newState.serverMute == true && oldState.serverMute == false) return;
-  if (newState.serverMute == false && oldState.serverMute == true) return;
+		if (oldState.guild.members.cache.get(client.user.id).voice.channelId === oldState.channelId) {
+			if (oldState.guild.me.voice?.channel && oldState.guild.me.voice.channel.members.filter((m) => !m.user.bot).size === 0) {
+				const vcRoom = oldState.guild.me.voice.channel.id;
+        const EmptyEmbed = new MessageEmbed()
+            .setColor("#000001")
+            .setDescription(`**Disconnecting <#${vcRoom}> in ${client.config.LEAVE_TIMEOUT / 60 / 1000} minutes because I was left alone.**`)
 
-  if (stateChange.type === "MOVE") {
-    if (oldState.channel.id === player.voiceChannel) stateChange.type = "LEAVE";
-    if (newState.channel.id === player.voiceChannel) stateChange.type = "JOIN";
-  }
+        if (leaveEmbed) leaveEmbed.send({ embeds: [EmptyEmbed] });
+				await delay(client.config.LEAVE_TIMEOUT);
 
-  if (stateChange.type === "JOIN") stateChange.channel = newState.channel;
-  if (stateChange.type === "LEAVE") stateChange.channel = oldState.channel;
+				const vcMembers = oldState.guild.me.voice.channel?.members.size;
+				if (!vcMembers || vcMembers === 1) {
+					const newPlayer = client.manager?.players.get(newState.guild.id)
+            newPlayer ? player.destroy() : oldState.guild.me.voice.channel.leave();
 
-  if (!stateChange.channel || stateChange.channel.id !== player.voiceChannel)
-    return;
-
-  stateChange.members = stateChange.channel.members.filter(
-    (member) => !member.user.bot
-  );
-
-  switch (stateChange.type) {
-    case "JOIN":
-      if (stateChange.members.size === 1 && player.paused) {
-        player.pause(false);
-      }
-      break;
-    case "LEAVE":
-      if (stateChange.members.size === 0 && !player.paused && player.playing) {
-        player.pause(true);
-      }
-      break;
-  }
+					const TimeoutEmbed = new MessageEmbed(client, newState.guild)
+            .setDescription(`**Disconnecting from <#${vcRoom}> because I was left alone.**`);
+					try {
+						if (leaveEmbed) leaveEmbed.send({ embeds: [TimeoutEmbed] });
+					} catch (error) {
+            console.log(error);
+          }
+				}
+			}
+		}
 };

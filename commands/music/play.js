@@ -16,12 +16,11 @@ module.exports = {
         const msg = await message.channel.send('Loading please wait...')
         
         const { channel } = message.member.voice;
-		if (!channel) return message.channel.send("You need to be in a voice channel to use command.");
-		if (!channel.permissionsFor(message.guild.me).has(Permissions.FLAGS.CONNECT)) return message.channel.send("I don't have permission to join your voice channel.");
-		if (!channel.permissionsFor(message.guild.me).has(Permissions.FLAGS.SPEAK)) return message.channel.send("I don't have permission to speak in your voice channel.");
+		if (!channel) return msg.edit("You need to be in a voice channel to use command.");
+		if (!channel.permissionsFor(message.guild.me).has(Permissions.FLAGS.CONNECT)) return msg.edit("I don't have permission to join your voice channel.");
+		if (!channel.permissionsFor(message.guild.me).has(Permissions.FLAGS.SPEAK)) return msg.edit("I don't have permission to speak in your voice channel.");
 
         if (!args[0]) return msg.edit("Please provide a song name or link to search.");
-       // if (args[0].includes("deezer.com") && args[0].includes("artist")) return msg.edit("Artist not supported yet.");
 
         const player = await client.manager.create({
             guild: message.guild.id,

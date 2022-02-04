@@ -37,6 +37,7 @@ class MainClient extends Client {
 
     this.manager = new Manager({
       nodes: this.config.NODES,
+      autoPlay: true,
       plugins: [
         new spotify(),
         new facebook(),
