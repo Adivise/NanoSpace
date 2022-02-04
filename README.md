@@ -150,6 +150,7 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 - Search (#search [songname])
 - 247 (#247)
 - Previous (#previous)
+- Autoplay (#autoplay)
 
 ⏺ **Filter Commands!**
 - Bass (#bass)
@@ -186,10 +187,8 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 	
 💎 **Premium Commands!**
 - Premium (#premium [plan] [user id])
-- Viewmember (#viewmember)
 - Generate (#generate [plan] [amount])
 - Redeem (#redeem [code])
-- Profile (#profile)
 	
 📑 **Utilities Commands!**
 - Restart (#restart, #stopbot)
