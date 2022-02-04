@@ -32,6 +32,8 @@
 ✈ Join Discord:  [NanoSpace ♪♪](https://discord.gg/SNG3dh3MbR)
    mention me in chat #general or #javascript and ask problem okay! 👌
 
+<details><summary>📎 Requirements [CLICK ME]</summary>
+<p>
 
 ## 📎 Requirements
 
@@ -41,7 +43,10 @@
 
 ## 🛑 Super Requirements 
 
-1. Java 11-13 **[Download JDK13](http://www.mediafire.com/file/m6gk7aoq96db8g0/file)** (i use this here version)
+1. Java 11-13 **[Download JDK13](http://www.mediafire.com/file/m6gk7aoq96db8g0/file)** (i use this version)
+
+</p>
+</details>
 
 ## 📚 Installation
 
@@ -51,7 +56,7 @@ cd NanoSpace
 npm install
 ```
 
-<details><summary>Configuration [CLICK ME]</summary>
+<details><summary>📄 Configuration [CLICK ME]</summary>
 <p>
 
 ## 📄 Configuration
@@ -110,13 +115,12 @@ module.exports = {
     ],
 }
 ```
+After installation or finishes all you can use `node .` to start the bot. or `Run Start.bat`
 
 </p>
 </details>
 
-After installation or finishes all you can use `node .` to start the bot. or `Run Start.bat`
-
-<details><summary>AllCommands [CLICK ME]</summary>
+<details><summary>🔩 Features & Commands [CLICK ME]</summary>
 <p>
 
 ## 🔩 Features & Commands
@@ -125,17 +129,17 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 
 🎶 **Music Commands!** 
 
-- Play (#play, #p, #pplay <song/url>)
+- Play (#play, #p, #pplay [song/url])
 - Nowplaying (#nowplaying, #np, #now)
 - Queue (#queue <page>)
 - Repeat (#loop (current, all), #repeat (current, all))
 - Loopqueue (#loopall, #lq, repeatall)
 - Shuffle (#shuffle, mix)
-- Volume control (#vol, #v <10 - 100>)
+- Volume control (#vol, #v [10 - 100])
 - Pause (#pause, #pa)
 - Resume (#resume, #r)
 - Skip (#skip, #s)
-- Skipto (#skipto, #st <position>)
+- Skipto (#skipto, #st [position])
 - Clear (#clear)
 - Join (#join, #summon)
 - Leave (#leave, #dc, #lev, #stop)
@@ -143,7 +147,7 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 - Seek (#seek <second>)
 - Rewind (#rewind <second>)
 - Replay (#replay)
-- Search (#search <song>)
+- Search (#search [songname])
 - 247 (#247)
 - Previous (#previous)
 
@@ -159,7 +163,7 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 - Picth (#pitch <amount>)
 - Vaporwave (#vaporwave)
 - Nightcore (#nightcore)
-- Bassboost (#bassboost, #bb <number -10 - 10>)
+- Bassboost (#bassboost, #bb [-10 - 10])
 - Rate (#rate)
 - Reset (#reset)
 - 3d (#3d)
@@ -174,30 +178,32 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 - Vibrato (#vibrato)
 	
 📦 **Playlist Commands!**
-- Create (#create <link> <name>) <= Work all link? use same name to add! went your have!
-- Delete (#delete <name>)
-- Import (#import <name>)
+- Create (#create [link] [name]) <= Work all link? use same name to add! went your have!
+- Delete (#delete [name])
+- Import (#import [name])
+- Detail (#detail [name])
 - View (#view)
-- Viewall (#viewall)
 	
 💎 **Premium Commands!**
-- Premium (#premium <user id>)
-- Premiumguild (#premiumguild <guild id>)
-- Viewserver (#viewserver)
+- Premium (#premium [plan] [user id])
 - Viewmember (#viewmember)
+- Generate (#generate [plan] [amount])
+- Redeem (#redeem [code])
+- Profile (#profile)
 	
 📑 **Utilities Commands!**
 - Restart (#restart, #stopbot)
 - DeploySlash (#deploy, #dps) <= only one guild
 - ClearSlash (#cdps) <= work only deployslash
+- Prefix (#prefix [new prefix])
 - DeploySlashGlobal (#deployglobal, #dpsg) <= want change need wait 1 - 2 hrs.
-- Help (#help, #halp <command>)
+- Help (#help, #halp [command])
 
 </p>
 </details>
 
 
-<details><summary>Picture [CLICK ME]</summary>
+<details><summary>🖼 Picture [CLICK ME]</summary>
 <p>
 
 ## 🖼 Picture & ScreenShots
@@ -211,12 +217,12 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 </p>
 </details>
 
-<details><summary>Credits [CLICK ME]</summary>
+<details><summary>👏 Credits [CLICK ME]</summary>
 <p>
 
 ## 👏 THANK
 - [lavamusic](https://github.com/brblacky/lavamusic)
-- [EarTensifier](https://github.com/Tetracyl/EarTensifier) (made me to create this bot!)
+- [EarTensifier](https://github.com/Tetracyl/EarTensifier)
 
 </p>
 </details>
