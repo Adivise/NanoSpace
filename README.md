@@ -70,6 +70,7 @@ Copy or Rename `.env.example` to `.env` and fill out the values:
 TOKEN=REPLACE_HERE
 PREFIX=#
 NP_REALTIME=true
+LEAVE_TIMEOUT=120000
 
 # Devloper
 OWNER_ID=REPLACE_HERE
@@ -99,6 +100,7 @@ module.exports = {
     OWNER_ID: process.env.OWNER_ID || "YOUR_CLIENT_ID", //your client id
 
     NP_REALTIME: process.env.NP_REALTIME || "BOOLEAN", // "true" = realtime, "false" = not realtime :3 // WARNING: on set to "true" = laggy
+    LEAVE_TIMEOUT: parseInt(process.env.LEAVE_TIMEOUT || "120000"), // leave timeout default "120000" = 2 minutes // 1000 = 1 seconds
 
     DEV_ID: [], // if you want to use command bot only, you can put your id here // example: ["515490955801919488", "543595284345782296"]
 
