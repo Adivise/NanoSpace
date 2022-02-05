@@ -9,7 +9,7 @@ module.exports = {
         accessableby: "Member",
         category: "music",
     },
-    run: async (bot, message, args) => {
+    run: async (client, message, args) => {
         const msg = await message.channel.send('Loading please wait...');
 
 		const player = client.manager.get(message.guild.id);
@@ -23,7 +23,7 @@ module.exports = {
         .setDescription(`\`⏯\` | **Song has been:** \`${player.playing ? "Resumed" : "Paused"}\``)
         .setColor('#000001');
 
-        msg.edit({ content: " ", embeeds: [embed] });
+        msg.edit({ content: " ", embeds: [embed] });
             console.log(chalk.magenta(`[COMMAND] ${player.playing ? "Resumed" : "Paused"} used by ${message.author.tag} from ${message.guild.name}`))
     }
 }
