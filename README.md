@@ -37,13 +37,14 @@
 
 ## 📎 Requirements
 
-1. Node.js Version 16+ **[Download](https://nodejs.org/en/download/)**
-2. Discord Bot Token **[Guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)**
-3. Lavalink **[Guide](https://github.com/freyacodes/lavalink)** (i use this development version [Direct Download](https://ci.fredboat.com/repository/downloadAll/Lavalink_Build/9311:id/artifacts.zip) )
+(1.) Node.js Version 16.6.0+ **[Download](https://nodejs.org/en/download/)**
+(2.) Discord Bot Token **[Guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)**
+(3.) LavaLink **[Guide](https://github.com/freyacodes/lavalink)** (i use this development version [Download](https://ci.fredboat.com/repository/downloadAll/Lavalink_Build/9311:id/artifacts.zip) )
+(4.) MongoDB **[Download](https://www.mongodb.com/try/download/community)** (Download & install = Finish!)
 
 ## 🛑 Super Requirements 
 
-1. Java 11-13 **[Download JDK13](http://www.mediafire.com/file/m6gk7aoq96db8g0/file)** (i use this version)
+(1.) Java 11-13 **[Download JDK13](http://www.mediafire.com/file/m6gk7aoq96db8g0/file)** (i use this version)
 
 </p>
 </details>
