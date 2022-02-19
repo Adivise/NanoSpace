@@ -37,13 +37,14 @@
 
 ## 📎 Requirements
 
-1. Node.js Version 16+ **[Download](https://nodejs.org/en/download/)**
+1. Node.js Version 16.6.0+ **[Download](https://nodejs.org/en/download/)**
 2. Discord Bot Token **[Guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)**
-3. Lavalink **[Guide](https://github.com/freyacodes/lavalink)** (i use this development version [Direct Download](https://ci.fredboat.com/repository/downloadAll/Lavalink_Build/9311:id/artifacts.zip) )
+3. LavaLink **[Guide](https://github.com/freyacodes/lavalink)** (i use this development version [Download](https://ci.fredboat.com/repository/downloadAll/Lavalink_Build/9311:id/artifacts.zip) )
+4. MongoDB **[Download](https://www.mongodb.com/try/download/community)** (Download & install = Finish!)
 
 ## 🛑 Super Requirements 
 
-1. Java 11-13 **[Download JDK13](http://www.mediafire.com/file/m6gk7aoq96db8g0/file)** (i use this version)
+Java 11-13 **[Download JDK13](http://www.mediafire.com/file/m6gk7aoq96db8g0/file)** (i use this version)
 
 </p>
 </details>
@@ -70,6 +71,7 @@ Copy or Rename `.env.example` to `.env` and fill out the values:
 TOKEN=REPLACE_HERE
 PREFIX=#
 NP_REALTIME=true
+LEAVE_TIMEOUT=120000
 
 # Devloper
 OWNER_ID=REPLACE_HERE
@@ -99,6 +101,7 @@ module.exports = {
     OWNER_ID: process.env.OWNER_ID || "YOUR_CLIENT_ID", //your client id
 
     NP_REALTIME: process.env.NP_REALTIME || "BOOLEAN", // "true" = realtime, "false" = not realtime :3 // WARNING: on set to "true" = laggy
+    LEAVE_TIMEOUT: parseInt(process.env.LEAVE_TIMEOUT || "120000"), // leave timeout default "120000" = 2 minutes // 1000 = 1 seconds
 
     DEV_ID: [], // if you want to use command bot only, you can put your id here // example: ["515490955801919488", "543595284345782296"]
 
