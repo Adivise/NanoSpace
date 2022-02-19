@@ -46,7 +46,7 @@
 
 ## 🛑 Super Requirements 
 
-Java 11-13 **[Download JDK13](http://www.mediafire.com/file/m6gk7aoq96db8g0/file)** (i use this version)
+Java 11-13 **[Download JDK13](http://www.mediafire.com/file/m6gk7aoq96db8g0/file)** (i use this version) for LAVALINK!
 
 </p>
 </details>
