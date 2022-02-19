@@ -1,36 +1,36 @@
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 const formatDuration = require('../../structures/formatduration.js')
 
 module.exports = { 
     config: {
         name: "seek",
-        aliases: [],
         description: "Seek timestamp in the song!",
         accessableby: "Member",
         category: "music",
         usage: "<seconds>"
     },
-    run: async (client, message, args) => {
-        const PREFIX = client.prefix;
-        const msg = await message.channel.send(`**Loading please wait...**`);
-        if(isNaN(args[0])) return msg.edit(`Invalid number. Please provide a number in seconds.\nCorrect Usage: \`${PREFIX}seek <seconds>\``);
+    run: async (client, message, args, user, language, prefix) => {
+        const msg = await message.channel.send(`${client.i18n.get(language, "music", "seek_loading")}`);
+        if(isNaN(args[0])) return msg.edit(`${client.i18n.get(language, "music", "seek_invalid", {
+            prefix: prefix
+        })}`);
         
 		const player = client.manager.get(message.guild.id);
-		if (!player) return msg.edit("No song/s currently playing within this guild.");
+		if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
         const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
+        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
-		if(args[0] * 1000 >= player.playing.length || args[0] < 0) return msg.edit('Cannot seek beyond length of song');
+		if(args[0] * 1000 >= player.playing.length || args[0] < 0) return msg.edit(`${client.i18n.get(language, "music", "seek_beyond")}`);
 		await player.seek(args[0] * 1000);
 
         const Duration = formatDuration(player.position);
 
         const seeked = new MessageEmbed()
-            .setDescription("\`⏭\` | **Seeked to:** "+ `\`${Duration}\``)
+            .setDescription(`${client.i18n.get(language, "music", "seek_msg", {
+                duration: Duration
+            })}`)
             .setColor('#000001');
 
         msg.edit({ content: ' ', embeds: [seeked] });
-            console.log(chalk.magenta(`[COMMAND] Seek used by ${message.author.tag} from ${message.guild.name}`));
     }
 }

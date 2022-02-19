@@ -1,7 +1,5 @@
 const delay = require('delay');
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const { threed } = require('../../settings/filter');
 
 module.exports = { 
     config: {
@@ -9,25 +7,33 @@ module.exports = {
         description: "Turning on 3d filter",
         category: "filters",
         accessableby: "Member",
-        aliases: []
     },
 
-    run: async (client, message) => {
-        const msg = await message.channel.send("Turning on **3d**. This may take a few seconds...");
+    run: async (client, message, args, language) => {
+        const msg = await message.channel.send(`${client.i18n.get(language, "filters", "filter_loading", {
+            name: client.commands.get('3d').config.name
+        })}`);
 
-        const player = client.manager.get(message.guild.id);
-        if(!player) return msg.edit("No song/s currently playing in this guild.");
-        const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
+            const player = client.manager.get(message.guild.id);
+            if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
+            const { channel } = message.member.voice;
+            if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
-        await player.setFilter('filters', threed);
+            const data = {
+                op: 'filters',
+                guildId: message.guild.id,
+                rotation: { rotationHz: 0.2 }
+            }
+
+            await player.node.send(data);
 
         const embed = new MessageEmbed()
-            .setAuthor({ name: "Turned on: 3d", iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif'})
+            .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
+                name: client.commands.get('3d').config.name
+            })}`)
             .setColor('#000001');
 
         await delay(5000);
         msg.edit({ content: " ", embeds: [embed] });
-            console.log(chalk.magenta(`[COMMAND] 3d used by ${message.author.tag} from ${message.guild.name}`));
    }
 };

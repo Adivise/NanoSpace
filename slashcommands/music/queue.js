@@ -1,4 +1,3 @@
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 const { SlashPage } = require('../../structures/PageQueue.js');
 const formatDuration = require('../../structures/formatduration');
@@ -6,7 +5,6 @@ const formatDuration = require('../../structures/formatduration');
 module.exports = { 
     name: "queue",
     description: "Show the queue of songs.",
-    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
     options: [
         {
             name: "page",
@@ -21,8 +19,6 @@ module.exports = {
 		if (!player) return interaction.editReply("No song/s currently playing within this guild.");
         const { channel } = interaction.member.voice;
         if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return interaction.editReply("You need to be in a same/voice channel.")
-
-		console.log(chalk.magenta(`[SLASHCOMMAND] Queue used by ${interaction.user.tag} from ${interaction.guild.name}`));
 
 		const song = player.queue.current;
 		const qduration = `${formatDuration(player.queue.duration)}`;

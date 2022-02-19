@@ -1,11 +1,8 @@
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
     name: "clear",
     description: "Clear song in queue!",
-    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
-
     run: async (interaction, client) => {
         await interaction.deferReply({ ephemeral: false });
         const msg = await interaction.editReply(`**Loading please wait...**`);
@@ -22,6 +19,5 @@ module.exports = {
             .setColor('#000001');
 
         msg.edit({ content: " ", embeds: [cleared] });
-            console.log(chalk.magenta(`[SLASHCOMMAND] Clear used by ${interaction.user.tag} from ${interaction.guild.name}`));
     }
 }

@@ -1,5 +1,4 @@
 const delay = require('delay');
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
@@ -30,7 +29,6 @@ module.exports = {
                 
 			await delay(5000);
             msg1.edit({ content: " ", embeds: [embed] });
-            return console.log(chalk.magenta(`[SLASHCOMMAND] BassBoost used by ${interaction.user.tag} from ${interaction.guild.name}`));
         }
 
 		if (isNaN(value)) return interaction.editReply('Amount must be a real number.');
@@ -47,6 +45,5 @@ module.exports = {
             
 		await delay(5000);
         msg2.edit({ content: " ", embeds: [embed] });
-        return console.log(chalk.magenta(`[SLASHCOMMAND] BassBoost used by ${interaction.user.tag} from ${interaction.guild.name}`));
 	}
 };

@@ -1,4 +1,3 @@
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 const formatDuration = require('../../structures/formatduration.js')
 
@@ -7,7 +6,6 @@ const rewindNum = 10;
 module.exports = { 
     name: "rewind",
     description: "Rewind timestamp in the song!",
-    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
     options: [
         {
             name: "seconds",
@@ -36,7 +34,6 @@ module.exports = {
                 .setColor('#000001');
 
                 msg.edit({ content: " ", embeds: [rewind1] });
-                    console.log(chalk.magenta(`[SLASHCOMMAND] Rewind used by ${interaction.user.tag} from ${interaction.guild.name}`));
 			}
 			else {
 				return msg.edit('Cannot rewind beyond 00:00');
@@ -55,7 +52,6 @@ module.exports = {
                 .setColor('#000001');
 
                 msg.edit({ content: " ", embeds: [rewind2] });
-                    console.log(chalk.magenta(`[SLASHCOMMAND] Rewind used by ${interaction.user.tag} from ${interaction.guild.name}`));
 			}
 			else {
 				return msg.edit('Cannot rewind beyond 00:00');

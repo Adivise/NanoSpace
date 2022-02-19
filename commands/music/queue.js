@@ -1,23 +1,20 @@
-const chalk = require('chalk');
-const { MessageEmbed, MessageButton } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const { NormalPage } = require('../../structures/PageQueue.js');
 const formatDuration = require('../../structures/formatduration');
 
 module.exports = { 
     config: {
         name: "queue",
-        aliases: ["q",],
+        aliases: ["q"],
         description: "Displays what the current queue is.",
         accessableby: "Member",
         category: "music",
     },
-    run: async (client, message, args) => {
+    run: async (client, message, args, language) => {
 		const player = client.manager.get(message.guild.id);
-		if (!player) return message.channel.send("No song/s currently playing within this guild.");
+		if (!player) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_player")}`);
         const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return message.channel.send("You need to be in a same/voice channel.")
-
-		console.log(chalk.magenta(`[COMMAND] Queue used by ${message.author.tag} from ${message.guild.name}`));
+        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
 		const song = player.queue.current;
 		const qduration = `${formatDuration(player.queue.duration)}`;
@@ -39,11 +36,24 @@ module.exports = {
 			const str = songStrings.slice(i * 10, i * 10 + 10).join('');
 
 			const embed = new MessageEmbed()
-                .setAuthor({ name: `Queue - ${message.guild.name}`, iconURL: message.guild.iconURL({ dynamic: true }) })
+                .setAuthor({ name: `${client.i18n.get(language, "music", "queue_author", {
+					guild: message.guild.name,
+				})}`, iconURL: message.guild.iconURL({ dynamic: true }) })
                 .setThumbnail(thumbnail)
-				.setColor('#000001')
-				.setDescription(`**Currently Playing:**\n**[${song.title}](${song.uri})** \`[${formatDuration(song.duration)}]\` • ${song.requester}\n\n**Rest of queue**:${str == '' ? '  Nothing' : '\n' + str}`)
-				.setFooter({ text: `Page • ${i + 1}/${pagesNum} | ${player.queue.length} • Song | ${qduration} • Total duration`});
+				.setColor('#000001') //**Currently Playing:**\n**[${song.title}](${song.uri})** \`[${formatDuration(song.duration)}]\` • ${song.requester}\n\n**Rest of queue**:${str == '' ? '  Nothing' : '\n' + str}
+				.setDescription(`${client.i18n.get(language, "music", "queue_description", {
+					title: song.title,
+					url: song.uri,
+					duration: formatDuration(song.duration),
+					request: song.requester,
+					rest: str == '' ? '  Nothing' : '\n' + str,
+				})}`) //Page • ${i + 1}/${pagesNum} | ${player.queue.length} • Song | ${qduration} • Total duration
+				.setFooter({ text: `${client.i18n.get(language, "music", "queue_footer", {
+					page: i + 1,
+					pages: pagesNum,
+					queue_lang: player.queue.length,
+					duration: qduration,
+				})}` });
 
 			pages.push(embed);
 		}
@@ -53,8 +63,10 @@ module.exports = {
 			else return message.channel.send({ embeds: [pages[0]] });
 		}
 		else {
-			if (isNaN(args[0])) return message.channel.send('Page must be a number.');
-			if (args[0] > pagesNum) return message.channel.send(`There are only ${pagesNum} pages available.`);
+			if (isNaN(args[0])) return message.channel.send(`${client.i18n.get(language, "music", "queue_notnumber")}`);
+			if (args[0] > pagesNum) return message.channel.send(`${client.i18n.get(language, "music", "queue_page_notfound", {
+				page: pageNum,
+			})}`);
 			const pageNum = args[0] == 0 ? 1 : args[0] - 1;
 			return message.channel.send({ embeds: [pages[pageNum]] });
 		}

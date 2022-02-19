@@ -1,24 +1,22 @@
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = {
+    ownerOnly: true,
     config: {
         name: "restart",
-        description: "shuts down the client!",
+        description: "Shuts down the client!",
         usage: "shutdown",
         category: "utilities",
         accessableby: "Owner",
         aliases: ["stopbot"]
     },
-    run: async (client, message, args) => {
-    if(message.author.id != client.owner) return message.channel.send("You're not the client owner!")
+    run: async (client, message, args, language) => {
 
     const restart = new MessageEmbed()
-        .setDescription("**Account has been**: `Shutting down...`")
+        .setDescription(`${client.i18n.get(language, "utilities", "restart_msg")}`)
         .setColor("#000001");
 
     await message.channel.send({ embeds: [restart] });
-        console.log(chalk.red(`[CLIENT] Restarting...`));
             
     process.exit();
     }

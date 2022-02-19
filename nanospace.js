@@ -6,6 +6,7 @@ const apple = require("erela.js-apple");
 const facebook = require("erela.js-facebook");
 const { readdirSync } = require("fs");
 const path = require("path");
+const { I18n } = require("locale-parser")
 
 class MainClient extends Client {
 	 constructor() {
@@ -28,6 +29,7 @@ class MainClient extends Client {
     this.prefix = this.config.PREFIX;
     this.owner = this.config.OWNER_ID;
     this.dev = this.config.DEV_ID;
+    this.i18n = new I18n(this.config.LANGUAGE);
     if(!this.token) this.token = this.config.TOKEN;
 
     process.on('unhandledRejection', error => console.log(error));
@@ -42,7 +44,7 @@ class MainClient extends Client {
         new spotify(),
         new facebook(),
         new deezer(),
-        new apple(),
+        new apple()
       ],
       send(id, payload) {
         const guild = client.guilds.cache.get(id);

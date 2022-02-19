@@ -1,10 +1,8 @@
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
     name: "pause",
     description: "Makes the bot pause/resume the music currently playing.",
-    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
 
     run: async (interaction, client) => {
         await interaction.deferReply({ ephemeral: false });
@@ -22,6 +20,5 @@ module.exports = {
         .setColor('#000001');
 
         msg.edit({ content: " ", embeeds: [embed] });
-            console.log(chalk.magenta(`[SLASHCOMMAND] Pause used by ${interaction.user.tag} from ${message.guild.name}`))
     }
 }

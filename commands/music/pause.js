@@ -1,29 +1,30 @@
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
     config: {
         name: "pause",
         aliases: ["pa"],
-        description: "Makes the bot pause/resume the music currently playing.",
+        description: "Pause song in queue!",
         accessableby: "Member",
         category: "music",
     },
-    run: async (client, message, args) => {
-        const msg = await message.channel.send('Loading please wait...');
+    run: async (client, message, args, language) => {
+        const msg = await message.channel.send(`${client.i18n.get(language, "music", "pause_loading")}`);
 
 		const player = client.manager.get(message.guild.id);
-		if (!player) return msg.edit("No song/s currently playing within this guild.");
+		if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
         const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
+        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
         
         await player.pause(player.playing);
+        const uni = player.paused ? `${client.i18n.get(language, "music", "pause_switch_pause")}` : `${client.i18n.get(language, "music", "pause_switch_resume")}`;
 
         const embed = new MessageEmbed()
-        .setDescription(`\`⏯\` | **Song has been:** \`${player.playing ? "Resumed" : "Paused"}\``)
-        .setColor('#000001');
+            .setDescription(`${client.i18n.get(language, "music", "pause_msg", {
+                pause: uni
+            })}`)
+            .setColor('#000001');
 
         msg.edit({ content: " ", embeds: [embed] });
-            console.log(chalk.magenta(`[COMMAND] ${player.playing ? "Resumed" : "Paused"} used by ${message.author.tag} from ${message.guild.name}`))
     }
 }

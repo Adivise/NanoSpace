@@ -1,7 +1,6 @@
 const delay = require('delay');
 const { normal } = require('../../settings/volume.js');
 const { reset } = require('../../settings/filter')
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
@@ -27,6 +26,5 @@ module.exports = {
 
         await delay(5000);
         msg.edit({ content: " ", embeds: [resetted] });
-            console.log(chalk.magenta(`[SLASHCOMMAND] Reset used by ${interaction.user.tag} from ${interaction.guild.name}`));
    }
 };

@@ -1,11 +1,9 @@
-const chalk = require('chalk');
 const { MessageEmbed, MessageButton, MessageActionRow, Permissions } = require("discord.js");
 const { convertTime } = require("../../structures/convert");
 
 module.exports = { 
     name: "search",
     description: "Play a song/playlist or search for a song from youtube",
-    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
     options: [
         {
             name: "input",
@@ -15,7 +13,6 @@ module.exports = {
         }
     ],
     run: async (interaction, client) => {
-        console.log(chalk.magenta(`[SLASHCOMMAND] Search used by ${interaction.user.tag} from ${interaction.guild.name}`));
         await interaction.deferReply({ ephemeral: false });
         const value = interaction.options.get("input").value;
         const msg = await interaction.editReply(`**Searching \`${value}\` please wait...**`)

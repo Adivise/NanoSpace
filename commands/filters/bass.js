@@ -1,7 +1,5 @@
 const delay = require('delay');
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const { bass } = require('../../settings/filter')
 
 module.exports = { 
     config: {
@@ -9,25 +7,48 @@ module.exports = {
         description: "Turning on bass filter",
         category: "filters",
         accessableby: "Member",
-        aliases: []
     },
 
-    run: async (client, message) => {
-        const msg = await message.channel.send("Turning on **Bass**. This may take a few seconds...");
+    run: async (client, message, args, language) => {
+        const msg = await message.channel.send(`${client.i18n.get(language, "filters", "filter_loading", {
+            name: client.commands.get('bass').config.name
+            })}`);
 
-        const player = client.manager.get(message.guild.id);
-        if(!player) return msg.edit("No song/s currently playing in this guild.");
-        const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
-
-        await player.setFilter('filters', bass);
+            const player = client.manager.get(message.guild.id);
+            if(!player) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_player")}`);
+            const { channel } = message.member.voice;
+            if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+    
+            const data = {
+                op: 'filters',
+                guildId: message.guild.id,
+                equalizer: [
+                    { band: 0, gain: 0.10 },
+                    { band: 1, gain: 0.10 },
+                    { band: 2, gain: 0.05 },
+                    { band: 3, gain: 0.05 },
+                    { band: 4, gain: -0.05 },
+                    { band: 5, gain: -0.05 },
+                    { band: 6, gain: 0 },
+                    { band: 7, gain: -0.05 },
+                    { band: 8, gain: -0.05 },
+                    { band: 9, gain: 0 },
+                    { band: 10, gain: 0.05 },
+                    { band: 11, gain: 0.05 },
+                    { band: 12, gain: 0.10 },
+                    { band: 13, gain: 0.10 },
+                ],
+            }
+            
+            await player.node.send(data);
 
         const bassed = new MessageEmbed()
-            .setAuthor({ name: "Turned on: Bass", iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif'})
+            .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
+                name: client.commands.get('bass').config.name
+            })}`)
             .setColor('#000001');
 
         await delay(5000);
         msg.edit({ content: " ", embeds: [bassed] });
-            console.log(chalk.magenta(`[COMMAND] Bass used by ${message.author.tag} from ${message.guild.name}`));
    }
 };

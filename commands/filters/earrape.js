@@ -1,7 +1,4 @@
 const delay = require('delay');
-const { earrape } = require('../../settings/volume.js')
-const { reset } = require('../../settings/filter.js')
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
@@ -13,23 +10,30 @@ module.exports = {
         aliases: ["ear"]
     },
 
-    run: async (client, message) => {
-        const msg = await message.channel.send("Turning on **Earrape**. This may take a few seconds...");
+    run: async (client, message, args, language) => {
+        const msg = await message.channel.send(`${client.i18n.get(language, "filters", "filter_loading", {
+            name: client.commands.get('earrape').config.name
+            })}`);
 
-        const player = client.manager.get(message.guild.id);
-        if(!player) return msg.edit("No song/s currently playing in this guild.");
-        const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
-
-		await player.setVolume(earrape);
-		await player.setFilter('filters', reset);
+            const player = client.manager.get(message.guild.id);
+            if(!player) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_player")}`);
+            const { channel } = message.member.voice;
+            if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+    
+		await player.setVolume(500);
+        const data = {
+            op: 'filters',
+            guildId: message.guild.id,
+        }
+        await player.node.send(data);
 
         const earrapped = new MessageEmbed()
-            .setAuthor({ name: "Turn on filter: Earrape", iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif'})
+            .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
+                name: client.commands.get('earrape').config.name
+            })}`)
             .setColor('#000001');
 
         await delay(3000);
         msg.edit({ content: " ", embeds: [earrapped] });
-                console.log(chalk.magenta(`[COMMAND] Earrape used by ${message.author.tag} from ${message.guild.name}`));
     }
 };

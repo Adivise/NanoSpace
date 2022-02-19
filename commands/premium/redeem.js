@@ -1,4 +1,3 @@
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 const Redeem = require('../../settings/models/Redeem.js')
 const PremiumUser = require('../../settings/models/PremiumUser.js')
@@ -8,14 +7,13 @@ module.exports = {
     config: {
         name: "redeem",
         aliases: ["redeemcode"],
-        usage: "redeem <code>",
+        usage: "<code>",
         description: "Redeem a premium code!",
         accessableby: "Member",
         category: "premium",
     },
-    run: async (client, message, args) => {
-    console.log(chalk.magenta(`[COMMAND] Redeem used by ${message.author.tag} from ${message.guild.name}`));
-
+    run: async (client, message, args, language) => {
+        
         let user = await PremiumUser.findOne({ Id: message.author.id })
   
         let code = args[0]
@@ -24,7 +22,7 @@ module.exports = {
             embeds: [
                 new MessageEmbed()
                 .setColor('#000001')
-                .setDescription(`**Please specify the code you want to redeem!**`),
+                .setDescription(`${client.i18n.get(language, "premium", "redeem_arg")}`),
             ],
         })
 
@@ -33,7 +31,7 @@ module.exports = {
             embeds: [
                 new MessageEmbed()
                 .setColor('#000001')
-                .setDescription(`**> You already are a premium user**`),
+                .setDescription(`${client.i18n.get(language, "premium", "redeem_already")}`),
             ],
         })
     }
@@ -60,8 +58,10 @@ module.exports = {
         message.channel.send({
             embeds: [
             new MessageEmbed()
-                .setTitle('Premium Redeemed')
-                .setDescription(`**You have successfully redeemed premium!**\n\n*Expires at*: [\`${expires}\`]`)
+                .setTitle(`${client.i18n.get(language, "premium", "redeem_title")}`)
+                .setDescription(`${client.i18n.get(language, "premium", "redeem_desc", {
+                    expires: expires,
+                })}`)
                 .setColor('#000001')
                 .setTimestamp(),
             ],
@@ -72,7 +72,7 @@ module.exports = {
             embeds: [
             new MessageEmbed()
                 .setColor('#000001')
-                .setDescription(`**The code is invalid. Please try again using valid one!**`,)
+                .setDescription(`${client.i18n.get(language, "premium", "redeem_invalid")}`),
                 ],
             })
         }

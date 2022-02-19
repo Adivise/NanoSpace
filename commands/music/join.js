@@ -1,4 +1,3 @@
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
@@ -9,11 +8,11 @@ module.exports = {
         accessableby: "Member",
         category: "music",
     },
-    run: async (client, message, args) => {
-        const msg = await message.channel.send(`**Loading please wait...**`);
+    run: async (client, message, args, language) => {
+        const msg = await message.channel.send(`${client.i18n.get(language, "music", "join_loading")}`);
 
         const { channel } = message.member.voice;
-        if(!channel) return msg.edit("You need to be in a voice channel to use the join command.");
+        if(!channel) return msg.edit(`${client.i18n.get(language, "music", "join_voice")}`);
 
         const player = client.manager.create({
             guild: message.guild.id,
@@ -25,7 +24,9 @@ module.exports = {
         await player.connect();
 
         const embed = new MessageEmbed()
-            .setDescription(`\`🔊\` | **Joined:** \`${channel.name}\``)
+            .setDescription(`${client.i18n.get(language, "music", "join_msg", {
+                channel: channel.name
+            })}`)
             .setColor('#000001')
 
         msg.edit({ content: " ", embeds: [embed] })

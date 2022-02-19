@@ -1,5 +1,4 @@
 const delay = require('delay');
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 const { tremolo } = require('../../settings/filter');
 
@@ -25,6 +24,5 @@ module.exports = {
 
         await delay(5000);
         msg.edit({ content: " ", embeds: [tremolod] });
-            console.log(chalk.magenta(`[SLASHCOMMAND] Tremolo used by ${interaction.user.tag} from ${interaction.guild.name}`));
    }
 };

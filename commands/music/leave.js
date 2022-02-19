@@ -1,4 +1,3 @@
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
@@ -9,18 +8,20 @@ module.exports = {
         accessableby: "Member",
         category: "music",
     },
-    run: async (client, message, args) => {
-        const msg = await message.channel.send(`**Loading please wait...**`);
+    run: async (client, message, args, language) => {
+        const msg = await message.channel.send(`${client.i18n.get(language, "music", "leave_loading")}`);
 
         const player = client.manager.get(message.guild.id);
-		if (!player) return msg.edit("No song/s currently playing within this guild.");
+		if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
         const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
+        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
         await player.destroy();
 
         const embed = new MessageEmbed()
-            .setDescription(`\`🚫\` | **Left:** | \`${channel.name}\``)
+            .setDescription(`${client.i18n.get(language, "music", "leave_msg", {
+                channel: channel.name
+            })}`)
             .setColor('#000001');
 
         msg.edit({ content: " ", embeds: [embed] })

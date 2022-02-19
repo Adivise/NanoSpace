@@ -1,10 +1,8 @@
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
     name: "skip",
     description: "Skips the song currently playing.",
-    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
 
     run: async (interaction, client) => {
         await interaction.deferReply({ ephemeral: false });
@@ -22,6 +20,5 @@ module.exports = {
             .setColor('#000001');
 
         msg.edit({ content: " ", embeds: [skipped] });
-            console.log(chalk.magenta(`[SLASHCOMMAND] Skip used by ${interaction.user.tag} from ${interaction.guild.name}`));
     }
 }

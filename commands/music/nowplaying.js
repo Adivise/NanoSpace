@@ -1,23 +1,21 @@
 const formatDuration = require("../../structures/formatduration.js");
 const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
 const ytsr = require("youtube-sr").default;
-const chalk = require("chalk");
 
 module.exports = { 
     config: {
         name: "nowplaying",
         aliases: ["np", "now"],
-        description: "Displays what the current song every 5 seconds.",
+        description: "Display the song currently playing.",
         accessableby: "Member",
         category: "music",
     },
 
-    run: async (client, message, args) => {
-        console.log(chalk.magenta(`[COMMAND] NowPlaying used by ${message.author.tag} from ${message.guild.name}`));
+    run: async (client, message, args, language) => {
         const realtime = client.config.NP_REALTIME;
-        const msg = await message.channel.send("Loading please wait...");
+        const msg = await message.channel.send(`${client.i18n.get(language, "music", "np_loading")}`);
         const player = client.manager.get(message.guild.id);
-        if (!player) return message.channel.send("No song/s currently playing within this guild.");
+        if (!player) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_player")}`);
 
         const song = player.queue.current;
         const CurrentDuration = formatDuration(player.position);
@@ -30,17 +28,20 @@ module.exports = {
         const Emoji = player.playing ? "🔴 |" : "⏸ |";
 
         const embeded = new MessageEmbed()
-            .setAuthor({ name: player.playing ? 'Now Playing...' : 'Song Pause..', iconURL: "https://cdn.discordapp.com/emojis/741605543046807626.gif" })
+            .setAuthor({ name: player.playing ? `${client.i18n.get(language, "music", "np_title")}` : `${client.i18n.get(language, "music", "np_title_pause")}`, iconURL: `${client.i18n.get(language, "music", "np_icon")}` })
             .setColor('#000001')
             .setDescription(`**[${song.title}](${song.uri})**`)
             .setThumbnail(Thumbnail)
-            .addField('Author:', `${song.author}`, true)
-            .addField('Requester:', `${song.requester}`, true)
-            .addField('Volume:', `${player.volume}%`, true)
-            .addField('Views:', `${views}`, true)
-            .addField('Upload At:', `${uploadat}`, true)
-            .addField('Download:', `**[Click Here](https://www.mp3fromlink.com/watch?v=${song.identifier})**`, true)
-            .addField(`Current Duration: \`[${CurrentDuration} / ${TotalDuration}]\``, `\`\`\`${Emoji} ${'─'.repeat(Part) + '🎶' + '─'.repeat(30 - Part)}\`\`\``)
+            .addField(`${client.i18n.get(language, "music", "np_author")}`, `${song.author}`, true)
+            .addField(`${client.i18n.get(language, "music", "np_request")}`, `${song.requester}`, true)
+            .addField(`${client.i18n.get(language, "music", "np_volume")}`, `${player.volume}%`, true)
+            .addField(`${client.i18n.get(language, "music", "np_view")}`, `${views}`, true)
+            .addField(`${client.i18n.get(language, "music", "np_upload")}`, `${uploadat}`, true)
+            .addField(`${client.i18n.get(language, "music", "np_download")}`, `**[Click Here](https://www.mp3fromlink.com/watch?v=${song.identifier})**`, true)
+            .addField(`${client.i18n.get(language, "music", "np_current_duration", {
+                current_duration: CurrentDuration,
+                total_duration: TotalDuration
+            })}`, `\`\`\`${Emoji} ${'─'.repeat(Part) + '🎶' + '─'.repeat(30 - Part)}\`\`\``)
             .setTimestamp();
 
         const row = new MessageActionRow()
@@ -85,7 +86,10 @@ module.exports = {
             const Part = Math.floor(player.position / song.duration * 30);
             const Emoji = player.playing ? "🔴 |" : "⏸ |";
 
-            embeded.fields[6] = { name: `Current Duration: \`[${CurrentDuration} / ${TotalDuration}]\``, value: `\`\`\`${Emoji} ${'─'.repeat(Part) + '🎶' + '─'.repeat(30 - Part)}\`\`\`` };
+            embeded.fields[6] = { name: `${client.i18n.get(language, "music", "np_current_duration", {
+                current_duration: CurrentDuration,
+                total_duration: TotalDuration
+            })}`, value: `\`\`\`${Emoji} ${'─'.repeat(Part) + '🎶' + '─'.repeat(30 - Part)}\`\`\`` };
 
             if (NEmbed) NEmbed.edit({ content: " ", embeds: [embeded], components: [row] })
         }, 5000);
@@ -97,7 +101,7 @@ module.exports = {
         const filter = (message) => {
             if(message.guild.me.voice.channel && message.guild.me.voice.channelId === message.member.voice.channelId) return true;
             else {
-              message.reply({ content: "You need to be in a same/voice channel.", ephemeral: true });
+              message.reply({ content: `${client.i18n.get(language, "music", "np_invoice")}`, ephemeral: true });
             }
           };
         const collector = msg.createMessageComponentCollector({ filter, time: song.duration });
@@ -110,14 +114,19 @@ module.exports = {
                 collector.stop();
             }
             await player.pause(!player.paused);
-            const uni = player.paused ? "Paused" : "Resumed";
+            const uni = player.paused ? `${client.i18n.get(language, "music", "np_switch_pause")}` : `${client.i18n.get(language, "music", "np_switch_resume")}`;
       
             const embed = new MessageEmbed()
-                .setDescription(`\`⏯\` **Song has been:** \`${uni}\``)
+                .setDescription(`${client.i18n.get(language, "music", "np_pause_msg", {
+                    pause: uni
+                })}`)
                 .setColor('#000001');
             
-            embeded.setAuthor({ name: player.playing ? 'Now Playing...' : 'Song Pause..', iconURL: "https://cdn.discordapp.com/emojis/741605543046807626.gif" });
-            embeded.fields[6] = { name: `Current Duration: \`[${formatDuration(player.position)} / ${formatDuration(song.duration)}]\``, value: `\`\`\`${player.playing ? "🔴 |" : "⏸ |"} ${'─'.repeat(Math.floor(player.position / song.duration * 30)) + '🎶' + '─'.repeat(30 - Math.floor(player.position / song.duration * 30))}\`\`\`` };
+            embeded.setAuthor({ name: player.playing ? `${client.i18n.get(language, "music", "np_title")}` : `${client.i18n.get(language, "music", "np_title_pause")}`, iconURL: `${client.i18n.get(language, "music", "np_icon")}` })
+            embeded.fields[6] = { name: `${client.i18n.get(language, "music", "np_current_duration", {
+                current_duration: formatDuration(player.position),
+                total_duration: TotalDuration
+            })}`, value: `\`\`\`${player.playing ? "🔴 |" : "⏸ |"} ${'─'.repeat(Math.floor(player.position / song.duration * 30)) + '🎶' + '─'.repeat(30 - Math.floor(player.position / song.duration * 30))}\`\`\`` };
 
             if(NEmbed) await NEmbed.edit({ embeds: [embeded] });
             interaction.reply({ embeds: [embed], ephemeral: true });
@@ -129,7 +138,7 @@ module.exports = {
             await player.seek(0);
           
             const embed = new MessageEmbed()
-                .setDescription("\`⏮\` | **Song has been:** `Replay`")
+                .setDescription(`${client.i18n.get(language, "music", "np_replay_msg")}`)
                 .setColor('#000001');;
       
             interaction.reply({ embeds: [embed], ephemeral: true });
@@ -142,7 +151,7 @@ module.exports = {
             await player.destroy();
       
             const embed = new MessageEmbed()
-                .setDescription(`\`🚫\` | **Song has been:** | \`Stopped\``)
+                .setDescription(`${client.i18n.get(language, "music", "np_stop_msg")}`)
                 .setColor('#000001');
 
             clearInterval(interval);
@@ -155,7 +164,7 @@ module.exports = {
             await player.stop();
       
             const embed = new MessageEmbed()
-                .setDescription("\`⏭\` | **Song has been:** `Skipped`")
+                .setDescription(`${client.i18n.get(language, "music", "np_skip_msg")}`)
                 .setColor('#000001');
 
             clearInterval(interval);
@@ -166,10 +175,12 @@ module.exports = {
                 collector.stop();
             }
             await player.setTrackRepeat(!player.trackRepeat);
-            const uni = player.trackRepeat ? "Enabled" : "Disabled";
+            const uni = player.trackRepeat ? `${client.i18n.get(language, "music", "np_switch_enable")}` : `${client.i18n.get(language, "music", "np_switch_disable")}`;
       
             const embed = new MessageEmbed()
-                .setDescription(`\`🔁\` **Loop has been:** \`${uni}\``)
+                .setDescription(`${client.i18n.get(language, "music", "np_repeat_msg", {
+                    loop: uni
+                    })}`)
                 .setColor('#000001');
       
             interaction.reply({ embeds: [embed], ephemeral: true });

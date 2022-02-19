@@ -1,5 +1,4 @@
 const delay = require('delay');
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
@@ -34,8 +33,8 @@ module.exports = {
 		const embed = new MessageEmbed()
 			.setAuthor({ name: `Rate set to: ${value}x`, iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif' })
 			.setColor('#000001');
+
 		await delay(5000);
 		msg.edit({ content: " ", embeds: [embed] });
-			console.log(chalk.magenta(`[SLASHCOMMAND] Rate used by ${interaction.user.tag} from ${interaction.guild.name}`));
 	}
 };
