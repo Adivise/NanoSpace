@@ -65,7 +65,7 @@ module.exports = {
 		else {
 			if (isNaN(args[0])) return message.channel.send(`${client.i18n.get(language, "music", "queue_notnumber")}`);
 			if (args[0] > pagesNum) return message.channel.send(`${client.i18n.get(language, "music", "queue_page_notfound", {
-				page: pageNum,
+				page: pagesNum,
 			})}`);
 			const pageNum = args[0] == 0 ? 1 : args[0] - 1;
 			return message.channel.send({ embeds: [pages[pageNum]] });
