@@ -5,35 +5,42 @@ const { convertTime } = require("../../structures/convert.js")
 const TrackAdd = [];
 
 module.exports = { 
-    config: {
-        name: "create",
-        usage: "<playlist link> <playlist name>",
-        description: "Create or add to a playlist",
-        accessableby: "Member",
-        category: "playlist",
-    },
-    run: async (client, message, args, user, language, prefix) => {
+    name: "create",
+    description: "Create a playlist",
+    options: [
+        {
+            name: "name",
+            description: "The name of the playlist",
+            required: true,
+            type: 3
+        },
+        {
+            name: "input",
+            description: "The playlist to add to",
+            required: true,
+            type: 3
+        }
+    ],
+    ownerOnly: false,
+    run: async (interaction, client, user, language) => {
+        await interaction.deferReply({ ephemeral: false });
+
+        const value = interaction.options.getString("name");
+        const input = interaction.options.get("input").value;;
 
         try {
             if (user && user.isPremium) {
 
-        if(!args[0]) return message.channel.send(`${client.i18n.get(language, "playlist", "create_arg", {
-            prefix: prefix
-        })}`);
-        if(!args[1]) return message.channel.send(`${client.i18n.get(language, "playlist", "create_arg", {
-            prefix: prefix
-        })}`);
-        if(args[1].length > 16) return message.channel.send(`${client.i18n.get(language, "playlist", "create_toolong")}`);
+        if(value.length > 16) return interaction.editReply(`${client.i18n.get(language, "playlist", "create_toolong")}`);
 
-        const PlaylistName = args[1].replace(/_/g, ' ');
-        const Inputed = args[0];
+        const PlaylistName = value.replace(/_/g, ' ');
+        const Inputed = input;
 
-        const msg = await message.channel.send(`${client.i18n.get(language, "playlist", "create_loading")}`);
-
-        const res = await client.manager.search(Inputed, message.author.id);
+        const msg = await interaction.editReply(`${client.i18n.get(language, "playlist", "create_loading")}`);
+        const res = await client.manager.search(Inputed, interaction.user.id);
 
         const Duration = convertTime(res.tracks[0].duration, true);
-      //  const TotalDuration = convertTime(res.playlist.duration, true);
+      //  const TotalDuration = convertTime(res.playlist.duration);
 
         if(res.loadType != "NO_MATCHES") {
             if(res.loadType == "TRACK_LOADED") {
@@ -43,13 +50,10 @@ module.exports = {
                         title: res.tracks[0].title,
                         url: res.tracks[0].uri,
                         duration: Duration,
-                        user: message.author
+                        user: interaction.user
                         })}`)
                     .setColor('#000001')
-                msg.edit({ content: " ", embeds: [embed] }).then(msg => {
-                //    message.delete()
-                    setTimeout(() => msg.delete(), 5000)
-                  });
+                msg.edit({ content: " ", embeds: [embed] });
             }
             else if(res.loadType == "PLAYLIST_LOADED") {
                 for (let t = 0; t < res.tracks.length; t++) {
@@ -58,16 +62,13 @@ module.exports = {
                 const embed = new MessageEmbed() //Searched • [${res.playlist.name}](${args[0]}) \`${TotalDuration}\` (${res.tracks.length} tracks) • ${message.author}
                     .setDescription(`${client.i18n.get(language, "playlist", "create_playlist", {
                         title: res.playlist.name,
-                        url: Inputed,
+                        url: input,
                         duration: convertTime(res.playlist.duration),
                         track: res.tracks.length,
-                        user: message.author
+                        user: interaction.user
                         })}`)
                     .setColor('#000001')
-                msg.edit({ content: " ", embeds: [embed] }).then(msg => {
-                 //   message.delete()
-                    setTimeout(() => msg.delete(), 5000)
-                  });
+                msg.edit({ content: " ", embeds: [embed] });
             }
             else if(res.loadType == "SEARCH_RESULT") {
                 TrackAdd.push(res.tracks[0]);
@@ -76,35 +77,26 @@ module.exports = {
                         title: res.tracks[0].title,
                         url: res.tracks[0].uri,
                         duration: Duration,
-                        user: message.author
+                        user: interaction.user
                         })}`)
                     .setColor('#000001')
-                msg.edit({ content: " ", embeds: [embed] }).then(msg => {
-                  //  message.delete()
-                    setTimeout(() => msg.delete(), 5000)
-                  });
+                msg.edit({ content: " ", embeds: [embed] });
             }
             else if(res.loadType == "LOAD_FAILED") { //Error loading playlist.
-                return msg.edit(`${client.i18n.get(language, "playlist", "create_fail")}`).then(msg => {
-                 //   message.delete()
-                    setTimeout(() => msg.delete(), 5000)
-                  });
+                return msg.edit(`${client.i18n.get(language, "playlist", "create_fail")}`);
             }
         }
         else { //The playlist link is invalid.
-            return msg.edit(`${client.i18n.get(language, "playlist", "create_match")}`).then(msg => {
-              //  message.delete()
-                setTimeout(() => msg.delete(), 5000)
-              });
+            return msg.edit(`${client.i18n.get(language, "playlist", "create_match")}`);
         }
 
-        const LimitPlaylist = await Playlist.find({ owner: message.author.id }).countDocuments();
+        const LimitPlaylist = await Playlist.find({ owner: interaction.user.id }).countDocuments();
 
         Playlist.findOne({ name: PlaylistName }).then(playlist => {
             if(playlist) {
-                if(playlist.owner !== message.author.id) return message.channel.send(`${client.i18n.get(language, "playlist", "create_owner")}`);
+                if(playlist.owner !== interaction.user.id) return interaction.followUp(`${client.i18n.get(language, "playlist", "create_owner")}`);
                 const LimitTrack = playlist.tracks.length + TrackAdd.length; //You can't add more than ${client.config.LIMIT_TRACK} tracks to this playlist.
-                if(LimitTrack > client.config.LIMIT_TRACK) return message.channel.send(`${client.i18n.get(language, "playlist", "create_limit_track", {
+                if(LimitTrack > client.config.LIMIT_TRACK) return interaction.followUp(`${client.i18n.get(language, "playlist", "create_limit_track", {
                     limit: client.config.LIMIT_TRACK
                 })}`);
                 for (let songs = 0; songs < TrackAdd.length; songs++) {
@@ -117,21 +109,21 @@ module.exports = {
                         playlist: PlaylistName
                         })}`)
                     .setColor('#000001')
-                message.channel.send({ content: " ", embeds: [embed] });
+                interaction.followUp({ content: " ", embeds: [embed] });
 
                 TrackAdd.length = 0;
                 }).catch(err => console.log(err));
             }
             else {
-                if(TrackAdd.length > client.config.LIMIT_TRACK)  return message.channel.send(`${client.i18n.get(language, "playlist", "create_limit_track", {
+                if(TrackAdd.length > client.config.LIMIT_TRACK)  return interaction.followUp(`${client.i18n.get(language, "playlist", "create_limit_track", {
                     limit: client.config.LIMIT_TRACK
                 })}`);
-                if(LimitPlaylist >= client.config.LIMIT_PLAYLIST) return message.channel.send(`${client.i18n.get(language, "playlist", "create_limit_playlist", {
+                if(LimitPlaylist >= client.config.LIMIT_PLAYLIST) return interaction.followUp(`${client.i18n.get(language, "playlist", "create_limit_playlist", {
                     limit: client.config.LIMIT_PLAYLIST
                 })}`);
                 const CreateNew = new Playlist({
                     name: PlaylistName,
-                    owner: message.author.id,
+                    owner: interaction.user.id,
                     tracks: TrackAdd,
                     created: Date.now()
                 });
@@ -142,7 +134,7 @@ module.exports = {
                         count: TrackAdd.length
                         })}`)
                     .setColor('#000001')
-                message.channel.send({ content: " ", embeds: [embed] });
+                interaction.followUp({ content: " ", embeds: [embed] });
                     TrackAdd.length = 0;
                 });
             }
@@ -154,11 +146,11 @@ module.exports = {
             .setColor("#000001")
             .setTimestamp()
 
-        return message.channel.send({ embeds: [Premiumed] });
+        return interaction.followUp({ embeds: [Premiumed] });
       }
     } catch (err) {
         console.log(err)
-        message.channel.send({ content: `${client.i18n.get(language, "nopremium", "premium_error")}` })
+        interaction.followUp({ content: `${client.i18n.get(language, "nopremium", "premium_error")}` })
         }
     }
 };

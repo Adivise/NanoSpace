@@ -46,11 +46,11 @@ queue_end_desc: "`📛` | *Song has been:* `Ended`"
 
 
 ##### On Track get error!! Event #####
-error_desc: "`❌` | *Song has error:* `Auto-Left`"
+error_desc: "`❌` | *Song has error:* `Auto-Skipped`"
 
 
 ##### On Track get stuck!! Event #####
-stuck_desc: "`❌` | *Song has stuck:* `Auto-Left`"
+stuck_desc: "`❌` | *Song has stuck:* `Auto-Skipped`"
 
 
 ##### On Bot get move Event #####

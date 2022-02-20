@@ -1,28 +1,38 @@
 const { MessageEmbed } = require('discord.js');
 const Playlist = require('../../settings/models/Playlist.js');
 const formatDuration = require('../../structures/formatduration');
-const { NormalPage } = require('../../structures/PageQueue.js');
+const { SlashPage } = require('../../structures/PageQueue.js');
 
 module.exports = { 
-    config: {
-        name: "detail",
-        usage: "<playlist name> <page number>",
-        description: "Detail a playlist",
-        accessableby: "Member",
-        category: "playlist",
-    },
-    run: async (client, message, args, user, language, prefix) => {
+    name: "detail",
+    description: "Detail a playlist",
+    options: [
+        {
+            name: "name",
+            description: "The name of the playlist",
+            required: true,
+            type: 3
+        },
+        {
+            name: "page",
+            description: "The page you want to view",
+            required: false,
+            type: 4
+        }
+    ],
+    run: async (interaction, client, user, language) => {
+        await interaction.deferReply({ ephemeral: false });
+
+        const value = interaction.options.getString("name");
+        const number = interaction.options.getInteger("page");
 
         try {
             if (user && user.isPremium) {
-            if(!args[0]) return message.channel.send(`${client.i18n.get(language, "playlist", "detail_arg", {
-                prefix: prefix
-                })}`);
 
-        const Plist = args.join(" ").replace(/_/g, ' ');
+        const Plist = value.replace(/_/g, ' ');
         const playlist = await Playlist.findOne({ name: Plist });
-        if(!playlist) return message.channel.send(`${client.i18n.get(language, "playlist", "detail_notfound")}`);
-        if(playlist.owner !== message.author.id) return message.channel.send(`${client.i18n.get(language, "playlist", "detail_owner")}`);
+        if(!playlist) return interaction.editReply(`${client.i18n.get(language, "playlist", "detail_notfound")}`);
+        if(playlist.owner !== interaction.user.id) return interaction.editReply(`${client.i18n.get(language, "playlist", "detail_owner")}`);
 
         let pagesNum = Math.ceil(playlist.tracks.length / 10);
 		if(pagesNum === 0) pagesNum = 1;
@@ -43,7 +53,7 @@ module.exports = {
             const embed = new MessageEmbed() //${playlist.name}'s Playlists
                 .setAuthor({ name: `${client.i18n.get(language, "playlist", "detail_embed_title", {
                     name: playlist.name
-                })}`, iconURL: message.author.displayAvatarURL() })
+                })}`, iconURL: interaction.user.displayAvatarURL() })
                 .setDescription(`${str == '' ? '  Nothing' : '\n' + str}`)
                 .setColor('#000001') //Page • ${i + 1}/${pagesNum} | ${playlist.tracks.length} • Songs | ${totalDuration} • Total duration
                 .setFooter({ text: `${client.i18n.get(language, "playlist", "detail_embed_footer", {
@@ -55,17 +65,17 @@ module.exports = {
 
             pages.push(embed);
         }
-		if (!args[1]) {
-			if (pages.length == pagesNum && playlist.tracks.length > 10) NormalPage(client, message, pages, 60000, playlist.tracks.length, totalDuration);
-			else return message.channel.send({ embeds: [pages[0]] });
+		if (!number) {
+			if (pages.length == pagesNum && playlist.tracks.length > 10) SlashPage(client, interaction, pages, 60000, playlist.tracks.length, totalDuration);
+			else return interaction.editReply({ embeds: [pages[0]] });
 		}
 		else {
-			if (isNaN(args[1])) return message.channel.send(`${client.i18n.get(language, "playlist", "detail_notnumber")}`);
-			if (args[1] > pagesNum) return message.channel.send(`${client.i18n.get(language, "playlist", "detail_page_notfound", {
+			if (isNaN(number)) return interaction.editReply(`${client.i18n.get(language, "playlist", "detail_notnumber")}`);
+			if (number > pagesNum) return interaction.editReply(`${client.i18n.get(language, "playlist", "detail_page_notfound", {
                 page: pagesNum
             })}`);
-			const pageNum = args[1] == 0 ? 1 : args[1] - 1;
-			return message.channel.send({ embeds: [pages[pageNum]] });
+			const pageNum = number == 0 ? 1 : number - 1;
+			return interaction.editReply({ embeds: [pages[pageNum]] });
         }
     } else {
         const Premiumed = new MessageEmbed()
@@ -74,11 +84,11 @@ module.exports = {
             .setColor("#000001")
             .setTimestamp()
 
-        return message.channel.send({ embeds: [Premiumed] });
+        return interaction.editReply({ embeds: [Premiumed] });
       }
     } catch (err) {
         console.log(err)
-        message.channel.send({ content: `${client.i18n.get(language, "nopremium", "premium_error")}` })
+        interaction.editReply({ content: `${client.i18n.get(language, "nopremium", "premium_error")}` })
         }
     }
 };

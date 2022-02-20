@@ -2,26 +2,24 @@ const delay = require('delay');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
-    config: {
-        name: "daycore",
-        description: "Turning on daycore filter",
-        category: "filters",
-        accessableby: "Member",
-    },
+    name: "daycore",
+    description: "Turning on daycore filter",
 
-    run: async (client, message, args, language) => {
-        const msg = await message.channel.send(`${client.i18n.get(language, "filters", "filter_loading", {
-            name: client.commands.get('daycore').config.name
+    run: async (interaction, client, user, language) => {
+        await interaction.deferReply({ ephemeral: false });
+
+        const msg = await interaction.editReply(`${client.i18n.get(language, "filters", "filter_loading", {
+            name: "Daycore"
             })}`);
 
             const player = client.manager.get(message.guild.id);
             if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
-            const { channel } = message.member.voice;
-            if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+            const { channel } = interaction.member.voice;
+            if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
     
             const data = {
                 op: 'filters',
-                guildId: message.guild.id,
+                guildId: interaction.guild.id,
                 equalizer: [
                     { band: 0, gain: 0 },
                     { band: 1, gain: 0 },
@@ -48,7 +46,7 @@ module.exports = {
 
         const daycored = new MessageEmbed()
             .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
-                name: client.commands.get('daycore').config.name
+                name: "Daycore"
             })}`)
             .setColor('#000001');
 

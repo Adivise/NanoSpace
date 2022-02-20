@@ -1,21 +1,28 @@
 const { MessageEmbed } = require('discord.js');
 const Playlist = require('../../settings/models/Playlist.js');
 const humanizeDuration = require('humanize-duration');
-const { NormalPlaylist } = require('../../structures/PageQueue.js');
+const { SlashPlaylist } = require('../../structures/PageQueue.js');
 
 module.exports = { 
-    config: {
-        name: "view",
-        description: "View my playlists",
-        accessableby: "Member",
-        category: "playlist",
-    },
-    run: async (client, message, args, user, language, prefix) => {
+    name: "view",
+    description: "View my playlists",
+    options: [
+        {
+            name: "page",
+            description: "The page you want to view",
+            required: false,
+            type: 4
+        }
+    ],
+    run: async (interaction, client, user, language) => {
+        await interaction.deferReply({ ephemeral: false });
+
+        const value = interaction.options.getInteger("page");
 
 		try {
 			if (user && user.isPremium) {
         
-        const playlists = await Playlist.find({ owner: message.author.id });
+        const playlists = await Playlist.find({ owner: interaction.user.id });
 
         let pagesNum = Math.ceil(playlists.length / 10);
 		if(pagesNum === 0) pagesNum = 1;
@@ -34,8 +41,8 @@ module.exports = {
             const str = playlistStrings.slice(i * 10, i * 10 + 10).join('');
             const embed = new MessageEmbed()
                 .setAuthor({ name: `${client.i18n.get(language, "playlist", "view_embed_title", {
-                    user: message.author.username
-                })}`, iconURL: message.author.displayAvatarURL() })
+                    user: interaction.user.username
+                })}`, iconURL: interaction.user.displayAvatarURL() })
                 .setDescription(`${str == '' ? '  Nothing' : '\n' + str}`)
                 .setColor('#000001')
                 .setFooter({ text: `${client.i18n.get(language, "playlist", "view_embed_footer", {
@@ -46,17 +53,17 @@ module.exports = {
 
             pages.push(embed);
         }
-		if (!args[0]) {
-			if (pages.length == pagesNum && playlists.length > 10) NormalPlaylist(client, message, pages, 30000, playlists.length);
-			else return message.channel.send({ embeds: [pages[0]] });
+		if (!value) {
+			if (pages.length == pagesNum && playlists.length > 10) SlashPlaylist(client, interaction, pages, 30000, playlists.length);
+			else return interaction.editReply({ embeds: [pages[0]] });
 		}
 		else {
-			if (isNaN(args[0])) return message.channel.send({ content: `${client.i18n.get(language, "playlist", "view_notnumber")}` });
-			if (args[0] > pagesNum) return message.channel.send({ content: `${client.i18n.get(language, "playlist", "view_page_notfound", {
+			if (isNaN(value)) return interaction.editReply({ content: `${client.i18n.get(language, "playlist", "view_notnumber")}` });
+			if (value > pagesNum) return interaction.editReply({ content: `${client.i18n.get(language, "playlist", "view_page_notfound", {
                 page: pagesNum
             })}` });
-			const pageNum = args[0] == 0 ? 1 : args[0] - 1;
-			return message.channel.send({ embeds: [pages[pageNum]] });
+			const pageNum = value == 0 ? 1 : value - 1;
+			return interaction.editReply({ embeds: [pages[pageNum]] });
         }
     } else {
         const Premiumed = new MessageEmbed()
@@ -65,11 +72,11 @@ module.exports = {
             .setColor("#000001")
             .setTimestamp()
 
-        return message.channel.send({ embeds: [Premiumed] });
+        return interaction.editReply({ embeds: [Premiumed] });
       }
     } catch (err) {
         console.log(err)
-        message.channel.send({ content: `${client.i18n.get(language, "nopremium", "premium_error")}` })
+        interaction.editReply({ content: `${client.i18n.get(language, "nopremium", "premium_error")}` })
         }
     }
 };
