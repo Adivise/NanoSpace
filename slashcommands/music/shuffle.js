@@ -1,11 +1,8 @@
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
     name: "shuffle",
     description: "Shuffle song in queue!",
-    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
-
     run: async (interaction, client) => {
         await interaction.deferReply({ ephemeral: false });
         const msg = await interaction.editReply(`**Loading please wait...**`);
@@ -22,6 +19,5 @@ module.exports = {
             .setColor('#000001');
         
         msg.edit({ content: " ", embeds: [shuffle] });
-            console.log(chalk.magenta(`[SLASHCOMMAND] Shuffle used by ${interaction.user.tag} from ${interaction.guild.name}`));
     }
 }

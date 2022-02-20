@@ -1,20 +1,18 @@
 const chalk = require('chalk');
-const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
 
 module.exports = {
+    ownerOnly: true,
     config: {
         name: "clearslash",
         description: "Clear slash command in the server!",
-        usage: "",
         category: "utilities",
         accessableby: "Owner",
         aliases: ["cdps"]
     },
     run: async (client, message, args) => {
-    if(message.author.id != client.owner) return message.channel.send("You're not the client owner!")
-    console.log(chalk.red(`[COMMAND] ClearSlash used by ${message.author.tag} from ${message.guild.name}`));
 
     const rest = new REST({ version: "9" }).setToken(client.token);
 

@@ -1,5 +1,4 @@
 const delay = require('delay');
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 const { vibrate } = require('../../settings/filter');
 
@@ -25,6 +24,5 @@ module.exports = {
 
         await delay(5000);
         msg.edit({ content: " ", embeds: [vibrated] });
-            console.log(chalk.magenta(`[SLASHCOMMAND] Vibrate used by ${interaction.user.tag} from ${interaction.guild.name}`));
    }
 };

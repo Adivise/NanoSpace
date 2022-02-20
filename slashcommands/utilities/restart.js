@@ -1,10 +1,8 @@
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     name: "restart",
     description: "Restarts the bot.",
-    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
     ownerOnly: true,
 
     run: async (interaction, client) => {
@@ -14,7 +12,6 @@ module.exports = {
         .setColor("#000001");
 
     await interaction.editReply({ embeds: [restart] });
-        console.log(chalk.red(`[CLIENT] Restarting...`));
             
     process.exit();
     }

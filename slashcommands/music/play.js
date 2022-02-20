@@ -1,11 +1,9 @@
 const { convertTime } = require("../../structures/convert.js")
-const chalk = require('chalk');
 const { MessageEmbed, Permissions } = require("discord.js");
 
 module.exports = { 
     name: "play",
     description: "Play a song from any types.",
-    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
     options: [
         {
             name: "input",
@@ -16,7 +14,6 @@ module.exports = {
     ],
 
     run: async (interaction, client) => {
-        console.log(chalk.magenta(`[SLASHCOMMAND] Play used by ${interaction.user.tag} from ${interaction.guild.name}`))
         await interaction.deferReply({ ephemeral: false });
         const value = interaction.options.get("input").value;
         const msg = await interaction.editReply(`**Searching \`${value}\` please wait...**`)

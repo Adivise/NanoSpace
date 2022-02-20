@@ -1,13 +1,9 @@
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
     name: "autoplay",
     description: "Auto play music in voice channel.",
-    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
-
     run: async (interaction, client, user) => {
-        console.log(chalk.magenta(`[SLASHCOMMAND] Autoplay used by ${interaction.user.tag} from ${interaction.guild.name}`));
         await interaction.deferReply({ ephemeral: false });
         const msg = await interaction.editReply(`**Loading please wait...**`);
 

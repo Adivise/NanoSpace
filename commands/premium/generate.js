@@ -1,30 +1,32 @@
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 const Redeem = require('../../settings/models/Redeem.js');
 const moment = require('moment')
 var voucher_codes = require('voucher-code-generator')
 
 module.exports = { 
+    ownerOnly: true,
     config: {
         name: "generate",
         aliases: ["gencode", "genpremiumcode", "genpremium"],
-        usage: "generate <plan> <amount>",
+        usage: "<plan> <amount>",
         description: "Generate a premium code",
         accessableby: "Owner",
         category: "premium",
     },
-    run: async (client, message, args) => {
-    if(message.author.id != client.owner) return message.channel.send("You're not the client owner!")
-    console.log(chalk.magenta(`[COMMAND] Generate used by ${message.author.tag} from ${message.guild.name}`));
+    run: async (client, message, args, user, language, prefix) => {
     let codes = [];
 
     const plan = args[0];
     const plans = ['daily', 'weekly', 'monthly', 'yearly'];
 
-    if (!plan) return message.channel.send({ content: `**> Please provide plan**` })
+    if (!plan) return message.channel.send({ content: `${client.i18n.get(language, "premium", "provide_plan", {
+        plans: plans.join(', ')
+    })}` })
 
     if (!plans.includes(args[0]))
-      return message.channel.send({ content:  `**Invalid Plan, available plans:** ${plans.join(', ')}`})
+      return message.channel.send({ content:  `${client.i18n.get(language, "premium", "plan_invalid", {
+        plans: plans.join(', ')
+      })}` })
 
     let time;
     if (plan === 'daily') time = Date.now() + 86400000;
@@ -55,10 +57,17 @@ module.exports = {
 
     const embed = new MessageEmbed()
       .setColor('#000001')
-      .setAuthor({ name: `Generate Code`, iconURL: client.user.avatarURL() })
-      .setDescription(`• *Generated* [\`+${codes.length}\`]\n\`\`\`${codes.join('\n')}\`\`\`\n • *Plan*: \`${plan}\`\n • *Expires at*: \`${moment(time).format('dddd, MMMM Do YYYY')}\``)
+      .setAuthor({ name: `${client.i18n.get(language, "premium", "gen_author")}`, iconURL: client.user.avatarURL() }) //${lang.description.replace("{codes_length}", codes.length).replace("{codes}", codes.join('\n')).replace("{plan}", plan).replace("{expires}", moment(time).format('dddd, MMMM Do YYYY'))}
+      .setDescription(`${client.i18n.get(language, "premium", "gen_desc", {
+        codes_length: codes.length,
+        codes: codes.join('\n'),
+        plan: plan,
+        expires: moment(time).format('dddd, MMMM Do YYYY')
+      })}`)
       .setTimestamp()
-      .setFooter({ text: `Type: ${client.prefix}redeem <code> to redeem!`, iconURL: message.author.displayAvatarURL() })
+      .setFooter({ text: `${client.i18n.get(language, "premium", "gen_footer", {
+        prefix: prefix
+      })}`, iconURL: message.author.displayAvatarURL() })
 
       message.channel.send({ embeds: [embed] })
   }

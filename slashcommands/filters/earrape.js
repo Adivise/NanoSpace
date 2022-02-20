@@ -1,7 +1,6 @@
 const delay = require('delay');
 const { earrape } = require('../../settings/volume.js')
 const { reset } = require('../../settings/filter.js')
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
@@ -27,6 +26,5 @@ module.exports = {
 
         await delay(3000);
         msg.edit({ content: " ", embeds: [earrapped] });
-                console.log(chalk.magenta(`[SLASHCOMMAND] Earrape used by ${interaction.user.tag} from ${interaction.guild.name}`));
     }
 };

@@ -1,11 +1,9 @@
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 const formatDuration = require('../../structures/formatduration.js')
 
 module.exports = { 
     name: "seek",
     description: "Seek timestamp in the song!",
-    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
     options: [
         {
             name: "seconds",
@@ -33,6 +31,5 @@ module.exports = {
             .setColor('#000001');
 
         msg.edit({ content: ' ', embeds: [seeked] });
-            console.log(chalk.magenta(`[SLASHCOMMAND] Seek used by ${interaction.user.tag} from ${interaction.guild.name}`));
     }
 }

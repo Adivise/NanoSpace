@@ -1,7 +1,5 @@
 const delay = require('delay');
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const { vaporwave } = require('../../settings/filter');
 
 module.exports = { 
     config: {
@@ -9,25 +7,43 @@ module.exports = {
         description: "Turning on vaporwave filter",
         category: "filters",
         accessableby: "Member",
-        aliases: []
     },
 
-    run: async (client, message) => {
-        const msg = await message.channel.send("Turning on **Vaporwave**. This may take a few seconds...");
+    run: async (client, message, args, language) => {
+        const msg = await message.channel.send(`${client.i18n.get(language, "filters", "filter_loading", {
+            name: client.commands.get('vaporwave').config.name
+            })}`);
 
-        const player = client.manager.get(message.guild.id);
-        if(!player) return msg.edit("No song/s currently playing in this guild.");
-        const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
+            const player = client.manager.get(message.guild.id);
+            if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
+            const { channel } = message.member.voice;
+            if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
-        await player.setFilter('filters', vaporwave);
+            const data = {
+                op: 'filters',
+                guildId: message.guild.id,
+                equalizer: [
+                    { band: 1, gain: 0.3 },
+                    { band: 0, gain: 0.3 },
+                ],
+                timescale: { 
+                    pitch: 0.5 
+                },
+                tremolo: { 
+                    depth: 0.3, 
+                    frequency: 14 
+                },
+            }
+
+            await player.node.send(data);
 
         const vaporwaved = new MessageEmbed()
-            .setAuthor({ name: "Turned on: Vaporwave", iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif'})
+            .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
+                name: client.commands.get('vaporwave').config.name
+            })}`)
             .setColor('#000001');
 
         await delay(5000);
         msg.edit({ content: " ", embeds: [vaporwaved] });
-            console.log(chalk.magenta(`[COMMAND] Vaporwave used by ${message.author.tag} from ${message.guild.name}`));
    }
 };

@@ -1,4 +1,3 @@
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 const Playlist = require('../../settings/models/Playlist.js');
 const formatDuration = require('../../structures/formatduration');
@@ -7,23 +6,23 @@ const { NormalPage } = require('../../structures/PageQueue.js');
 module.exports = { 
     config: {
         name: "detail",
-        aliases: [],
-        usage: "detail <playlist name> <page number>",
+        usage: "<playlist name> <page number>",
         description: "Detail a playlist",
         accessableby: "Member",
         category: "playlist",
     },
-    run: async (client, message, args, user) => {
-        console.log(chalk.magenta(`[COMMAND] Detail used by ${message.author.tag} from ${message.guild.name}`));
+    run: async (client, message, args, user, language, prefix) => {
 
         try {
             if (user && user.isPremium) {
-            if(!args[0]) return message.channel.send(`**Please specify a playlist!**`);
+            if(!args[0]) return message.channel.send(`${client.i18n.get(language, "playlist", "detail_arg", {
+                prefix: prefix
+                })}`);
 
         const Plist = args.join(" ").replace(/_/g, ' ');
         const playlist = await Playlist.findOne({ name: Plist });
-        if(!playlist) return message.channel.send(`**Playlist \`${Plist}\` not found!**`);
-        if(playlist.owner !== message.author.id) return message.channel.send(`**This is not your playlist!**`);
+        if(!playlist) return message.channel.send(`${client.i18n.get(language, "playlist", "detail_notfound")}`);
+        if(playlist.owner !== message.author.id) return message.channel.send(`${client.i18n.get(language, "playlist", "detail_owner")}`);
 
         let pagesNum = Math.ceil(playlist.tracks.length / 10);
 		if(pagesNum === 0) pagesNum = 1;
@@ -32,7 +31,7 @@ module.exports = {
         for(let i = 0; i < playlist.tracks.length; i++) {
             const playlists = playlist.tracks[i];
             playlistStrings.push(
-                `**${i + 1}. [${playlists.title}](${playlists.uri})** | Author: ${playlists.author} • \`[${formatDuration(playlists.duration)}]\`
+                `${i + 1}. **[${playlists.title}](${playlists.uri})** | Author: ${playlists.author} • \`[${formatDuration(playlists.duration)}]\`
                 `);
         }
 
@@ -41,11 +40,18 @@ module.exports = {
         const pages = [];
         for (let i = 0; i < pagesNum; i++) {
             const str = playlistStrings.slice(i * 10, i * 10 + 10).join('');
-            const embed = new MessageEmbed()
-                .setAuthor({ name: `${playlist.name}'s Playlists`, iconURL: message.author.displayAvatarURL() })
+            const embed = new MessageEmbed() //${playlist.name}'s Playlists
+                .setAuthor({ name: `${client.i18n.get(language, "playlist", "detail_embed_title", {
+                    name: playlist.name
+                })}`, iconURL: message.author.displayAvatarURL() })
                 .setDescription(`${str == '' ? '  Nothing' : '\n' + str}`)
-                .setColor('#000001')
-                .setFooter({ text: `Page • ${i + 1}/${pagesNum} | ${playlist.tracks.length} • Songs | ${totalDuration} • Total duration` });
+                .setColor('#000001') //Page • ${i + 1}/${pagesNum} | ${playlist.tracks.length} • Songs | ${totalDuration} • Total duration
+                .setFooter({ text: `${client.i18n.get(language, "playlist", "detail_embed_footer", {
+                    page: i + 1,
+                    pages: pagesNum,
+                    songs: playlist.tracks.length,
+                    duration: totalDuration
+                })}` });
 
             pages.push(embed);
         }
@@ -54,15 +60,17 @@ module.exports = {
 			else return message.channel.send({ embeds: [pages[0]] });
 		}
 		else {
-			if (isNaN(args[1])) return message.channel.send('Page must be a number.');
-			if (args[1] > pagesNum) return message.channel.send(`There are only ${pagesNum} pages available.`);
+			if (isNaN(args[1])) return message.channel.send(`${client.i18n.get(language, "playlist", "detail_notnumber")}`);
+			if (args[1] > pagesNum) return message.channel.send(`${client.i18n.get(language, "playlist", "detail_page_notfound", {
+                page: pagesNum
+            })}`);
 			const pageNum = args[1] == 0 ? 1 : args[1] - 1;
 			return message.channel.send({ embeds: [pages[pageNum]] });
         }
     } else {
         const Premiumed = new MessageEmbed()
-            .setAuthor({ name: "Only Premium!", iconURL: client.user.displayAvatarURL() })
-            .setDescription(`*You need to be a premium to use this command.*`)
+            .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premiun_author")}`, iconURL: client.user.displayAvatarURL() })
+            .setDescription(`${client.i18n.get(language, "nopremium", "premiun_desc")}`)
             .setColor("#000001")
             .setTimestamp()
 
@@ -70,7 +78,7 @@ module.exports = {
       }
     } catch (err) {
         console.log(err)
-        message.channel.send({ content: "Something went wrong, try again later." })
+        message.channel.send({ content: `${client.i18n.get(language, "nopremium", "premium_error")}` })
         }
     }
 };

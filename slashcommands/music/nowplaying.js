@@ -1,16 +1,13 @@
 const formatDuration = require("../../structures/formatduration.js");
 const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
 const ytsr = require("youtube-sr").default;
-const chalk = require("chalk");
 
 module.exports = { 
     name: "nowplaying",
     description: "Displays what the current song every 5 seconds.",
-    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
 
     run: async (interaction, client) => {
         await interaction.deferReply({ ephemeral: false });
-        console.log(chalk.magenta(`[COMMAND] NowPlaying used by ${interaction.user.tag} from ${interaction.guild.name}`));
         const realtime = client.config.NP_REALTIME;
         const msg = await interaction.editReply("Loading please wait...");
         const player = client.manager.get(interaction.guild.id);

@@ -1,27 +1,28 @@
-const chalk = require('chalk');
 const { MessageEmbed, Permissions } = require('discord.js');
 const Playlist = require('../../settings/models/Playlist.js');
+const { convertTime } = require('../../structures/convert.js');
 
 module.exports = { 
     config: {
         name: "import",
         aliases: ["load"],
-		usage: "import <playlist name>",
+		usage: "<playlist name>",
         description: "Import a playlist to the queue",
         accessableby: "Member",
         category: "playlist",
     },
-    run: async (client, message, args, user) => {
-		console.log(chalk.magenta(`[COMMAND] Import used by ${message.author.tag} from ${message.guild.name}`));
+    run: async (client, message, args, user, language, prefix) => {
 
 		const { channel } = message.member.voice;
-		if (!channel) return message.channel.send("You need to be in a voice channel to use command.");
-		if (!channel.permissionsFor(message.guild.me).has(Permissions.FLAGS.CONNECT)) return message.channel.send("I don't have permission to join your voice channel.");
-		if (!channel.permissionsFor(message.guild.me).has(Permissions.FLAGS.SPEAK)) return message.channel.send("I don't have permission to speak in your voice channel.");
+		if (!channel) return message.channel.send(`${client.i18n.get(language, "playlist", "import_voice")}`);
+		if (!channel.permissionsFor(message.guild.me).has(Permissions.FLAGS.CONNECT)) return message.channel.send(`${client.i18n.get(language, "playlist", "import_join")}`);
+		if (!channel.permissionsFor(message.guild.me).has(Permissions.FLAGS.SPEAK)) return message.channel.send(`${client.i18n.get(language, "playlist", "import_speak")}`);
 
 		try {
 			if (user && user.isPremium) {
-			if(!args[0]) return message.channel.send(`**Please specify a playlist name!**`);
+			if(!args[0]) return message.channel.send(`${client.i18n.get(language, "playlist", "import_arg", {
+				prefix: prefix
+				})}`);
 
 		let player = client.manager.get(message.guild.id);
 		if(!player) { player = await client.manager.create({
@@ -41,13 +42,20 @@ module.exports = {
 		let SongLoad = 0;
 
 		const playlist = await Playlist.findOne({ name: Plist });
-		if(!playlist) return message.channel.send(`**Playlist \`${Plist}\` not found!**`);
-		if(playlist.owner !== message.author.id) return message.channel.send(`**You are not the owner of \`${Plist}\`**`);
+		if(!playlist) return message.channel.send(`${client.i18n.get(language, "playlist", "import_notfound")}`);
+		if(playlist.owner !== message.author.id) return message.channel.send(`${client.i18n.get(language, "playlist", "import_owner")}`);
 
-		const msg = await message.channel.send(`Importing a playlist to the queue...`);
+		const totalDuration = convertTime(playlist.tracks.reduce((acc, cur) => acc + cur.duration, 0));
 
-		const embed = new MessageEmbed()
-			.setDescription(`**Imported • \`${Plist}\`** (${playlist.tracks.length} tracks) • ${message.author}`)
+		const msg = await message.channel.send(`${client.i18n.get(language, "playlist", "import_loading")}`);
+
+		const embed = new MessageEmbed() // **Imported • \`${Plist}\`** (${playlist.tracks.length} tracks) • ${message.author}
+			.setDescription(`${client.i18n.get(language, "playlist", "import_imported", {
+				name: Plist,
+				tracks: playlist.tracks.length,
+				duration: totalDuration,
+				user: message.author
+			})}`)
 			.setColor('#000001')
 
 		msg.edit({ content: " ", embeds: [embed] });
@@ -70,11 +78,11 @@ module.exports = {
 					SongLoad++;
 				}
 				else if(res.loadType == "LOAD_FAILED") {
-					return message.channel.send("Error loading playlist.");
+					return message.channel.send(`${client.i18n.get(language, "playlist", "import_fail")}`);
 				}
 			}
 			else {
-				return message.channel.send("Error loading playlist.");
+				return message.channel.send(`${client.i18n.get(language, "playlist", "import_match")}`);
 			}
 
 			if(SongLoad == playlist.tracks.length) {
@@ -82,18 +90,18 @@ module.exports = {
 				if (!player.playing) { player.play(); }
 			}
 		}
-		} else {
-			const Premiumed = new MessageEmbed()
-				.setAuthor({ name: "Only Premium!", iconURL: client.user.displayAvatarURL() })
-				.setDescription(`*You need to be a premium to use this command.*`)
-				.setColor("#000001")
-				.setTimestamp()
+    } else {
+        const Premiumed = new MessageEmbed()
+            .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premiun_author")}`, iconURL: client.user.displayAvatarURL() })
+            .setDescription(`${client.i18n.get(language, "nopremium", "premiun_desc")}`)
+            .setColor("#000001")
+            .setTimestamp()
 
-			return message.channel.send({ embeds: [Premiumed] });
-	  	}
-	    } catch (err) {
-		  	console.log(err)
-		 	message.channel.send({ content: "Something went wrong, try again later." })
-	    }
-	}
+        return message.channel.send({ embeds: [Premiumed] });
+      }
+    } catch (err) {
+        console.log(err)
+        message.channel.send({ content: `${client.i18n.get(language, "nopremium", "premium_error")}` })
+        }
+    }
 };

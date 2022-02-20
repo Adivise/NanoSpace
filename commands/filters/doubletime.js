@@ -1,7 +1,5 @@
 const delay = require('delay');
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const { doubletime } = require('../../settings/filter')
 
 module.exports = { 
     config: {
@@ -9,25 +7,35 @@ module.exports = {
         description: "Turning on doubletime filter",
         category: "filters",
         accessableby: "Member",
-        aliases: []
     },
 
-    run: async (client, message) => {
-        const msg = await message.channel.send("Turning on **DoubleTime**. This may take a few seconds...");
+    run: async (client, message, args, language) => {
+        const msg = await message.channel.send(`${client.i18n.get(language, "filters", "filter_loading", {
+            name: client.commands.get('doubletime').config.name
+            })}`);
 
-        const player = client.manager.get(message.guild.id);
-        if(!player) return msg.edit("No song/s currently playing in this guild.");
-        const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
-
-        await player.setFilter('filters', doubletime);
+            const player = client.manager.get(message.guild.id);
+            if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
+            const { channel } = message.member.voice;
+            if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+    
+            const data = {
+                op: 'filters',
+                guildId: message.guild.id,
+                timescale: {
+                    speed: 1.165,
+                },
+            }
+    
+            await player.node.send(data);
 
         const embed = new MessageEmbed()
-            .setAuthor({ name: "Turned on: DoubleTime", iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif'})
+            .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
+                name: client.commands.get('doubletime').config.name
+            })}`)
             .setColor('#000001');
 
         await delay(5000);
         msg.edit({ content: " ", embeds: [embed] });
-            console.log(chalk.magenta(`[COMMAND] DoubleTime used by ${message.author.tag} from ${message.guild.name}`));
    }
 };

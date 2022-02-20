@@ -1,10 +1,8 @@
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
     name: "skipto",
     description: "Skips to a certain song in the queue.",
-    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
     options: [
         {
             name: "position",
@@ -35,6 +33,5 @@ module.exports = {
             .setColor('#000001');
 
         msg.edit({ content: " ", embeds: [skipto] });
-            console.log(chalk.magenta(`[SLASHCOMMAND] Skipto used by ${interaction.user.tag} from ${interaction.guild.name}`));
     }
 }

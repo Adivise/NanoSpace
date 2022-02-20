@@ -1,10 +1,8 @@
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
     name: "previous",
     description: "Previous a song",
-    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
 
     run: async (interaction, client) => {
         await interaction.deferReply({ ephemeral: false });
@@ -25,6 +23,5 @@ module.exports = {
             .setColor('#000001');
 
         msg.edit({ content: " ", embeds: [embed] });
-            console.log(chalk.magenta(`[COMMAND] Previous used by ${interaction.user.tag} from ${interaction.guild.name}`));
     }
 }

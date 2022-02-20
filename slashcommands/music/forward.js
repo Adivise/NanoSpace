@@ -1,4 +1,3 @@
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 const formatDuration = require('../../structures/formatduration.js')
 
@@ -7,7 +6,6 @@ const fastForwardNum = 10;
 module.exports = { 
     name: "forward",
     description: "Forward timestamp in the song!",
-    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
     options: [
         {
             name: "seconds",
@@ -15,7 +13,6 @@ module.exports = {
             type: 4,
         }
     ],
-
     run: async (interaction, client) => {
         await interaction.deferReply({ ephemeral: false });
         const value = interaction.options.getInteger("seconds");
@@ -38,8 +35,6 @@ module.exports = {
                 .setColor('#000001');
 
                 msg.edit({ content: " ", embeds: [forward1] });
-                    console.log(chalk.magenta(`[SLASHCOMMAND] Forward used by ${interaction.user.tag} from ${interaction.guild.name}`));
-
 			} else { 
                 return msg.edit('Cannot forward beyond the song\'s duration.'); 
             }
@@ -57,8 +52,6 @@ module.exports = {
                 .setColor('#000001');
 
                 msg.edit({ content: " ", embeds: [forward2] });
-                    console.log(chalk.magenta(`[SLASHCOMMAND] Forward used by ${interaction.user.tag} from ${interaction.guild.name}`));
-
 			} else {
 				return msg.edit('Cannot forward beyond the song\'s duration.');
 			}

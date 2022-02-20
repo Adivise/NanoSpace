@@ -1,10 +1,8 @@
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
     name: "volume",
     description: "Adjusts the volume of the bot.",
-    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
     options: [
         {
             name: "amount",
@@ -32,6 +30,5 @@ module.exports = {
             .setColor('#000001');
         
         msg.edit({ content: " ", embeds: [changevol] });
-            console.log(chalk.magenta(`[SLASHCOMMAND] Volume used by ${interaction.user.tag} from ${interaction.guild.name}`));
     }
 }

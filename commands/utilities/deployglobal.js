@@ -4,17 +4,15 @@ const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
 
 module.exports = {
+    ownerOnly: true,
     config: {
         name: "deployglobal",
         description: "Deploy global slash command to all server!",
-        usage: "",
         category: "utilities",
         accessableby: "Owner",
         aliases: ["dpsg"]
     },
     run: async (client, message, args) => {
-    if(message.author.id != client.owner) return message.channel.send("You're not the client owner!")
-    console.log(chalk.red(`[COMMAND] Deployglobal used by ${message.author.tag} from ${message.guild.name}`));
 
     const rest = new REST({ version: "9" }).setToken(client.token);
 

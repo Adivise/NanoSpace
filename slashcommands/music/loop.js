@@ -1,10 +1,8 @@
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     name: "loop",
     description: "Loop song in queue type all/current!",
-    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
     options: [
         {
             name: "type",
@@ -32,7 +30,6 @@ module.exports = {
 					.setColor('#000001');
 
 					msg.edit({ content: " ", embeds: [looped] });
-						console.log(chalk.magenta(`[SLASHCOMMAND] Loop used by ${interaction.user.tag} from ${interaction.guild.name}`));
 			}
 			else {
 				player.setTrackRepeat(false);
@@ -42,7 +39,6 @@ module.exports = {
 					.setColor('#000001');
 
 					msg.edit({ content: " ", embeds: [unlooped] });
-						console.log(chalk.magenta(`[SLASHCOMMAND] Unloop used by ${interaction.user.tag} from ${interaction.guild.name}`));
 			}
 		}
 		else if (value == 'all') {
@@ -54,7 +50,6 @@ module.exports = {
 					.setColor('#000001');
 
 					msg.edit({ content: " ", embeds: [unloopall] });
-						console.log(chalk.magenta(`[SLASHCOMMAND] Unloopall used by ${interaction.user.tag} from ${interaction.guild.name}`));
 			}
 			else {
 				player.setQueueRepeat(true);
@@ -64,7 +59,6 @@ module.exports = {
 					.setColor('#000001');
 
 					msg.edit({ content: " ", embeds: [loopall] });
-						console.log(chalk.magenta(`[SLASHCOMMAND] Loopall used by ${interaction.user.tag} from ${interaction.guild.name}`));
 			}
 		}
 	}

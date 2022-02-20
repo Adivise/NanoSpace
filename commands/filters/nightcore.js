@@ -1,7 +1,5 @@
 const delay = require('delay');
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
-const { nightcore } = require('../../settings/filter')
 
 module.exports = { 
     config: {
@@ -9,25 +7,37 @@ module.exports = {
         description: "Turning on nightcore filter",
         category: "filters",
         accessableby: "Member",
-        aliases: []
     },
 
-    run: async (client, message) => {
-        const msg = await message.channel.send("Turning on **Nightcore**. This may take a few seconds...");
+    run: async (client, message, args, language) => {
+        const msg = await message.channel.send(`${client.i18n.get(language, "filters", "filter_loading", {
+            name: client.commands.get('nightcore').config.name
+            })}`);
 
-        const player = client.manager.get(message.guild.id);
-        if(!player) return msg.edit("No song/s currently playing in this guild.");
-        const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
-
-        await player.setFilter('filters', nightcore);
+            const player = client.manager.get(message.guild.id);
+            if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
+            const { channel } = message.member.voice;
+            if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+    
+            const data = {
+                op: 'filters',
+                guildId: message.guild.id,
+                timescale: {
+                    speed: 1.165,
+                    pitch: 1.125,
+                    rate: 1.05
+                },
+            }
+    
+            await player.node.send(data);
 
         const nightcored = new MessageEmbed()
-            .setAuthor({ name: "Turned on: Nightcore", iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif'})
+            .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
+                name: client.commands.get('nightcore').config.name
+            })}`)
             .setColor('#000001');
 
         await delay(5000);
         msg.edit({ content: " ", embeds: [nightcored] });
-            console.log(chalk.magenta(`[COMMAND] Nightcore used by ${message.author.tag} from ${message.guild.name}`));
    }
 };

@@ -1,5 +1,4 @@
 const delay = require('delay');
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
@@ -35,6 +34,5 @@ module.exports = {
 			.setColor('#000001');
 		await delay(5000);
 		msg.edit({ content: " ", embeds: [embed] });
-			console.log(chalk.magenta(`[SLASHCOMMAND] Speed used by ${interaction.user.tag} from ${interaction.guild.name}`));
 	}
 };

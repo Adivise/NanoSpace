@@ -1,4 +1,3 @@
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 const { reset } = require('../../settings/filter')
 
@@ -59,6 +58,5 @@ module.exports = {
 
 		await delay(5000);
         msg.edit({ content: " ", embeds: [embed] });
-            console.log(chalk.magenta(`[SLASHCOMMAND] Equalizer used by ${interaction.user.tag} from ${interaction.guild.name}`));
 	}
 };

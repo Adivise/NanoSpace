@@ -1,10 +1,8 @@
-const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
     name: "join",
     description: "Makes the bot join the voice channel.",
-    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
 
     run: async (interaction, client) => {
         await interaction.deferReply({ ephemeral: false });
@@ -27,6 +25,5 @@ module.exports = {
             .setColor('#000001')
 
         msg.edit({ content: " ", embeds: [embed] })
-        console.log(chalk.magenta(`[SLASHCOMMAND] Join used by ${interaction.user.tag} from ${interaction.guild.name}`));
     }
 }
