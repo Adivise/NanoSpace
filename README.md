@@ -10,7 +10,9 @@
 ## 📑 Short Feature
 - [x] Music
 - [x] Playlists System
+- [x] Premium System
 - [x] Custom Prefix
+- [x] Multi Language (70%)
 - [x] SlashCommand
 - [x] Custom Filters
 - [x] Easy to use
@@ -44,7 +46,7 @@
 
 ## 🛑 Super Requirements 
 
-Java 11-13 **[Download JDK13](http://www.mediafire.com/file/m6gk7aoq96db8g0/file)** (i use this version)
+Java 11-13 **[Download JDK13](http://www.mediafire.com/file/m6gk7aoq96db8g0/file)** (i use this version) for LAVALINK!
 
 </p>
 </details>
@@ -72,12 +74,13 @@ TOKEN=REPLACE_HERE
 PREFIX=#
 NP_REALTIME=true
 LEAVE_TIMEOUT=120000
+LANGUAGE=en
 
 # Devloper
 OWNER_ID=REPLACE_HERE
 
 # Database
-MONGO_URI=mongodb://127.0.0.1:27017/playlist
+MONGO_URI=mongodb://127.0.0.1:27017/nanospace
 LIMIT_TRACK=100
 LIMIT_PLAYLIST=10
 
@@ -102,6 +105,11 @@ module.exports = {
 
     NP_REALTIME: process.env.NP_REALTIME || "BOOLEAN", // "true" = realtime, "false" = not realtime :3 // WARNING: on set to "true" = laggy
     LEAVE_TIMEOUT: parseInt(process.env.LEAVE_TIMEOUT || "120000"), // leave timeout default "120000" = 2 minutes // 1000 = 1 seconds
+						  
+    LANGUAGE: {
+      defaultLocale: process.env.LANGUAGE || "en", // "en" = default language
+      directory: resolve("languages"), // <= location of language
+    },
 
     DEV_ID: [], // if you want to use command bot only, you can put your id here // example: ["515490955801919488", "543595284345782296"]
 
@@ -180,6 +188,7 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 - Tremolo (#tremolo)
 - Vibrate (#vibrate)
 - Vibrato (#vibrato)
+- Daycore (#daycore)
 	
 📦 **Playlist Commands!**
 - Create (#create [link] [name]) <= Work all link? use same name to add! went your have!

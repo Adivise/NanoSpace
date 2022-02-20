@@ -2,12 +2,12 @@
 
 # CONTENT PROGRESS
 
-[x] English Languages (91%)
-[x] Message Intent (95%)
-[x] Events (100%)
-[ ] Message Slash (0%)
-[ ] Thailand Language (0%)
-[ ] Structures (0%)
+- [x] English Languages (91%)
+- [x] Message Intent (95%)
+- [x] Events (100%)
+- [ ] Message Slash (0%)
+- [ ] Thailand Language (0%)
+- [ ] Structures (0%)
 
 # **WARNING** (Don't do this!)
 
