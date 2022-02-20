@@ -1,0 +1,8 @@
+# Hindi Not Finished
+##### voiceStateUpdate #####
+
+# On nobody in voice!
+wait_leave: Disconnecting <#%{voice}> in %{timeout} minutes because I was left alone.
+
+# On bot waiting to disconnected!
+timeout_leave: Disconnect from <#%{voice}> because I was left alone.

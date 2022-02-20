@@ -1,6 +1,6 @@
 ##### All Filter command!
 filter_loading: "Turning on **%{name}**. This may take a few seconds..."
-filter_on: "`🔩` | *Turning on:* `%{name}`"
+filter_on: "`🔩` | *Turned on:* `%{name}`"
 filter_number: "Please enter a number."
 
 filter_greater: "Number must be greater than 0."
@@ -34,7 +34,7 @@ rate_on: "`🔩` | *Rate set to:* `%{amount}x`"
 
 # Reset command!
 reset_loading: "Turning off **filter** This may take a few seconds..."
-reset_on: "`🔩` | *Turning off:* `filter`"
+reset_on: "`🔩` | *Turned off:* `filter`"
 
 # Speed command!
 speed_loading: "Setting **Speed** to **%{amount}x**. This may take a few seconds..."
