@@ -1,8 +1,7 @@
-# Hindi Not Finished
 ##### voiceStateUpdate #####
 
 # On nobody in voice!
-wait_leave: Disconnecting <#%{voice}> in %{timeout} minutes because I was left alone.
+wait_leave: <#%{voice}> से %{timeout} मिनट में डिस्कनेक्ट हो रहा है क्योंकि मैं अकेला रह गया हूं।
 
 # On bot waiting to disconnected!
-timeout_leave: Disconnect from <#%{voice}> because I was left alone.
+timeout_leave: मैं <#%{voice}> से डिस्कनेक्ट हो गया क्योंकि मैं अकेला रह गया था।
