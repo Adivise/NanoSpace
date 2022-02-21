@@ -8,7 +8,7 @@ module.exports = {
         accessableby: "Member",
         category: "music",
     },
-    run: async (client, message, args, language) => {
+    run: async (client, message, args, user, language, prefix) => {
         const msg = await message.channel.send(`${client.i18n.get(language, "music", "resume_loading")}`);
 
 		const player = client.manager.get(message.guild.id);

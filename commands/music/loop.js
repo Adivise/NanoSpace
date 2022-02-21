@@ -9,7 +9,7 @@ module.exports = {
         category: "music",
         usage: "<current, all>"
     },
-    run: async (client, message, args, language) => {
+    run: async (client, message, args, user, language, prefix) => {
 		const msg = await message.channel.send(`${client.i18n.get(language, "music", "loop_loading")}`);
 
 		const player = client.manager.get(message.guild.id);

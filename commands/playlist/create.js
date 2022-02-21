@@ -149,8 +149,8 @@ module.exports = {
         }).catch(err => console.log(err));
     } else {
         const Premiumed = new MessageEmbed()
-            .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premiun_author")}`, iconURL: client.user.displayAvatarURL() })
-            .setDescription(`${client.i18n.get(language, "nopremium", "premiun_desc")}`)
+            .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premium_author")}`, iconURL: client.user.displayAvatarURL() })
+            .setDescription(`${client.i18n.get(language, "nopremium", "premium_desc")}`)
             .setColor("#000001")
             .setTimestamp()
 

@@ -10,7 +10,7 @@ module.exports = {
         accessableby: "Owner",
         aliases: ["stopbot"]
     },
-    run: async (client, message, args, language) => {
+    run: async (client, message, args, user, language, prefix) => {
 
     const restart = new MessageEmbed()
         .setDescription(`${client.i18n.get(language, "utilities", "restart_msg")}`)

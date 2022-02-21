@@ -10,7 +10,7 @@ module.exports = {
         accessableby: "Member",
         aliases: ["p", "pplay"]
     },
-    run: async (client, message, args, language) => {
+    run: async (client, message, args, user, language, prefix) => {
         const msg = await message.channel.send(`${client.i18n.get(language, "music", "play_loading")}`);
         
         const { channel } = message.member.voice;

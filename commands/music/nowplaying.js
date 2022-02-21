@@ -11,7 +11,7 @@ module.exports = {
         category: "music",
     },
 
-    run: async (client, message, args, language) => {
+    run: async (client, message, args, user, language, prefix) => {
         const realtime = client.config.NP_REALTIME;
         const msg = await message.channel.send(`${client.i18n.get(language, "music", "np_loading")}`);
         const player = client.manager.get(message.guild.id);
