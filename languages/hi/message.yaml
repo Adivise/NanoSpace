@@ -1,16 +1,15 @@
 ##### MessageCraete Event #####
-# Hindi Not Finished
 # On @mention bot get ping back!
-my_prefix: "`🤖` | *My prefix is:* `%{prefix}`"
+my_prefix: "`🤖` | *मेरा Prefix `%{prefix}` है*"
 
 # On put id to settings/config.js in DEV_ID
-dev_only: The bot is under maintenance. (Please come back again later)
+dev_only: बॉट मेंटेनेंस चल रहा है। कृपया बाद में फिर से आएं।
 
 # No permission to use command (this for bot!)
-no_perms: I don't have perms to execute command!
+no_perms: मेरे पास कमांड का उपयोग करने के लिए Permission नहीं है!
 
 # Bot getting error something!
-error: Something went wrong.
+error: बॉट के साथ कुछ समस्या है। बाद में फिर से कोशिश करें।
 
 # You are not the client owner of this bot!
-owner_only: You're not the client owner!
+owner_only: आप बॉट के मालिक नहीं हैं!
