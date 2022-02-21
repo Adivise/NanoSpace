@@ -7,7 +7,7 @@ module.exports = {
         accessableby: "Member",
         category: "music"
     },
-    run: async (client, message, args, user, language) => {
+    run: async (client, message, args, user, language, prefix) => {
         const msg = await message.channel.send(`${client.i18n.get(language, "music", "autoplay_loading")}`);
   
         const player = client.manager.get(message.guild.id);
@@ -49,16 +49,16 @@ module.exports = {
         }
     } else {
         const Premiumed = new MessageEmbed()
-            .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premiun_author")}`, iconURL: client.user.displayAvatarURL() })
-            .setDescription(`${client.i18n.get(language, "nopremium", "premiun_desc")}`)
+            .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premium_author")}`, iconURL: client.user.displayAvatarURL() })
+            .setDescription(`${client.i18n.get(language, "nopremium", "premium_desc")}`)
             .setColor("#000001")
             .setTimestamp()
 
-        return message.channel.send({ embeds: [Premiumed] });
+        return msg.edit({ embeds: [Premiumed] });
       }
     } catch (err) {
         console.log(err)
-        message.channel.send({ content: `${client.i18n.get(language, "nopremium", "premium_error")}` })
+        msg.edit({ content: `${client.i18n.get(language, "nopremium", "premium_error")}` })
         }
     }
 };

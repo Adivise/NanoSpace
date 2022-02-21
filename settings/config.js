@@ -5,7 +5,7 @@ module.exports = {
     TOKEN: process.env.TOKEN || "YOUR_TOKEN",  // your bot token
     PREFIX: process.env.PREFIX || "#", //<= default is #  // bot prefix
 
-    OWNER_ID: process.env.OWNER_ID || "YOUR_CLIENT_ID", //your client id
+    OWNER_ID: process.env.OWNER_ID || "YOUR_CLIENT_ID", //your owner discord id example: "515490955801919488"
 
     NP_REALTIME: process.env.NP_REALTIME || "BOOLEAN", // "true" = realtime, "false" = not realtime :3 // WARNING: on set to "true" = laggy
     LEAVE_TIMEOUT: parseInt(process.env.LEAVE_TIMEOUT || "120000"), // leave timeout default "120000" = 2 minutes // 1000 = 1 seconds

@@ -12,9 +12,9 @@ module.exports = {
         accessableby: "Member",
         category: "premium",
     },
-    run: async (client, message, args, language) => {
+    run: async (client, message, args, user, language, prefix) => {
         
-        let user = await PremiumUser.findOne({ Id: message.author.id })
+        let member = await PremiumUser.findOne({ Id: message.author.id })
   
         let code = args[0]
         if (!code)
@@ -26,7 +26,7 @@ module.exports = {
             ],
         })
 
-        if (user && user.isPremium) {
+        if (member && member.isPremium) {
             return message.channel.send({
             embeds: [
                 new MessageEmbed()
@@ -45,14 +45,14 @@ module.exports = {
             'dddd, MMMM Do YYYY HH:mm:ss',
         )
   
-        user.isPremium = true
-        user.premium.redeemedBy.push(message.author)
-        user.premium.redeemedAt = Date.now()
-        user.premium.expiresAt = premium.expiresAt
-        user.premium.plan = premium.plan
+        member.isPremium = true
+        member.premium.redeemedBy.push(message.author)
+        member.premium.redeemedAt = Date.now()
+        member.premium.expiresAt = premium.expiresAt
+        member.premium.plan = premium.plan
 
-        user = await user.save({ new: true }).catch(() => {})
-        client.premiums.set(message.author.id, user)
+        member = await member.save({ new: true }).catch(() => {})
+        client.premiums.set(message.author.id, member)
         await premium.deleteOne().catch(() => {})
 
         message.channel.send({

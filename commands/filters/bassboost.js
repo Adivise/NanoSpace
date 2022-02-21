@@ -11,7 +11,7 @@ module.exports = {
         aliases: ["bb"]
     },
 
-    run: async (client, message, args, language) => {
+    run: async (client, message, args, user, language, prefix) => {
         const player = client.manager.get(message.guild.id);
         if(!player) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_player")}`);
         const { channel } = message.member.voice;

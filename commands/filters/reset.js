@@ -9,7 +9,7 @@ module.exports = {
         accessableby: "Member",
     },
 
-    run: async (client, message, args, language) => {
+    run: async (client, message, args, user, language, prefix) => {
         const msg = await message.channel.send(`${client.i18n.get(language, "filters", "reset_loading")}`);
 
 		const player = client.manager.get(message.guild.id);

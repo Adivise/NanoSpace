@@ -10,7 +10,7 @@ module.exports = {
         aliases: ["ear"]
     },
 
-    run: async (client, message, args, language) => {
+    run: async (client, message, args, user, language, prefix) => {
         const msg = await message.channel.send(`${client.i18n.get(language, "filters", "filter_loading", {
             name: client.commands.get('earrape').config.name
             })}`);

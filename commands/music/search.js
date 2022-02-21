@@ -9,7 +9,7 @@ module.exports = {
         category: "music",
         accessableby: "Member",
     },
-    run: async (client, message, args, language) => {
+    run: async (client, message, args, user, language, prefix) => {
         const msg = await message.channel.send(`${client.i18n.get(language, "music", "search_loading")}`);
 
         const { channel } = message.member.voice;
