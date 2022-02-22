@@ -1,25 +1,37 @@
 const delay = require('delay');
 const { MessageEmbed } = require('discord.js');
-const { nightcore } = require('../../settings/filter')
 
 module.exports = { 
     name: "nightcore",
     description: "Turning on nightcore filter",
-    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
-
-    run: async (interaction, client) => {
+    
+    run: async (interaction, client, user, language) => {
         await interaction.deferReply({ ephemeral: false });
-        const msg = await interaction.editReply("Turning on **Nightcore**. This may take a few seconds...");
+        const msg = await interaction.editReply(`${client.i18n.get(language, "filters", "filter_loading", {
+            name: "nightcore"
+            })}`);
 
-        const player = client.manager.get(interaction.guild.id);
-        if(!player) return msg.edit("No song/s currently playing in this guild.");
-        const { channel } = interaction.member.voice;
-        if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
-
-        await player.setFilter('filters', nightcore);
+            const player = client.manager.get(interaction.guild.id);
+            if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
+            const { channel } = interaction.member.voice;
+            if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+    
+            const data = {
+                op: 'filters',
+                guildId: interaction.guild.id,
+                timescale: {
+                    speed: 1.165,
+                    pitch: 1.125,
+                    rate: 1.05
+                },
+            }
+    
+            await player.node.send(data);
 
         const nightcored = new MessageEmbed()
-            .setAuthor({ name: "Turned on: Nightcore", iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif' })
+            .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
+                name: "nightcore"
+            })}`)
             .setColor('#000001');
 
         await delay(5000);

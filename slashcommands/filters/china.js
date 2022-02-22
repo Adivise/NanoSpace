@@ -1,28 +1,40 @@
 const delay = require('delay');
 const { MessageEmbed } = require('discord.js');
-const { china } = require('../../settings/filter');
 
 module.exports = { 
     name: "china",
     description: "Turning on china filter",
-    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
-
-    run: async (interaction, client) => {
+    
+    run: async (interaction, client, user, language) => {
         await interaction.deferReply({ ephemeral: false });
-        const msg = await interaction.editReply("Turning on **China**. This may take a few seconds...");
+        const msg = await interaction.editReply(`${client.i18n.get(language, "filters", "filter_loading", {
+            name: "china"
+            })}`);
 
-        const player = client.manager.get(interaction.guild.id);
-        if(!player) return msg.edit("No song/s currently playing in this guild.");
-        const { channel } = interaction.member.voice;
-        if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
+            const player = client.manager.get(interaction.guild.id);
+            if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
+            const { channel } = interaction.member.voice;
+            if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
-        await player.setFilter('filters', china);
+            const data = {
+                op: 'filters',
+                guildId: interaction.guild.id,
+                timescale: { 
+                    speed: 0.75, 
+                    pitch: 1.25, 
+                    rate: 1.25 
+                }
+            }
 
-        const chinad = new MessageEmbed()
-            .setAuthor({ name: "Turned on: China", iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif' })
+            await player.node.send(data);
+
+        const embed = new MessageEmbed()
+            .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
+                name: "china"
+            })}`)
             .setColor('#000001');
 
         await delay(5000);
-        msg.edit({ content: " ", embeds: [chinad] });
+        msg.edit({ content: " ", embeds: [embed] });
    }
 };

@@ -16,13 +16,12 @@ module.exports = {
     run: async (interaction, client, user, language) => {
         await interaction.deferReply({ ephemeral: false });
 
-        const msg = await interaction.editReply(`**Loading please wait...**`);
+    //    const msg = await interaction.editReply(`**Loading please wait...**`);
         const input = interaction.options.getString("input");
 
-        if (!interaction.member.permissions.has('MANAGE_GUILD')) return msg.edit(`${client.i18n.get(language, "utilities", "lang_perm")}`);
-        if(!input) return msg.edit(`${client.i18n.get(language, "utilities", "lang_arg")}`);
+        if (!interaction.member.permissions.has('MANAGE_GUILD')) return interaction.editReply(`${client.i18n.get(language, "utilities", "lang_perm")}`);
         const languages = client.i18n.getLocales();
-        if (!languages.includes(input)) return msg.edit(`${client.i18n.get(language, "utilities", "provide_lang", {
+        if (!languages.includes(input)) return interaction.editReply(`${client.i18n.get(language, "utilities", "provide_lang", {
             languages: languages.join(', ')
         })}`);
 
@@ -39,10 +38,10 @@ module.exports = {
                 })}`)
                 .setColor('#000001')
 
-                msg.edit({ embeds: [embed] });
+                interaction.editReply({ content: " ", embeds: [embed] });
             }
             ).catch(() => {
-                msg.edit(`${client.i18n.get(language, "utilities", "Lang_error")}`);
+                interaction.editReply(`${client.i18n.get(language, "utilities", "Lang_error")}`);
             });
         }
         else if(newLang) {
@@ -54,10 +53,10 @@ module.exports = {
                 })}`)
                 .setColor('#000001')
     
-                msg.edit({ embeds: [embed] });
+                interaction.editReply({ content: " ", embeds: [embed] });
             }
             ).catch(() => {
-                msg.edit(`${client.i18n.get(language, "utilities", "Lang_error")}`);
+                interaction.editReply(`${client.i18n.get(language, "utilities", "Lang_error")}`);
             });
         }
     }

@@ -1,27 +1,29 @@
 const delay = require('delay');
-const { normal } = require('../../settings/volume.js');
-const { reset } = require('../../settings/filter')
 const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
     name: "reset",
-    description: "reseting all filters",
-    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
+    description: "Reseting all filters",
     
-    run: async (interaction, client) => {
+    run: async (interaction, client, user, language) => {
         await interaction.deferReply({ ephemeral: false });
-        const msg = await interaction.editReply("Turning off `filter` please wait...");
+        const msg = await interaction.editReply(`${client.i18n.get(language, "filters", "reset_loading")}`);
 
-        const player = client.manager.get(interaction.guild.id);
-        if(!player) return msg.edit("No song/s currently playing in this guild.");
-        const { channel } = interaction.member.voice;
-        if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
+		const player = client.manager.get(interaction.guild.id);
+		if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
+		const { channel } = interaction.member.voice;
+		if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
-		await player.setFilter('filters', reset);
-        await player.setVolume(normal);
+		const data = {
+            op: 'filters',
+            guildId: interaction.guild.id,
+        }
+
+        await player.node.send(data);
+        await player.setVolume(100);
         
         const resetted = new MessageEmbed()
-            .setAuthor({ name: "Filter has been: Reseted", iconURL: 'https://cdn.discordapp.com/emojis/758423099178745876.gif' })
+            .setDescription(`${client.i18n.get(language, "filters", "reset_on")}`)
             .setColor('#000001');
 
         await delay(5000);

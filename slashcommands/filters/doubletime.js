@@ -1,28 +1,38 @@
 const delay = require('delay');
 const { MessageEmbed } = require('discord.js');
-const { doubletime } = require('../../settings/filter');
 
 module.exports = { 
     name: "doubletime",
     description: "Turning on doubletime filter",
-    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
-
-    run: async (interaction, client) => {
+    
+    run: async (interaction, client, user, language) => {
         await interaction.deferReply({ ephemeral: false });
-        const msg = await interaction.editReply("Turning on **DoubleTime**. This may take a few seconds...");
+        const msg = await interaction.editReply(`${client.i18n.get(language, "filters", "filter_loading", {
+            name: "doubletime"
+            })}`);
 
-        const player = client.manager.get(interaction.guild.id);
-        if(!player) return msg.edit("No song/s currently playing in this guild.");
-        const { channel } = interaction.member.voice;
-        if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
+            const player = client.manager.get(interaction.guild.id);
+            if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
+            const { channel } = interaction.member.voice;
+            if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+    
+            const data = {
+                op: 'filters',
+                guildId: interaction.guild.id,
+                timescale: {
+                    speed: 1.165,
+                },
+            }
+    
+            await player.node.send(data);
 
-        await player.setFilter('filters', doubletime);
-
-        const doubletimed = new MessageEmbed()
-            .setAuthor({ name: "Turned on: DoubleTime", iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif' })
+        const embed = new MessageEmbed()
+            .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
+                name: "doubletime"
+            })}`)
             .setColor('#000001');
 
         await delay(5000);
-        msg.edit({ content: " ", embeds: [doubletimed] });
+        msg.edit({ content: " ", embeds: [embed] });
    }
 };

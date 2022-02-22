@@ -4,15 +4,14 @@ const { MessageEmbed } = require('discord.js');
 module.exports = { 
     name: "daycore",
     description: "Turning on daycore filter",
-
+    
     run: async (interaction, client, user, language) => {
         await interaction.deferReply({ ephemeral: false });
-
         const msg = await interaction.editReply(`${client.i18n.get(language, "filters", "filter_loading", {
-            name: "Daycore"
+            name: "daycore"
             })}`);
 
-            const player = client.manager.get(message.guild.id);
+            const player = client.manager.get(interaction.guild.id);
             if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
             const { channel } = interaction.member.voice;
             if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
@@ -46,7 +45,7 @@ module.exports = {
 
         const daycored = new MessageEmbed()
             .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
-                name: "Daycore"
+                name: "daycore"
             })}`)
             .setColor('#000001');
 

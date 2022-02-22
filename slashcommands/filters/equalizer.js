@@ -1,10 +1,9 @@
+const delay = require('delay');
 const { MessageEmbed } = require('discord.js');
-const { reset } = require('../../settings/filter')
 
 module.exports = { 
 	name: 'equalizer',
 	description: 'Custom Equalizer!',
-	botPerms: ['SEND_MESSAGES', 'EMBED_LINKS', 'CONNECT', 'SPEAK'],
 	options: [
 		{
 			name: 'bands',
@@ -12,51 +11,72 @@ module.exports = {
 			type: 3,
 		}
 	],
-	run: async (interaction, client) => {
+
+	run: async (interaction, client, user, language) => {
 		await interaction.deferReply({ ephemeral: false });
 		const value = interaction.options.getString('bands');
 
         const player = client.manager.get(interaction.guild.id);
-        if(!player) return interaction.editReply("No song/s currently playing in this guild.");
+        if(!player) return interaction.editReply(`${client.i18n.get(language, "noplayer", "no_player")}`);
         const { channel } = interaction.member.voice;
-        if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return interaction.editReply("You need to be in a same/voice channel.")
+        if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return interaction.editReply(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
 		if (!value) {
 			const embed = new MessageEmbed()
-				.setAuthor({ name: 'Custom Equalizer', iconURL: "https://cdn.discordapp.com/emojis/758423098885275748.gif" })
+				.setAuthor({ name: `${client.i18n.get(language, "filters", "eq_author")}`, iconURL: `${client.i18n.get(language, "filters", "eq_icon")}` })
 				.setColor('#000001')
-				.setDescription('There are 14 bands that can be set from -10 to 10. Not all bands have to be filled out.')
-				.addField('Example Equalizer:', `/equalizer 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n/equalizer 2 3 0 8 0 5 0 -5 0 0`)
-				.addField('Reset Equalizer', `Typing : /reset`)
+				.setDescription(`${client.i18n.get(language, "filters", "eq_desc")}`)
+				.addField(`${client.i18n.get(language, "filters", "eq_field_title")}`, `${client.i18n.get(language, "filters", "eq_field_value", {
+					prefix: "/"
+				})}`)
+				.setFooter({ text: `${client.i18n.get(language, "filters", "eq_footer", {
+					prefix: "/"
+				})}` })
 			return interaction.editReply({ embeds: [embed] });
 		}
 		else if (value == 'off' || value == 'reset') {
-			player.setFilter('filters', reset);
+			const data = {
+                op: 'filters',
+                guildId: interaction.guild.id,
+			}
+			return player.node.send(data);
 		}
 
 		const bands = value.split(/[ ]+/);
 		let bandsStr = '';
 		for (let i = 0; i < bands.length; i++) {
 			if (i > 13) break;
-			if (isNaN(bands[i])) return interaction.editReply(`Band #${i + 1} is not a valid number. Please type \`/equalizer\` for info on the equalizer command.`);
-			if (bands[i] > 10) return interaction.editReply(`Band #${i + 1} must be less than 10. Please type \`/equalizer\` for info on the equalizer command.`);
+			if (isNaN(bands[i])) return interaction.editReply(`${client.i18n.get(language, "filters", "eq_number", {
+				num: i + 1
+			})}`);
+			if (bands[i] > 10) return interaction.editReply(`${client.i18n.get(language, "filters", "eq_than", {
+				num: i + 1
+			})}`);
 		}
 
 		for (let i = 0; i < bands.length; i++) {
 			if (i > 13) break;
-			player.setFilter('filters', [{ band: i, gain: (bands[i]) / 10 }]);
+			const data = {
+                op: 'filters',
+                guildId: interaction.guild.id,
+                equalizer: [
+					{ band: i, gain: (bands[i]) / 10 },
+                ]
+            }
+			player.node.send(data);
 			bandsStr += `${bands[i]} `;
 		}
-
-		const delay = ms => new Promise(res => setTimeout(res, ms));
-		const msg = await interaction.editReply(`Setting equalizer to... \`${bandsStr}\` Please wait...`);
+	
+		const msg = await interaction.editReply(`${client.i18n.get(language, "filters", "eq_loading", {
+			bands: bandsStr
+			})}`);
 		const embed = new MessageEmbed()
-			.setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
-			.setDescription(`Custom Equalizer: \`${bandsStr}\``)
-			.setFooter({ text: `Reset Equalizer, Typing: /reset`})
+			.setDescription(`${client.i18n.get(language, "filters", "eq_on", {
+				bands: bandsStr
+				})}`)
 			.setColor('#000001');
 
 		await delay(5000);
         msg.edit({ content: " ", embeds: [embed] });
 	}
-};
+}

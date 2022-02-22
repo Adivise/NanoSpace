@@ -1,25 +1,48 @@
 const delay = require('delay');
 const { MessageEmbed } = require('discord.js');
-const { treblebass } = require('../../settings/filter');
 
 module.exports = { 
     name: "treblebass",
     description: "Turning on treblebass filter",
-    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
-
-    run: async (interaction, client) => {
+    
+    run: async (interaction, client, user, language) => {
         await interaction.deferReply({ ephemeral: false });
-        const msg = await interaction.editReply("Turning on **Treblebass**. This may take a few seconds...");
+        const msg = await interaction.editReply(`${client.i18n.get(language, "filters", "filter_loading", {
+            name: "treblebass"
+            })}`);
 
-        const player = client.manager.get(interaction.guild.id);
-        if(!player) return msg.edit("No song/s currently playing in this guild.");
-        const { channel } = interaction.member.voice;
-        if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
+            const player = client.manager.get(interaction.guild.id);
+            if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
+            const { channel } = interaction.member.voice;
+            if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+    
+            const data = {
+                op: 'filters',
+                guildId: interaction.guild.id,
+                equalizer: [
+                    { band: 0, gain: 0.6 },
+                    { band: 1, gain: 0.67 },
+                    { band: 2, gain: 0.67 },
+                    { band: 3, gain: 0 },
+                    { band: 4, gain: -0.5 },
+                    { band: 5, gain: 0.15 },
+                    { band: 6, gain: -0.45 },
+                    { band: 7, gain: 0.23 },
+                    { band: 8, gain: 0.35 },
+                    { band: 9, gain: 0.45 },
+                    { band: 10, gain: 0.55 },
+                    { band: 11, gain: 0.6 },
+                    { band: 12, gain: 0.55 },
+                    { band: 13, gain: 0 },
+                ]
+            }
 
-        await player.setFilter('filters', treblebass);
+            await player.node.send(data);
 
         const tbed = new MessageEmbed()
-            .setAuthor({ name: "Turned on: TrebleBass", iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif'})
+            .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
+                name: "treblebass"
+            })}`)
             .setColor('#000001');
 
         await delay(5000);

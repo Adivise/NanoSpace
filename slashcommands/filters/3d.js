@@ -1,28 +1,36 @@
 const delay = require('delay');
 const { MessageEmbed } = require('discord.js');
-const { threed } = require('../../settings/filter');
 
 module.exports = { 
     name: "3d",
     description: "Turning on 3d filter",
-    botPerms: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
-
-    run: async (interaction, client) => {
+    
+    run: async (interaction, client, user, language) => {
         await interaction.deferReply({ ephemeral: false });
-        const msg = await interaction.editReply("Turning on **3d**. This may take a few seconds...");
+        const msg = await interaction.editReply(`${client.i18n.get(language, "filters", "filter_loading", {
+            name: "3d"
+        })}`);
 
-        const player = client.manager.get(interaction.guild.id);
-        if(!player) return msg.edit("No song/s currently playing in this guild.");
-        const { channel } = interaction.member.voice;
-        if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
+            const player = client.manager.get(interaction.guild.id);
+            if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
+            const { channel } = interaction.member.voice;
+            if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
-        await player.setFilter('filters', threed);
+            const data = {
+                op: 'filters',
+                guildId: interaction.guild.id,
+                rotation: { rotationHz: 0.2 }
+            }
 
-        const threeded = new MessageEmbed()
-            .setAuthor({ name: "Turned on: 3d", iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif' })
+            await player.node.send(data);
+
+        const embed = new MessageEmbed()
+            .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
+                name: "3d"
+            })}`)
             .setColor('#000001');
 
         await delay(5000);
-        msg.edit({ content: " ", embeds: [threeded] });
+        msg.edit({ content: " ", embeds: [embed] });
    }
 };

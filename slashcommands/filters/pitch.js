@@ -4,7 +4,6 @@ const { MessageEmbed } = require('discord.js');
 module.exports = { 
 	name: 'pitch',
 	description: 'Sets the pitch of the song.',
-	botPermissions: ["SEND_MESSAGES", "EMBED_LINKS", "CONNECT", "SPEAK"],
 	options: [
 		{
 			name: 'amount',
@@ -13,26 +12,35 @@ module.exports = {
 			required: true
 		}
 	],
-
-	run: async (interaction, client) => {
+	
+	run: async (interaction, client, user, language) => {
 		await interaction.deferReply({ ephemeral: false });
 		const value = interaction.options.getInteger('amount');
 
-        const player = client.manager.get(interaction.guild.id);
-        if(!player) return interaction.editReply("No song/s currently playing in this guild.");
-        const { channel } = interaction.member.voice;
-        if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return interaction.editReply("You need to be in a same/voice channel.")
+		const player = client.manager.get(interaction.guild.id);
+		if(!player) return interaction.editReply(`${client.i18n.get(language, "noplayer", "no_player")}`);
+		const { channel } = interaction.member.voice;
+		if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return interaction.editReply(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
-		if (value < 0) return interaction.editReply('Pitch must be greater than 0.');
-		if (value > 10) return interaction.editReply('Pitch must be less than 10.');
+	//	if (isNaN(value)) return interaction.editReply(`${client.i18n.get(language, "filters", "filter_number")}`);
+		if (value < 0) return interaction.editReply(`${client.i18n.get(language, "filters", "filter_greater")}`);
+		if (value > 10) return interaction.editReply(`${client.i18n.get(language, "filters", "filter_less")}`);
 
-		await player.setFilter('filters', {
+		const data = {
+			op: 'filters',
+			guildId: message.guild.id,
 			timescale: { pitch: value },
-		});
+		}
 
-		const msg = await interaction.editReply(`Setting **Pitch** to **${value}**. This may take a few seconds...`);
+		await player.node.send(data);
+
+		const msg = await interaction.editReply(`${client.i18n.get(language, "filters", "pitch_loading", {
+			amount: value
+		})}`);
 		const embed = new MessageEmbed()
-			.setAuthor({ name: `Pitch set to: ${value}`, iconURL: 'https://cdn.discordapp.com/emojis/758423098885275748.gif' })
+			.setDescription(`${client.i18n.get(language, "filters", "pitch_on", {
+				amount: value
+			})}`)
 			.setColor('#000001');
 		await delay(5000);
 		msg.edit({ content: " ", embeds: [embed] });

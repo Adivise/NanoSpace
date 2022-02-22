@@ -2,13 +2,14 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     name: "restart",
-    description: "Restarts the bot.",
+    description: "Shuts down the client!",
     ownerOnly: true,
 
-    run: async (interaction, client) => {
+    run: async (interaction, client, user, language) => {
     await interaction.deferReply({ ephemeral: false });
+
     const restart = new MessageEmbed()
-        .setDescription("**Account has been**: `Shutting down...`")
+        .setDescription(`${client.i18n.get(language, "utilities", "restart_msg")}`)
         .setColor("#000001");
 
     await interaction.editReply({ embeds: [restart] });
