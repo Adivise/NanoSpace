@@ -17,7 +17,7 @@ create_created: "**Created • %{playlist} | Added • [`%{count} track's`]**"
 delete_arg: "Please provide a playlist name. Example: %{prefix}delete <playlist name>"
 delete_notfound: "The playlist name is invalid."
 delete_owner: "You can't delete this playlist."
-delete_deleted: "**Playlist • %{name} has been deleted.**"
+delete_deleted: "**Deleted •** %{name} playlist."
 
 ##### Detail command #####
 detail_arg: "Please provide a playlist name. Example: %{prefix}detail <playlist name>"
@@ -45,3 +45,19 @@ view_embed_title: "%{user}'s • Playlist"
 view_embed_footer: "Page • %{page}/%{pages} | %{songs} • Playlists"
 view_notnumber: "Page must be a number."
 view_page_notfound: "There are only %{page} pages available."
+
+##### Remove command #####
+remove_arg: "Please provide a playlist name. Example: %{prefix}remove <playlist name> <position>"
+remove_notfound: "The playlist name is invalid."
+remove_song_notfound: "Can't not find the song to remove"
+remove_owner: "You can't remove song from this playlist."
+remove_removed: "**Removed •** to `%{position}` in `%{name}` playlist"
+
+##### Savequeue command #####
+savequeue_arg: "Please provide a playlist name. Example: %{prefix}savequeue <playlist name>"
+savequeue_notfound: "The playlist name is invalid."
+savequeue_owner: "You can't save song to this playlist."
+savequeue_saved: "**Saved •** (%{tracks} tracks) to `%{name}` playlist"
+
+
+
