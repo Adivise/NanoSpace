@@ -12,7 +12,7 @@
 - [x] Playlists System
 - [x] Premium System
 - [x] Custom Prefix
-- [x] Multi Language (70%)
+- [x] Multi Language (98.9%)
 - [x] SlashCommand
 - [x] Custom Filters
 - [x] Easy to use
