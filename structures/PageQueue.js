@@ -129,7 +129,7 @@ const NormalPlaylist = async (client, message, pages, timeout, queueLength, lang
     const curPage = await message.channel.send({ embeds: [pages[page].setFooter({ text: `${client.i18n.get(language, "playlist", "view_embed_footer", {
                     page: i + 1,
                     pages: pagesNum,
-                    songs: playlists.length
+                    songs: queueLength
                 })}` })], components: [row], allowedMentions: { repliedUser: false } });
     if(pages.length == 0) return;
 
@@ -146,7 +146,7 @@ const NormalPlaylist = async (client, message, pages, timeout, queueLength, lang
             curPage.edit({ embeds: [pages[page].setFooter({ text: `${client.i18n.get(language, "playlist", "view_embed_footer", {
                     page: i + 1,
                     pages: pagesNum,
-                    songs: playlists.length
+                    songs: queueLength
                 })}` })], components: [row] })
         });
     collector.on('end', () => {
@@ -155,7 +155,7 @@ const NormalPlaylist = async (client, message, pages, timeout, queueLength, lang
         curPage.edit({ embeds: [pages[page].setFooter({ text: `${client.i18n.get(language, "playlist", "view_embed_footer", {
                     page: i + 1,
                     pages: pagesNum,
-                    songs: playlists.length
+                    songs: queueLength
                 })}` })], components: [disabled] })
     });
     return curPage;
@@ -180,7 +180,7 @@ const SlashPlaylist = async (client, message, pages, timeout, queueLength, langu
     const curPage = await message.editReply({ embeds: [pages[page].setFooter({ text: `${client.i18n.get(language, "playlist", "view_embed_footer", {
                     page: i + 1,
                     pages: pagesNum,
-                    songs: playlists.length
+                    songs: queueLength
                 })}` })], components: [row], allowedMentions: { repliedUser: false } });
     if(pages.length == 0) return;
 
@@ -197,7 +197,7 @@ const SlashPlaylist = async (client, message, pages, timeout, queueLength, langu
             curPage.edit({ embeds: [pages[page].setFooter({ text: `${client.i18n.get(language, "playlist", "view_embed_footer", {
                     page: i + 1,
                     pages: pagesNum,
-                    songs: playlists.length
+                    songs: queueLength
                 })}` })], components: [row] })
         });
     collector.on('end', () => {
@@ -206,7 +206,7 @@ const SlashPlaylist = async (client, message, pages, timeout, queueLength, langu
         curPage.edit({ embeds: [pages[page].setFooter({ text: `${client.i18n.get(language, "playlist", "view_embed_footer", {
                     page: i + 1,
                     pages: pagesNum,
-                    songs: playlists.length
+                    songs: queueLength
                 })}` })], components: [disabled] })
     });
     return curPage;
