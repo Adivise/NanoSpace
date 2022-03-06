@@ -52,7 +52,7 @@ module.exports = {
                         duration: Duration,
                         user: interaction.user
                         })}`)
-                    .setColor('#000001')
+                    .setColor(client.color)
                 msg.edit({ content: " ", embeds: [embed] });
             }
             else if(res.loadType == "PLAYLIST_LOADED") {
@@ -67,7 +67,7 @@ module.exports = {
                         track: res.tracks.length,
                         user: interaction.user
                         })}`)
-                    .setColor('#000001')
+                    .setColor(client.color)
                 msg.edit({ content: " ", embeds: [embed] });
             }
             else if(res.loadType == "SEARCH_RESULT") {
@@ -79,7 +79,7 @@ module.exports = {
                         duration: Duration,
                         user: interaction.user
                         })}`)
-                    .setColor('#000001')
+                    .setColor(client.color)
                 msg.edit({ content: " ", embeds: [embed] });
             }
             else if(res.loadType == "LOAD_FAILED") { //Error loading playlist.
@@ -108,7 +108,7 @@ module.exports = {
                         count: TrackAdd.length,
                         playlist: PlaylistName
                         })}`)
-                    .setColor('#000001')
+                    .setColor(client.color)
                 interaction.followUp({ content: " ", embeds: [embed] });
 
                 TrackAdd.length = 0;
@@ -133,7 +133,7 @@ module.exports = {
                         playlist: PlaylistName,
                         count: TrackAdd.length
                         })}`)
-                    .setColor('#000001')
+                    .setColor(client.color)
                 interaction.followUp({ content: " ", embeds: [embed] });
                     TrackAdd.length = 0;
                 });
@@ -143,10 +143,10 @@ module.exports = {
         const Premiumed = new MessageEmbed()
             .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premiun_author")}`, iconURL: client.user.displayAvatarURL() })
             .setDescription(`${client.i18n.get(language, "nopremium", "premiun_desc")}`)
-            .setColor("#000001")
+            .setColor(client.color)
             .setTimestamp()
 
-        return interaction.followUp({ embeds: [Premiumed] });
+        return interaction.followUp({ content: " ", embeds: [Premiumed] });
       }
     } catch (err) {
         console.log(err)

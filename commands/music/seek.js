@@ -29,7 +29,7 @@ module.exports = {
             .setDescription(`${client.i18n.get(language, "music", "seek_msg", {
                 duration: Duration
             })}`)
-            .setColor('#000001');
+            .setColor(client.color);
 
         msg.edit({ content: ' ', embeds: [seeked] });
     }

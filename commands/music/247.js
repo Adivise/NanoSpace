@@ -3,33 +3,33 @@ const { MessageEmbed } = require('discord.js');
 module.exports = { 
     config: {
         name: "247",
-        description: "Make bot 24/7 in voice channel!",
+        description: "24/7 Music!",
         accessableby: "Member",
         category: "music"
     },
     run: async (client, message, args, user, language, prefix) => {
         const msg = await message.channel.send(`${client.i18n.get(language, "music", "247_loading")}`);
 
-		const player = client.manager.get(message.guild.id);
-		if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
-
-        const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
-
         try {
             if (user && user.isPremium) {
+                
+            const player = client.manager.get(message.guild.id);
+            if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
+            const { channel } = message.member.voice;
+            if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+
         if (player.twentyFourSeven) {
             player.twentyFourSeven = false;
             const off = new MessageEmbed()
             .setDescription(`${client.i18n.get(language, "music", "247_off")}`)
-            .setColor('#000001');
+            .setColor(client.color);
 
             msg.edit({ content: " ", embeds: [off] });
         } else {
             player.twentyFourSeven = true;
             const on = new MessageEmbed()
             .setDescription(`${client.i18n.get(language, "music", "247_on")}`)
-            .setColor('#000001');
+            .setColor(client.color);
 
             msg.edit({ content: " ", embeds: [on] });
         }
@@ -37,10 +37,10 @@ module.exports = {
         const Premiumed = new MessageEmbed()
             .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premium_author")}`, iconURL: client.user.displayAvatarURL() })
             .setDescription(`${client.i18n.get(language, "nopremium", "premium_desc")}`)
-            .setColor("#000001")
+            .setColor(client.color)
             .setTimestamp()
 
-        return msg.edit({ embeds: [Premiumed] });
+        return msg.edit({ content: " ", embeds: [Premiumed] });
       }
     } catch (err) {
         console.log(err)

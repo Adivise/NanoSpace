@@ -4,7 +4,7 @@ const { MessageEmbed, Permissions } = require("discord.js");
 module.exports = { 
     config: {
         name: "play",
-        description: "Play a song/playlist or search for a song from youtube",
+        description: "Play a song!",
         usage: "<results>",
         category: "music",
         accessableby: "Member",
@@ -42,7 +42,7 @@ module.exports = {
                         duration: convertTime(res.tracks[0].duration, true),
                         request: res.tracks[0].requester
                     })}`)
-                    .setColor('#000001')
+                    .setColor(client.color)
                 msg.edit({ content: " ", embeds: [embed] });
                 if(!player.playing) player.play();
             }
@@ -56,7 +56,7 @@ module.exports = {
                         songs: res.tracks.length,
                         request: res.tracks[0].requester
                     })}`)
-                    .setColor('#000001')
+                    .setColor(client.color)
                 msg.edit({ content: " ", embeds: [embed] });
                 if(!player.playing) player.play();
             }
@@ -69,7 +69,7 @@ module.exports = {
                         duration: convertTime(res.tracks[0].duration, true),
                         request: res.tracks[0].requester
                     })}`)
-                    .setColor('#000001')
+                    .setColor(client.color)
                 msg.edit({ content: " ", embeds: [embed] });
                 if(!player.playing) player.play();
             }

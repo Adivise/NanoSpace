@@ -32,17 +32,17 @@ module.exports = {
             .setDescription(`${client.i18n.get(language, "playlist", "delete_deleted", {
                 name: Plist
                 })}`)
-            .setColor('#000001')
+            .setColor(client.color)
 
         interaction.editReply({ embeds: [embed] });
     } else {
         const Premiumed = new MessageEmbed()
             .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premiun_author")}`, iconURL: client.user.displayAvatarURL() })
             .setDescription(`${client.i18n.get(language, "nopremium", "premiun_desc")}`)
-            .setColor("#000001")
+            .setColor(client.color)
             .setTimestamp()
 
-        return interaction.editReply({ embeds: [Premiumed] });
+        return interaction.editReply({ content: " ", embeds: [Premiumed] });
       }
     } catch (err) {
         console.log(err)

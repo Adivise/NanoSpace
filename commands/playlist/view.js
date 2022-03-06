@@ -23,9 +23,14 @@ module.exports = {
         const playlistStrings = [];
         for(let i = 0; i < playlists.length; i++) {
             const playlist = playlists[i];
-            const created = humanizeDuration(Date.now() - playlists[i].created, { largest: 1 })
+            const created = humanizeDuration(Date.now() - playlists[i].created, { largest: 1 }) //`${i + 1}. **\`${playlist.name}\`** • (${playlist.tracks.length} tracks) • *Created At*: \`[${created}]\``
             playlistStrings.push(
-                `${i + 1}. **\`${playlist.name}\`** • (${playlist.tracks.length} tracks) • *Created At*: \`[${created}]\`
+                `${client.i18n.get(language, "playlist", "view_embed_playlist", {
+                    num: i + 1,
+                    name: playlist.name,
+                    tracks: playlist.tracks.length,
+                    create: created
+                })}
                 `);
         }
 
@@ -37,7 +42,7 @@ module.exports = {
                     user: message.author.username
                 })}`, iconURL: message.author.displayAvatarURL() })
                 .setDescription(`${str == '' ? '  Nothing' : '\n' + str}`)
-                .setColor('#000001')
+                .setColor(client.color)
                 .setFooter({ text: `${client.i18n.get(language, "playlist", "view_embed_footer", {
                     page: i + 1,
                     pages: pagesNum,
@@ -47,7 +52,7 @@ module.exports = {
             pages.push(embed);
         }
 		if (!args[0]) {
-			if (pages.length == pagesNum && playlists.length > 10) NormalPlaylist(client, message, pages, 30000, playlists.length);
+			if (pages.length == pagesNum && playlists.length > 10) NormalPlaylist(client, message, pages, 30000, playlists.length, language);
 			else return message.channel.send({ embeds: [pages[0]] });
 		}
 		else {
@@ -62,10 +67,10 @@ module.exports = {
         const Premiumed = new MessageEmbed()
             .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premium_author")}`, iconURL: client.user.displayAvatarURL() })
             .setDescription(`${client.i18n.get(language, "nopremium", "premium_desc")}`)
-            .setColor("#000001")
+            .setColor(client.color)
             .setTimestamp()
 
-        return message.channel.send({ embeds: [Premiumed] });
+        return message.channel.send({ content: " ", embeds: [Premiumed] });
       }
     } catch (err) {
         console.log(err)

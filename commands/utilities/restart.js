@@ -14,7 +14,7 @@ module.exports = {
 
     const restart = new MessageEmbed()
         .setDescription(`${client.i18n.get(language, "utilities", "restart_msg")}`)
-        .setColor("#000001");
+        .setColor(client.color);
 
     await message.channel.send({ embeds: [restart] });
             

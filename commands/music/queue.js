@@ -40,7 +40,7 @@ module.exports = {
 					guild: message.guild.name,
 				})}`, iconURL: message.guild.iconURL({ dynamic: true }) })
                 .setThumbnail(thumbnail)
-				.setColor('#000001') //**Currently Playing:**\n**[${song.title}](${song.uri})** \`[${formatDuration(song.duration)}]\` • ${song.requester}\n\n**Rest of queue**:${str == '' ? '  Nothing' : '\n' + str}
+				.setColor(client.color) //**Currently Playing:**\n**[${song.title}](${song.uri})** \`[${formatDuration(song.duration)}]\` • ${song.requester}\n\n**Rest of queue**:${str == '' ? '  Nothing' : '\n' + str}
 				.setDescription(`${client.i18n.get(language, "music", "queue_description", {
 					title: song.title,
 					url: song.uri,
@@ -59,7 +59,7 @@ module.exports = {
 		}
 
 		if (!args[0]) {
-			if (pages.length == pagesNum && player.queue.length > 10) NormalPage(client, message, pages, 60000, player.queue.length, qduration);
+			if (pages.length == pagesNum && player.queue.length > 10) NormalPage(client, message, pages, 60000, player.queue.length, qduration, language);
 			else return message.channel.send({ embeds: [pages[0]] });
 		}
 		else {

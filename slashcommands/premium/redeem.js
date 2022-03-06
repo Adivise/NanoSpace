@@ -26,7 +26,7 @@ module.exports = {
             return interaction.editReply({
             embeds: [
                 new MessageEmbed()
-                .setColor('#000001')
+                .setColor(client.color)
                 .setDescription(`${client.i18n.get(language, "premium", "redeem_arg")}`),
             ],
         })
@@ -35,7 +35,7 @@ module.exports = {
             return interaction.editReply({
             embeds: [
                 new MessageEmbed()
-                .setColor('#000001')
+                .setColor(client.color)
                 .setDescription(`${client.i18n.get(language, "premium", "redeem_already")}`),
             ],
         })
@@ -67,7 +67,7 @@ module.exports = {
                 .setDescription(`${client.i18n.get(language, "premium", "redeem_desc", {
                     expires: expires,
                 })}`)
-                .setColor('#000001')
+                .setColor(client.color)
                 .setTimestamp(),
             ],
         })
@@ -76,7 +76,7 @@ module.exports = {
         return interaction.editReply({
             embeds: [
             new MessageEmbed()
-                .setColor('#000001')
+                .setColor(client.color)
                 .setDescription(`${client.i18n.get(language, "premium", "redeem_invalid")}`),
                 ],
             })

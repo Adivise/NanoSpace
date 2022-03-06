@@ -28,7 +28,7 @@ module.exports = {
             .setDescription(`${client.i18n.get(language, "music", "volume_msg", {
                 volume: args[0]
             })}`)
-            .setColor('#000001');
+            .setColor(client.color);
         
         msg.edit({ content: " ", embeds: [changevol] });
     }

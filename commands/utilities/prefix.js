@@ -27,7 +27,7 @@ module.exports = {
                 .setDescription(`${client.i18n.get(language, "utilities", "prefix_set", {
                     prefix: args[0]
                 })}`)
-                .setColor('#000001')
+                .setColor(client.color)
 
                 message.channel.send({ embeds: [embed] });
             }
@@ -42,7 +42,7 @@ module.exports = {
                 .setDescription(`${client.i18n.get(language, "utilities", "prefix_change", {
                     prefix: args[0]
                 })}`)
-                .setColor('#000001')
+                .setColor(client.color)
     
                 message.channel.send({ embeds: [embed] });
             }

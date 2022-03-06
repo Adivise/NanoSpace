@@ -23,7 +23,7 @@ module.exports = {
             .setDescription(`${client.i18n.get(language, "music", "resume_msg", {
                 resume: uni
             })}`)
-            .setColor('#000001');
+            .setColor(client.color);
 
         msg.edit({ content: " ", embeds: [embed] });
     }

@@ -19,7 +19,7 @@ module.exports = {
         
         const cleared = new MessageEmbed()
             .setDescription(`${client.i18n.get(language, "music", "clearqueue_msg")}`)
-            .setColor('#000001');
+            .setColor(client.color);
 
         msg.edit({ content: " ", embeds: [cleared] });
     }

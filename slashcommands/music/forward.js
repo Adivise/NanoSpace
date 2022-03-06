@@ -16,31 +16,38 @@ module.exports = {
     run: async (interaction, client) => {
         await interaction.deferReply({ ephemeral: false });
         const value = interaction.options.getInteger("seconds");
-        const msg = await interaction.editReply(`**Loading please wait...**`);
+
+        const msg = await interaction.channel.send(`${client.i18n.get(language, "music", "forward_loading")}`);
            
 		const player = client.manager.get(interaction.guild.id);
-		if (!player) return msg.edit("No song/s currently playing within this guild.");
+		if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
         const { channel } = interaction.member.voice;
-        if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
+        if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
-        const CurrentDuration = formatDuration(player.position);
         const song = player.queue.current;
+        const CurrentDuration = formatDuration(player.position);
 
 		if (value && !isNaN(value)) {
 			if((player.position + value * 1000) < song.duration) {
+
                 player.seek(player.position + value * 1000);
                 
                 const forward1 = new MessageEmbed()
-                .setDescription("\`⏭\` | **Forward to:** "+ `\`${CurrentDuration}\``)
-                .setColor('#000001');
+                .setDescription(`${client.i18n.get(language, "music", "forward_msg", {
+                    duration: CurrentDuration
+                })}`)
+                .setColor(client.color);
 
                 msg.edit({ content: " ", embeds: [forward1] });
+
 			} else { 
-                return msg.edit('Cannot forward beyond the song\'s duration.'); 
+                return msg.edit(`${client.i18n.get(language, "music", "forward_beyond")}`);
             }
 		}
 		else if (value && isNaN(value)) { 
-            return interaction.reply(`Invalid argument, must be a number.\nCorrect Usage: \`/forward <seconds>\``); 
+            return msg.edit(`${client.i18n.get(language, "music", "forward_invalid", {
+                prefix: "/"
+            })}`);
         }
 
 		if (!value) {
@@ -48,12 +55,15 @@ module.exports = {
                 player.seek(player.position + fastForwardNum * 1000);
                 
                 const forward2 = new MessageEmbed()
-                .setDescription("\`⏭\` | **Forward to:** "+ `\`${CurrentDuration}\``)
-                .setColor('#000001');
+                .setDescription(`${client.i18n.get(language, "music", "forward_msg", {
+                    duration: CurrentDuration
+                    })}`)
+                .setColor(client.color);
 
                 msg.edit({ content: " ", embeds: [forward2] });
+
 			} else {
-				return msg.edit('Cannot forward beyond the song\'s duration.');
+				return msg.edit(`${client.i18n.get(language, "music", "forward_beyond")}`);
 			}
 		}
 	}

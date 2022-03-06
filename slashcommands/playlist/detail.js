@@ -41,7 +41,13 @@ module.exports = {
         for(let i = 0; i < playlist.tracks.length; i++) {
             const playlists = playlist.tracks[i];
             playlistStrings.push(
-                `${i + 1}. **[${playlists.title}](${playlists.uri})** | Author: ${playlists.author} • \`[${formatDuration(playlists.duration)}]\`
+                `${client.i18n.get(language, "playlist", "detail_track", {
+                    num: i + 1,
+                    title: playlists.title,
+                    url: playlists.uri,
+                    author: playlists.author,
+                    duration: formatDuration(playlists.duration)
+                })}
                 `);
         }
 
@@ -55,7 +61,7 @@ module.exports = {
                     name: playlist.name
                 })}`, iconURL: interaction.user.displayAvatarURL() })
                 .setDescription(`${str == '' ? '  Nothing' : '\n' + str}`)
-                .setColor('#000001') //Page • ${i + 1}/${pagesNum} | ${playlist.tracks.length} • Songs | ${totalDuration} • Total duration
+                .setColor(client.color) //Page • ${i + 1}/${pagesNum} | ${playlist.tracks.length} • Songs | ${totalDuration} • Total duration
                 .setFooter({ text: `${client.i18n.get(language, "playlist", "detail_embed_footer", {
                     page: i + 1,
                     pages: pagesNum,
@@ -66,7 +72,7 @@ module.exports = {
             pages.push(embed);
         }
 		if (!number) {
-			if (pages.length == pagesNum && playlist.tracks.length > 10) SlashPage(client, interaction, pages, 60000, playlist.tracks.length, totalDuration);
+			if (pages.length == pagesNum && playlist.tracks.length > 10) SlashPage(client, interaction, pages, 60000, playlist.tracks.length, totalDuration, language);
 			else return interaction.editReply({ embeds: [pages[0]] });
 		}
 		else {
@@ -81,10 +87,10 @@ module.exports = {
         const Premiumed = new MessageEmbed()
             .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premiun_author")}`, iconURL: client.user.displayAvatarURL() })
             .setDescription(`${client.i18n.get(language, "nopremium", "premiun_desc")}`)
-            .setColor("#000001")
+            .setColor(client.color)
             .setTimestamp()
 
-        return interaction.editReply({ embeds: [Premiumed] });
+        return interaction.editReply({ content: " ", embeds: [Premiumed] });
       }
     } catch (err) {
         console.log(err)

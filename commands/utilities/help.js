@@ -16,7 +16,7 @@ module.exports = {
             const categories = readdirSync("./commands/")
 
             const embed = new MessageEmbed()
-            .setColor('#000001')
+            .setColor(client.color)
             .setDescription(`${client.i18n.get(language, "utilities", "help_desc")}`)
 
             const row = new MessageActionRow()
@@ -53,7 +53,7 @@ module.exports = {
                                     .setAuthor({ name: `${message.guild.me.displayName} Help Command!`, iconURL: message.guild.iconURL({ dynamic: true })})
                                     .setDescription(`The bot prefix is: \`${prefix}\``)
                                     .setThumbnail(client.user.displayAvatarURL({ dynamic: true, size: 2048 }))
-                                    .setColor('#000001')
+                                    .setColor(client.color)
                                     .addField(`❯  ${directory.toUpperCase()} [${client.commands.filter(c => c.config.category === directory).size}]`, `${client.commands.filter(c => c.config.category === directory).map(c => `\`${c.config.name}\``).join(", ")}`)
                                     .setFooter({ text: `© ${message.guild.me.displayName} | Total Commands: ${client.commands.size}`, iconURL: client.user.displayAvatarURL({ dynamic: true })})
 
@@ -67,7 +67,7 @@ module.exports = {
                                 .setDescription(`${client.i18n.get(language, "utilities", "help_timeout", {
                                     prefix: prefix
                                 })}`)
-                                .setColor('#000001')
+                                .setColor(client.color)
 
                                 msg.edit({ embeds: [timed], components: [] });
                             }

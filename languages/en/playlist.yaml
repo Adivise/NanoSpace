@@ -27,6 +27,7 @@ detail_embed_title: "Playlist • %{name}"
 detail_embed_footer: "Page • %{page}/%{pages} | %{songs} • Songs | %{duration} • Total duration"
 detail_notnumber: "Page must be a number."
 detail_page_notfound: "There are only %{page} pages available."
+detail_track: "%{num}. **[%{title}](%{url})** | *Author*: %{author} • `[%{duration}]`"
 
 ##### Import command #####
 import_loading: "Importing a playlist to the queue..."
@@ -45,6 +46,7 @@ view_embed_title: "%{user}'s • Playlist"
 view_embed_footer: "Page • %{page}/%{pages} | %{songs} • Playlists"
 view_notnumber: "Page must be a number."
 view_page_notfound: "There are only %{page} pages available."
+view_embed_playlist: "%{num}. **`%{name}`** • (%{tracks} tracks) • *Created At*: `[%{create} ago]`"
 
 ##### Remove command #####
 remove_arg: "Please provide a playlist name. Example: %{prefix}remove <playlist name> <position>"

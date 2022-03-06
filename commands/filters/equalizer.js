@@ -12,15 +12,18 @@ module.exports = {
     },
 
 	run: async (client, message, args, user, language, prefix) => {
-        const player = client.manager.get(message.guild.id);
-        if(!player) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_player")}`);
-        const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+		try {
+            if (user && user.isPremium) {
 
+				const player = client.manager.get(message.guild.id);
+				if(!player) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_player")}`);
+				const { channel } = message.member.voice;
+				if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+				
 		if (!args[0]) {
 			const embed = new MessageEmbed()
 				.setAuthor({ name: `${client.i18n.get(language, "filters", "eq_author")}`, iconURL: `${client.i18n.get(language, "filters", "eq_icon")}` })
-				.setColor('#000001')
+				.setColor(client.color)
 				.setDescription(`${client.i18n.get(language, "filters", "eq_desc")}`)
 				.addField(`${client.i18n.get(language, "filters", "eq_field_title")}`, `${client.i18n.get(language, "filters", "eq_field_value", {
 					prefix: prefix
@@ -70,9 +73,22 @@ module.exports = {
 			.setDescription(`${client.i18n.get(language, "filters", "eq_on", {
 				bands: bandsStr
 				})}`)
-			.setColor('#000001');
+			.setColor(client.color);
 
 		await delay(5000);
-        msg.edit({ content: " ", embeds: [embed] });
+        return msg.edit({ content: " ", embeds: [embed] });
+	} else {
+		const Premiumed = new MessageEmbed()
+			.setAuthor({ name: `${client.i18n.get(language, "nopremium", "premium_author")}`, iconURL: client.user.displayAvatarURL() })
+			.setDescription(`${client.i18n.get(language, "nopremium", "premium_desc")}`)
+			.setColor(client.color)
+			.setTimestamp()
+
+		return message.channel.send({ content: " ", embeds: [Premiumed] });
+	  }
+	} catch (err) {
+		console.log(err)
+		message.channel.send({ content: `${client.i18n.get(language, "nopremium", "premium_error")}` })
+		}
 	}
-}
+};

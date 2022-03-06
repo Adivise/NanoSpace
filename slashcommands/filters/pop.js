@@ -43,7 +43,7 @@ module.exports = {
             .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                 name: "pop"
             })}`)
-            .setColor('#000001');
+            .setColor(client.color);
 
         await delay(5000);
         msg.edit({ content: " ", embeds: [popped] });

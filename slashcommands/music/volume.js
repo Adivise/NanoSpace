@@ -10,24 +10,28 @@ module.exports = {
             type: 4,
         }
     ],
-    run: async (interaction, client) => {
+    run: async (interaction, client, user, language) => {
         await interaction.deferReply({ ephemeral: false });
         const value = interaction.options.getInteger("amount");
-        const msg = await interaction.editReply(`**Volume adjusting to ${value}...**`);
+        const msg = await interaction.editReply(`${client.i18n.get(language, "music", "volume_loading")}`);
 
 		const player = client.manager.get(interaction.guild.id);
-		if (!player) return msg.edit("No song/s currently playing within this guild.");
+		if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
         const { channel } = interaction.member.voice;
-        if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
+        if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
-        if (!value) return msg.edit(`Current Volume: ${player.volume}`);
-        if (Number(value) <= 0 || Number(value) > 100) return msg.edit("You may only set the volume to 1-100");
+        if (!value) return msg.edit(`${client.i18n.get(language, "music", "volume_usage", {
+            volume: player.volume
+        })}`);
+        if (Number(value) <= 0 || Number(value) > 100) return msg.edit(`${client.i18n.get(language, "music", "volume_invalid")}`);
 
         await player.setVolume(Number(value));
 
         const changevol = new MessageEmbed()
-            .setDescription(`\`🔊\` | **Change volume to:** \`${value}%\``)
-            .setColor('#000001');
+            .setDescription(`${client.i18n.get(language, "music", "volume_msg", {
+                volume: value
+            })}`)
+            .setColor(client.color);
         
         msg.edit({ content: " ", embeds: [changevol] });
     }

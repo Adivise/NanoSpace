@@ -20,7 +20,7 @@ module.exports = {
 
         const skipped = new MessageEmbed()
             .setDescription(`${client.i18n.get(language, "music", "skip_msg")}`)
-            .setColor('#000001');
+            .setColor(client.color);
 
         msg.edit({ content: " ", embeds: [skipped] });
     }

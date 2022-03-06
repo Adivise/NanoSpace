@@ -33,7 +33,7 @@ module.exports = async (client, oldState, newState) => {
 
 			
 		const EmptyEmbed = new MessageEmbed()
-			.setColor("#000001")
+			.setColor(client.color)
 			.setDescription(client.i18n.get(language, "voicestate", "wait_leave", {
 				voice: vcRoom,
 				timeout: client.config.LEAVE_TIMEOUT / 60 / 1000,
@@ -49,6 +49,7 @@ module.exports = async (client, oldState, newState) => {
 			newPlayer ? player.destroy() : oldState.guild.me.voice.channel.leave();
 
 			const TimeoutEmbed = new MessageEmbed(client, newState.guild)
+				.setColor(client.color)
 				.setDescription(client.i18n.get(language, "voicestate", "timeout_leave", {
 					voice: vcRoom,
 		  		}),

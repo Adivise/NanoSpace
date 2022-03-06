@@ -27,7 +27,7 @@ module.exports = {
             .setDescription(`${client.i18n.get(language, "music", "join_msg", {
                 channel: channel.name
             })}`)
-            .setColor('#000001')
+            .setColor(client.color)
 
         msg.edit({ content: " ", embeds: [embed] })
     }

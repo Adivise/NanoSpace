@@ -73,7 +73,7 @@ module.exports = {
                         duration: convertTime(res.tracks[0].duration, true),
                         request: res.tracks[0].requester
                     })}`)
-                    .setColor('#000001')
+                    .setColor(client.color)
                     msg.edit({ content: " ", embeds: [embed] });
                     if (!player.playing) player.play();
                 }
@@ -91,7 +91,7 @@ module.exports = {
                         .join("\n");
                     const playing = new MessageEmbed()
                         .setAuthor({ name: `${client.i18n.get(language, "music", "search_title")}`, iconURL: message.guild.iconURL({ dynamic: true }) })
-                        .setColor('#000001')
+                        .setColor(client.color)
                         .setDescription(results)
                         .setFooter({ text: `${client.i18n.get(language, "music", "search_footer")}` })
                     await msg.edit({ content: " ", embeds: [playing], components: [row] });
@@ -114,7 +114,7 @@ module.exports = {
                                     duration: convertTime(res.tracks[0].duration, true),
                                     request: res.tracks[0].requester
                                 })}`)
-                                .setColor('#000001')
+                                .setColor(client.color)
          
                             if(msg) await msg.edit({ embeds: [embed], components: [] });
                         } else if(id === "two") {
@@ -128,7 +128,7 @@ module.exports = {
                                     duration: convertTime(res.tracks[1].duration, true),
                                     request: res.tracks[1].requester
                                 })}`)
-                                .setColor('#000001')
+                                .setColor(client.color)
         
                             if(msg) await msg.edit({ embeds: [embed], components: [] });
                         } else if(id === "three") {
@@ -142,7 +142,7 @@ module.exports = {
                                     duration: convertTime(res.tracks[2].duration, true),
                                     request: res.tracks[2].requester
                                 })}`)
-                                .setColor('#000001')
+                                .setColor(client.color)
         
                             if(msg) await msg.edit({ embeds: [embed], components: [] });
                         } else if(id === "four") {
@@ -156,7 +156,7 @@ module.exports = {
                                     duration: convertTime(res.tracks[3].duration, true),
                                     request: res.tracks[3].requester
                                     })}`)
-                                .setColor('#000001')
+                                .setColor(client.color)
         
                             if(msg) await msg.edit({ embeds: [embed], components: [] });
                         } else if(id === "five") {
@@ -170,7 +170,7 @@ module.exports = {
                                     duration: convertTime(res.tracks[4].duration, true),
                                     request: res.tracks[4].requester
                                     })}`)
-                                .setColor('#000001')
+                                .setColor(client.color)
         
                             if(msg) await msg.edit({ embeds: [embed], components: [] });
                         }
@@ -193,7 +193,7 @@ module.exports = {
                             songs: res.tracks.length,
                             request: res.tracks[0].requester
                         })}`)
-                        .setColor('#000001')
+                        .setColor(client.color)
                     msg.edit({ content: " ", embeds: [playlist] });
                         if(!player.playing) player.play()
                     }

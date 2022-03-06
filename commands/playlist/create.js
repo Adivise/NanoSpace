@@ -45,7 +45,7 @@ module.exports = {
                         duration: Duration,
                         user: message.author
                         })}`)
-                    .setColor('#000001')
+                    .setColor(client.color)
                 msg.edit({ content: " ", embeds: [embed] }).then(msg => {
                 //    message.delete()
                     setTimeout(() => msg.delete(), 5000)
@@ -63,7 +63,7 @@ module.exports = {
                         track: res.tracks.length,
                         user: message.author
                         })}`)
-                    .setColor('#000001')
+                    .setColor(client.color)
                 msg.edit({ content: " ", embeds: [embed] }).then(msg => {
                  //   message.delete()
                     setTimeout(() => msg.delete(), 5000)
@@ -78,7 +78,7 @@ module.exports = {
                         duration: Duration,
                         user: message.author
                         })}`)
-                    .setColor('#000001')
+                    .setColor(client.color)
                 msg.edit({ content: " ", embeds: [embed] }).then(msg => {
                   //  message.delete()
                     setTimeout(() => msg.delete(), 5000)
@@ -116,7 +116,7 @@ module.exports = {
                         count: TrackAdd.length,
                         playlist: PlaylistName
                         })}`)
-                    .setColor('#000001')
+                    .setColor(client.color)
                 message.channel.send({ content: " ", embeds: [embed] });
 
                 TrackAdd.length = 0;
@@ -141,7 +141,7 @@ module.exports = {
                         playlist: PlaylistName,
                         count: TrackAdd.length
                         })}`)
-                    .setColor('#000001')
+                    .setColor(client.color)
                 message.channel.send({ content: " ", embeds: [embed] });
                     TrackAdd.length = 0;
                 });
@@ -151,10 +151,10 @@ module.exports = {
         const Premiumed = new MessageEmbed()
             .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premium_author")}`, iconURL: client.user.displayAvatarURL() })
             .setDescription(`${client.i18n.get(language, "nopremium", "premium_desc")}`)
-            .setColor("#000001")
+            .setColor(client.color)
             .setTimestamp()
 
-        return message.channel.send({ embeds: [Premiumed] });
+        return message.channel.send({ content: " ", embeds: [Premiumed] });
       }
     } catch (err) {
         console.log(err)

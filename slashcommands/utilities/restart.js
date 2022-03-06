@@ -10,7 +10,7 @@ module.exports = {
 
     const restart = new MessageEmbed()
         .setDescription(`${client.i18n.get(language, "utilities", "restart_msg")}`)
-        .setColor("#000001");
+        .setColor(client.color);
 
     await interaction.editReply({ embeds: [restart] });
             

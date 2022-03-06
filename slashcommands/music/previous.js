@@ -2,25 +2,24 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
     name: "previous",
-    description: "Previous a song",
-
-    run: async (interaction, client) => {
+    description: "Play the previous song in the queue.",
+    run: async (interaction, client, user, language) => {
         await interaction.deferReply({ ephemeral: false });
-        const msg = await interaction.editReply(`**Loading please wait...**`);
+        const msg = await interaction.editReply(`${client.i18n.get(language, "music", "previous_loading")}`);
 
 		const player = client.manager.get(interaction.guild.id);
-		if (!player) return msg.edit("No song/s currently playing within this guild.");
+		if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
         const { channel } = interaction.member.voice;
-        if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
+        if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
-        if (!player.queue.previous) return msg.edit("No previous song/s found.");
+        if (!player.queue.previous) return msg.edit(`${client.i18n.get(language, "music", "previous_notfound")}`);
 
         await player.queue.unshift(player.queue.previous);
         await player.stop();
 
         const embed = new MessageEmbed()
-            .setDescription("\`⏮\` | **Song has been:** `Previous`")
-            .setColor('#000001');
+            .setDescription(`${client.i18n.get(language, "music", "previous_msg")}`)
+            .setColor(client.color);
 
         msg.edit({ content: " ", embeds: [embed] });
     }

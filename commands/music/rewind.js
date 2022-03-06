@@ -29,7 +29,7 @@ module.exports = {
                 .setDescription(`${client.i18n.get(language, "music", "rewind_msg", {
                     duration: CurrentDuration,
                 })}`)
-                .setColor('#000001');
+                .setColor(client.color);
 
                 msg.edit({ content: " ", embeds: [rewind1] });
 			}
@@ -51,7 +51,7 @@ module.exports = {
                 .setDescription(`${client.i18n.get(language, "music", "rewind_msg", {
                     duration: CurrentDuration,
                 })}`)
-                .setColor('#000001');
+                .setColor(client.color);
 
                 msg.edit({ content: " ", embeds: [rewind2] });
 			}

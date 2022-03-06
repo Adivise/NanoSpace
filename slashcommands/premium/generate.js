@@ -65,7 +65,7 @@ module.exports = {
     }
 
     const embed = new MessageEmbed()
-      .setColor('#000001')
+      .setColor(client.color)
       .setAuthor({ name: `${client.i18n.get(language, "premium", "gen_author")}`, iconURL: client.user.avatarURL() }) //${lang.description.replace("{codes_length}", codes.length).replace("{codes}", codes.join('\n')).replace("{plan}", plan).replace("{expires}", moment(time).format('dddd, MMMM Do YYYY'))}
       .setDescription(`${client.i18n.get(language, "premium", "gen_desc", {
         codes_length: codes.length,

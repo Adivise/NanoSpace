@@ -18,7 +18,7 @@ module.exports = async (client, player) => {
 	const { language } = guildModel;
 
 	const embed = new MessageEmbed()
-		.setColor("#000001")
+		.setColor(client.color)
 		.setDescription(`${client.i18n.get(language, "player", "queue_end_desc")}`);
 
 	await channel.send({ embeds: [embed] });

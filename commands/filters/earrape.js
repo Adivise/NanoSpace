@@ -31,7 +31,7 @@ module.exports = {
             .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                 name: client.commands.get('earrape').config.name
             })}`)
-            .setColor('#000001');
+            .setColor(client.color);
 
         await delay(3000);
         msg.edit({ content: " ", embeds: [earrapped] });

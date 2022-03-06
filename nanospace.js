@@ -1,9 +1,9 @@
 const { Client, Intents, Collection } = require("discord.js");
 const { Manager } = require("erela.js");
-const spotify = require("better-erela.js-spotify").default;
-const deezer = require("erela.js-deezer");
-const apple = require("erela.js-apple");
-const facebook = require("erela.js-facebook");
+const Spotify = require("better-erela.js-spotify").default;
+const Deezer = require("erela.js-deezer");
+const AppleMusic = require("better-erela.js-apple").default;
+const Facebook = require("erela.js-facebook");
 const { readdirSync } = require("fs");
 const path = require("path");
 const { I18n } = require("locale-parser")
@@ -29,6 +29,7 @@ class MainClient extends Client {
     this.prefix = this.config.PREFIX;
     this.owner = this.config.OWNER_ID;
     this.dev = this.config.DEV_ID;
+    this.color = this.config.EMBED_COLOR;
     this.i18n = new I18n(this.config.LANGUAGE);
     if(!this.token) this.token = this.config.TOKEN;
 
@@ -41,10 +42,10 @@ class MainClient extends Client {
       nodes: this.config.NODES,
       autoPlay: true,
       plugins: [
-        new spotify(),
-        new facebook(),
-        new deezer(),
-        new apple()
+        new Spotify(),
+        new Facebook(),
+        new Deezer(),
+        new AppleMusic()
       ],
       send(id, payload) {
         const guild = client.guilds.cache.get(id);

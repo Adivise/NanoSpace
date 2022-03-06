@@ -2,34 +2,33 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     name: "loopall",
-    description: "loop the song in queue playing.",
-
-    run: async (interaction, client) => {
+    description: "Loop all songs in queue!",
+    run: async (interaction, client, user, language) => {
         await interaction.deferReply({ ephemeral: false });
-		const msg = await interaction.editReply('**Loading please wait...**');
+		const msg = await interaction.editReply(`${client.i18n.get(language, "music", "loopall_loading")}`);
 
 		const player = client.manager.get(interaction.guild.id);
-		if (!player) return msg.edit("No song/s currently playing within this guild.");
+		if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
         const { channel } = interaction.member.voice;
-        if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
+        if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
 		if (player.queueRepeat === true) {
             player.setQueueRepeat(false)
             
             const unloopall = new MessageEmbed()
-                .setDescription(`\`🔁\` | **Song is unloop:** \`All\``)
-                .setColor('#000001');
+                .setDescription(`${client.i18n.get(language, "music", "unloopall")}`)
+                .setColor(client.color);
 
-                msg.edit({ content: ' ', embeds: [unloopall] });
+                return msg.edit({ content: ' ', embeds: [unloopall] });
 		}
 		else {
             player.setQueueRepeat(true);
             
             const loopall = new MessageEmbed()
-                .setDescription(`\`🔁\` | **Song is loop:** \`All\``)
-                .setColor('#000001');
+                .setDescription(`${client.i18n.get(language, "music", "loopall")}`)
+                .setColor(client.color);
 
-                msg.edit({ content: ' ', embeds: [loopall] });
+                return msg.edit({ content: ' ', embeds: [loopall] });
 		}
 	}
 };

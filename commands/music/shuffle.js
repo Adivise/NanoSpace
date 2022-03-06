@@ -20,7 +20,7 @@ module.exports = {
 
         const shuffle = new MessageEmbed()
             .setDescription(`${client.i18n.get(language, "music", "shuffle_msg")}`)
-            .setColor('#000001');
+            .setColor(client.color);
         
         msg.edit({ content: " ", embeds: [shuffle] });
     }

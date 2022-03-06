@@ -21,7 +21,7 @@ module.exports = {
                     plan: PremiumPlan.premium.plan,
                     expires: expires
                 })}`)
-                .setColor("#000001")
+                .setColor(client.color)
                 .setTimestamp()
 
             return interaction.editReply({ embeds: [embed] });
@@ -30,10 +30,10 @@ module.exports = {
             const Premiumed = new MessageEmbed()
                 .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premium_author")}`, iconURL: client.user.displayAvatarURL() })
                 .setDescription(`${client.i18n.get(language, "nopremium", "premium_desc")}`)
-                .setColor("#000001")
+                .setColor(client.color)
                 .setTimestamp()
     
-            return interaction.editReply({ embeds: [Premiumed] });
+            return interaction.editReply({ content: " ", embeds: [Premiumed] });
           }
         } catch (err) {
             console.log(err)

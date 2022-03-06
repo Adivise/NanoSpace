@@ -23,7 +23,7 @@ module.exports = {
             .setDescription(`${client.i18n.get(language, "music", "pause_msg", {
                 pause: uni
             })}`)
-            .setColor('#000001');
+            .setColor(client.color);
 
         msg.edit({ content: " ", embeds: [embed] });
     }

@@ -21,7 +21,7 @@ module.exports = {
             
             const unloopall = new MessageEmbed()
                 .setDescription(`${client.i18n.get(language, "music", "unloopall")}`)
-                .setColor('#000001');
+                .setColor(client.color);
 
                 msg.edit({ content: ' ', embeds: [unloopall] });
 		}
@@ -30,7 +30,7 @@ module.exports = {
             
             const loopall = new MessageEmbed()
                 .setDescription(`${client.i18n.get(language, "music", "loopall")}`)
-                .setColor('#000001');
+                .setColor(client.color);
 
                 msg.edit({ content: ' ', embeds: [loopall] });
 		}

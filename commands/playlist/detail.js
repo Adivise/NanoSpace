@@ -29,9 +29,15 @@ module.exports = {
 
         const playlistStrings = [];
         for(let i = 0; i < playlist.tracks.length; i++) {
-            const playlists = playlist.tracks[i];
+            const playlists = playlist.tracks[i]; //  `${i + 1}. **[${playlists.title}](${playlists.uri})** | Author: ${playlists.author} • \`[${formatDuration(playlists.duration)}]\``
             playlistStrings.push(
-                `${i + 1}. **[${playlists.title}](${playlists.uri})** | Author: ${playlists.author} • \`[${formatDuration(playlists.duration)}]\`
+                `${client.i18n.get(language, "playlist", "detail_track", {
+                    num: i + 1,
+                    title: playlists.title,
+                    url: playlists.uri,
+                    author: playlists.author,
+                    duration: formatDuration(playlists.duration)
+                })}
                 `);
         }
 
@@ -45,7 +51,7 @@ module.exports = {
                     name: playlist.name
                 })}`, iconURL: message.author.displayAvatarURL() })
                 .setDescription(`${str == '' ? '  Nothing' : '\n' + str}`)
-                .setColor('#000001') //Page • ${i + 1}/${pagesNum} | ${playlist.tracks.length} • Songs | ${totalDuration} • Total duration
+                .setColor(client.color) //Page • ${i + 1}/${pagesNum} | ${playlist.tracks.length} • Songs | ${totalDuration} • Total duration
                 .setFooter({ text: `${client.i18n.get(language, "playlist", "detail_embed_footer", {
                     page: i + 1,
                     pages: pagesNum,
@@ -56,7 +62,7 @@ module.exports = {
             pages.push(embed);
         }
 		if (!args[1]) {
-			if (pages.length == pagesNum && playlist.tracks.length > 10) NormalPage(client, message, pages, 60000, playlist.tracks.length, totalDuration);
+			if (pages.length == pagesNum && playlist.tracks.length > 10) NormalPage(client, message, pages, 60000, playlist.tracks.length, totalDuration, language);
 			else return message.channel.send({ embeds: [pages[0]] });
 		}
 		else {
@@ -71,10 +77,10 @@ module.exports = {
         const Premiumed = new MessageEmbed()
             .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premium_author")}`, iconURL: client.user.displayAvatarURL() })
             .setDescription(`${client.i18n.get(language, "nopremium", "premium_desc")}`)
-            .setColor("#000001")
+            .setColor(client.color)
             .setTimestamp()
 
-        return message.channel.send({ embeds: [Premiumed] });
+        return message.channel.send({ content: " ", embeds: [Premiumed] });
       }
     } catch (err) {
         console.log(err)

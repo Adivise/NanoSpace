@@ -16,15 +16,18 @@ module.exports = {
 		await interaction.deferReply({ ephemeral: false });
 		const value = interaction.options.getString('bands');
 
-        const player = client.manager.get(interaction.guild.id);
-        if(!player) return interaction.editReply(`${client.i18n.get(language, "noplayer", "no_player")}`);
-        const { channel } = interaction.member.voice;
-        if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return interaction.editReply(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+		try {
+            if (user && user.isPremium) {
+
+			const player = client.manager.get(interaction.guild.id);
+			if(!player) return interaction.editReply(`${client.i18n.get(language, "noplayer", "no_player")}`);
+			const { channel } = interaction.member.voice;
+			if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return interaction.editReply(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
 		if (!value) {
 			const embed = new MessageEmbed()
 				.setAuthor({ name: `${client.i18n.get(language, "filters", "eq_author")}`, iconURL: `${client.i18n.get(language, "filters", "eq_icon")}` })
-				.setColor('#000001')
+				.setColor(client.color)
 				.setDescription(`${client.i18n.get(language, "filters", "eq_desc")}`)
 				.addField(`${client.i18n.get(language, "filters", "eq_field_title")}`, `${client.i18n.get(language, "filters", "eq_field_value", {
 					prefix: "/"
@@ -74,9 +77,22 @@ module.exports = {
 			.setDescription(`${client.i18n.get(language, "filters", "eq_on", {
 				bands: bandsStr
 				})}`)
-			.setColor('#000001');
+			.setColor(client.color);
 
 		await delay(5000);
-        msg.edit({ content: " ", embeds: [embed] });
-	}
-}
+        return msg.edit({ content: " ", embeds: [embed] });
+    } else {
+        const Premiumed = new MessageEmbed()
+            .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premiun_author")}`, iconURL: client.user.displayAvatarURL() })
+            .setDescription(`${client.i18n.get(language, "nopremium", "premiun_desc")}`)
+            .setColor(client.color)
+            .setTimestamp()
+
+        return interaction.editReply({ content: " ", embeds: [Premiumed] });
+      }
+    } catch (err) {
+        console.log(err)
+        interaction.editReply({ content: `${client.i18n.get(language, "nopremium", "premium_error")}` })
+        }
+    }
+};

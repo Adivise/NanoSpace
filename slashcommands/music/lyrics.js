@@ -2,21 +2,27 @@ const lyricsfinder = require('lyrics-finder');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = { 
-    config: {
-        name: "lyrics",
-        description: "Display lyrics of a song",
-        accessableby: "Member",
-        category: "music",
-    },
-    run: async (client, message, args, user, language, prefix) => {
-        const msg = await message.channel.send(`${client.i18n.get(language, "music", "lyrics_loading")}`);
+    name: "lyrics",
+    description: "Display lyrics of a song.",
+    options: [
+        {
+            name: "input",
+            description: "The song you want to find lyrics for",
+            type: 3,
+            required: false,
+        }
+    ],
+    run: async (interaction, client, user, language) => {
+        await interaction.deferReply({ ephemeral: false });
+        const value = interaction.options.getString("input");
+        const msg = await interaction.editReply(`${client.i18n.get(language, "music", "lyrics_loading")}`);
 
-        const player = client.manager.get(message.guild.id);
+        const player = client.manager.get(interaction.guild.id);
         if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
-        const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+        const { channel } = interaction.member.voice;
+        if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
-        let song = args.join(" ");
+        let song = value;
             let CurrentSong = player.queue.current;
         if (!song && CurrentSong) song = CurrentSong.title;
 
@@ -35,7 +41,7 @@ module.exports = {
                 song: song
             })}`)
             .setDescription(`${lyrics}`)
-            .setFooter({ text: `Requested by ${message.author.username}`})
+            .setFooter({ text: `Requested by ${interaction.user.username}`})
             .setTimestamp();
 
         if (lyrics.length > 2048) {

@@ -12,11 +12,14 @@ module.exports = {
     },
 
     run: async (client, message, args, user, language, prefix) => {
-        const player = client.manager.get(message.guild.id);
-        if(!player) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_player")}`);
-        const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+        try {
+            if (user && user.isPremium) {
 
+                const player = client.manager.get(message.guild.id);
+                if(!player) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_player")}`);
+                const { channel } = message.member.voice;
+                if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+        
 		if(!args[0]) {
             const data = {
                 op: 'filters',
@@ -48,7 +51,7 @@ module.exports = {
 				.setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                 name: client.commands.get('bassboost').config.name
             })}`)
-                .setColor('#000001');
+                .setColor(client.color);
                 
 			await delay(5000);
             return msg1.edit({ content: " ", embeds: [embed] });
@@ -84,9 +87,22 @@ module.exports = {
 			    .setDescription(`${client.i18n.get(language, "filters", "bassboost_set", {
                 amount: args[0]
                 })}`)
-                .setColor('#000001');
+                .setColor(client.color);
             
 		    await delay(5000);
             return msg2.edit({ content: " ", embeds: [embed] });
-	}
-};
+        } else {
+            const Premiumed = new MessageEmbed()
+                .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premium_author")}`, iconURL: client.user.displayAvatarURL() })
+                .setDescription(`${client.i18n.get(language, "nopremium", "premium_desc")}`)
+                .setColor(client.color)
+                .setTimestamp()
+    
+            return message.channel.send({ content: " ", embeds: [Premiumed] });
+          }
+        } catch (err) {
+            console.log(err)
+            message.channel.send({ content: `${client.i18n.get(language, "nopremium", "premium_error")}` })
+            }
+        }
+    };

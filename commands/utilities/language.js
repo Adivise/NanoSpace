@@ -30,7 +30,7 @@ module.exports = {
                 .setDescription(`${client.i18n.get(language, "utilities", "lang_set", {
                     language: args[0]
                 })}`)
-                .setColor('#000001')
+                .setColor(client.color)
 
                 message.channel.send({ embeds: [embed] });
             }
@@ -45,7 +45,7 @@ module.exports = {
                 .setDescription(`${client.i18n.get(language, "utilities", "lang_change", {
                     language: args[0]
                 })}`)
-                .setColor('#000001')
+                .setColor(client.color)
     
                 message.channel.send({ embeds: [embed] });
             }

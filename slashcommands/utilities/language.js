@@ -36,7 +36,7 @@ module.exports = {
                 .setDescription(`${client.i18n.get(language, "utilities", "lang_set", {
                     language: input
                 })}`)
-                .setColor('#000001')
+                .setColor(client.color)
 
                 interaction.editReply({ content: " ", embeds: [embed] });
             }
@@ -51,7 +51,7 @@ module.exports = {
                 .setDescription(`${client.i18n.get(language, "utilities", "lang_change", {
                     language: input
                 })}`)
-                .setColor('#000001')
+                .setColor(client.color)
     
                 interaction.editReply({ content: " ", embeds: [embed] });
             }

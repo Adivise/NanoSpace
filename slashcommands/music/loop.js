@@ -8,57 +8,66 @@ module.exports = {
             name: "type",
             description: "Type of loop",
             type: 3,
+			required: true,
+            choices: [
+                {
+                    name: "Current",
+                    value: "current"
+                },
+                {
+                    name: "Queue",
+                    value: "queue"
+                }
+            ]
         }
     ],
-    
-    run: async (interaction, client) => {
+    run: async (interaction, client, user, language) => {
         await interaction.deferReply({ ephemeral: false });
-        const value = interaction.options.getString("type");
-		const msg = await interaction.editReply('**Loading please wait...**');
+		const msg = await interaction.editReply(`${client.i18n.get(language, "music", "loop_loading")}`);
 
 		const player = client.manager.get(interaction.guild.id);
-		if (!player) return msg.edit("No song/s currently playing within this guild.");
+		if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
         const { channel } = interaction.member.voice;
-        if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
+        if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
-		if (!value || value.toLowerCase() == 'current') {
+		if(interaction.options._hoistedOptions.find(c => c.value === "current")) {
 			if (player.trackRepeat === false) {
 				player.setTrackRepeat(true);
 
 				const looped = new MessageEmbed()
-					.setDescription(`\`🔁\` | **Song is loop:** \`Current\``)
-					.setColor('#000001');
+					.setDescription(`${client.i18n.get(language, "music", "loop_current")}`)
+					.setColor(client.color);
 
-					msg.edit({ content: " ", embeds: [looped] });
+					return msg.edit({ content: " ", embeds: [looped] });
 			}
 			else {
 				player.setTrackRepeat(false);
 
 				const unlooped = new MessageEmbed()
-					.setDescription(`\`🔁\` | **Song is unloop:** \`Current\``)
-					.setColor('#000001');
+					.setDescription(`${client.i18n.get(language, "music", "unloop_current")}`)
+					.setColor(client.color);
 
-					msg.edit({ content: " ", embeds: [unlooped] });
+					return msg.edit({ content: " ", embeds: [unlooped] });
 			}
 		}
-		else if (value == 'all') {
+		else if(interaction.options._hoistedOptions.find(c => c.value === "queue")) {
 			if (player.queueRepeat === true) {
 				player.setQueueRepeat(false);
 
 				const unloopall = new MessageEmbed()
-					.setDescription(`\`🔁\` | **Song is unloop:** \`All\``)
-					.setColor('#000001');
+					.setDescription(`${client.i18n.get(language, "music", "unloop_all")}`)
+					.setColor(client.color);
 
-					msg.edit({ content: " ", embeds: [unloopall] });
+					return msg.edit({ content: " ", embeds: [unloopall] });
 			}
 			else {
 				player.setQueueRepeat(true);
 
 				const loopall = new MessageEmbed()
-					.setDescription(`\`🔁\` | **Song is loop:** \`All\``)
-					.setColor('#000001');
+					.setDescription(`${client.i18n.get(language, "music", "loop_all")}`)
+					.setColor(client.color);
 
-					msg.edit({ content: " ", embeds: [loopall] });
+					return msg.edit({ content: " ", embeds: [loopall] });
 			}
 		}
 	}

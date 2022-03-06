@@ -32,7 +32,7 @@ module.exports = {
             .setDescription(`${client.i18n.get(language, "music", "skipto_msg", {
                 position: args[0]
             })}`)
-            .setColor('#000001');
+            .setColor(client.color);
 
         msg.edit({ content: " ", embeds: [skipto] });
     }

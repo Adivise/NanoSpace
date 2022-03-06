@@ -27,7 +27,7 @@ module.exports = {
         
         const resetted = new MessageEmbed()
             .setDescription(`${client.i18n.get(language, "filters", "reset_on")}`)
-            .setColor('#000001');
+            .setColor(client.color);
 
         await delay(5000);
         msg.edit({ content: " ", embeds: [resetted] });

@@ -23,7 +23,7 @@ module.exports = {
 
 				const looped = new MessageEmbed()
 					.setDescription(`${client.i18n.get(language, "music", "loop_current")}`)
-					.setColor('#000001');
+					.setColor(client.color);
 
 					msg.edit({ content: " ", embeds: [looped] });
 			}
@@ -32,7 +32,7 @@ module.exports = {
 
 				const unlooped = new MessageEmbed()
 					.setDescription(`${client.i18n.get(language, "music", "unloop_current")}`)
-					.setColor('#000001');
+					.setColor(client.color);
 
 					msg.edit({ content: " ", embeds: [unlooped] });
 			}
@@ -43,7 +43,7 @@ module.exports = {
 
 				const unloopall = new MessageEmbed() //// this is unloop all in queue!
 					.setDescription(`${client.i18n.get(language, "music", "unloop_all")}`)
-					.setColor('#000001');
+					.setColor(client.color);
 
 					msg.edit({ content: " ", embeds: [unloopall] });
 			}
@@ -52,7 +52,7 @@ module.exports = {
 
 				const loopall = new MessageEmbed() // this is loop all in queue!
 					.setDescription(`${client.i18n.get(language, "music", "loop_all")}`)
-					.setColor('#000001');
+					.setColor(client.color);
 
 					msg.edit({ content: " ", embeds: [loopall] });
 			}

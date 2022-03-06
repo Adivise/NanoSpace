@@ -21,7 +21,7 @@ module.exports = async (client, player, track, payload) => {
     const embeded = new MessageEmbed()
       .setAuthor({ name: `${client.i18n.get(language, "player", "track_title")}`, iconURL: `${client.i18n.get(language, "player", "track_icon")}` })
       .setDescription(`**[${track.title}](${track.uri})**`)
-      .setColor('#000001')
+      .setColor(client.color)
       .setThumbnail(`https://img.youtube.com/vi/${track.identifier}/hqdefault.jpg`)
       .addField(`${client.i18n.get(language, "player", "author_title")}`, `${track.author}`, true)
       .addField(`${client.i18n.get(language, "player", "request_title")}`, `${track.requester}`, true)
@@ -121,7 +121,7 @@ module.exports = async (client, player, track, payload) => {
             .setDescription(`${client.i18n.get(language, "player", "pause_msg", {
               pause: uni,
             })}`)
-            .setColor('#000001');
+            .setColor(client.color);
 
         message.reply({ embeds: [embed], ephemeral: true });
       } else if (id === "skip") {
@@ -132,7 +132,7 @@ module.exports = async (client, player, track, payload) => {
 
         const embed = new MessageEmbed()
             .setDescription(`${client.i18n.get(language, "player", "skip_msg")}`)
-            .setColor('#000001');
+            .setColor(client.color);
 
         await nplaying.edit({ embeds: [embeded], components: [] });
         message.reply({ embeds: [embed], ephemeral: true });
@@ -146,7 +146,7 @@ module.exports = async (client, player, track, payload) => {
 
         const embed = new MessageEmbed()
             .setDescription(`${client.i18n.get(language, "player", "stop_msg")}`)
-            .setColor('#000001');
+            .setColor(client.color);
         
         await nplaying.edit({ embeds: [embeded], components: [] });
         message.reply({ embeds: [embed], ephemeral: true });
@@ -158,7 +158,7 @@ module.exports = async (client, player, track, payload) => {
 
         const embed = new MessageEmbed()
             .setDescription(`${client.i18n.get(language, "player", "shuffle_msg")}`)
-            .setColor('#000001');
+            .setColor(client.color);
 
         message.reply({ embeds: [embed], ephemeral: true });
       } else if(id === "loop") {
@@ -172,7 +172,7 @@ module.exports = async (client, player, track, payload) => {
             .setDescription(`${client.i18n.get(language, "player", "repeat_msg", {
               loop: uni,
             })}`)
-            .setColor('#000001');
+            .setColor(client.color);
 
         message.reply({ embeds: [embed], ephemeral: true });
       } else if(id === "volup") {
@@ -185,7 +185,7 @@ module.exports = async (client, player, track, payload) => {
             .setDescription(`${client.i18n.get(language, "player", "volup_msg", {
               volume: player.volume,
             })}`)
-            .setColor('#000001');
+            .setColor(client.color);
 
         message.reply({ embeds: [embed], ephemeral: true });
       }
@@ -199,7 +199,7 @@ module.exports = async (client, player, track, payload) => {
             .setDescription(`${client.i18n.get(language, "player", "voldown_msg", {
               volume: player.volume,
             })}`)
-            .setColor('#000001');
+            .setColor(client.color);
 
         message.reply({ embeds: [embed], ephemeral: true });
       }
@@ -211,7 +211,7 @@ module.exports = async (client, player, track, payload) => {
 
         const embed = new MessageEmbed()
             .setDescription(`${client.i18n.get(language, "player", "replay_msg")}`)
-            .setColor('#000001');
+            .setColor(client.color);
 
         message.reply({ embeds: [embed], ephemeral: true });
       }
@@ -243,7 +243,7 @@ module.exports = async (client, player, track, payload) => {
               guild: message.guild.name,
             })}`, iconURL: message.guild.iconURL({ dynamic: true }) })
             .setThumbnail(thumbnail)
-            .setColor('#000001')
+            .setColor(client.color)
             .setDescription(`${client.i18n.get(language, "player", "queue_description", {
               track: song.title,
               track_url: song.uri,
@@ -270,7 +270,7 @@ module.exports = async (client, player, track, payload) => {
 
         const embed = new MessageEmbed()
             .setDescription(`${client.i18n.get(language, "player", "clear_msg")}`)
-            .setColor('#000001');
+            .setColor(client.color);
 
         message.reply({ embeds: [embed], ephemeral: true });
       }

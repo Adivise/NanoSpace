@@ -38,7 +38,7 @@ module.exports = async (client, player, oldChannel, newChannel) => {
         .setDescription(`${client.i18n.get(language, "player", "dis_desc", {
           voice: oldChannel,
         })}`)
-        .setColor("#000001")
+        .setColor(client.color)
 
         if(channel) await channel.send({ embeds: [embed] });
         return player.destroy();
@@ -48,7 +48,7 @@ module.exports = async (client, player, oldChannel, newChannel) => {
         const embed = new MessageEmbed()
         .setTitle(`${client.i18n.get(language, "player", "leave_title")}`)
         .setDescription(`${client.i18n.get(language, "player", "leave_desc")}`)
-        .setColor("#000001")
+        .setColor(client.color)
         
         if(channel) await channel.send({ embeds: [embed] });
         return player.destroy();

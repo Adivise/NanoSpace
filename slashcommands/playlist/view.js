@@ -32,7 +32,12 @@ module.exports = {
             const playlist = playlists[i];
             const created = humanizeDuration(Date.now() - playlists[i].created, { largest: 1 })
             playlistStrings.push(
-                `${i + 1}. **\`${playlist.name}\`** • (${playlist.tracks.length} tracks) • *Created At*: \`[${created}]\`
+                `${client.i18n.get(language, "playlist", "view_embed_playlist", {
+                    num: i + 1,
+                    name: playlist.name,
+                    tracks: playlist.tracks.length,
+                    create: created
+                })}
                 `);
         }
 
@@ -44,7 +49,7 @@ module.exports = {
                     user: interaction.user.username
                 })}`, iconURL: interaction.user.displayAvatarURL() })
                 .setDescription(`${str == '' ? '  Nothing' : '\n' + str}`)
-                .setColor('#000001')
+                .setColor(client.color)
                 .setFooter({ text: `${client.i18n.get(language, "playlist", "view_embed_footer", {
                     page: i + 1,
                     pages: pagesNum,
@@ -54,7 +59,7 @@ module.exports = {
             pages.push(embed);
         }
 		if (!value) {
-			if (pages.length == pagesNum && playlists.length > 10) SlashPlaylist(client, interaction, pages, 30000, playlists.length);
+			if (pages.length == pagesNum && playlists.length > 10) SlashPlaylist(client, interaction, pages, 30000, playlists.length, language);
 			else return interaction.editReply({ embeds: [pages[0]] });
 		}
 		else {
@@ -69,10 +74,10 @@ module.exports = {
         const Premiumed = new MessageEmbed()
             .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premiun_author")}`, iconURL: client.user.displayAvatarURL() })
             .setDescription(`${client.i18n.get(language, "nopremium", "premiun_desc")}`)
-            .setColor("#000001")
+            .setColor(client.color)
             .setTimestamp()
 
-        return interaction.editReply({ embeds: [Premiumed] });
+        return interaction.editReply({ content: " ", embeds: [Premiumed] });
       }
     } catch (err) {
         console.log(err)

@@ -33,7 +33,7 @@ module.exports = {
                 .setDescription(`${client.i18n.get(language, "utilities", "prefix_set", {
                     prefix: input
                 })}`)
-                .setColor('#000001')
+                .setColor(client.color)
 
                 interaction.editReply({ embeds: [embed] });
             }
@@ -48,7 +48,7 @@ module.exports = {
                 .setDescription(`${client.i18n.get(language, "utilities", "prefix_change", {
                     prefix: input
                 })}`)
-                .setColor('#000001')
+                .setColor(client.color)
     
                 interaction.editReply({ embeds: [embed] });
             }

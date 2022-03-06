@@ -15,7 +15,7 @@ module.exports = {
         const realtime = client.config.NP_REALTIME;
         const msg = await message.channel.send(`${client.i18n.get(language, "music", "np_loading")}`);
         const player = client.manager.get(message.guild.id);
-        if (!player) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_player")}`);
+        if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
 
         const song = player.queue.current;
         const CurrentDuration = formatDuration(player.position);
@@ -29,7 +29,7 @@ module.exports = {
 
         const embeded = new MessageEmbed()
             .setAuthor({ name: player.playing ? `${client.i18n.get(language, "music", "np_title")}` : `${client.i18n.get(language, "music", "np_title_pause")}`, iconURL: `${client.i18n.get(language, "music", "np_icon")}` })
-            .setColor('#000001')
+            .setColor(client.color)
             .setDescription(`**[${song.title}](${song.uri})**`)
             .setThumbnail(Thumbnail)
             .addField(`${client.i18n.get(language, "music", "np_author")}`, `${song.author}`, true)
@@ -120,7 +120,7 @@ module.exports = {
                 .setDescription(`${client.i18n.get(language, "music", "np_pause_msg", {
                     pause: uni
                 })}`)
-                .setColor('#000001');
+                .setColor(client.color);
             
             embeded.setAuthor({ name: player.playing ? `${client.i18n.get(language, "music", "np_title")}` : `${client.i18n.get(language, "music", "np_title_pause")}`, iconURL: `${client.i18n.get(language, "music", "np_icon")}` })
             embeded.fields[6] = { name: `${client.i18n.get(language, "music", "np_current_duration", {
@@ -139,7 +139,7 @@ module.exports = {
           
             const embed = new MessageEmbed()
                 .setDescription(`${client.i18n.get(language, "music", "np_replay_msg")}`)
-                .setColor('#000001');;
+                .setColor(client.color);;
       
             interaction.reply({ embeds: [embed], ephemeral: true });
             } else if(id === "stop") {
@@ -152,7 +152,7 @@ module.exports = {
       
             const embed = new MessageEmbed()
                 .setDescription(`${client.i18n.get(language, "music", "np_stop_msg")}`)
-                .setColor('#000001');
+                .setColor(client.color);
 
             clearInterval(interval);
             if (NEmbed) await NEmbed.edit({ components: [] })
@@ -165,7 +165,7 @@ module.exports = {
       
             const embed = new MessageEmbed()
                 .setDescription(`${client.i18n.get(language, "music", "np_skip_msg")}`)
-                .setColor('#000001');
+                .setColor(client.color);
 
             clearInterval(interval);
             if (NEmbed) await NEmbed.edit({ components: [] });
@@ -181,7 +181,7 @@ module.exports = {
                 .setDescription(`${client.i18n.get(language, "music", "np_repeat_msg", {
                     loop: uni
                     })}`)
-                .setColor('#000001');
+                .setColor(client.color);
       
             interaction.reply({ embeds: [embed], ephemeral: true });
         }

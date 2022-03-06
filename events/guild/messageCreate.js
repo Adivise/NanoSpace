@@ -23,7 +23,7 @@ module.exports = async (client, message) => {
 
     if(message.content.match(mention)) {
       const embed = new MessageEmbed()
-        .setColor("#000001")
+        .setColor(client.color)
         .setDescription(client.i18n.get(language, "message", "my_prefix", {
             prefix: prefix || client.prefix,
           }),

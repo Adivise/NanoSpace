@@ -9,19 +9,19 @@ module.exports = {
     options: [
         {
             name: "seconds",
-            description: "The number of seconds to rewind the timestamp by.",
+            description: "Rewind timestamp in the song!",
             type: 4,
         }
     ],
-    run: async (interaction, client) => {
+    run: async (interaction, client, user, language) => {
         await interaction.deferReply({ ephemeral: false });
         const value = interaction.options.getInteger("seconds");
-        const msg = await interaction.editReply(`**Loading please wait...**`);
+        const msg = await interaction.editReply(`${client.i18n.get(language, "music", "rewind_loading")}`);
 
 		const player = client.manager.get(interaction.guild.id);
-		if (!player) return msg.edit("No song/s currently playing within this guild.");
+		if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
         const { channel } = interaction.member.voice;
-        if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit("You need to be in a same/voice channel.")
+        if (!channel || interaction.member.voice.channel !== interaction.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
         const CurrentDuration = formatDuration(player.position);
 
@@ -30,17 +30,21 @@ module.exports = {
                 await player.seek(player.position - value * 1000);
                 
                 const rewind1 = new MessageEmbed()
-                .setDescription("\`⏮\` | **Rewind to:** "+ `\`${CurrentDuration}\``)
-                .setColor('#000001');
+                .setDescription(`${client.i18n.get(language, "music", "rewind_msg", {
+                    duration: CurrentDuration,
+                })}`)
+                .setColor(client.color);
 
                 msg.edit({ content: " ", embeds: [rewind1] });
 			}
 			else {
-				return msg.edit('Cannot rewind beyond 00:00');
+				return msg.edit(`${client.i18n.get(language, "music", "rewind_beyond")}`);
 			}
 		}
 		else if(value && isNaN(value)) {
-			return msg.edit(`Invalid argument, must be a number.\nCorrect Usage: \`/rewind <seconds>\``);
+			return msg.edit(`${client.i18n.get(language, "music", "rewind_invalid", {
+                prefix: "/"
+            })}`);
 		}
 
 		if(!value) {
@@ -48,13 +52,15 @@ module.exports = {
                 await player.seek(player.position - rewindNum * 1000);
                 
                 const rewind2 = new MessageEmbed()
-                .setDescription("\`⏮\` | **Rewind to:** "+ `\`${CurrentDuration}\``)
-                .setColor('#000001');
+                .setDescription(`${client.i18n.get(language, "music", "rewind_msg", {
+                    duration: CurrentDuration,
+                })}`)
+                .setColor(client.color);
 
                 msg.edit({ content: " ", embeds: [rewind2] });
 			}
 			else {
-				return msg.edit('Cannot rewind beyond 00:00');
+				return msg.edit(`${client.i18n.get(language, "music", "rewind_beyond")}`);
 			}
 		}
 	}

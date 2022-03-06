@@ -59,7 +59,7 @@ module.exports = {
 				duration: totalDuration,
 				user: interaction.user
 			})}`)
-			.setColor('#000001')
+			.setColor(client.color)
 
 		msg.edit({ content: " ", embeds: [embed] });
 
@@ -97,10 +97,10 @@ module.exports = {
         const Premiumed = new MessageEmbed()
             .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premiun_author")}`, iconURL: client.user.displayAvatarURL() })
             .setDescription(`${client.i18n.get(language, "nopremium", "premiun_desc")}`)
-            .setColor("#000001")
+            .setColor(client.color)
             .setTimestamp()
 
-        return interaction.channel.send({ embeds: [Premiumed] });
+        return interaction.channel.send({ content: " ", embeds: [Premiumed] });
       }
     } catch (err) {
         console.log(err)
