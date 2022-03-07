@@ -48,20 +48,20 @@ module.exports = {
 
             await player.node.send(data);
 
-			const msg1 = await interaction.editReply(`${client.i18n.get(language, "filters", "filter_loading", {
+		const msg1 = await interaction.editReply(`${client.i18n.get(language, "filters", "filter_loading", {
                 name: client.commands.get('bassboost').config.name
             })}`);
-			const embed = new MessageEmbed()
-				.setDescription(`${client.i18n.get(language, "filters", "filter_on", {
+		const embed = new MessageEmbed()
+		.setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                 name: client.commands.get('bassboost').config.name
             })}`)
                 .setColor(client.color);
                 
-			await delay(5000);
+	await delay(5000);
             return msg1.edit({ content: " ", embeds: [embed] });
         } 
 
-		if(isNaN(value)) return interaction.editReply(`${client.i18n.get(language, "filters", "filter_number")}`);
+	if(isNaN(value)) return interaction.editReply(`${client.i18n.get(language, "filters", "filter_number")}`);
         if(value > 10 || value < -10) return interaction.editReply(`${client.i18n.get(language, "filters", "bassboost_limit")}`);
             const data = {
                 op: 'filters',
@@ -84,21 +84,21 @@ module.exports = {
                 ]
             }
             await player.node.send(data);
-		    const msg2 = await interaction.editReply(`${client.i18n.get(language, "filters", "bassboost_loading", {
+	const msg2 = await interaction.editReply(`${client.i18n.get(language, "filters", "bassboost_loading", {
                 amount: value
                 })}`);
-		    const embed = new MessageEmbed()
-			    .setDescription(`${client.i18n.get(language, "filters", "bassboost_set", {
+	const embed = new MessageEmbed()
+		.setDescription(`${client.i18n.get(language, "filters", "bassboost_set", {
                 amount: value
                 })}`)
                 .setColor(client.color);
             
-		    await delay(5000);
+	await delay(5000);
             return msg2.edit({ content: " ", embeds: [embed] });
     } else {
         const Premiumed = new MessageEmbed()
-            .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premiun_author")}`, iconURL: client.user.displayAvatarURL() })
-            .setDescription(`${client.i18n.get(language, "nopremium", "premiun_desc")}`)
+            .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premium_author")}`, iconURL: client.user.displayAvatarURL() })
+            .setDescription(`${client.i18n.get(language, "nopremium", "premium_desc")}`)
             .setColor(client.color)
             .setTimestamp()
 
