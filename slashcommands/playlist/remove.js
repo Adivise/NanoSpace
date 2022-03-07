@@ -37,13 +37,13 @@ module.exports = {
                 const song = playlist.tracks[position];
                 if(!song) return interaction.editReply(`${client.i18n.get(language, "playlist", "remove_song_notfound")}`);
 
-                playlist.tracks.splice(position + 1, 1);
+                playlist.tracks.splice(position - 1, 1);
                 await playlist.save();
 
                 const embed = new MessageEmbed()
                     .setDescription(`${client.i18n.get(language, "playlist", "remove_removed", {
                         name: Plist,
-                        position: pos + 1
+                        position: pos
                         })}`)
                     .setColor(client.color)
 
