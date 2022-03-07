@@ -102,16 +102,16 @@ module.exports = {
 
         Playlist.findOne({ name: PlaylistName }).then(playlist => {
             if(playlist) {
-                if(playlist.owner !== message.author.id) return message.channel.send(`${client.i18n.get(language, "playlist", "create_owner")}`);
-                const LimitTrack = playlist.tracks.length + TrackAdd.length; //You can't add more than ${client.config.LIMIT_TRACK} tracks to this playlist.
-                if(LimitTrack > client.config.LIMIT_TRACK) return message.channel.send(`${client.i18n.get(language, "playlist", "create_limit_track", {
+                if(playlist.owner !== message.author.id) { message.channel.send(`${client.i18n.get(language, "playlist", "create_owner")}`); TrackAdd.length = 0; return; }
+                const LimitTrack = playlist.tracks.length + TrackAdd.length;
+                if(LimitTrack > client.config.LIMIT_TRACK) { message.channel.send(`${client.i18n.get(language, "playlist", "create_limit_track", {
                     limit: client.config.LIMIT_TRACK
-                })}`);
+                })}`); TrackAdd.length = 0; return; }
                 for (let songs = 0; songs < TrackAdd.length; songs++) {
                     playlist.tracks.push(TrackAdd[songs]);
                 }
                 playlist.save().then(() => {
-                const embed = new MessageEmbed() //**Added • [\`${TrackAdd.length} track's\`] | Playlist • ${PlaylistName}**
+                const embed = new MessageEmbed()
                     .setDescription(`${client.i18n.get(language, "playlist", "create_added", {
                         count: TrackAdd.length,
                         playlist: PlaylistName
@@ -123,12 +123,12 @@ module.exports = {
                 }).catch(err => console.log(err));
             }
             else {
-                if(TrackAdd.length > client.config.LIMIT_TRACK)  return message.channel.send(`${client.i18n.get(language, "playlist", "create_limit_track", {
+                if(TrackAdd.length > client.config.LIMIT_TRACK) { message.channel.send(`${client.i18n.get(language, "playlist", "create_limit_track", {
                     limit: client.config.LIMIT_TRACK
-                })}`);
-                if(LimitPlaylist >= client.config.LIMIT_PLAYLIST) return message.channel.send(`${client.i18n.get(language, "playlist", "create_limit_playlist", {
+                })}`); TrackAdd.length = 0; return; }
+                if(LimitPlaylist >= client.config.LIMIT_PLAYLIST) { message.channel.send(`${client.i18n.get(language, "playlist", "create_limit_playlist", {
                     limit: client.config.LIMIT_PLAYLIST
-                })}`);
+                })}`); TrackAdd.length = 0; return; }
                 const CreateNew = new Playlist({
                     name: PlaylistName,
                     owner: message.author.id,
