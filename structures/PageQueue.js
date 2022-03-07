@@ -127,8 +127,8 @@ const NormalPlaylist = async (client, message, pages, timeout, queueLength, lang
 
     let page = 0;
     const curPage = await message.channel.send({ embeds: [pages[page].setFooter({ text: `${client.i18n.get(language, "playlist", "view_embed_footer", {
-                    page: i + 1,
-                    pages: pagesNum,
+                    page: page + 1,
+                    pages: pages.length,
                     songs: queueLength
                 })}` })], components: [row], allowedMentions: { repliedUser: false } });
     if(pages.length == 0) return;
@@ -144,8 +144,8 @@ const NormalPlaylist = async (client, message, pages, timeout, queueLength, lang
                 page = page + 1 < pages.length ? ++page : 0;
             }
             curPage.edit({ embeds: [pages[page].setFooter({ text: `${client.i18n.get(language, "playlist", "view_embed_footer", {
-                    page: i + 1,
-                    pages: pagesNum,
+                    page: page + 1,
+                    pages: pages.length,
                     songs: queueLength
                 })}` })], components: [row] })
         });
@@ -153,8 +153,8 @@ const NormalPlaylist = async (client, message, pages, timeout, queueLength, lang
         const disabled = new MessageActionRow()
             .addComponents(row1.setDisabled(true), row2.setDisabled(true))
         curPage.edit({ embeds: [pages[page].setFooter({ text: `${client.i18n.get(language, "playlist", "view_embed_footer", {
-                    page: i + 1,
-                    pages: pagesNum,
+                    page: page + 1,
+                    pages: pages.length,
                     songs: queueLength
                 })}` })], components: [disabled] })
     });
@@ -178,8 +178,8 @@ const SlashPlaylist = async (client, message, pages, timeout, queueLength, langu
 
     let page = 0;
     const curPage = await message.editReply({ embeds: [pages[page].setFooter({ text: `${client.i18n.get(language, "playlist", "view_embed_footer", {
-                    page: i + 1,
-                    pages: pagesNum,
+                    page: page + 1,
+                    pages: pages.length,
                     songs: queueLength
                 })}` })], components: [row], allowedMentions: { repliedUser: false } });
     if(pages.length == 0) return;
@@ -195,8 +195,8 @@ const SlashPlaylist = async (client, message, pages, timeout, queueLength, langu
                 page = page + 1 < pages.length ? ++page : 0;
             }
             curPage.edit({ embeds: [pages[page].setFooter({ text: `${client.i18n.get(language, "playlist", "view_embed_footer", {
-                    page: i + 1,
-                    pages: pagesNum,
+                    page: page + 1,
+                    pages: pages.length,
                     songs: queueLength
                 })}` })], components: [row] })
         });
@@ -204,8 +204,8 @@ const SlashPlaylist = async (client, message, pages, timeout, queueLength, langu
         const disabled = new MessageActionRow()
             .addComponents(row1.setDisabled(true), row2.setDisabled(true))
         curPage.edit({ embeds: [pages[page].setFooter({ text: `${client.i18n.get(language, "playlist", "view_embed_footer", {
-                    page: i + 1,
-                    pages: pagesNum,
+                    page: page + 1,
+                    pages: pages.length,
                     songs: queueLength
                 })}` })], components: [disabled] })
     });
