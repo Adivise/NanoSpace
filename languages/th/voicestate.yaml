@@ -1,0 +1,7 @@
+##### voiceStateUpdate #####
+
+# On nobody in voice!
+wait_leave: "กำลังตัดการเชื่อมต่อ ห้อง <#%{voice}> ใน %{timeout} นาที เพราะฉันถูกทิ้งให้อยู่คนเดียว"
+
+# On bot waiting to disconnected!
+timeout_leave: "ตัดการเชื่อมต่อจาก ห้อง <#%{voice}> เพราะฉันถูกทิ้งให้อยู่คนเดียว"

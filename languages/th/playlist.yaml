@@ -1,0 +1,65 @@
+##### Create command #####
+create_loading: "**กำลังสร้างเพลย์ลิสต์...**"
+create_arg: "โปรดระบุ ตัวอย่าง: %{prefix}create <ลิ้ง หรือ ชื่อเพลง> <ชื่อเพลย์ลิสต์>"
+create_toolong: "ชื่อเพลย์ลิสต์ต้องมีความยาวไม่เกิน 16 อักขระ"
+create_match: "ลิงก์เพลย์ลิสต์ไม่ถูกต้อง"
+create_fail: "เกิดข้อผิดพลาดในการโหลดเพลย์ลิสต์"
+create_track: "**ค้นหา • [%{title}](%{url})** `%{duration}` • %{user}"
+create_playlist: "**ค้นหา • [%{title}](%{url})** `%{duration}` (%{track} เพลง) • %{user}"
+create_search: "**ค้นหา • [%{title}](%{url})** `%{duration}` • %{user}"
+create_owner: "คุณไม่สามารถเพิ่มลงในเพลย์ลิสต์นี้ได้"
+create_limit_track: "คุณไม่สามารถเพิ่มมากกว่า %{limit} เพลง ในเพลย์ลิสต์นี้"
+create_limit_playlist: "คุณมีเพลย์ลิสต์ได้ไม่เกิน %{limit} เพลย์ลิสต์"
+create_added: "**เพิ่ม • [`%{count} เพลง`] | เพลย์ลิสต์ • %{playlist}**"
+create_created: "**สร้าง • %{playlist} | เพิ่ม • [`%{count} เพลง`]**"
+
+##### Delete command #####
+delete_arg: "โปรดระบุ ตัวอย่าง: %{prefix}delete <ชื่อเพลย์ลิสต์>"
+delete_notfound: "ชื่อเพลย์ลิสต์ไม่ถูกต้อง"
+delete_owner: "คุณไม่สามารถลบเพลย์ลิสต์นี้ได้"
+delete_deleted: "**ลบเพลย์ลิสต์ •** %{name}"
+
+##### Detail command #####
+detail_arg: "โปรดระบุ ตัวอย่าง: %{prefix}detail <ชื่อเพลย์ลิสต์>"
+detail_notfound: "ชื่อเพลย์ลิสต์ไม่ถูกต้อง."
+detail_owner: "คุณไม่สามารถดูเพลย์ลิสต์นี้ได้"
+detail_embed_title: "เพลย์ลิสต์ • %{name}"
+detail_embed_footer: "หน้าที่ • %{page}/%{pages} | %{songs} • เพลง | ระยะเวลาทั้งหมด • %{duration}"
+detail_notnumber: "หน้าต้องเป็นตัวเลข"
+detail_page_notfound: "มีเพียง %{page} หน้าที่ใช้ได้"
+detail_track: "%{num}. **[%{title}](%{url})** | *ช่อง*: %{author} • `[%{duration}]`"
+
+##### Import command #####
+import_loading: "กำลังนำเพิ่ม เพลย์ลิสต์ไปยังคิว..."
+import_voice: "คุณต้องอยู่ใน ห้องเสียง เพื่อใช้คำสั่ง"
+import_join: "ฉันไม่ได้รับอนุญาตให้เข้าร่วม ห้องเสียง ของคุณ"
+import_speak: "ฉันไม่ได้รับอนุญาตให้พูดใน ห้องเสียง ของคุณ"
+import_arg: "โปรดระบุชื่อเพลย์ลิสต์ ตัวอย่าง: %{prefix}import <ชื่อเพลย์ลิสต์>**"
+import_notfound: "ชื่อเพลย์ลิสต์ไม่ถูกต้อง"
+import_owner: "คุณไม่สามารถเพิ่มเพลย์ลิสต์นี้เข้าคิวได้"
+import_imported: "**เพิ่มเพลย์ลิสต์ • %{name}** `[%{duration}]` (%{tracks} เพลง) • %{user}"
+import_match: "เกิดข้อผิดพลาดเพลย์ลิสต์ไม่ถูกต้อง"
+import_fail: "เกิดข้อผิดพลาดในการโหลดเพลย์ลิสต์"
+
+##### View command #####
+view_embed_title: "%{user}'s • เพลย์ลิสต์"
+view_embed_footer: "หน้าที่ • %{page}/%{pages} | %{songs} • เพลย์ลิสต์"
+view_notnumber: "หน้าต้องเป็นตัวเลข"
+view_page_notfound: "มีเพียง %{page} หน้าที่ใช้ได้"
+view_embed_playlist: "%{num}. **`%{name}`** • (%{tracks} เพลง) • *สร้างตั้งแต่*: `[%{create} ที่แล้ว]`"
+
+##### Remove command #####
+remove_arg: "โปรดระบุ ตัวอย่าง: %{prefix}remove <ชื่อเพลย์ลิสต์> <ตำแหน่ง>"
+remove_notfound: "ชื่อเพลย์ลิสต์ไม่ถูกต้อง"
+remove_song_notfound: "ไม่พบเพลงที่จะลบ"
+remove_owner: "คุณไม่สามารถลบเพลงออกจากเพลย์ลิสต์นี้ได้"
+remove_removed: "**ลบเพลง •** จากตำแหน่ง `%{position}` ในเพลย์ลิสต์ `%{name}`"
+
+##### Savequeue command #####
+savequeue_arg: "โปรดระบุ ตัวอย่าง: %{prefix}savequeue <ชื่อเพลย์ลิสต์>"
+savequeue_notfound: "ชื่อเพลย์ลิสต์ไม่ถูกต้อง"
+savequeue_owner: "คุณไม่สามารถบันทึกเพลงลงในเพลย์ลิสต์นี้ได้"
+savequeue_saved: "**บันทึก •** (%{tracks} เพลง) ลงในเพลย์ลิสต์ `%{name}`"
+
+
+
