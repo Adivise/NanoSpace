@@ -74,11 +74,13 @@ module.exports = {
                 if(!player.playing) player.play();
             }
             else if(res.loadType == "LOAD_FAILED") {
-                return msg.edit(`${client.i18n.get(language, "music", "play_fail")}`);
+                msg.edit(`${client.i18n.get(language, "music", "play_fail")}`);
+                player.destroy();
             }
         }
         else {
-            return msg.edit(`${client.i18n.get(language, "music", "play_match")}`);
+            msg.edit(`${client.i18n.get(language, "music", "play_match")}`);
+            player.destroy();
         }
     }
 }

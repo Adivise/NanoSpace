@@ -125,6 +125,7 @@ module.exports = {
                     name: PlaylistName,
                     owner: interaction.user.id,
                     tracks: TrackAdd,
+                    private: true,
                     created: Date.now()
                 });
                 CreateNew.save().then(() => {

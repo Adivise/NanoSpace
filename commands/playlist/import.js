@@ -42,8 +42,8 @@ module.exports = {
 		let SongLoad = 0;
 
 		const playlist = await Playlist.findOne({ name: Plist });
-		if(!playlist) return message.channel.send(`${client.i18n.get(language, "playlist", "import_notfound")}`);
-		if(playlist.owner !== message.author.id) return message.channel.send(`${client.i18n.get(language, "playlist", "import_owner")}`);
+		if(!playlist) { message.channel.send(`${client.i18n.get(language, "playlist", "import_notfound")}`); player.destroy(); return; }
+		if(playlist.private && playlist.owner !== message.author.id) { message.channel.send(`${client.i18n.get(language, "playlist", "import_private")}`); player.destroy(); return; }
 
 		const totalDuration = convertTime(playlist.tracks.reduce((acc, cur) => acc + cur.duration, 0));
 
@@ -78,11 +78,11 @@ module.exports = {
 					SongLoad++;
 				}
 				else if(res.loadType == "LOAD_FAILED") {
-					return message.channel.send(`${client.i18n.get(language, "playlist", "import_fail")}`);
+					{ message.channel.send(`${client.i18n.get(language, "playlist", "import_fail")}`); player.destroy(); return; }
 				}
 			}
 			else {
-				return message.channel.send(`${client.i18n.get(language, "playlist", "import_match")}`);
+				{ message.channel.send(`${client.i18n.get(language, "playlist", "import_match")}`); player.destroy(); return; }
 			}
 
 			if(SongLoad == playlist.tracks.length) {

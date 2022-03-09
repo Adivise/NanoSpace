@@ -22,7 +22,7 @@ module.exports = {
         const Plist = args.join(" ").replace(/_/g, ' ');
         const playlist = await Playlist.findOne({ name: Plist });
         if(!playlist) return message.channel.send(`${client.i18n.get(language, "playlist", "detail_notfound")}`);
-        if(playlist.owner !== message.author.id) return message.channel.send(`${client.i18n.get(language, "playlist", "detail_owner")}`);
+        if(playlist.private && playlist.owner !== message.author.id) return message.channel.send(`${client.i18n.get(language, "playlist", "detail_private")}`);
 
         let pagesNum = Math.ceil(playlist.tracks.length / 10);
 		if(pagesNum === 0) pagesNum = 1;

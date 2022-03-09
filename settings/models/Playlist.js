@@ -4,6 +4,7 @@ const CreatePlaylist = mongoose.Schema({
     name: String,
     tracks: Array,
     created: Number,
+    private: Boolean,
     owner: String,
 });
 

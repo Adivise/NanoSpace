@@ -46,10 +46,7 @@ module.exports = {
                         user: message.author
                         })}`)
                     .setColor(client.color)
-                msg.edit({ content: " ", embeds: [embed] }).then(msg => {
-                //    message.delete()
-                    setTimeout(() => msg.delete(), 5000)
-                  });
+                msg.edit({ content: " ", embeds: [embed] });
             }
             else if(res.loadType == "PLAYLIST_LOADED") {
                 for (let t = 0; t < res.tracks.length; t++) {
@@ -64,10 +61,7 @@ module.exports = {
                         user: message.author
                         })}`)
                     .setColor(client.color)
-                msg.edit({ content: " ", embeds: [embed] }).then(msg => {
-                 //   message.delete()
-                    setTimeout(() => msg.delete(), 5000)
-                  });
+                msg.edit({ content: " ", embeds: [embed] });
             }
             else if(res.loadType == "SEARCH_RESULT") {
                 TrackAdd.push(res.tracks[0]);
@@ -79,23 +73,14 @@ module.exports = {
                         user: message.author
                         })}`)
                     .setColor(client.color)
-                msg.edit({ content: " ", embeds: [embed] }).then(msg => {
-                  //  message.delete()
-                    setTimeout(() => msg.delete(), 5000)
-                  });
+                msg.edit({ content: " ", embeds: [embed] });
             }
             else if(res.loadType == "LOAD_FAILED") { //Error loading playlist.
-                return msg.edit(`${client.i18n.get(language, "playlist", "create_fail")}`).then(msg => {
-                 //   message.delete()
-                    setTimeout(() => msg.delete(), 5000)
-                  });
+                return msg.edit(`${client.i18n.get(language, "playlist", "create_fail")}`);
             }
         }
         else { //The playlist link is invalid.
-            return msg.edit(`${client.i18n.get(language, "playlist", "create_match")}`).then(msg => {
-              //  message.delete()
-                setTimeout(() => msg.delete(), 5000)
-              });
+            return msg.edit(`${client.i18n.get(language, "playlist", "create_match")}`);
         }
 
         const LimitPlaylist = await Playlist.find({ owner: message.author.id }).countDocuments();
@@ -133,6 +118,7 @@ module.exports = {
                     name: PlaylistName,
                     owner: message.author.id,
                     tracks: TrackAdd,
+                    private: true,
                     created: Date.now()
                 });
                 CreateNew.save().then(() => {

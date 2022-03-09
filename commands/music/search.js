@@ -179,6 +179,7 @@ module.exports = {
                     collector.on('end', async (collected, reason) => {
                         if(reason === "time") {
                             msg.edit({ content: `${client.i18n.get(language, "music", "search_no_response")}`, embeds: [], components: [] });
+                            player.destroy();
                         }
                     });
 
@@ -198,11 +199,13 @@ module.exports = {
                         if(!player.playing) player.play()
                     }
                     else if(res.loadType == "LOAD_FAILED") {
-                        return msg.edit(`${client.i18n.get(language, "music", "search_fail")}`);
+                        msg.edit(`${client.i18n.get(language, "music", "search_fail")}`);
+                        player.destroy();
                     }
                 }
                 else {
-                    return msg.edit(`${client.i18n.get(language, "music", "search_match")}`);
+                    msg.edit(`${client.i18n.get(language, "music", "search_match")}`);
+                    player.destroy();
                 }
             }
         }

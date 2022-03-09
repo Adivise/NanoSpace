@@ -32,7 +32,7 @@ module.exports = {
         const Plist = value.replace(/_/g, ' ');
         const playlist = await Playlist.findOne({ name: Plist });
         if(!playlist) return interaction.editReply(`${client.i18n.get(language, "playlist", "detail_notfound")}`);
-        if(playlist.owner !== interaction.user.id) return interaction.editReply(`${client.i18n.get(language, "playlist", "detail_owner")}`);
+        if(playlist.private && playlist.owner !== interaction.user.id) return interaction.editReply(`${client.i18n.get(language, "playlist", "detail_private")}`);
 
         let pagesNum = Math.ceil(playlist.tracks.length / 10);
 		if(pagesNum === 0) pagesNum = 1;
