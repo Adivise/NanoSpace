@@ -1,23 +1,28 @@
 ##### Create command #####
 create_loading: "**Creating playlist...**"
-create_arg: "Please provide a playlist link. Example: %{prefix}create <playlist link> <playlist name>"
+create_arg: "Please provide a playlist name. Example: %{prefix}create <playlist name>"
 create_toolong: "Playlist name can't be longer than 16 characters."
-create_match: "The playlist link is invalid."
-create_fail: "Error loading playlist."
-create_track: "**Searched • [%{title}](%{url})** `%{duration}` • %{user}"
-create_playlist: "**Searched • [%{title}](%{url})** `%{duration}` (%{track} tracks) • %{user}"
-create_search: "**Searched • [%{title}](%{url})** `%{duration}` • %{user}"
-create_owner: "You can't add to this playlist."
-create_limit_track: "You can't add more than %{limit} tracks to this playlist."
 create_limit_playlist: "You can't have playlist more than %{limit} playlists."
-create_added: "**Added • [`%{count} track's`] | Playlist • %{playlist}**"
-create_created: "**Created • %{playlist} | Added • [`%{count} track's`]**"
+create_name_exist: "This name already have in data."
+create_created: "`📦` | *Created* • `%{playlist}`"
+
+##### Add command #####
+add_loading: "**Adding to playlist...**"
+add_arg: "Please provide a playlist name. Example: %{prefix}add <playlist name> <playlist link>"
+add_match: "The playlist link is invalid."
+add_fail: "Error loading playlist."
+add_track: "**Searched • [%{title}](%{url})** `%{duration}` • %{user}"
+add_playlist: "**Searched • [%{title}](%{url})** `%{duration}` (%{track} tracks) • %{user}"
+add_search: "**Searched • [%{title}](%{url})** `%{duration}` • %{user}"
+add_owner: "You can't add to this playlist."
+add_limit_track: "You can't add more than %{limit} tracks to this playlist."
+add_added: "`📦` | *Added* • [`%{count} track's`] to *Playlist* • `%{playlist}`"
 
 ##### Delete command #####
 delete_arg: "Please provide a playlist name. Example: %{prefix}delete <playlist name>"
 delete_notfound: "The playlist name is invalid."
 delete_owner: "You can't delete this playlist."
-delete_deleted: "**Deleted •** %{name} playlist."
+delete_deleted: "`📦` | *Deleted* • `%{name}`"
 
 ##### Detail command #####
 detail_arg: "Please provide a playlist name. Example: %{prefix}detail <playlist name>"
@@ -53,13 +58,13 @@ remove_arg: "Please provide a playlist name. Example: %{prefix}remove <playlist 
 remove_notfound: "The playlist name is invalid."
 remove_song_notfound: "Can't not find the song to remove"
 remove_owner: "You can't remove song from this playlist."
-remove_removed: "**Removed •** to `%{position}` in `%{name}` playlist"
+remove_removed: "`📦` | *Removed* • position `%{position}` in `%{name}`"
 
 ##### Savequeue command #####
 savequeue_arg: "Please provide a playlist name. Example: %{prefix}savequeue <playlist name>"
 savequeue_notfound: "The playlist name is invalid."
 savequeue_owner: "You can't save song to this playlist."
-savequeue_saved: "**Saved •** (%{tracks} tracks) to `%{name}` playlist"
+savequeue_saved: "`📦` | *Saved* • (%{tracks} tracks) to `%{name}`"
 
 ##### Private command #####
 private_arg: "Please provide a playlist name. Example: %{prefix}private <playlist name>"
