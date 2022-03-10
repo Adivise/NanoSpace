@@ -1,6 +1,4 @@
-# Hindi Not Finished
 ### 247 command
-
 247_loading: "Loading please wait..."
 247_off: "`🌙` | *Mode 24/7 has been:* `Deactivated`"
 247_on: "`🌕` | *Mode 24/7 has been:* `Activated`"
@@ -93,6 +91,7 @@ play_invoice: "You need to be in a voice channel to use command."
 play_join: "I don't have permission to join your voice channel."
 play_speak: "I don't have permission to speak in your voice channel."
 play_arg: "Please provide a song name or link to search."
+play_startwith: "Please use link to play music."
 
 play_track: "**Queued • [%{title}](%{url})** `%{duration}` • %{request}"
 play_playlist: "**Queued • [%{title}](%{url})** `%{duration}` (%{songs} tracks) • %{request}"

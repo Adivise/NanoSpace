@@ -4,7 +4,7 @@ const GLang = require('../../settings/models/Language.js');
 const chalk = require('chalk');
 
 module.exports = async(client, interaction) => {
-    if (interaction.isCommand()) {
+    if (interaction.isCommand() || interaction.isContextMenu()) {
         if (!client.slash.has(interaction.commandName)) return;
         if (!interaction.guild) return;
 
