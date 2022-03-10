@@ -14,6 +14,7 @@
 - [x] Custom Prefix
 - [x] Multi Language (98.9%) (can set per guild!)
 - [x] SlashCommand
+- [x] ContextMenus
 - [x] Custom Filters
 - [x] Easy to use
 
@@ -192,9 +193,14 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 - Vibrate (#vibrate)
 - Vibrato (#vibrato)
 - Daycore (#daycore)
+- Televistion (#Television)
+- Jazz (#jazz)
 	
 📦 **Playlist Commands!**
-- Create (#create [link] [name]) <= Work all link? use same name to add! went your have!
+- Create (#create [name])
+- Add (#add [name] [link])
+- Private (#private [name])
+- Public (#public [name])
 - Delete (#delete [name])
 - Import (#import [name])
 - Detail (#detail [name])
