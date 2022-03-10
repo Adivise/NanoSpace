@@ -193,7 +193,7 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 - Vibrate (#vibrate)
 - Vibrato (#vibrato)
 - Daycore (#daycore)
-- Televistion (#Television)
+- Television (#Television)
 - Jazz (#jazz)
 	
 📦 **Playlist Commands!**
