@@ -4,8 +4,6 @@ const Spotify = require("better-erela.js-spotify").default;
 const Deezer = require("erela.js-deezer");
 const AppleMusic = require("better-erela.js-apple").default;
 const Facebook = require("erela.js-facebook");
-const { readdirSync } = require("fs");
-const path = require("path");
 const { I18n } = require("locale-parser")
 
 class MainClient extends Client {
@@ -25,7 +23,6 @@ class MainClient extends Client {
         });
 
     this.config = require("./settings/config.js");
-    this.loadslash = [];
     this.prefix = this.config.PREFIX;
     this.owner = this.config.OWNER_ID;
     this.dev = this.config.DEV_ID;
@@ -53,14 +50,8 @@ class MainClient extends Client {
       },
     });
 
-    ["aliases", "slash", "commands", "premiums"].forEach(x => client[x] = new Collection());
-    ["loadCommand", "loadSlashCommand", "loadEvent", "loadPlayer", "loadDatabase", "loadPremium"].forEach(x => require(`./handlers/${x}`)(client));
-
-    readdirSync("./slashcommands/").map(async dir => {
-        readdirSync(`./slashcommands/${dir}`).map(async (cmd) => {
-            this.loadslash.push(require(path.join(__dirname, `./slashcommands/${dir}/${cmd}`)));
-        })
-    })
+    ["aliases", "commands", "premiums"].forEach(x => client[x] = new Collection());
+    ["loadCommand", "loadEvent", "loadPlayer", "loadDatabase", "loadPremium"].forEach(x => require(`./handlers/${x}`)(client));
 
 	}
 		connect() {

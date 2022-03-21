@@ -1,6 +1,6 @@
 const { MessageEmbed, Permissions } = require('discord.js');
 const Playlist = require('../../settings/models/Playlist.js');
-const { convertTime } = require('../../structures/convert.js');
+const { convertTime } = require('../../structures/ConvertTime.js');
 
 module.exports = { 
     config: {

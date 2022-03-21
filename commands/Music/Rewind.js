@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js');
-const formatDuration = require('../../structures/formatduration.js')
+const formatDuration = require('../../structures/FormatDuration.js')
 
 const rewindNum = 10;
 

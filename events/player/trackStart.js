@@ -1,5 +1,5 @@
 const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
-const formatduration = require('../../structures/formatduration');
+const formatduration = require('../../structures/FormatDuration.js');
 const GLang = require("../../settings/models/Language.js");
     
 module.exports = async (client, player, track, payload) => {

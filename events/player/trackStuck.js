@@ -1,4 +1,6 @@
 const { MessageEmbed } = require("discord.js");
+const { white, red } = require("chalk");
+const GLang = require("../../settings/models/Language.js");
 
 module.exports = async (client, player, track, payload) => {
     const channel = client.channels.cache.get(player.textChannel);
@@ -22,7 +24,7 @@ module.exports = async (client, player, track, payload) => {
 
     channel.send({embeds: [embed]});
     
-    console.log(`[ERROR] Error when loading song! Track is stuck in [${player.guild}]`);
+    console.log(white('[') + red('DEBUG') + white('] ') + red('Track Stuck in ') + white(player.guild) + red(' Auto-Leaved!'));
     if (!player.voiceChannel) player.destroy();
 
 }

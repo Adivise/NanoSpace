@@ -1,19 +1,12 @@
-const figlet = require('figlet');
-const chalk = require('chalk');
-const PremiumUser = require('../../settings/models/PremiumUser.js')
+const { white, green } = require('chalk');
+const Premium = require('../../settings/models/Premium.js')
 
 module.exports = async (client) => {
-    client.manager.init(client.user.id);
-    figlet(client.user.tag, function(err, data) {
-        if (err) {
-            console.log('Something went wrong...');
-            console.dir(err);
-            return;
-        }
-        console.log(chalk.red.bold(data));
-    });
+    await client.manager.init(client.user.id);
 
-    const users = await PremiumUser.find();
+    console.log(white('[') + green('INFO') + white('] ') + green(`${client.user.tag} (${client.user.id})`) + white(` is Ready!`));
+
+    const users = await Premium.find();
     for (let user of users) {
       client.premiums.set(user.Id, user);
     }

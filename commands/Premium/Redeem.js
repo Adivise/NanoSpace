@@ -1,6 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const Redeem = require('../../settings/models/Redeem.js')
-const PremiumUser = require('../../settings/models/PremiumUser.js')
+const Premium = require('../../settings/models/Premium.js')
 const moment = require('moment')
 
 module.exports = { 
@@ -14,7 +14,7 @@ module.exports = {
     },
     run: async (client, message, args, user, language, prefix) => {
         
-        let member = await PremiumUser.findOne({ Id: message.author.id })
+        let member = await Premium.findOne({ Id: message.author.id })
   
         let code = args[0]
         if (!code)

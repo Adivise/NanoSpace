@@ -1,6 +1,5 @@
 const { readdirSync } = require("fs")
-const delay = require('delay');
-const chalk = require("chalk");
+const { white, green } = require("chalk");
 
 module.exports = async (client) => {
     const load = dirs => {
@@ -12,6 +11,5 @@ module.exports = async (client) => {
           };
         };
         ["Music", "Filters", "Utilities", "Playlist", "Premium"].forEach(x => load(x));
-        await delay(4000);
-        console.log(chalk.greenBright(`[INFORMATION] Command Events Loaded`));
+        console.log(white('[') + green('INFO') + white('] ') + green('SlashCommand ') + white('Events') + green(' Loaded!'));
 };

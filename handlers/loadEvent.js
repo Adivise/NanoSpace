@@ -1,5 +1,4 @@
-const delay = require('delay');
-const chalk = require("chalk");
+const { white, green } = require("chalk");
 const { readdirSync } = require('fs');
 
 module.exports = async (client) => {
@@ -12,6 +11,5 @@ module.exports = async (client) => {
         }
     };
     ["client", "guild"].forEach((x) => loadcommand(x));
-    await delay(4000);
-    console.log(chalk.greenBright(`[INFORMATION] Global Events Loaded`));
+    console.log(white('[') + green('INFO') + white('] ') + green('Event ') + white('Events') + green(' Loaded!'));
 };

@@ -1,5 +1,5 @@
-const chalk = require("chalk");
+const { white, red }= require("chalk");
 
 module.exports = async (client, player) => {
-	console.log(chalk.red(`[INFORMATION] Player Destroyed from [GUILDID] ${player.guild}`));
+	console.log(white('[') + red('DEBUG') + white('] ') + red('Player Destroyed from (') + white(`${player.guild}`) + red(')'));
 }

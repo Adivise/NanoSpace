@@ -1,4 +1,4 @@
-const { convertTime } = require('./convert.js');
+const { convertTime } = require('./ConvertTime.js');
 
 module.exports = (duration) => {
     if(isNaN(duration) || typeof duration === 'undefined') return '00:00';

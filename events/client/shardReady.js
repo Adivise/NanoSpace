@@ -1,7 +1,5 @@
-const chalk = require("chalk");
-const delay = require("delay");
+const { white, green } = require("chalk");
 
 module.exports = async (client, id) => {
-    await delay(4000);
-    console.log(chalk.green(`[INFORMATION] (${String(new Date).split(" ", 5).join(" ")}) Shard ${id} Shard ready!`));
+    console.log(white('[') + green('INFO') + white('] ') + green('Shard ') + white(id) + green(' Shard Ready!'));
 }

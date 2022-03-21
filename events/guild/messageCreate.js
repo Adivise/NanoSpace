@@ -1,7 +1,7 @@
 const { Permissions, MessageEmbed } = require("discord.js");
 const GPrefix = require('../../settings/models/Prefix.js');
 const GLang = require('../../settings/models/Language.js');
-const PremiumUser = require('../../settings/models/PremiumUser.js');
+const Premium = require('../../settings/models/Premium.js');
 const chalk = require('chalk');
 
 module.exports = async (client, message) => { 
@@ -58,9 +58,9 @@ module.exports = async (client, message) => {
       let user = message.client.premiums.get(message.author.id)
   
       if (!user) {
-        const findUser = await PremiumUser.findOne({ Id: message.author.id })
+        const findUser = await Premium.findOne({ Id: message.author.id })
         if (!findUser) {
-          const newUser = await PremiumUser.create({ Id: message.author.id })
+          const newUser = await Premium.create({ Id: message.author.id })
           message.client.premiums.set(message.author.id, newUser)
           user = newUser
         } else return

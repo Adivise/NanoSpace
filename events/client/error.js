@@ -1,5 +1,5 @@
-const chalk = require('chalk');
+const { white, red } = require('chalk');
 
 module.exports = async (client) => {
-    console.log(chalk.red(`[ERROR] ${client.user.tag} (${client.user.id})`));
+    console.log(white('[') + red('WARN') + white('] ') + red('Errored ') + white(`${client.user.tag} (${client.user.id})`) + red(' '));
 };

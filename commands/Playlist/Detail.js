@@ -1,6 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const Playlist = require('../../settings/models/Playlist.js');
-const formatDuration = require('../../structures/formatduration');
+const formatDuration = require('../../structures/FormatDuration.js');
 const { NormalPage } = require('../../structures/PageQueue.js');
 
 module.exports = { 

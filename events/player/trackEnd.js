@@ -7,6 +7,6 @@ module.exports = async (client, player, track, playload) => {
         const search = `https://www.youtube.com/watch?v=${identifier}&list=RD${identifier}`;
         let res = await player.search(search, requester);
 
-		player.queue.add(res.tracks[2]);
+		player.queue.add(res.tracks[1]);
     }
 }

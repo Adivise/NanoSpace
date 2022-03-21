@@ -1,6 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const { NormalPage } = require('../../structures/PageQueue.js');
-const formatDuration = require('../../structures/formatduration');
+const formatDuration = require('../../structures/FormatDuration.js');
 
 module.exports = { 
     config: {

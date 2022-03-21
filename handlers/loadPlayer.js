@@ -1,5 +1,4 @@
-const chalk = require("chalk");
-const delay = require("delay");
+const { white, green } = require("chalk");
 const { readdirSync } = require("fs");
 
 module.exports = async (client) => {
@@ -12,6 +11,5 @@ module.exports = async (client) => {
     } catch (e) {
         console.log(e);
     }
-    await delay(4000);
-    console.log(chalk.greenBright(`[INFORMATION] Player Events Loaded`));
+    console.log(white('[') + green('INFO') + white('] ') + green('Player ') + white('Events') + green(' Loaded!'));
 };
