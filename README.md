@@ -1,20 +1,13 @@
-## 📸 Tutorial
+## 📄 READ THIS
 
-- [x] How to run on Replit? [Click Here](https://youtu.be/PvWHuYA8kpU) (When have new release!, Please refork the project!)
-- [x] How to run on your own? [Coming Next...]
-
-## ☔ Fork
-
- [![Run on Repl.it](https://repl.it/badge/github/Adivise/NanoSpace)](https://repl.it/github/Adivise/NanoSpace)
+**NEED USE WITH SLASH-COMMAND? HERE: >> [NanoSpacePlus](https://github.com/Adivise/NanoSpacePlus)**
 
 ## 📑 Short Feature
-- [x] Music
+- [x] Music System
 - [x] Playlists System
 - [x] Premium System
 - [x] Custom Prefix
-- [x] Multi Language (98.9%) (can set per guild!)
-- [x] SlashCommand
-- [x] ContextMenus
+- [x] Multi Language
 - [x] Custom Filters
 - [x] Easy to use
 
