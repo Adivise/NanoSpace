@@ -1,6 +1,6 @@
 const formatDuration = require("../../structures/FormatDuration.js");
 const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
-const ytsr = require("youtube-sr").default;
+// const ytsr = require("youtube-sr").default;
 
 module.exports = { 
     config: {
@@ -21,9 +21,9 @@ module.exports = {
         const CurrentDuration = formatDuration(player.position);
         const TotalDuration = formatDuration(song.duration);
         const Thumbnail = `https://img.youtube.com/vi/${song.identifier}/maxresdefault.jpg`;
-        const songInfo = await ytsr.searchOne(song.uri);
-        const views = songInfo.views;
-        const uploadat = songInfo.uploadedAt;
+      //  const songInfo = await ytsr.searchOne(song.uri);
+      //  const views = songInfo.views;
+      //  const uploadat = songInfo.uploadedAt;
         const Part = Math.floor(player.position / song.duration * 30);
         const Emoji = player.playing ? "🔴 |" : "⏸ |";
 
@@ -35,8 +35,8 @@ module.exports = {
             .addField(`${client.i18n.get(language, "music", "np_author")}`, `${song.author}`, true)
             .addField(`${client.i18n.get(language, "music", "np_request")}`, `${song.requester}`, true)
             .addField(`${client.i18n.get(language, "music", "np_volume")}`, `${player.volume}%`, true)
-            .addField(`${client.i18n.get(language, "music", "np_view")}`, `${views}`, true)
-            .addField(`${client.i18n.get(language, "music", "np_upload")}`, `${uploadat}`, true)
+        //    .addField(`${client.i18n.get(language, "music", "np_view")}`, `${views}`, true)
+        //    .addField(`${client.i18n.get(language, "music", "np_upload")}`, `${uploadat}`, true)
             .addField(`${client.i18n.get(language, "music", "np_download")}`, `**[Click Here](https://www.mp3fromlink.com/watch?v=${song.identifier})**`, true)
             .addField(`${client.i18n.get(language, "music", "np_current_duration", {
                 current_duration: CurrentDuration,
