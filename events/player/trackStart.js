@@ -1,9 +1,11 @@
 const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
 const formatduration = require('../../structures/FormatDuration.js');
 const GLang = require("../../settings/models/Language.js");
+const GControl = require("../../settings/models/Control.js");
     
 module.exports = async (client, player, track, payload) => {
-
+  const GuildControl = await GControl.findOne({ guild: player.guild });
+  if (GuildControl.playerControl === 'enable'){
     const channel = client.channels.cache.get(player.textChannel);
     if (!channel) return;
 
@@ -280,4 +282,7 @@ module.exports = async (client, player, track, payload) => {
         nplaying.edit({ embeds: [embeded], components: [] })
       }
     });
+  } else if(GuildControl.playerControl === 'disable'){
+    null
+  }
 }
