@@ -23,3 +23,11 @@ help_desc: "Please Select Category Menu!"
 help_category_desc: "Select the %{category} to see all commands."
 help_category: "%{category}"
 help_timeout: "```Help Menu is time out please try %{prefix}help to see again.```"
+
+##### Player Control Toggle command #####
+control_perm: "You need the `MANAGE_GUILD` permission to use this command."
+control_arg: "**Please specify a mode! `(enable or disable)`**"
+control_invalid: "**The mode can't be another word! Only enable or disable**"
+control_set: "`🔧` | *Player control mode has been set to:* `%{playerControl}`"
+control_change: "`🔧` | *Player control mode has been change to:* `%{playerControl}`"
+control_error: "An error occured while setting the player control mode!"
