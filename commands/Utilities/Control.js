@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const GControl = require('../../settings/models/Control.js');
 module.exports = {
     config: {
@@ -21,7 +21,7 @@ module.exports = {
                 playerControl: args[0]
             });
             guildControl.save().then(() => {
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "utilities", "control_set", {
                     playerControl: args[0]
                 })}`)
@@ -36,7 +36,7 @@ module.exports = {
         else if(guildControl) {
             guildControl.playerControl = args[0];
             guildControl.save().then(() => {
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "utilities", "control_change", {
                     playerControl: args[0]
                 })}`)

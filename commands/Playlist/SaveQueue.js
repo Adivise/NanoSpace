@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const Playlist = require('../../settings/models/Playlist.js');
 
 const TrackAdd = [];
@@ -29,7 +29,7 @@ module.exports = {
                 const player = client.manager.get(message.guild.id);
                 if (!player) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_player")}`);
                 const { channel } = message.member.voice;
-                if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+                if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
                 const queue = player.queue.map(track => track);
                 const current = player.queue.current;
@@ -37,7 +37,7 @@ module.exports = {
                 TrackAdd.push(current);
                 TrackAdd.push(...queue);
 
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                     .setDescription(`${client.i18n.get(language, "playlist", "savequeue_saved", {
                         name: Plist,
                         tracks: queue.length + 1
@@ -52,7 +52,7 @@ module.exports = {
                 });
 
     } else {
-        const Premiumed = new MessageEmbed()
+        const Premiumed = new EmbedBuilder()
             .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premium_author")}`, iconURL: client.user.displayAvatarURL() })
             .setDescription(`${client.i18n.get(language, "nopremium", "premium_desc")}`)
             .setColor(client.color)

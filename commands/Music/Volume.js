@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = { 
     config: {
@@ -15,7 +15,7 @@ module.exports = {
 		const player = client.manager.get(message.guild.id);
 		if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
         const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+        if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
         if (!args[0]) return msg.edit(`${client.i18n.get(language, "music", "volume_usage", {
             volume: player.volume
@@ -24,7 +24,7 @@ module.exports = {
 
         await player.setVolume(Number(args[0]));
 
-        const changevol = new MessageEmbed()
+        const changevol = new EmbedBuilder()
             .setDescription(`${client.i18n.get(language, "music", "volume_msg", {
                 volume: args[0]
             })}`)

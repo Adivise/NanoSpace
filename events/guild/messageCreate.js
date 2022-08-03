@@ -1,4 +1,4 @@
-const { Permissions, MessageEmbed } = require("discord.js");
+const { PermissionsBitField, EmbedBuilder } = require("discord.js");
 const GPrefix = require('../../settings/models/Prefix.js');
 const GLang = require('../../settings/models/Language.js');
 const Premium = require('../../settings/models/Premium.js');
@@ -22,7 +22,7 @@ module.exports = async (client, message) => {
     const mention = new RegExp(`^<@!?${client.user.id}>( |)$`);
 
     if(message.content.match(mention)) {
-      const embed = new MessageEmbed()
+      const embed = new EmbedBuilder()
         .setColor(client.color)
         .setDescription(client.i18n.get(language, "message", "my_prefix", {
             prefix: prefix || client.prefix,
@@ -48,11 +48,11 @@ module.exports = async (client, message) => {
 
     console.log(chalk.magenta(`[COMMAND] ${command.config.name} used by ${message.author.tag} from ${message.guild.name}`));
 
-    if(!message.guild.me.permissions.has(Permissions.FLAGS.SEND_MESSAGES)) return await message.author.dmChannel.send(`${client.i18n.get(language, "message", "no_perms")}`);
-    if(!message.guild.me.permissions.has(Permissions.FLAGS.VIEW_CHANNEL)) return;
-    if(!message.guild.me.permissions.has(Permissions.FLAGS.EMBED_LINKS)) return await message.channel.send(`${client.i18n.get(language, "message", "no_perms")}`);
-    if(!message.guild.me.permissions.has(Permissions.FLAGS.SPEAK)) return await message.channel.send(`${client.i18n.get(language, "message", "no_perms")}`);
-    if(!message.guild.me.permissions.has(Permissions.FLAGS.CONNECT)) return await message.channel.send(`${client.i18n.get(language, "message", "no_perms")}`);
+    if(!message.guild.members.me.permissions.has(PermissionsBitField.Flags.SendMessages)) return await message.author.dmChannel.send(`${client.i18n.get(language, "message", "no_perms")}`);
+    if(!message.guild.members.me.permissions.has(PermissionsBitField.Flags.ViewChannel)) return;
+    if(!message.guild.members.me.permissions.has(PermissionsBitField.Flags.EmbedLinks)) return await message.channel.send(`${client.i18n.get(language, "message", "no_perms")}`);
+    if(!message.guild.members.me.permissions.has(PermissionsBitField.Flags.Speak)) return await message.channel.send(`${client.i18n.get(language, "message", "no_perms")}`);
+    if(!message.guild.members.me.permissions.has(PermissionsBitField.Flags.Connect)) return await message.channel.send(`${client.i18n.get(language, "message", "no_perms")}`);
     
     if (command) {
       let user = message.client.premiums.get(message.author.id)

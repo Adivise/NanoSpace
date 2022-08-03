@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const delay = require('delay');
 
 module.exports = { 
@@ -18,16 +18,16 @@ module.exports = {
 				const player = client.manager.get(message.guild.id);
 				if(!player) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_player")}`);
 				const { channel } = message.member.voice;
-				if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+				if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 				
 		if (!args[0]) {
-			const embed = new MessageEmbed()
+			const embed = new EmbedBuilder()
 				.setAuthor({ name: `${client.i18n.get(language, "filters", "eq_author")}`, iconURL: `${client.i18n.get(language, "filters", "eq_icon")}` })
 				.setColor(client.color)
 				.setDescription(`${client.i18n.get(language, "filters", "eq_desc")}`)
-				.addField(`${client.i18n.get(language, "filters", "eq_field_title")}`, `${client.i18n.get(language, "filters", "eq_field_value", {
+				.addFields({ name: `${client.i18n.get(language, "filters", "eq_field_title")}`, value: `${client.i18n.get(language, "filters", "eq_field_value", {
 					prefix: prefix
-				})}`)
+				})}`, inline: false })
 				.setFooter({ text: `${client.i18n.get(language, "filters", "eq_footer", {
 					prefix: prefix
 				})}` })
@@ -69,7 +69,7 @@ module.exports = {
 		const msg = await message.channel.send(`${client.i18n.get(language, "filters", "eq_loading", {
 			bands: bandsStr
 			})}`);
-		const embed = new MessageEmbed()
+		const embed = new EmbedBuilder()
 			.setDescription(`${client.i18n.get(language, "filters", "eq_on", {
 				bands: bandsStr
 				})}`)
@@ -78,7 +78,7 @@ module.exports = {
 		await delay(5000);
         return msg.edit({ content: " ", embeds: [embed] });
 	} else {
-		const Premiumed = new MessageEmbed()
+		const Premiumed = new EmbedBuilder()
 			.setAuthor({ name: `${client.i18n.get(language, "nopremium", "premium_author")}`, iconURL: client.user.displayAvatarURL() })
 			.setDescription(`${client.i18n.get(language, "nopremium", "premium_desc")}`)
 			.setColor(client.color)

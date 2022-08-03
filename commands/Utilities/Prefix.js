@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const GPrefix = require('../../settings/models/Prefix.js');
 
 module.exports = {
@@ -23,7 +23,7 @@ module.exports = {
                 prefix: args[0]
             });
             newPrefix.save().then(() => {
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "utilities", "prefix_set", {
                     prefix: args[0]
                 })}`)
@@ -38,7 +38,7 @@ module.exports = {
         else if(newPrefix) {
             newPrefix.prefix = args[0];
             newPrefix.save().then(() => {
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "utilities", "prefix_change", {
                     prefix: args[0]
                 })}`)

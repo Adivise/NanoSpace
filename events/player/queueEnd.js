@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const GLang = require("../../settings/models/Language.js");
 
 module.exports = async (client, player) => {
@@ -19,7 +19,7 @@ module.exports = async (client, player) => {
 
 	const { language } = guildModel;
 
-	const embed = new MessageEmbed()
+	const embed = new EmbedBuilder()
 		.setColor(client.color)
 		.setDescription(`${client.i18n.get(language, "player", "queue_end_desc")}`);
 

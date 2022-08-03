@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     config: {
@@ -14,12 +14,12 @@ module.exports = {
 		const player = client.manager.get(message.guild.id);
 		if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
         const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+        if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
 		if (player.queueRepeat === true) {
             player.setQueueRepeat(false)
             
-            const unloopall = new MessageEmbed()
+            const unloopall = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "music", "unloopall")}`)
                 .setColor(client.color);
 
@@ -28,7 +28,7 @@ module.exports = {
 		else {
             player.setQueueRepeat(true);
             
-            const loopall = new MessageEmbed()
+            const loopall = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "music", "loopall")}`)
                 .setColor(client.color);
 

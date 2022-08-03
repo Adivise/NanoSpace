@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const Premium = require('../../settings/models/Premium.js')
 const moment = require('moment');
 
@@ -16,7 +16,7 @@ module.exports = {
 
 		try {
 		if (user && user.isPremium) {
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setAuthor({ name: `${client.i18n.get(language, "premium", "profile_author")}`, iconURL: client.user.displayAvatarURL() })
                 .setDescription(`${client.i18n.get(language, "premium", "profile_desc", {
                     user: message.author.tag,
@@ -29,7 +29,7 @@ module.exports = {
             return message.channel.send({ embeds: [embed] });
 
         } else {
-            const Premiumed = new MessageEmbed()
+            const Premiumed = new EmbedBuilder()
                 .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premium_author")}`, iconURL: client.user.displayAvatarURL() })
                 .setDescription(`${client.i18n.get(language, "nopremium", "premium_desc")}`)
                 .setColor(client.color)

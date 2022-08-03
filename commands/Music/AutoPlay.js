@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = { 
     config: {
@@ -19,14 +19,14 @@ module.exports = {
                 const autoplay = player.get("autoplay");
         
                 const { channel } = message.member.voice;
-                if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+                if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
         
         if (autoplay === true) {
 
             await player.set("autoplay", false);
             await player.queue.clear();
 
-            const off = new MessageEmbed()
+            const off = new EmbedBuilder()
             .setDescription(`${client.i18n.get(language, "music", "autoplay_off")}`)
             .setColor(client.color);
 
@@ -42,14 +42,14 @@ module.exports = {
             await player.set("identifier", identifier);
             await player.queue.add(res.tracks[1]);
 
-            const on = new MessageEmbed()
+            const on = new EmbedBuilder()
             .setDescription(`${client.i18n.get(language, "music", "autoplay_on")}`)
             .setColor(client.color);
 
             msg.edit({ content: " ", embeds: [on] });
         }
     } else {
-        const Premiumed = new MessageEmbed()
+        const Premiumed = new EmbedBuilder()
             .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premium_author")}`, iconURL: client.user.displayAvatarURL() })
             .setDescription(`${client.i18n.get(language, "nopremium", "premium_desc")}`)
             .setColor(client.color)

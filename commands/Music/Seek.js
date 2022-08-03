@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const formatDuration = require('../../structures/FormatDuration.js')
 
 module.exports = { 
@@ -18,14 +18,14 @@ module.exports = {
 		const player = client.manager.get(message.guild.id);
 		if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
         const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+        if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
 		if(args[0] * 1000 >= player.playing.length || args[0] < 0) return msg.edit(`${client.i18n.get(language, "music", "seek_beyond")}`);
 		await player.seek(args[0] * 1000);
 
         const Duration = formatDuration(player.position);
 
-        const seeked = new MessageEmbed()
+        const seeked = new EmbedBuilder()
             .setDescription(`${client.i18n.get(language, "music", "seek_msg", {
                 duration: Duration
             })}`)

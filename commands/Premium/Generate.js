@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const Redeem = require('../../settings/models/Redeem.js');
 const moment = require('moment')
 var voucher_codes = require('voucher-code-generator')
@@ -55,7 +55,7 @@ module.exports = {
       }
     }
 
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setColor(client.color)
       .setAuthor({ name: `${client.i18n.get(language, "premium", "gen_author")}`, iconURL: client.user.avatarURL() }) //${lang.description.replace("{codes_length}", codes.length).replace("{codes}", codes.join('\n')).replace("{plan}", plan).replace("{expires}", moment(time).format('dddd, MMMM Do YYYY'))}
       .setDescription(`${client.i18n.get(language, "premium", "gen_desc", {

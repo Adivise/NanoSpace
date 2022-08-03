@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const formatDuration = require('../../structures/FormatDuration.js')
 
 const rewindNum = 10;
@@ -17,7 +17,7 @@ module.exports = {
 		const player = client.manager.get(message.guild.id);
 		if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
         const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+        if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
         const CurrentDuration = formatDuration(player.position);
 
@@ -25,7 +25,7 @@ module.exports = {
 			if((player.position - args[0] * 1000) > 0) {
                 await player.seek(player.position - args[0] * 1000);
                 
-                const rewind1 = new MessageEmbed()
+                const rewind1 = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "music", "rewind_msg", {
                     duration: CurrentDuration,
                 })}`)
@@ -47,7 +47,7 @@ module.exports = {
 			if((player.position - rewindNum * 1000) > 0) {
                 await player.seek(player.position - rewindNum * 1000);
                 
-                const rewind2 = new MessageEmbed()
+                const rewind2 = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "music", "rewind_msg", {
                     duration: CurrentDuration,
                 })}`)

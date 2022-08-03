@@ -1,4 +1,4 @@
-const { MessageEmbed, Permissions } = require('discord.js');
+const { EmbedBuilder, PermissionsBitField } = require('discord.js');
 const Playlist = require('../../settings/models/Playlist.js');
 const { convertTime } = require('../../structures/ConvertTime.js');
 
@@ -15,8 +15,8 @@ module.exports = {
 
 		const { channel } = message.member.voice;
 		if (!channel) return message.channel.send(`${client.i18n.get(language, "playlist", "import_voice")}`);
-		if (!channel.permissionsFor(message.guild.me).has(Permissions.FLAGS.CONNECT)) return message.channel.send(`${client.i18n.get(language, "playlist", "import_join")}`);
-		if (!channel.permissionsFor(message.guild.me).has(Permissions.FLAGS.SPEAK)) return message.channel.send(`${client.i18n.get(language, "playlist", "import_speak")}`);
+		if (!channel.permissionsFor(message.guild.members.me).has(PermissionsBitField.Flags.Connect)) return message.channel.send(`${client.i18n.get(language, "playlist", "import_join")}`);
+		if (!channel.permissionsFor(message.guild.members.me).has(PermissionsBitField.Flags.Speak)) return message.channel.send(`${client.i18n.get(language, "playlist", "import_speak")}`);
 
 		try {
 			if (user && user.isPremium) {
@@ -49,7 +49,7 @@ module.exports = {
 
 		const msg = await message.channel.send(`${client.i18n.get(language, "playlist", "import_loading")}`);
 
-		const embed = new MessageEmbed() // **Imported • \`${Plist}\`** (${playlist.tracks.length} tracks) • ${message.author}
+		const embed = new EmbedBuilder() // **Imported • \`${Plist}\`** (${playlist.tracks.length} tracks) • ${message.author}
 			.setDescription(`${client.i18n.get(language, "playlist", "import_imported", {
 				name: Plist,
 				tracks: playlist.tracks.length,
@@ -91,7 +91,7 @@ module.exports = {
 			}
 		}
     } else {
-        const Premiumed = new MessageEmbed()
+        const Premiumed = new EmbedBuilder()
             .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premium_author")}`, iconURL: client.user.displayAvatarURL() })
             .setDescription(`${client.i18n.get(language, "nopremium", "premium_desc")}`)
             .setColor(client.color)

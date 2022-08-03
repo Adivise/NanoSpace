@@ -1,5 +1,5 @@
 const delay = require('delay');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = { 
     config: {
@@ -14,7 +14,7 @@ module.exports = {
 		const player = client.manager.get(message.guild.id);
 		if(!player) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_player")}`);
 		const { channel } = message.member.voice;
-		if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+		if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
 		if (isNaN(args[0])) return message.channel.send(`${client.i18n.get(language, "filters", "filter_number")}`);
 		if (args[0] < 0) return message.channel.send(`${client.i18n.get(language, "filters", "filter_greater")}`);
@@ -31,7 +31,7 @@ module.exports = {
 		const msg = await message.channel.send(`${client.i18n.get(language, "filters", "pitch_loading", {
 			amount: args[0]
 		})}`);
-		const embed = new MessageEmbed()
+		const embed = new EmbedBuilder()
 			.setDescription(`${client.i18n.get(language, "filters", "pitch_on", {
 				amount: args[0]
 			})}`)

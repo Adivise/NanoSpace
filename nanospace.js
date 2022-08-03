@@ -1,10 +1,10 @@
-const { Client, Intents, Collection } = require("discord.js");
+const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const { Manager } = require("erela.js");
 const Spotify = require("better-erela.js-spotify").default;
 const Deezer = require("erela.js-deezer");
 const AppleMusic = require("better-erela.js-apple").default;
 const Facebook = require("erela.js-facebook");
-const { I18n } = require("locale-parser")
+const { I18n } = require("locale-parser");
 
 class MainClient extends Client {
 	 constructor() {
@@ -15,10 +15,11 @@ class MainClient extends Client {
                 repliedUser: false
             },
             intents: [
-                Intents.FLAGS.GUILDS,
-                Intents.FLAGS.GUILD_MESSAGES,
-                Intents.FLAGS.GUILD_MEMBERS,
-                Intents.FLAGS.GUILD_VOICE_STATES,
+                GatewayIntentBits.Guilds,
+                GatewayIntentBits.GuildMessages,
+                GatewayIntentBits.GuildMembers,
+                GatewayIntentBits.GuildVoiceStates,
+                GatewayIntentBits.MessageContent,
             ]
         });
 

@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const GLang = require('../../settings/models/Language.js');
 
 module.exports = {
@@ -26,7 +26,7 @@ module.exports = {
                 language: args[0]
             });
             newLang.save().then(() => {
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "utilities", "lang_set", {
                     language: args[0]
                 })}`)
@@ -41,7 +41,7 @@ module.exports = {
         else if(newLang) {
             newLang.language = args[0];
             newLang.save().then(() => {
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "utilities", "lang_change", {
                     language: args[0]
                 })}`)
