@@ -12,13 +12,13 @@ module.exports = {
         usage: "<seconds>"
     },
 
-    run: async (client, message, args, user, language, prefix) => {
-        const msg = await message.channel.send(`${client.i18n.get(language, "music", "forward_loading")}`);
+    run: async (client, message, args, user) => {
+        const msg = await message.channel.send(`Loading please wait....`);
            
 		const player = client.manager.get(message.guild.id);
-		if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
+		if (!player) return msg.edit(`No playing in this guild!`);
         const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+        if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`I'm not in the same voice channel as you!`);
 
         const song = player.queue.current;
         const CurrentDuration = formatDuration(player.position);
@@ -29,21 +29,17 @@ module.exports = {
                 player.seek(player.position + args[0] * 1000);
                 
                 const forward1 = new EmbedBuilder()
-                .setDescription(`${client.i18n.get(language, "music", "forward_msg", {
-                    duration: CurrentDuration
-                })}`)
+                .setDescription(`\`⏭\` | *Forward to:* \`${CurrentDuration}\``)
                 .setColor(client.color);
 
                 msg.edit({ content: " ", embeds: [forward1] });
 
 			} else { 
-                return msg.edit(`${client.i18n.get(language, "music", "forward_beyond")}`);
+                return msg.edit(`You can't forward more than the duration of the song!`);
             }
 		}
 		else if (args[0] && isNaN(args[0])) { 
-            return message.reply(`${client.i18n.get(language, "music", "forward_invalid", {
-                prefix: prefix
-            })}`);
+            return message.reply(`Please enter a number!`);
         }
 
 		if (!args[0]) {
@@ -51,15 +47,13 @@ module.exports = {
                 player.seek(player.position + fastForwardNum * 1000);
                 
                 const forward2 = new EmbedBuilder()
-                .setDescription(`${client.i18n.get(language, "music", "forward_msg", {
-                    duration: CurrentDuration
-                    })}`)
+                .setDescription(`\`⏭\` | *Forward to:* \`${CurrentDuration}\``)
                 .setColor(client.color);
 
                 msg.edit({ content: " ", embeds: [forward2] });
 
 			} else {
-				return msg.edit(`${client.i18n.get(language, "music", "forward_beyond")}`);
+				return msg.edit(`You can't forward more than the duration of the song!`);
 			}
 		}
 	}

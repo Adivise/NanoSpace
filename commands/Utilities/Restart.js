@@ -10,10 +10,10 @@ module.exports = {
         accessableby: "Owner",
         aliases: ["stopbot"]
     },
-    run: async (client, message, args, user, language, prefix) => {
+    run: async (client, message, args, user) => {
 
     const restart = new EmbedBuilder()
-        .setDescription(`${client.i18n.get(language, "utilities", "restart_msg")}`)
+        .setDescription(`\`🔄\` | *Restarting...*`)
         .setColor(client.color);
 
     await message.channel.send({ embeds: [restart] });

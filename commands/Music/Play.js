@@ -10,15 +10,15 @@ module.exports = {
         accessableby: "Member",
         aliases: ["p", "pplay"]
     },
-    run: async (client, message, args, user, language, prefix) => {
-        const msg = await message.channel.send(`${client.i18n.get(language, "music", "play_loading")}`);
+    run: async (client, message, args, user) => {
+        const msg = await message.channel.send(`Loading please wait....`);
         
         const { channel } = message.member.voice;
-		if (!channel) return msg.edit(`${client.i18n.get(language, "music", "play_invoice")}`);
-		if (!channel.permissionsFor(message.guild.members.me).has(PermissionsBitField.Flags.Connect)) return msg.edit(`${client.i18n.get(language, "music", "play_join")}`);
-		if (!channel.permissionsFor(message.guild.members.me).has(PermissionsBitField.Flags.Speak)) return msg.edit(`${client.i18n.get(language, "music", "play_speak")}`);
+		if (!channel) return msg.edit(`You are not in a voice channel!`);
+		if (!channel.permissionsFor(message.guild.members.me).has(PermissionsBitField.Flags.Connect)) return msg.edit(`I don't have permission to join your voice channel!`);
+		if (!channel.permissionsFor(message.guild.members.me).has(PermissionsBitField.Flags.Speak)) return msg.edit(`I don't have permission to speak in your voice channel!`);
 
-        if (!args[0]) return msg.edit(`${client.i18n.get(language, "music", "play_arg")}`);
+        if (!args[0]) return msg.edit(`Please provide a song name/link to play music.`);
 
         const player = await client.manager.create({
             guild: message.guild.id,
@@ -36,12 +36,7 @@ module.exports = {
             if(res.loadType == "TRACK_LOADED") {
                 player.queue.add(res.tracks[0]);
                 const embed = new EmbedBuilder() //**Queued • [${res.tracks[0].title}](${res.tracks[0].uri})** \`${convertTime(res.tracks[0].duration, true)}\` • ${res.tracks[0].requester}
-                    .setDescription(`${client.i18n.get(language, "music", "play_track", {
-                        title: res.tracks[0].title,
-                        url: res.tracks[0].uri,
-                        duration: convertTime(res.tracks[0].duration, true),
-                        request: res.tracks[0].requester
-                    })}`)
+                    .setDescription(`**Queued • [${res.tracks[0].title}](${res.tracks[0].uri})** \`${convertTime(res.tracks[0].duration)}\` • ${res.tracks[0].requester}`)
                     .setColor(client.color)
                 msg.edit({ content: " ", embeds: [embed] });
                 if(!player.playing) player.play();
@@ -49,13 +44,7 @@ module.exports = {
             else if(res.loadType == "PLAYLIST_LOADED") {
                 player.queue.add(res.tracks)
                 const embed = new EmbedBuilder() //**Queued • [${res.playlist.name}](${search})** \`${convertTime(res.playlist.duration)}\` (${res.tracks.length} tracks) • ${res.tracks[0].requester}
-                    .setDescription(`${client.i18n.get(language, "music", "play_playlist", {
-                        title: res.playlist.name,
-                        url: search,
-                        duration: convertTime(res.playlist.duration),
-                        songs: res.tracks.length,
-                        request: res.tracks[0].requester
-                    })}`)
+                    .setDescription(`**Queued • [${res.playlist.name}](${search})** \`${convertTime(res.playlist.duration)}\` (${res.tracks.length} tracks) • ${res.tracks[0].requester}`)
                     .setColor(client.color)
                 msg.edit({ content: " ", embeds: [embed] });
                 if(!player.playing) player.play();
@@ -63,23 +52,18 @@ module.exports = {
             else if(res.loadType == "SEARCH_RESULT") {
                 player.queue.add(res.tracks[0]);
                 const embed = new EmbedBuilder()
-                    .setDescription(`${client.i18n.get(language, "music", "play_result", {
-                        title: res.tracks[0].title,
-                        url: res.tracks[0].uri,
-                        duration: convertTime(res.tracks[0].duration, true),
-                        request: res.tracks[0].requester
-                    })}`)
+                    .setDescription(`**Queued • [${res.tracks[0].title}](${res.tracks[0].uri})** \`${convertTime(res.tracks[0].duration)}\` • ${res.tracks[0].requester}`)
                     .setColor(client.color)
                 msg.edit({ content: " ", embeds: [embed] });
                 if(!player.playing) player.play();
             }
             else if(res.loadType == "LOAD_FAILED") {
-                msg.edit(`${client.i18n.get(language, "music", "play_fail")}`);
+                msg.edit(`Error loading track failed`);
                 player.destroy();
             }
         }
         else {
-            msg.edit(`${client.i18n.get(language, "music", "play_match")}`);
+            msg.edit(`No results found for ${search}`);
             player.destroy();
         }
     }

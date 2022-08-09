@@ -7,19 +7,15 @@ module.exports = {
         accessableby: "Member",
         category: "Music"
     },
-    run: async (client, message, args, user, language, prefix) => {
-        const msg = await message.channel.send(`${client.i18n.get(language, "music", "autoplay_loading")}`);
-  
-        try {
-            if (user && user.isPremium) {
+    run: async (client, message, args, user) => {
+        const msg = await message.channel.send(`Loading please wait....`);
 
-                const player = client.manager.get(message.guild.id);
-                if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
-        
-                const autoplay = player.get("autoplay");
-        
-                const { channel } = message.member.voice;
-                if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+            const player = client.manager.get(message.guild.id);
+            if (!player) return msg.edit(`No playing in this guild!`);
+            const { channel } = message.member.voice;
+            if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`I'm not in the same voice channel as you!`);
+
+        const autoplay = player.get("autoplay");
         
         if (autoplay === true) {
 
@@ -27,7 +23,7 @@ module.exports = {
             await player.queue.clear();
 
             const off = new EmbedBuilder()
-            .setDescription(`${client.i18n.get(language, "music", "autoplay_off")}`)
+            .setDescription("`📻` | *Autoplay has been:* `Deactivated`")
             .setColor(client.color);
 
             msg.edit({ content: " ", embeds: [off] });
@@ -43,23 +39,10 @@ module.exports = {
             await player.queue.add(res.tracks[1]);
 
             const on = new EmbedBuilder()
-            .setDescription(`${client.i18n.get(language, "music", "autoplay_on")}`)
+            .setDescription("`📻` | *Autoplay has been:* `Activated`")
             .setColor(client.color);
 
             msg.edit({ content: " ", embeds: [on] });
-        }
-    } else {
-        const Premiumed = new EmbedBuilder()
-            .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premium_author")}`, iconURL: client.user.displayAvatarURL() })
-            .setDescription(`${client.i18n.get(language, "nopremium", "premium_desc")}`)
-            .setColor(client.color)
-            .setTimestamp()
-
-        return msg.edit({ content: " ", embeds: [Premiumed] });
-      }
-    } catch (err) {
-        console.log(err)
-        msg.edit({ content: `${client.i18n.get(language, "nopremium", "premium_error")}` })
         }
     }
 };

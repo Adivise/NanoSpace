@@ -9,25 +9,21 @@ module.exports = {
         category: "Music",
         usage: "<input>"
     },
-    run: async (client, message, args, user, language, prefix) => {
-        const msg = await message.channel.send(`${client.i18n.get(language, "music", "volume_loading")}`);
+    run: async (client, message, args, user) => {
+        const msg = await message.channel.send(`Loading please wait....`);
 
 		const player = client.manager.get(message.guild.id);
-		if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
+		if (!player) return msg.edit(`No playing in this guild!`);
         const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+        if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`I'm not in the same voice channel as you!`);
 
-        if (!args[0]) return msg.edit(`${client.i18n.get(language, "music", "volume_usage", {
-            volume: player.volume
-        })}`);
-        if (Number(args[0]) <= 0 || Number(args[0]) > 100) return msg.edit(`${client.i18n.get(language, "music", "volume_invalid")}`);
+        if (!args[0]) return msg.edit(`*Current volume:* ${player.volume}%`);
+        if (Number(args[0]) <= 0 || Number(args[0]) > 100) return msg.edit(`Please provide a volume between 1 and 100.`);
 
         await player.setVolume(Number(args[0]));
 
         const changevol = new EmbedBuilder()
-            .setDescription(`${client.i18n.get(language, "music", "volume_msg", {
-                volume: args[0]
-            })}`)
+            .setDescription(`\`🔈\` | *Volume set to:* \`${args[0]}%\``)
             .setColor(client.color);
         
         msg.edit({ content: " ", embeds: [changevol] });

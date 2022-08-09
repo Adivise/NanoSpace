@@ -1,26 +1,13 @@
 const { EmbedBuilder } = require("discord.js");
 const { white, red } = require("chalk");
-const GLang = require("../../settings/models/Language.js");
 
 module.exports = async (client, player, track, payload) => {
     const channel = client.channels.cache.get(player.textChannel);
     if (!channel) return;
 
-    let guildModel = await GLang.findOne({
-      guild: channel.guild.id,
-    });
-    if (!guildModel) {
-      guildModel = await GLang.create({
-        guild: channel.guild.id,
-        language: "en",
-      });
-    }
-
-    const { language } = guildModel;
-
     const embed = new EmbedBuilder()
         .setColor(client.color)
-        .setDescription(`${client.i18n.get(language, "player", "error_desc")}`);
+        .setDescription("`❌` | *Song has stuck:* `Auto-Skipped`");
 
     channel.send({embeds: [embed]});
     

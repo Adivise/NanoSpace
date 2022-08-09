@@ -11,13 +11,13 @@ module.exports = {
         category: "Music",
         usage: "<seconds>"
     },
-    run: async (client, message, args, user, language, prefix) => {
-        const msg = await message.channel.send(`${client.i18n.get(language, "music", "rewind_loading")}`);
+    run: async (client, message, args, user) => {
+        const msg = await message.channel.send(`Loading please wait....`);
 
 		const player = client.manager.get(message.guild.id);
-		if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
+		if (!player) return msg.edit(`No playing in this guild!`);
         const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+        if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`I'm not in the same voice channel as you!`);
 
         const CurrentDuration = formatDuration(player.position);
 
@@ -26,21 +26,17 @@ module.exports = {
                 await player.seek(player.position - args[0] * 1000);
                 
                 const rewind1 = new EmbedBuilder()
-                .setDescription(`${client.i18n.get(language, "music", "rewind_msg", {
-                    duration: CurrentDuration,
-                })}`)
+                .setDescription(`\`⏮\` | *Rewind to:* \`${CurrentDuration}\``)
                 .setColor(client.color);
 
                 msg.edit({ content: " ", embeds: [rewind1] });
 			}
 			else {
-				return msg.edit(`${client.i18n.get(language, "music", "rewind_beyond")}`);
+				return msg.edit(`You can't rewind more than the duration of the song!`);
 			}
 		}
 		else if(args[0] && isNaN(args[0])) {
-			return msg.edit(`${client.i18n.get(language, "music", "rewind_invalid", {
-                prefix: prefix
-            })}`);
+			return msg.edit(`Please enter a number!`);
 		}
 
 		if(!args[0]) {
@@ -48,15 +44,13 @@ module.exports = {
                 await player.seek(player.position - rewindNum * 1000);
                 
                 const rewind2 = new EmbedBuilder()
-                .setDescription(`${client.i18n.get(language, "music", "rewind_msg", {
-                    duration: CurrentDuration,
-                })}`)
+                .setDescription(`\`⏮\` | *Rewind to:* \`${CurrentDuration}\``)
                 .setColor(client.color);
 
                 msg.edit({ content: " ", embeds: [rewind2] });
 			}
 			else {
-				return msg.edit(`${client.i18n.get(language, "music", "rewind_beyond")}`);
+				return msg.edit(`You can't rewind more than the duration of the song!`);
 			}
 		}
 	}
