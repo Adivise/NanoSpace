@@ -21,6 +21,7 @@
 - [x] Apple
 - [x] Bandcamp
 - [x] Vimeo
+- [x] Tidal
 - [x] Https (Radio)
 
 ## 🚨 Have a Problem
