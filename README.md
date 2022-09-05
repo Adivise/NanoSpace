@@ -1,11 +1,7 @@
-## 📄 READ THIS
-
-*Slash Commands!* | **[NanoSpacePlus](https://github.com/Adivise/NanoSpacePlus)** (`Have Request System`)
-*Prefix Commands!* | **[NanoSpace](https://github.com/Adivise/NanoSpace)** (`Have Premium System`)
-
 ## 📑 Short Feature
 - [x] Music System
 - [x] Custom Filters
+- [x] Multi Bot Support
 - [x] Easy to use
 
 ## 🎶 Support Source
