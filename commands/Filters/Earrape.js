@@ -1,4 +1,3 @@
-const delay = require('delay');
 const { EmbedBuilder } = require('discord.js');
 
 module.exports = { 
@@ -9,16 +8,13 @@ module.exports = {
         accessableby: "Member",
         aliases: ["ear"]
     },
-
-    run: async (client, message, args, user, language, prefix) => {
-        const msg = await message.channel.send(`${client.i18n.get(language, "filters", "filter_loading", {
-            name: client.commands.get('earrape').config.name
-            })}`);
+    run: async (client, message, args) => {
+        const msg = await message.channel.send(`Loading please wait....`);
 
             const player = client.manager.get(message.guild.id);
-            if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
+            if(!player) return msg.edit(`No playing in this guild!`);
             const { channel } = message.member.voice;
-            if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+            if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`I'm not in the same voice channel as you!`);
     
 		await player.setVolume(500);
         const data = {
@@ -28,12 +24,14 @@ module.exports = {
         await player.node.send(data);
 
         const earrapped = new EmbedBuilder()
-            .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
-                name: client.commands.get('earrape').config.name
-            })}`)
+            .setDescription(`\`💠\` | *Turned on:* \`Earrape\``)
             .setColor(client.color);
 
         await delay(3000);
         msg.edit({ content: " ", embeds: [earrapped] });
     }
 };
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}

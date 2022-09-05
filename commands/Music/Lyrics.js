@@ -8,13 +8,13 @@ module.exports = {
         accessableby: "Member",
         category: "Music",
     },
-    run: async (client, message, args, user, language, prefix) => {
-        const msg = await message.channel.send(`${client.i18n.get(language, "music", "lyrics_loading")}`);
+    run: async (client, message, args) => {
+        const msg = await message.channel.send(`Loading please wait....`);
 
         const player = client.manager.get(message.guild.id);
-        if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
+        if (!player) return msg.edit(`No playing in this guild!`);
         const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+        if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`I'm not in the same voice channel as you!`);
 
         let song = args.join(" ");
             let CurrentSong = player.queue.current;
@@ -24,22 +24,20 @@ module.exports = {
 
         try {
             lyrics = await lyricsfinder(song, "");
-            if (!lyrics) return msg.edit(`${client.i18n.get(language, "music", "lyrics_notfound")}`);
+            if (!lyrics) return msg.edit(`No lyrics found for ${song}`);
         } catch (err) {
             console.log(err);
-            return msg.edit(`${client.i18n.get(language, "music", "lyrics_notfound")}`);
+            return msg.edit(`No lyrics found for ${song}`);
         }
         let lyricsEmbed = new EmbedBuilder()
             .setColor(client.color)
-            .setTitle(`${client.i18n.get(language, "music", "lyrics_title", {
-                song: song
-            })}`)
+            .setTitle(`Lyrics for ${song}`)
             .setDescription(`${lyrics}`)
             .setFooter({ text: `Requested by ${message.author.username}`})
             .setTimestamp();
 
         if (lyrics.length > 2048) {
-            lyricsEmbed.setDescription(`${client.i18n.get(language, "music", "lyrics_toolong")}`);
+            lyricsEmbed.setDescription(`Lyrics are too long to display!`);
         }
 
         msg.edit({ content: ' ', embeds: [lyricsEmbed] });

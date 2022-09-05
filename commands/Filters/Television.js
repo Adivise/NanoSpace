@@ -1,4 +1,3 @@
-const delay = require('delay');
 const { EmbedBuilder } = require('discord.js');
 
 module.exports = { 
@@ -8,16 +7,13 @@ module.exports = {
         category: "Filters",
         accessableby: "Member",
     },
-
-    run: async (client, message, args, user, language, prefix) => {
-        const msg = await message.channel.send(`${client.i18n.get(language, "filters", "filter_loading", {
-            name: client.commands.get('television').config.name
-            })}`);
+    run: async (client, message, args) => {
+        const msg = await message.channel.send(`Loading please wait....`);
 
             const player = client.manager.get(message.guild.id);
-            if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
+            if(!player) return msg.edit(`No playing in this guild!`);
             const { channel } = message.member.voice;
-            if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+            if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`I'm not in the same voice channel as you!`);
     
             const data = {
                 op: 'filters',
@@ -43,12 +39,14 @@ module.exports = {
             await player.node.send(data);
 
         const embed = new EmbedBuilder()
-            .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
-                name: client.commands.get('television').config.name
-            })}`)
+            .setDescription(`\`💠\` | *Turned on:* ` + "`Television`")
             .setColor(client.color);
 
         await delay(5000);
         msg.edit({ content: " ", embeds: [embed] });
-   }
+    }
 };
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}

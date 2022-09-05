@@ -1,4 +1,3 @@
-const { white, green } = require("chalk");
 const { readdirSync } = require("fs");
 
 module.exports = async (client) => {
@@ -9,7 +8,6 @@ module.exports = async (client) => {
             client.manager.on(eventName, event.bind(null, client));
         });
     } catch (e) {
-        console.log(e);
+      //  console.log(e);
     }
-    console.log(white('[') + green('INFO') + white('] ') + green('Player ') + white('Events') + green(' Loaded!'));
 };

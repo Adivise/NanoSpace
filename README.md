@@ -1,13 +1,10 @@
 ## 📄 READ THIS
 
 *Slash Commands!* | **[NanoSpacePlus](https://github.com/Adivise/NanoSpacePlus)** (`Have Request System`)
+*Prefix Commands!* | **[NanoSpace](https://github.com/Adivise/NanoSpace)** (`Have Premium System`)
 
 ## 📑 Short Feature
 - [x] Music System
-- [x] Playlists System
-- [x] Premium System
-- [x] Custom Prefix
-- [x] Multi Language
 - [x] Custom Filters
 - [x] Easy to use
 
@@ -36,7 +33,6 @@
 - Node.js+ **[Download](https://nodejs.org/en/download/)**
 - Discord Bot Token **[Guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)**
 - LavaLink **[Guide](https://github.com/freyacodes/lavalink)** (*Dev Version!* **[Download](https://ci.fredboat.com/repository/downloadAll/Lavalink_Build/9311:id/artifacts.zip)** )
-- MongoDB **[Download](https://www.mongodb.com/try/download/community)** (Download & install = Finish!)
 
 ## 🛑 Super Requirements 
 
@@ -64,18 +60,12 @@ Copy or Rename `.env.example` to `.env` and fill out the values:
 # Bot
 TOKEN=REPLACE_HERE
 PREFIX=#
-NP_REALTIME=true
+NP_REALTIME=false
 LEAVE_TIMEOUT=120000
-LANGUAGE=en
 EMBED_COLOR=#000001
 
 # Dev
 OWNER_ID=REPLACE_HERE
-
-# Database
-MONGO_URI=mongodb://127.0.0.1:27017/nanospace
-LIMIT_TRACK=100
-LIMIT_PLAYLIST=10
 
 # Nodes
 NODE_HOST=localhost
@@ -149,30 +139,9 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 - Television (#Television)
 - Jazz (#jazz)
 	
-📦 **Playlist Commands!**
-- Create (#create [name])
-- Add (#add [name] [link])
-- Private (#private [name])
-- Public (#public [name])
-- Delete (#delete [name])
-- Import (#import [name])
-- Detail (#detail [name])
-- Remove (#remove [name] [position])
-- Savequeu (#savequeue [name])
-- View (#view)
-	
-💎 **Premium Commands!**
-- Premium (#premium [plan] [user id])
-- Generate (#generate [plan] [amount])
-- Redeem (#redeem [code])
-	
 📑 **Utilities Commands!**
 - Restart (#restart, #stopbot)
-- DeploySlash (#deploy, #dps) <= only one guild
-- ClearSlash (#cdps) <= work only deployslash
-- Prefix (#prefix [new prefix])
-- Language (#language [lang]) // Example: en, hi
-- DeploySlashGlobal (#deployglobal, #dpsg) <= want change need wait 1 - 2 hrs.
+- Invite (#invite)
 - Help (#help, #halp [command])
 
 </p>
@@ -189,16 +158,6 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 ![see](https://i.imgur.com/P3GNCbQ.png)
 ![see](https://i.imgur.com/9Plhzar.png)
 ![see](https://i.imgur.com/k2Sp8zo.png)
-
-</p>
-</details>
-
-<details><summary>👏 Credits [CLICK ME]</summary>
-<p>
-
-## 👏 THANK
-- [lavamusic](https://github.com/brblacky/lavamusic)
-- [EarTensifier](https://github.com/Tetracyl/EarTensifier)
 
 </p>
 </details>
