@@ -8,21 +8,19 @@ module.exports = {
         accessableby: "Member",
         category: "Music",
     },
-    run: async (client, message, args, user, language, prefix) => {
-        const msg = await message.channel.send(`${client.i18n.get(language, "music", "pause_loading")}`);
+    run: async (client, message, args) => {
+        const msg = await message.channel.send(`Loading please wait....`);
 
 		const player = client.manager.get(message.guild.id);
-		if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
+		if (!player) return msg.edit(`No playing in this guild!`);
         const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+        if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`I'm not in the same voice channel as you!`);
         
         await player.pause(player.playing);
-        const uni = player.paused ? `${client.i18n.get(language, "music", "pause_switch_pause")}` : `${client.i18n.get(language, "music", "pause_switch_resume")}`;
+        const uni = player.paused ? `Paused` : `Resumed`;
 
         const embed = new EmbedBuilder()
-            .setDescription(`${client.i18n.get(language, "music", "pause_msg", {
-                pause: uni
-            })}`)
+            .setDescription(`\`⏯\` | *Song has been:* \`${uni}\``)
             .setColor(client.color);
 
         msg.edit({ content: " ", embeds: [embed] });

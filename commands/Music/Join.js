@@ -8,11 +8,11 @@ module.exports = {
         accessableby: "Member",
         category: "Music",
     },
-    run: async (client, message, args, user, language, prefix) => {
-        const msg = await message.channel.send(`${client.i18n.get(language, "music", "join_loading")}`);
+    run: async (client, message, args) => {
+        const msg = await message.channel.send(`Loading please wait....`);
 
         const { channel } = message.member.voice;
-        if(!channel) return msg.edit(`${client.i18n.get(language, "music", "join_voice")}`);
+        if(!channel) return msg.edit(`You are not in a voice channel`);
 
         const player = client.manager.create({
             guild: message.guild.id,
@@ -24,9 +24,7 @@ module.exports = {
         await player.connect();
 
         const embed = new EmbedBuilder()
-            .setDescription(`${client.i18n.get(language, "music", "join_msg", {
-                channel: channel.name
-            })}`)
+            .setDescription(`\`🔊\` | *Joined:* \`${channel.name}\``)
             .setColor(client.color)
 
         msg.edit({ content: " ", embeds: [embed] })

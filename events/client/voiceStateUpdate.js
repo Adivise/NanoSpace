@@ -1,4 +1,3 @@
-const delay = require("delay");
 const { PermissionsBitField } = require("discord.js");
 
 module.exports = async (client, oldState, newState) => {
@@ -30,3 +29,7 @@ module.exports = async (client, oldState, newState) => {
 		}
 	}
 };
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
