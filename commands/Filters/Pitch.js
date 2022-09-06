@@ -1,4 +1,3 @@
-const delay = require('delay');
 const { EmbedBuilder } = require('discord.js');
 
 module.exports = { 
@@ -9,16 +8,16 @@ module.exports = {
 		accessableby: "Member",
 		usage: '<pitch>',
 	},
-	
-	run: async (client, message, args, user, language, prefix) => {
-		const player = client.manager.get(message.guild.id);
-		if(!player) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_player")}`);
-		const { channel } = message.member.voice;
-		if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+	run: async (client, message, args) => {
+		const msg = await message.channel.send(`Loading please wait....`);
 
-		if (isNaN(args[0])) return message.channel.send(`${client.i18n.get(language, "filters", "filter_number")}`);
-		if (args[0] < 0) return message.channel.send(`${client.i18n.get(language, "filters", "filter_greater")}`);
-		if (args[0] > 10) return message.channel.send(`${client.i18n.get(language, "filters", "filter_less")}`);
+		const player = client.manager.get(message.guild.id);
+		if(!player) return msg.edit(`No playing in this guild!`);
+		const { channel } = message.member.voice;
+		if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`I'm not in the same voice channel as you!`);
+
+		if (isNaN(args[0])) return msg.edit(`Please enter a number!`);
+		if(args[0] > 10 || args[0] < 0) return msg.edit(`Please enter a number between 0 - 10!`);
 
 		const data = {
 			op: 'filters',
@@ -28,15 +27,14 @@ module.exports = {
 
 		await player.node.send(data);
 
-		const msg = await message.channel.send(`${client.i18n.get(language, "filters", "pitch_loading", {
-			amount: args[0]
-		})}`);
 		const embed = new EmbedBuilder()
-			.setDescription(`${client.i18n.get(language, "filters", "pitch_on", {
-				amount: args[0]
-			})}`)
+			.setDescription(`\`💠\` | *Pitch set to:* \`${args[0]}\``)
 			.setColor(client.color);
 		await delay(5000);
 		msg.edit({ content: " ", embeds: [embed] });
 	}
 };
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}

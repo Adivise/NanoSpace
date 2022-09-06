@@ -1,5 +1,4 @@
 const { EmbedBuilder } = require("discord.js");
-const GLang = require("../../settings/models/Language.js");
 
 module.exports = async (client, player) => {
 	const channel = client.channels.cache.get(player.textChannel);
@@ -7,22 +6,10 @@ module.exports = async (client, player) => {
 
 	if (player.twentyFourSeven) return;
 
-	let guildModel = await GLang.findOne({
-	  guild: channel.guild.id,
-	});
-	if (!guildModel) {
-	  guildModel = await GLang.create({
-		guild: channel.guild.id,
-		language: "en",
-	  });
-	}
-
-	const { language } = guildModel;
-
 	const embed = new EmbedBuilder()
 		.setColor(client.color)
-		.setDescription(`${client.i18n.get(language, "player", "queue_end_desc")}`);
+		.setDescription("`📛` | *Song has been:* `Ended`");
 
-	await channel.send({ embeds: [embed] });
-	return player.destroy(false);
+	channel.send({ embeds: [embed] });
+	return player.destroy();
 }

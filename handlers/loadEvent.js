@@ -1,4 +1,3 @@
-const { white, green } = require("chalk");
 const { readdirSync } = require('fs');
 
 module.exports = async (client) => {
@@ -11,5 +10,4 @@ module.exports = async (client) => {
         }
     };
     ["client", "guild"].forEach((x) => loadcommand(x));
-    console.log(white('[') + green('INFO') + white('] ') + green('Event ') + white('Events') + green(' Loaded!'));
 };
