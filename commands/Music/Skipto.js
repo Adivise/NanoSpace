@@ -9,7 +9,7 @@ module.exports = {
         category: "Music",
         usage: "<positions>"
     },
-    run: async (client, message, args, user) => {
+    run: async (client, message, args) => {
         const msg = await message.channel.send(`Loading please wait....`);
 
         if (isNaN(args[0])) return msg.edit(`Please enter a valid position!`);

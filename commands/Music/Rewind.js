@@ -11,7 +11,7 @@ module.exports = {
         category: "Music",
         usage: "<seconds>"
     },
-    run: async (client, message, args, user) => {
+    run: async (client, message, args) => {
         const msg = await message.channel.send(`Loading please wait....`);
 
 		const player = client.manager.get(message.guild.id);

@@ -10,11 +10,11 @@ module.exports = {
         accessableby: "Member",
         aliases: ["p", "pplay"]
     },
-    run: async (client, message, args, user) => {
+    run: async (client, message, args) => {
         const msg = await message.channel.send(`Loading please wait....`);
         
         const { channel } = message.member.voice;
-		if (!channel) return msg.edit(`You are not in a voice channel!`);
+		if (!channel) return msg.edit(`You are not in a voice channel`);
 		if (!channel.permissionsFor(message.guild.members.me).has(PermissionsBitField.Flags.Connect)) return msg.edit(`I don't have permission to join your voice channel!`);
 		if (!channel.permissionsFor(message.guild.members.me).has(PermissionsBitField.Flags.Speak)) return msg.edit(`I don't have permission to speak in your voice channel!`);
 

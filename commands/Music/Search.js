@@ -9,7 +9,7 @@ module.exports = {
         category: "Music",
         accessableby: "Member",
     },
-    run: async (client, message, args, user, language) => {
+    run: async (client, message, args) => {
         const msg = await message.channel.send(`Loading please wait....`);
 
         const { channel } = message.member.voice;
@@ -79,10 +79,10 @@ module.exports = {
                         .map(video => `**(${index++}.) [${video.title}](${video.uri})** \`${convertTime(video.duration)}\` Author: \`${video.author}\``)
                         .join("\n");
                     const playing = new EmbedBuilder()
-                        .setAuthor({ name: `${client.i18n.get(language, "music", "search_title")}`, iconURL: message.guild.iconURL({ dynamic: true }) })
+                        .setAuthor({ name: `Song Selection...`, iconURL: message.guild.iconURL({ dynamic: true }) })
                         .setColor(client.color)
                         .setDescription(results)
-                        .setFooter({ text: `${client.i18n.get(language, "music", "search_footer")}` })
+                        .setFooter({ text: `Please Respone in 30s | Type *cancel* to Cancel` })
                     await msg.edit({ content: " ", embeds: [playing], components: [row] });
 
                     const collector = msg.createMessageComponentCollector({ filter: (interaction) => interaction.user.id === message.author.id ? true : false && interaction.deferUpdate(), max: 1, time: 30000 });

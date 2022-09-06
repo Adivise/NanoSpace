@@ -11,13 +11,12 @@ module.exports = {
         aliases: ["stopbot"]
     },
     run: async (client, message, args, user) => {
+        const restart = new EmbedBuilder()
+            .setDescription(`\`🔄\` | *Restarting...*`)
+            .setColor(client.color);
 
-    const restart = new EmbedBuilder()
-        .setDescription(`\`🔄\` | *Restarting...*`)
-        .setColor(client.color);
-
-    await message.channel.send({ embeds: [restart] });
-            
-    process.exit();
+        await message.channel.send({ embeds: [restart] });
+                
+        await process.exit();
     }
 };

@@ -9,7 +9,7 @@ module.exports = {
         accessableby: "Member",
         aliases: ["bb"]
     },
-    run: async (client, message, args, user) => {
+    run: async (client, message, args) => {
             const player = client.manager.get(message.guild.id);
             if(!player) return message.channel.send(`No playing in this guild!`);
             const { channel } = message.member.voice;
@@ -73,7 +73,7 @@ module.exports = {
         await player.node.send(data);
         const msg2 = await message.channel.send(`Loading please wait....`);
         const embed = new EmbedBuilder()
-            .setDescription(`\`💠\` | *Turned on:* \`Bassboost\`\n*Gain:* \`${args[0]}\``)
+            .setDescription(`\`💠\` | *Turned on:* \`Bassboost\` *Gain:* \`${args[0]}\``)
             .setColor(client.color);
         
         await delay(5000);

@@ -7,7 +7,7 @@ module.exports = {
         category: "Filters",
         accessableby: "Member",
     },
-    run: async (client, message, args, user) => {
+    run: async (client, message, args) => {
         const msg = await message.channel.send(`Loading please wait....`);
 
 		const player = client.manager.get(message.guild.id);

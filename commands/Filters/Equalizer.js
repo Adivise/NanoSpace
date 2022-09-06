@@ -9,7 +9,7 @@ module.exports = {
         usage: "<2 3 0 8 0 5 0 -5 0 0>",
         aliases: ["eq"]
     },
-	run: async (client, message, args, user) => {
+	run: async (client, message, args) => {
 			const player = client.manager.get(message.guild.id);
 			if(!player) return message.channel.send(`No playing in this guild!`);
 			const { channel } = message.member.voice;

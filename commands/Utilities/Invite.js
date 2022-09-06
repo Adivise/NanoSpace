@@ -9,12 +9,14 @@ module.exports = {
         accessableby: "Members"
     },
     run: async (client, message, args) => {
+        const msg = await message.channel.send(`Loading please wait....`);
+
         const embed = new EmbedBuilder()
-        .setColor("#000001")
-        .setAuthor({ name: "Invite!"})
-        .setDescription("```Invite me to your server!```")
-        .setTimestamp()
-        .setFooter({ text: `Requested by ${message.author.tag}`, iconURL: message.author.displayAvatarURL()});
+            .setColor("#000001")
+            .setAuthor({ name: "Invite!"})
+            .setDescription("```Invite me to your server!```")
+            .setTimestamp()
+            .setFooter({ text: `Requested by ${message.author.tag}`, iconURL: message.author.displayAvatarURL()});
 
         const row = new ActionRowBuilder()
             .addComponents(
@@ -25,6 +27,6 @@ module.exports = {
                     .setStyle(ButtonStyle.Link)
             )
         
-        message.channel.send({ embeds: [embed], components: [row] });
+        await msg.edit({ embeds: [embed], components: [row] });
     }
 }

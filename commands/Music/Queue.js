@@ -10,7 +10,7 @@ module.exports = {
         accessableby: "Member",
         category: "Music",
     },
-    run: async (client, message, args, user) => {
+    run: async (client, message, args) => {
 		const player = client.manager.get(message.guild.id);
 		if (!player) return message.channel.send(`No playing in this guild!`);
         const { channel } = message.member.voice;
@@ -39,7 +39,7 @@ module.exports = {
                 .setAuthor({ name: `Queue - ${message.guild.name}`, iconURL: message.guild.iconURL({ dynamic: true }) })
                 .setThumbnail(thumbnail)
 				.setColor(client.color) //**Currently Playing:**\n**[${song.title}](${song.uri})** \`[${formatDuration(song.duration)}]\` • ${song.requester}\n\n**Rest of queue**:${str == '' ? '  Nothing' : '\n' + str}
-				.setDescription(`*Currently Playing*\n*[%${song.title}](${song.uri})* \`[${formatDuration(song.duration)}]\` • ${song.requester}\n\n*Rest of queue*:${str == '' ? '  Nothing' : '\n' + str}`) //Page • ${i + 1}/${pagesNum} | ${player.queue.length} • Song | ${qduration} • Total duration
+				.setDescription(`*Currently Playing*\n*[${song.title}](${song.uri})* \`[${formatDuration(song.duration)}]\` • ${song.requester}\n\n*Rest of queue*:${str == '' ? '  Nothing' : '\n' + str}`) //Page • ${i + 1}/${pagesNum} | ${player.queue.length} • Song | ${qduration} • Total duration
 				.setFooter({ text: `Page • ${i + 1}/${pagesNum} | ${player.queue.length} • Song/s | ${qduration} • Total Duration` });
 
 			pages.push(embed);
