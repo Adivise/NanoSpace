@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, PermissionsBitField } = require('discord.js');
 const GPrefix = require('../../settings/models/Prefix.js');
 
 module.exports = {
@@ -11,8 +11,7 @@ module.exports = {
         accessableby: "Members"
     },
     run: async (client, message, args, user, language, prefix) => {
-
-        if (!message.member.permissions.has('MANAGE_GUILD')) return message.channel.send(`${client.i18n.get(language, "utilities", "prefix_perm")}`);
+        if (!message.member.permissions.has(PermissionsBitField.Flags.ManageGuild)) return message.channel.send(`${client.i18n.get(language, "utilities", "prefix_perm")}`);
         if(!args[0]) return message.channel.send(`${client.i18n.get(language, "utilities", "prefix_arg")}`);
         if(args[0].length > 10) return message.channel.send(`${client.i18n.get(language, "utilities", "prefix_length")}`);
 

@@ -6,6 +6,7 @@
 - [x] Music System
 - [x] Playlists System
 - [x] Premium System
+- [x] Song Request System
 - [x] Custom Prefix
 - [x] Multi Language
 - [x] Custom Filters

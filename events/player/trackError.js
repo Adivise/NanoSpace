@@ -21,6 +21,12 @@ module.exports = async (client, player, track, payload) => {
 
     const { language } = guildModel;
 
+    /////////// Update Music Setup ///////////
+
+    await client.UpdateMusic(player);
+
+    ////////// End Update Music Setup //////////
+
     const embed = new EmbedBuilder()
         .setColor(client.color)
         .setDescription(`${client.i18n.get(language, "player", "error_desc")}`);

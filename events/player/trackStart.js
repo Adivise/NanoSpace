@@ -2,13 +2,25 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("
 const formatduration = require('../../structures/FormatDuration.js');
 const GLang = require("../../settings/models/Language.js");
 const GControl = require("../../settings/models/Control.js");
+const GSetup = require("../../settings/models/Setup.js");
     
 module.exports = async (client, player, track, payload) => {
-  const GuildControl = await GControl.findOne({ guild: player.guild });
-  try {
-    if (GuildControl.playerControl === 'enable'){
+      if(!player) return;
+
+      /////////// Update Music Setup ///////////
+
+      await client.UpdateQueueMsg(player);
+
+      /////////// Update Music Setup ///////////
+
       const channel = client.channels.cache.get(player.textChannel);
       if (!channel) return;
+
+      const Control = await GControl.findOne({ guild: channel.guild.id });
+      if (Control.enable) return;
+
+      const Setup = await GSetup.findOne({ guild: channel.guild.id });
+      if (Setup.enable) return;
 
       let guildModel = await GLang.findOne({
         guild: channel.guild.id,
@@ -283,15 +295,4 @@ module.exports = async (client, player, track, payload) => {
           nplaying.edit({ embeds: [embeded], components: [] })
         }
       });
-    } else if(GuildControl.playerControl === 'disable'){
-      null
-    }
-  } catch (err) {
-    const guildControl = new GControl({ guild: player.guild, playerControl: 'disable' });
-    try {
-      guildControl.save()
-    } catch(err){
-      console.log(err)
-    }
-  }
 }

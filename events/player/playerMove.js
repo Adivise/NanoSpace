@@ -16,9 +16,15 @@ module.exports = async (client, player, oldChannel, newChannel) => {
       const channel = guild.channels.cache.get(player.textChannel);
       if (!channel) return;
 
-        if(oldChannel === newChannel) return;
-        if(newChannel === null || !newChannel) {
-        if(!player) return;
+      /////////// Update Music Setup ///////////
+
+      await client.UpdateMusic(player);
+
+      ////////// End Update Music Setup //////////
+
+      if(oldChannel === newChannel) return;
+      if(newChannel === null || !newChannel) {
+      if(!player) return;
 
         return player.destroy();
       } else {
