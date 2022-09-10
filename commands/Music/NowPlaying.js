@@ -86,7 +86,7 @@ module.exports = {
             const Part = Math.floor(player.position / song.duration * 30);
             const Emoji = player.playing ? "🔴 |" : "⏸ |";
 
-            embeded.fields[6] = { name: `${client.i18n.get(language, "music", "np_current_duration", {
+             embeded.data.fields[6] = { name: `${client.i18n.get(language, "music", "np_current_duration", {
                 current_duration: CurrentDuration,
                 total_duration: TotalDuration
             })}`, value: `\`\`\`${Emoji} ${'─'.repeat(Part) + '🎶' + '─'.repeat(30 - Part)}\`\`\`` };
@@ -123,7 +123,7 @@ module.exports = {
                 .setColor(client.color);
             
             embeded.setAuthor({ name: player.playing ? `${client.i18n.get(language, "music", "np_title")}` : `${client.i18n.get(language, "music", "np_title_pause")}`, iconURL: `${client.i18n.get(language, "music", "np_icon")}` })
-            embeded.fields[6] = { name: `${client.i18n.get(language, "music", "np_current_duration", {
+            embeded.data.fields[6] = { name: `${client.i18n.get(language, "music", "np_current_duration", {
                 current_duration: formatDuration(player.position),
                 total_duration: TotalDuration
             })}`, value: `\`\`\`${player.playing ? "🔴 |" : "⏸ |"} ${'─'.repeat(Math.floor(player.position / song.duration * 30)) + '🎶' + '─'.repeat(30 - Math.floor(player.position / song.duration * 30))}\`\`\`` };
