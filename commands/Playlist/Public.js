@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const Playlist = require('../../settings/models/Playlist.js');
 
 module.exports = { 
@@ -32,14 +32,14 @@ module.exports = {
         playlist.private = false;
 
         playlist.save().then(() => {
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "playlist", "public_success")}`)
                 .setColor(client.color)
             msg.edit({ content: " ", embeds: [embed] });
         });
 
     } else {
-        const Premiumed = new MessageEmbed()
+        const Premiumed = new EmbedBuilder()
             .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premium_author")}`, iconURL: client.user.displayAvatarURL() })
             .setDescription(`${client.i18n.get(language, "nopremium", "premium_desc")}`)
             .setColor(client.color)

@@ -1,5 +1,5 @@
 const lyricsfinder = require('lyrics-finder');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = { 
     config: {
@@ -14,7 +14,7 @@ module.exports = {
         const player = client.manager.get(message.guild.id);
         if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
         const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+        if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
         let song = args.join(" ");
             let CurrentSong = player.queue.current;
@@ -29,7 +29,7 @@ module.exports = {
             console.log(err);
             return msg.edit(`${client.i18n.get(language, "music", "lyrics_notfound")}`);
         }
-        let lyricsEmbed = new MessageEmbed()
+        let lyricsEmbed = new EmbedBuilder()
             .setColor(client.color)
             .setTitle(`${client.i18n.get(language, "music", "lyrics_title", {
                 song: song

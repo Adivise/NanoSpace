@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder, PermissionsBitField } = require('discord.js');
 const GPrefix = require('../../settings/models/Prefix.js');
 
 module.exports = {
@@ -11,8 +11,7 @@ module.exports = {
         accessableby: "Members"
     },
     run: async (client, message, args, user, language, prefix) => {
-
-        if (!message.member.permissions.has('MANAGE_GUILD')) return message.channel.send(`${client.i18n.get(language, "utilities", "prefix_perm")}`);
+        if (!message.member.permissions.has(PermissionsBitField.Flags.ManageGuild)) return message.channel.send(`${client.i18n.get(language, "utilities", "prefix_perm")}`);
         if(!args[0]) return message.channel.send(`${client.i18n.get(language, "utilities", "prefix_arg")}`);
         if(args[0].length > 10) return message.channel.send(`${client.i18n.get(language, "utilities", "prefix_length")}`);
 
@@ -23,7 +22,7 @@ module.exports = {
                 prefix: args[0]
             });
             newPrefix.save().then(() => {
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "utilities", "prefix_set", {
                     prefix: args[0]
                 })}`)
@@ -38,7 +37,7 @@ module.exports = {
         else if(newPrefix) {
             newPrefix.prefix = args[0];
             newPrefix.save().then(() => {
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                 .setDescription(`${client.i18n.get(language, "utilities", "prefix_change", {
                     prefix: args[0]
                 })}`)

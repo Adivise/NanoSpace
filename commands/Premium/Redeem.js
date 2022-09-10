@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const Redeem = require('../../settings/models/Redeem.js')
 const Premium = require('../../settings/models/Premium.js')
 const moment = require('moment')
@@ -20,7 +20,7 @@ module.exports = {
         if (!code)
             return message.channel.send({
             embeds: [
-                new MessageEmbed()
+                new EmbedBuilder()
                 .setColor(client.color)
                 .setDescription(`${client.i18n.get(language, "premium", "redeem_arg")}`),
             ],
@@ -29,7 +29,7 @@ module.exports = {
         if (member && member.isPremium) {
             return message.channel.send({
             embeds: [
-                new MessageEmbed()
+                new EmbedBuilder()
                 .setColor(client.color)
                 .setDescription(`${client.i18n.get(language, "premium", "redeem_already")}`),
             ],
@@ -57,7 +57,7 @@ module.exports = {
 
         message.channel.send({
             embeds: [
-            new MessageEmbed()
+            new EmbedBuilder()
                 .setTitle(`${client.i18n.get(language, "premium", "redeem_title")}`)
                 .setDescription(`${client.i18n.get(language, "premium", "redeem_desc", {
                     expires: expires,
@@ -70,7 +70,7 @@ module.exports = {
         } else {
         return message.channel.send({
             embeds: [
-            new MessageEmbed()
+            new EmbedBuilder()
                 .setColor(client.color)
                 .setDescription(`${client.i18n.get(language, "premium", "redeem_invalid")}`),
                 ],

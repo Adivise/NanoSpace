@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = { 
     config: {
@@ -20,7 +20,7 @@ module.exports = {
 		const player = client.manager.get(message.guild.id);
 		if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
         const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+        if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
 		if ((args[0] > player.queue.length) || (args[0] && !player.queue[args[0] - 1])) return msg.edit(`${client.i18n.get(language, "music", "skipto_invalid")}`);
 		if (args[0] == 1) player.stop();
@@ -28,7 +28,7 @@ module.exports = {
 		await player.queue.splice(0, args[0] - 1);
         await player.stop();
         
-        const skipto = new MessageEmbed()
+        const skipto = new EmbedBuilder()
             .setDescription(`${client.i18n.get(language, "music", "skipto_msg", {
                 position: args[0]
             })}`)

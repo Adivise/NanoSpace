@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     config: {
@@ -15,13 +15,13 @@ module.exports = {
 		const player = client.manager.get(message.guild.id);
 		if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
         const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+        if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
 		if (!args[0] || args[0].toLowerCase() == 'current') {
 			if (player.trackRepeat === false) {
 				player.setTrackRepeat(true);
 
-				const looped = new MessageEmbed()
+				const looped = new EmbedBuilder()
 					.setDescription(`${client.i18n.get(language, "music", "loop_current")}`)
 					.setColor(client.color);
 
@@ -30,7 +30,7 @@ module.exports = {
 			else {
 				player.setTrackRepeat(false);
 
-				const unlooped = new MessageEmbed()
+				const unlooped = new EmbedBuilder()
 					.setDescription(`${client.i18n.get(language, "music", "unloop_current")}`)
 					.setColor(client.color);
 
@@ -41,7 +41,7 @@ module.exports = {
 			if (player.queueRepeat === true) {
 				player.setQueueRepeat(false);
 
-				const unloopall = new MessageEmbed() //// this is unloop all in queue!
+				const unloopall = new EmbedBuilder() //// this is unloop all in queue!
 					.setDescription(`${client.i18n.get(language, "music", "unloop_all")}`)
 					.setColor(client.color);
 
@@ -50,7 +50,7 @@ module.exports = {
 			else {
 				player.setQueueRepeat(true);
 
-				const loopall = new MessageEmbed() // this is loop all in queue!
+				const loopall = new EmbedBuilder() // this is loop all in queue!
 					.setDescription(`${client.i18n.get(language, "music", "loop_all")}`)
 					.setColor(client.color);
 

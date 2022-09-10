@@ -1,18 +1,18 @@
-const { MessageActionRow, MessageButton } = require('discord.js')
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
 
 const NormalPage = async (client, message, pages, timeout, queueLength, queueDuration, language) => {
     if (!message && !message.channel) throw new Error('Channel is inaccessible.');
     if (!pages) throw new Error('Pages are not given.');
 
-    const row1 = new MessageButton()
+    const row1 = new ButtonBuilder()
         .setCustomId('back')
         .setLabel('⬅')
-        .setStyle('SECONDARY')
-    const row2 = new MessageButton()
+        .setStyle(ButtonStyle.Secondary)
+    const row2 = new ButtonBuilder()
         .setCustomId('next')
         .setLabel('➡')
-        .setStyle('SECONDARY')
-    const row = new MessageActionRow()
+        .setStyle(ButtonStyle.Secondary)
+    const row = new ActionRowBuilder()
         .addComponents(row1, row2)
 
     let page = 0;
@@ -42,7 +42,7 @@ const NormalPage = async (client, message, pages, timeout, queueLength, queueDur
             })}` })], components: [row] })
         });
     collector.on('end', () => {
-        const disabled = new MessageActionRow()
+        const disabled = new ActionRowBuilder()
             .addComponents(row1.setDisabled(true), row2.setDisabled(true))
         curPage.edit({ embeds: [pages[page].setFooter({ text: `${client.i18n.get(language, "music", "queue_footer", {
             page: page + 1,
@@ -58,15 +58,15 @@ const NormalPlaylist = async (client, message, pages, timeout, queueLength, lang
     if (!message && !message.channel) throw new Error('Channel is inaccessible.');
     if (!pages) throw new Error('Pages are not given.');
 
-    const row1 = new MessageButton()
+    const row1 = new ButtonBuilder()
         .setCustomId('back')
         .setLabel('⬅')
-        .setStyle('SECONDARY')
-    const row2 = new MessageButton()
+        .setStyle(ButtonStyle.Secondary)
+    const row2 = new ButtonBuilder()
         .setCustomId('next')
         .setLabel('➡')
-        .setStyle('SECONDARY')
-    const row = new MessageActionRow()
+        .setStyle(ButtonStyle.Secondary)
+    const row = new ActionRowBuilder()
         .addComponents(row1, row2)
 
     let page = 0;
@@ -94,7 +94,7 @@ const NormalPlaylist = async (client, message, pages, timeout, queueLength, lang
                 })}` })], components: [row] })
         });
     collector.on('end', () => {
-        const disabled = new MessageActionRow()
+        const disabled = new ActionRowBuilder()
             .addComponents(row1.setDisabled(true), row2.setDisabled(true))
         curPage.edit({ embeds: [pages[page].setFooter({ text: `${client.i18n.get(language, "playlist", "view_embed_footer", {
                     page: page + 1,

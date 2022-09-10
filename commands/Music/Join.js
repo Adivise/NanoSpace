@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = { 
     config: {
@@ -23,7 +23,7 @@ module.exports = {
 
         await player.connect();
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setDescription(`${client.i18n.get(language, "music", "join_msg", {
                 channel: channel.name
             })}`)

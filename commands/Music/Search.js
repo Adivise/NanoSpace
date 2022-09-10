@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageButton, MessageActionRow, Permissions } = require("discord.js");
+const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, PermissionsBitField, ButtonStyle } = require("discord.js");
 const { convertTime } = require("../../structures/ConvertTime.js");
 
 module.exports = { 
@@ -14,8 +14,8 @@ module.exports = {
 
         const { channel } = message.member.voice;
 		if (!channel) return msg.edit(`${client.i18n.get(language, "music", "search_invoice")}`);
-		if (!channel.permissionsFor(message.guild.me).has(Permissions.FLAGS.CONNECT)) return msg.edit(`${client.i18n.get(language, "music", "search_join")}`);
-		if (!channel.permissionsFor(message.guild.me).has(Permissions.FLAGS.SPEAK)) return msg.edit(`${client.i18n.get(language, "music", "search_speak")}`);
+		if (!channel.permissionsFor(message.guild.members.me).has(PermissionsBitField.Flags.Connect)) return msg.edit(`${client.i18n.get(language, "music", "search_join")}`);
+		if (!channel.permissionsFor(message.guild.members.me).has(PermissionsBitField.Flags.Speak)) return msg.edit(`${client.i18n.get(language, "music", "search_speak")}`);
 
         if (!args[0]) return msg.edit(`${client.i18n.get(language, "music", "search_arg")}`);
 
@@ -26,36 +26,36 @@ module.exports = {
             selfDeafen: true,
         });
 
-        const row = new MessageActionRow()
+        const row = new  ActionRowBuilder()
         .addComponents(
-          new MessageButton()
+          new ButtonBuilder()
             .setCustomId("one")
             .setEmoji("1️⃣")
-            .setStyle("SECONDARY")
+            .setStyle(ButtonStyle.Secondary)
         )
         .addComponents(
-          new MessageButton()
+          new ButtonBuilder()
             .setCustomId("two")
             .setEmoji("2️⃣")
-            .setStyle("SECONDARY")
+            .setStyle(ButtonStyle.Secondary)
         )
         .addComponents(
-          new MessageButton()
+          new ButtonBuilder()
             .setCustomId("three")
             .setEmoji("3️⃣")
-            .setStyle("SECONDARY")
+            .setStyle(ButtonStyle.Secondary)
         )
         .addComponents(
-          new MessageButton()
+          new ButtonBuilder()
             .setCustomId("four")
             .setEmoji("4️⃣")
-            .setStyle("SECONDARY")
+            .setStyle(ButtonStyle.Secondary)
         )
         .addComponents(
-          new MessageButton()
+          new ButtonBuilder()
             .setCustomId("five")
             .setEmoji("5️⃣")
-            .setStyle("SECONDARY")
+            .setStyle(ButtonStyle.Secondary)
         )
 
         const search = args.join(" ");
@@ -66,7 +66,7 @@ module.exports = {
         if(res.loadType != "NO_MATCHES") {
             if(res.loadType == "TRACK_LOADED") {
                 player.queue.add(res.tracks[0]);
-                const embed = new MessageEmbed() //`**Queued • [${res.tracks[0].title}](${res.tracks[0].uri})** \`${convertTime(res.tracks[0].duration, true)}\` • ${res.tracks[0].requester}
+                const embed = new EmbedBuilder() //`**Queued • [${res.tracks[0].title}](${res.tracks[0].uri})** \`${convertTime(res.tracks[0].duration, true)}\` • ${res.tracks[0].requester}
                     .setDescription(`${client.i18n.get(language, "music", "search_result", {
                         title: res.tracks[0].title,
                         url: res.tracks[0].uri,
@@ -89,7 +89,7 @@ module.exports = {
                             author: video.author
                         })}`)
                         .join("\n");
-                    const playing = new MessageEmbed()
+                    const playing = new EmbedBuilder()
                         .setAuthor({ name: `${client.i18n.get(language, "music", "search_title")}`, iconURL: message.guild.iconURL({ dynamic: true }) })
                         .setColor(client.color)
                         .setDescription(results)
@@ -107,7 +107,7 @@ module.exports = {
                             player.queue.add(res.tracks[0]);
                             if(player && player.state === "CONNECTED" && !player.playing && !player.paused && !player.queue.size) await player.play();
 
-                            const embed = new MessageEmbed() //**Queued • [${res.tracks[0].title}](${res.tracks[0].uri})** \`${convertTime(res.tracks[0].duration, true)}\` • ${res.tracks[0].requester}
+                            const embed = new EmbedBuilder() //**Queued • [${res.tracks[0].title}](${res.tracks[0].uri})** \`${convertTime(res.tracks[0].duration, true)}\` • ${res.tracks[0].requester}
                                 .setDescription(`${client.i18n.get(language, "music", "search_result", {
                                     title: res.tracks[0].title,
                                     url: res.tracks[0].uri,
@@ -121,7 +121,7 @@ module.exports = {
                             player.queue.add(res.tracks[1]);
                             if(player && player.state === "CONNECTED" && !player.playing && !player.paused && !player.queue.size) await player.play();
 
-                            const embed = new MessageEmbed() //**Queued • [${res.tracks[1].title}](${res.tracks[1].uri})** \`${convertTime(res.tracks[1].duration, true)}\` • ${res.tracks[1].requester}
+                            const embed = new EmbedBuilder() //**Queued • [${res.tracks[1].title}](${res.tracks[1].uri})** \`${convertTime(res.tracks[1].duration, true)}\` • ${res.tracks[1].requester}
                                 .setDescription(`${client.i18n.get(language, "music", "search_result", {
                                     title: res.tracks[1].title,
                                     url: res.tracks[1].uri,
@@ -135,7 +135,7 @@ module.exports = {
                             player.queue.add(res.tracks[2]);
                             if(player && player.state === "CONNECTED" && !player.playing && !player.paused && !player.queue.size) await player.play();
 
-                            const embed = new MessageEmbed() //**Queued • [${res.tracks[2].title}](${res.tracks[2].uri})** \`${convertTime(res.tracks[2].duration, true)}\` • ${res.tracks[2].requester}
+                            const embed = new EmbedBuilder() //**Queued • [${res.tracks[2].title}](${res.tracks[2].uri})** \`${convertTime(res.tracks[2].duration, true)}\` • ${res.tracks[2].requester}
                                 .setDescription(`${client.i18n.get(language, "music", "search_result", {
                                     title: res.tracks[2].title,
                                     url: res.tracks[2].uri,
@@ -149,7 +149,7 @@ module.exports = {
                             player.queue.add(res.tracks[3]);
                             if(player && player.state === "CONNECTED" && !player.playing && !player.paused && !player.queue.size) await player.play();
 
-                            const embed = new MessageEmbed() //**Queued • [${res.tracks[3].title}](${res.tracks[3].uri})** \`${convertTime(res.tracks[3].duration, true)}\` • ${res.tracks[3].requester}
+                            const embed = new EmbedBuilder() //**Queued • [${res.tracks[3].title}](${res.tracks[3].uri})** \`${convertTime(res.tracks[3].duration, true)}\` • ${res.tracks[3].requester}
                                 .setDescription(`${client.i18n.get(language, "music", "search_result", {
                                     title: res.tracks[3].title,
                                     url: res.tracks[3].uri,
@@ -163,7 +163,7 @@ module.exports = {
                             player.queue.add(res.tracks[4]);
                             if(player && player.state === "CONNECTED" && !player.playing && !player.paused && !player.queue.size) await player.play();
 
-                            const embed = new MessageEmbed() //**Queued • [${res.tracks[4].title}](${res.tracks[4].uri})** \`${convertTime(res.tracks[4].duration, true)}\` • ${res.tracks[4].requester}
+                            const embed = new EmbedBuilder() //**Queued • [${res.tracks[4].title}](${res.tracks[4].uri})** \`${convertTime(res.tracks[4].duration, true)}\` • ${res.tracks[4].requester}
                                 .setDescription(`${client.i18n.get(language, "music", "search_result", {
                                     title: res.tracks[4].title,
                                     url: res.tracks[4].uri,
@@ -186,7 +186,7 @@ module.exports = {
                 }
                 else if(res.loadType == "PLAYLIST_LOADED") {
                     player.queue.add(res.tracks)
-                    const playlist = new MessageEmbed() //**Queued** • [${res.playlist.name}](${search}) \`${convertTime(res.playlist.duration)}\` (${res.tracks.length} tracks) • ${res.tracks[0].requester}
+                    const playlist = new EmbedBuilder() //**Queued** • [${res.playlist.name}](${search}) \`${convertTime(res.playlist.duration)}\` (${res.tracks.length} tracks) • ${res.tracks[0].requester}
                         .setDescription(`${client.i18n.get(language, "music", "search_playlist", {
                             title: res.playlist.name,
                             url: search,

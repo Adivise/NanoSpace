@@ -1,5 +1,5 @@
 const delay = require('delay');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = { 
     config: {
@@ -18,7 +18,7 @@ module.exports = {
             const player = client.manager.get(message.guild.id);
             if(!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
             const { channel } = message.member.voice;
-            if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+            if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
     
             const data = {
                 op: 'filters',
@@ -43,7 +43,7 @@ module.exports = {
 
             await player.node.send(data);
 
-        const tbed = new MessageEmbed()
+        const tbed = new EmbedBuilder()
             .setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                 name: client.commands.get('treblebass').config.name
             })}`)

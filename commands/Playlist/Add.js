@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const Playlist = require('../../settings/models/Playlist.js');
 const { convertTime } = require("../../structures/ConvertTime.js")
 
@@ -36,7 +36,7 @@ module.exports = {
         if(res.loadType != "NO_MATCHES") {
             if(res.loadType == "TRACK_LOADED") {
                 TrackAdd.push(res.tracks[0])
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                     .setDescription(`${client.i18n.get(language, "playlist", "add_track", {
                         title: res.tracks[0].title,
                         url: res.tracks[0].uri,
@@ -50,7 +50,7 @@ module.exports = {
                 for (let t = 0; t < res.tracks.length; t++) {
                     TrackAdd.push(res.tracks[t]);
                 }
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                     .setDescription(`${client.i18n.get(language, "playlist", "add_playlist", {
                         title: res.playlist.name,
                         url: Inputed,
@@ -63,7 +63,7 @@ module.exports = {
             }
             else if(res.loadType == "SEARCH_RESULT") {
                 TrackAdd.push(res.tracks[0]);
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                     .setDescription(`${client.i18n.get(language, "playlist", "add_search", {
                         title: res.tracks[0].title,
                         url: res.tracks[0].uri,
@@ -92,7 +92,7 @@ module.exports = {
                     playlist.tracks.push(TrackAdd[songs]);
                 }
                 playlist.save().then(() => {
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                     .setDescription(`${client.i18n.get(language, "playlist", "add_added", {
                         count: TrackAdd.length,
                         playlist: PlaylistName
@@ -105,7 +105,7 @@ module.exports = {
             }
         }).catch(err => console.log(err));
     } else {
-        const Premiumed = new MessageEmbed()
+        const Premiumed = new EmbedBuilder()
             .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premium_author")}`, iconURL: client.user.displayAvatarURL() })
             .setDescription(`${client.i18n.get(language, "nopremium", "premium_desc")}`)
             .setColor(client.color)

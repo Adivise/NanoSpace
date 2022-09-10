@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = { 
     config: {
@@ -13,11 +13,11 @@ module.exports = {
 		const player = client.manager.get(message.guild.id);
 		if (!player) return msg.edit(`${client.i18n.get(language, "noplayer", "no_player")}`);
         const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+        if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
         await player.queue.clear();
         
-        const cleared = new MessageEmbed()
+        const cleared = new EmbedBuilder()
             .setDescription(`${client.i18n.get(language, "music", "clearqueue_msg")}`)
             .setColor(client.color);
 

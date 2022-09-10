@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const Playlist = require('../../settings/models/Playlist.js');
 const humanizeDuration = require('humanize-duration');
 const { NormalPlaylist } = require('../../structures/PageQueue.js');
@@ -37,7 +37,7 @@ module.exports = {
         const pages = [];
         for (let i = 0; i < pagesNum; i++) {
             const str = playlistStrings.slice(i * 10, i * 10 + 10).join('');
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setAuthor({ name: `${client.i18n.get(language, "playlist", "view_embed_title", {
                     user: message.author.username
                 })}`, iconURL: message.author.displayAvatarURL() })
@@ -64,7 +64,7 @@ module.exports = {
 			return message.channel.send({ embeds: [pages[pageNum]] });
         }
     } else {
-        const Premiumed = new MessageEmbed()
+        const Premiumed = new EmbedBuilder()
             .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premium_author")}`, iconURL: client.user.displayAvatarURL() })
             .setDescription(`${client.i18n.get(language, "nopremium", "premium_desc")}`)
             .setColor(client.color)

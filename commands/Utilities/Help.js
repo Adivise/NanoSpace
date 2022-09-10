@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageActionRow, MessageSelectMenu } = require("discord.js");
+const { EmbedBuilder, ActionRowBuilder, SelectMenuBuilder, SelectMenuOptionBuilder } = require("discord.js");
 const { readdirSync } = require("fs");
 const { stripIndents } = require("common-tags");
 
@@ -15,26 +15,24 @@ module.exports = {
         if(!args[0]) {
             const categories = readdirSync("./commands/")
 
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
             .setColor(client.color)
             .setDescription(`${client.i18n.get(language, "utilities", "help_desc")}`)
 
-            const row = new MessageActionRow()
+            const row = new ActionRowBuilder()
                 .addComponents([
-                    new MessageSelectMenu()
+                    new SelectMenuBuilder()
                         .setCustomId("help-category")
                         .setPlaceholder(`${client.i18n.get(language, "utilities", "help_desc")}`)
-                        .addOptions([
-                            categories.map(category => {
-                                return {
-                                    label: `${category[0].toUpperCase() + category.slice(1)}`,
-                                    value: category,
-                                    description: `${client.i18n.get(language, "utilities", "help_category_desc", {
-                                        category: category
-                                    })}`
-                                }
-                            })
-                        ])
+                        .setMaxValues(1)
+                        .setMinValues(1)
+                        /// Map the categories to the select menu
+                        .setOptions(categories.map(category => {
+                            return new SelectMenuOptionBuilder()
+                                .setLabel(category)
+                                .setValue(category)
+                            }
+                        ))
                     ])
 
                     message.channel.send({ embeds: [embed], components: [row] }).then(async (msg) => {
@@ -49,13 +47,13 @@ module.exports = {
                                     await m.deferUpdate();
                                     let [directory] = m.values;
 
-                                    const embed = new MessageEmbed()
-                                    .setAuthor({ name: `${message.guild.me.displayName} Help Command!`, iconURL: message.guild.iconURL({ dynamic: true })})
+                                    const embed = new EmbedBuilder()
+                                    .setAuthor({ name: `${message.guild.members.me.displayName} Help Command!`, iconURL: message.guild.iconURL({ dynamic: true })})
                                     .setDescription(`The bot prefix is: \`${prefix}\``)
                                     .setThumbnail(client.user.displayAvatarURL({ dynamic: true, size: 2048 }))
                                     .setColor(client.color)
-                                    .addField(`❯  ${directory.toUpperCase()} [${client.commands.filter(c => c.config.category === directory).size}]`, `${client.commands.filter(c => c.config.category === directory).map(c => `\`${c.config.name}\``).join(", ")}`)
-                                    .setFooter({ text: `© ${message.guild.me.displayName} | Total Commands: ${client.commands.size}`, iconURL: client.user.displayAvatarURL({ dynamic: true })})
+                                    .addFields({ name: `❯  ${directory.toUpperCase()} [${client.commands.filter(c => c.config.category === directory).size}]`, value: `${client.commands.filter(c => c.config.category === directory).map(c => `\`${c.config.name}\``).join(", ")}`, inline: false })
+                                    .setFooter({ text: `© ${message.guild.members.me.displayName} | Total Commands: ${client.commands.size}`, iconURL: client.user.displayAvatarURL({ dynamic: true })})
 
                                     msg.edit({ embeds: [embed] });
                             }
@@ -63,7 +61,7 @@ module.exports = {
                     });
                         collector.on('end', async (collected, reason) => {
                             if(reason === 'time') {
-                                const timed = new MessageEmbed()
+                                const timed = new EmbedBuilder()
                                 .setDescription(`${client.i18n.get(language, "utilities", "help_timeout", {
                                     prefix: prefix
                                 })}`)
@@ -74,8 +72,8 @@ module.exports = {
                         });
                 })
         } else {
-            const embed = new MessageEmbed()
-                .setAuthor({ name: `${message.guild.me.displayName} Help Command!`, iconURL: message.guild.iconURL({ dynamic: true })})
+            const embed = new EmbedBuilder()
+                .setAuthor({ name: `${message.guild.members.me.displayName} Help Command!`, iconURL: message.guild.iconURL({ dynamic: true })})
                 .setDescription(`The bot prefix is: **${prefix}**`)
                 .setThumbnail(client.user.displayAvatarURL({ dynamic: true, size: 2048 }));
 

@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const { NormalPage } = require('../../structures/PageQueue.js');
 const formatDuration = require('../../structures/FormatDuration.js');
 
@@ -14,7 +14,7 @@ module.exports = {
 		const player = client.manager.get(message.guild.id);
 		if (!player) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_player")}`);
         const { channel } = message.member.voice;
-        if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+        if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
 		const song = player.queue.current;
 		const qduration = `${formatDuration(player.queue.duration)}`;
@@ -35,7 +35,7 @@ module.exports = {
 		for (let i = 0; i < pagesNum; i++) {
 			const str = songStrings.slice(i * 10, i * 10 + 10).join('');
 
-			const embed = new MessageEmbed()
+			const embed = new EmbedBuilder()
                 .setAuthor({ name: `${client.i18n.get(language, "music", "queue_author", {
 					guild: message.guild.name,
 				})}`, iconURL: message.guild.iconURL({ dynamic: true }) })

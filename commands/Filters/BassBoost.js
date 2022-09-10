@@ -1,5 +1,5 @@
 const delay = require('delay');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = { 
     config: {
@@ -18,7 +18,7 @@ module.exports = {
                 const player = client.manager.get(message.guild.id);
                 if(!player) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_player")}`);
                 const { channel } = message.member.voice;
-                if (!channel || message.member.voice.channel !== message.guild.me.voice.channel) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_voice")}`);
+                if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return message.channel.send(`${client.i18n.get(language, "noplayer", "no_voice")}`);
         
 		if(!args[0]) {
             const data = {
@@ -47,7 +47,7 @@ module.exports = {
 			const msg1 = await message.channel.send(`${client.i18n.get(language, "filters", "filter_loading", {
                 name: client.commands.get('bassboost').config.name
             })}`);
-			const embed = new MessageEmbed()
+			const embed = new EmbedBuilder()
 				.setDescription(`${client.i18n.get(language, "filters", "filter_on", {
                 name: client.commands.get('bassboost').config.name
             })}`)
@@ -83,7 +83,7 @@ module.exports = {
 		    const msg2 = await message.channel.send(`${client.i18n.get(language, "filters", "bassboost_loading", {
                 amount: args[0]
                 })}`);
-		    const embed = new MessageEmbed()
+		    const embed = new EmbedBuilder()
 			    .setDescription(`${client.i18n.get(language, "filters", "bassboost_set", {
                 amount: args[0]
                 })}`)
@@ -92,7 +92,7 @@ module.exports = {
 		    await delay(5000);
             return msg2.edit({ content: " ", embeds: [embed] });
         } else {
-            const Premiumed = new MessageEmbed()
+            const Premiumed = new EmbedBuilder()
                 .setAuthor({ name: `${client.i18n.get(language, "nopremium", "premium_author")}`, iconURL: client.user.displayAvatarURL() })
                 .setDescription(`${client.i18n.get(language, "nopremium", "premium_desc")}`)
                 .setColor(client.color)

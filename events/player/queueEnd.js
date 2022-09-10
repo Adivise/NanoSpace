@@ -1,5 +1,6 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const GLang = require("../../settings/models/Language.js");
+const Setup = require("../../settings/models/Setup.js");
 
 module.exports = async (client, player) => {
 	const channel = client.channels.cache.get(player.textChannel);
@@ -19,10 +20,19 @@ module.exports = async (client, player) => {
 
 	const { language } = guildModel;
 
-	const embed = new MessageEmbed()
+	/////////// Update Music Setup ///////////
+
+	await client.UpdateMusic(player);
+
+	const db = await Setup.findOne({ guild: channel.guild.id });
+	if (db.enable) return player.destroy();
+
+	////////// End Update Music Setup //////////
+
+	const embed = new EmbedBuilder()
 		.setColor(client.color)
 		.setDescription(`${client.i18n.get(language, "player", "queue_end_desc")}`);
 
 	await channel.send({ embeds: [embed] });
-	return player.destroy(false);
+	return player.destroy();
 }

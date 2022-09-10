@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     ownerOnly: true,
@@ -12,7 +12,7 @@ module.exports = {
     },
     run: async (client, message, args, user, language, prefix) => {
 
-    const restart = new MessageEmbed()
+    const restart = new EmbedBuilder()
         .setDescription(`${client.i18n.get(language, "utilities", "restart_msg")}`)
         .setColor(client.color);
 
