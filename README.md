@@ -16,6 +16,7 @@
 - [x] Youtube
 - [x] SoundCloud
 - [x] Spotify
+- [x] Tidal
 - [x] Deezer
 - [x] Facebook 
 - [x] Twitch
