@@ -1,6 +1,7 @@
 module.exports = async (client, player, track, playload) => {
-    const autoplay = player.get("autoplay")
+    await client.clearInterval;
 
+    const autoplay = player.get("autoplay")
     if (autoplay === true) {
         const requester = player.get("requester");
         const identifier = player.queue.current.identifier;
