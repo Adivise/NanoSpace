@@ -1,5 +1,6 @@
 module.exports = async (client, player, track, playload) => {
-    await client.clearInterval;
+
+    await client.clearInterval(client.interval);
 
     const autoplay = player.get("autoplay")
     if (autoplay === true) {

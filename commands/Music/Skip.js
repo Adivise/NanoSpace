@@ -17,7 +17,7 @@ module.exports = {
         if (!channel || message.member.voice.channel !== message.guild.members.me.voice.channel) return msg.edit(`${client.i18n.get(language, "noplayer", "no_voice")}`);
 
         await player.stop();
-        await client.clearInterval;
+        await client.clearInterval(client.interval);
 
         const skipped = new EmbedBuilder()
             .setDescription(`${client.i18n.get(language, "music", "skip_msg")}`)

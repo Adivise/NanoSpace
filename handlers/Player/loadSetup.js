@@ -86,4 +86,10 @@ module.exports = async (client) => {
         }
     }
 
+    client.interval = null;
+
+    client.clearInterval = async function (interval) {
+        clearInterval(interval);
+    }
+
 };

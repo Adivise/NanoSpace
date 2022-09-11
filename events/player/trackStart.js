@@ -10,7 +10,7 @@ module.exports = async (client, player, track, payload) => {
       /////////// Update Music Setup ///////////
 
       await client.UpdateQueueMsg(player);
-      await client.clearInterval;
+      await client.clearInterval(client.interval);
 
       /////////// Update Music Setup ///////////
 
@@ -147,7 +147,7 @@ module.exports = async (client, player, track, payload) => {
           }
 
           await player.stop();
-          await client.clearInterval;
+          await client.clearInterval(client.interval);
 
           const embed = new EmbedBuilder()
               .setDescription(`${client.i18n.get(language, "player", "skip_msg")}`)
@@ -162,7 +162,7 @@ module.exports = async (client, player, track, payload) => {
 
           await player.stop();
           await player.destroy();
-          await client.clearInterval;
+          await client.clearInterval(client.interval);
 
           const embed = new EmbedBuilder()
               .setDescription(`${client.i18n.get(language, "player", "stop_msg")}`)
@@ -298,7 +298,7 @@ module.exports = async (client, player, track, payload) => {
       collector.on('end', async (collected, reason) => {
         if(reason === "time") {
           await nplaying.edit({ embeds: [embeded], components: [] })
-          await client.clearInterval;
+          await client.clearInterval(client.interval);
         }
       });
 }
