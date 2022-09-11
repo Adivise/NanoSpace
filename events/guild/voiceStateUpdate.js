@@ -5,7 +5,9 @@ module.exports = async (client, oldState, newState) => {
 	const player = client.manager?.players.get(newState.guild.id);
 
 	if (!player) return;
-	if (!newState.guild.members.cache.get(client.user.id).voice.channelId) player.destroy();
+	if (!newState.guild.members.cache.get(client.user.id).voice.channelId) { 
+		player.destroy();
+	}
 
 	if (newState.channelId && newState.channel.type == 13 && newState.guild.members.me.voice.suppress) {
 		if (newState.guild.members.me.permissions.has(PermissionsBitField.Flags.Speak) || (newState.channel && newState.channel.permissionsFor(nS.guild.members.me).has(PermissionsBitField.Flags.Speak))) {
@@ -28,6 +30,7 @@ module.exports = async (client, oldState, newState) => {
 				if(!player) return;
 				await player.destroy();
 				await client.UpdateMusic(player);
+				await client.clearInterval;
 			}
 		}
 	}

@@ -77,16 +77,15 @@ module.exports = {
             )
 
         const NEmbed = await msg.edit({ content: " ", embeds: [embeded], components: [row] });
-        var interval = null;
 
         if (realtime === 'true') {
-        interval = setInterval(async () => {
+        client.interval = setInterval(async () => {
             if (!player.playing) return;
             const CurrentDuration = formatDuration(player.position);
             const Part = Math.floor(player.position / song.duration * 30);
             const Emoji = player.playing ? "🔴 |" : "⏸ |";
 
-             embeded.data.fields[6] = { name: `${client.i18n.get(language, "music", "np_current_duration", {
+            embeded.data.fields[6] = { name: `${client.i18n.get(language, "music", "np_current_duration", {
                 current_duration: CurrentDuration,
                 total_duration: TotalDuration
             })}`, value: `\`\`\`${Emoji} ${'─'.repeat(Part) + '🎶' + '─'.repeat(30 - Part)}\`\`\`` };
@@ -154,7 +153,7 @@ module.exports = {
                 .setDescription(`${client.i18n.get(language, "music", "np_stop_msg")}`)
                 .setColor(client.color);
 
-            clearInterval(interval);
+            await client.clearInterval;
             if (NEmbed) await NEmbed.edit({ components: [] })
             interaction.reply({ embeds: [embed], ephemeral: true });
             } else if (id === "skip") {
@@ -167,7 +166,7 @@ module.exports = {
                 .setDescription(`${client.i18n.get(language, "music", "np_skip_msg")}`)
                 .setColor(client.color);
 
-            clearInterval(interval);
+            await client.clearInterval;
             if (NEmbed) await NEmbed.edit({ components: [] });
             interaction.reply({ embeds: [embed], ephemeral: true });
             } else if(id === "loop") {
@@ -190,7 +189,7 @@ module.exports = {
         collector.on('end', async (collected, reason) => {
             if(reason === "time") {
                 if (NEmbed) await NEmbed.edit({ components: [] });
-                clearInterval(interval);
+                await client.clearInterval;
             }
         });
     }

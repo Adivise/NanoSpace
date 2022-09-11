@@ -27,6 +27,7 @@ module.exports = {
 
 		await player.queue.splice(0, args[0] - 1);
         await player.stop();
+        await client.clearInterval;
         
         const skipto = new EmbedBuilder()
             .setDescription(`${client.i18n.get(language, "music", "skipto_msg", {

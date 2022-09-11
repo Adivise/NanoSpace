@@ -3,6 +3,7 @@ const formatDuration = require("../../structures/FormatDuration.js");
 const { Player } = require("erela.js");
 const GLang = require("../../settings/models/Language.js");
 const Setup = require("../../settings/models/Setup.js");
+const { clearInterval } = require("timers");
   
   /**
    *
@@ -69,6 +70,10 @@ module.exports = async (client) => {
             components: [client.enSwitch] 
         }).catch((e) => {});
     };
+
+    
+    client.interval = null;
+    client.clearInterval = clearInterval(client.interval);
 
     /**
      *
