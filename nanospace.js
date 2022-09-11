@@ -2,6 +2,7 @@ const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const { Manager } = require("erela.js");
 const Spotify = require("better-erela.js-spotify").default;
 const Deezer = require("erela.js-deezer");
+const Tidal  = require("erela.js-tidal");
 const AppleMusic = require("better-erela.js-apple").default;
 const Facebook = require("erela.js-facebook");
 const { I18n } = require("locale-parser");
@@ -43,7 +44,8 @@ class MainClient extends Client {
         new Spotify(),
         new Facebook(),
         new Deezer(),
-        new AppleMusic()
+        new AppleMusic(),
+        new Tidal()
       ],
       send(id, payload) {
         const guild = client.guilds.cache.get(id);
