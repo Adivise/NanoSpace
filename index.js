@@ -2,6 +2,7 @@ const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const { Manager } = require("erela.js");
 const Spotify = require("better-erela.js-spotify").default;
 const AppleMusic = require("better-erela.js-apple").default;
+const Tidal  = require("erela.js-tidal");
 const Deezer = require("erela.js-deezer");
 const Facebook = require("erela.js-facebook");
 
@@ -41,7 +42,8 @@ for (let i = 0; i < TOKEN.length ; i++) {
           new Spotify(),
           new Facebook(),
           new Deezer(),
-          new AppleMusic()
+          new AppleMusic(),
+		  new Tidal()
         ],
         send(id, payload) {
           const guild = client.guilds.cache.get(id);

@@ -11,6 +11,7 @@
     "erela.js": "github:Adivise/erela.js-multi",
     "erela.js-deezer": "^1.0.7",
     "erela.js-facebook": "^1.0.4",
+	"erela.js-tidal": "^1.0.2",
     "lyrics-finder": "^21.7.0"
   },
   "scripts": {
