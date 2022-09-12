@@ -4,14 +4,18 @@ const NormalPage = async (client, message, pages, timeout, queueLength, queueDur
     if (!message && !message.channel) throw new Error('Channel is inaccessible.');
     if (!pages) throw new Error('Pages are not given.');
 
+    const button = client.button.queue_page;
+
     const row1 = new ButtonBuilder()
         .setCustomId('back')
-        .setLabel('⬅')
-        .setStyle(ButtonStyle.Secondary)
+        .setLabel(`${button.back.label}`)
+        .setEmoji(`${button.back.emoji}`)
+        .setStyle(ButtonStyle[button.back.style])
     const row2 = new ButtonBuilder()
         .setCustomId('next')
-        .setLabel('➡')
-        .setStyle(ButtonStyle.Secondary)
+        .setLabel(`${button.next.label}`)
+        .setEmoji(`${button.next.emoji}`)
+        .setStyle(ButtonStyle[button.next.style])
     const row = new ActionRowBuilder()
         .addComponents(row1, row2)
 
@@ -58,14 +62,17 @@ const NormalPlaylist = async (client, message, pages, timeout, queueLength, lang
     if (!message && !message.channel) throw new Error('Channel is inaccessible.');
     if (!pages) throw new Error('Pages are not given.');
 
+    const button = client.button.playlist_page;
+
     const row1 = new ButtonBuilder()
         .setCustomId('back')
-        .setLabel('⬅')
-        .setStyle(ButtonStyle.Secondary)
+        .setLabel(`${button.back.label}`)
+        .setEmoji(`${button.back.emoji}`)
+        .setStyle(ButtonStyle[button.back.style])
     const row2 = new ButtonBuilder()
-        .setCustomId('next')
-        .setLabel('➡')
-        .setStyle(ButtonStyle.Secondary)
+        .setLabel(`${button.next.label}`)
+        .setEmoji(`${button.next.emoji}`)
+        .setStyle(ButtonStyle[button.next.style])
     const row = new ActionRowBuilder()
         .addComponents(row1, row2)
 

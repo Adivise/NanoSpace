@@ -25,6 +25,7 @@ class MainClient extends Client {
         });
 
     this.config = require("./settings/config.js");
+    this.button = require("./settings/button.js");
     this.prefix = this.config.PREFIX;
     this.owner = this.config.OWNER_ID;
     this.dev = this.config.DEV_ID;

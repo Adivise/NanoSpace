@@ -26,37 +26,44 @@ module.exports = {
             selfDeafen: true,
         });
 
+        const button = client.button.search;
+
         const row = new  ActionRowBuilder()
-        .addComponents(
-          new ButtonBuilder()
-            .setCustomId("one")
-            .setEmoji("1️⃣")
-            .setStyle(ButtonStyle.Secondary)
-        )
-        .addComponents(
-          new ButtonBuilder()
-            .setCustomId("two")
-            .setEmoji("2️⃣")
-            .setStyle(ButtonStyle.Secondary)
-        )
-        .addComponents(
-          new ButtonBuilder()
-            .setCustomId("three")
-            .setEmoji("3️⃣")
-            .setStyle(ButtonStyle.Secondary)
-        )
-        .addComponents(
-          new ButtonBuilder()
-            .setCustomId("four")
-            .setEmoji("4️⃣")
-            .setStyle(ButtonStyle.Secondary)
-        )
-        .addComponents(
-          new ButtonBuilder()
-            .setCustomId("five")
-            .setEmoji("5️⃣")
-            .setStyle(ButtonStyle.Secondary)
-        )
+            .addComponents(
+            new ButtonBuilder()
+                .setCustomId("one")
+                .setLabel(`${button.one.label}`)
+                .setEmoji(`${button.one.emoji}`)
+                .setStyle(ButtonStyle[button.one.style])
+            )
+            .addComponents(
+            new ButtonBuilder()
+                .setCustomId("two")
+                .setLabel(`${button.two.label}`)
+                .setEmoji(`${button.two.emoji}`)
+                .setStyle(ButtonStyle[button.two.style])
+            )
+            .addComponents(
+            new ButtonBuilder()
+                .setCustomId("three")
+                .setLabel(`${button.three.label}`)
+                .setEmoji(`${button.three.emoji}`)
+                .setStyle(ButtonStyle[button.three.style])
+            )
+            .addComponents(
+            new ButtonBuilder()
+                .setCustomId("four")
+                .setLabel(`${button.four.label}`)
+                .setEmoji(`${button.four.emoji}`)
+                .setStyle(ButtonStyle[button.four.style])
+            )
+            .addComponents(
+            new ButtonBuilder()
+                .setCustomId("five")
+                .setLabel(`${button.five.label}`)
+                .setEmoji(`${button.five.emoji}`)
+                .setStyle(ButtonStyle[button.five.style])
+            )
 
         const search = args.join(" ");
 

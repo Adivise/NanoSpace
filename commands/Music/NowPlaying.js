@@ -44,54 +44,63 @@ module.exports = {
             })}`, value: `\`\`\`${Emoji} ${'─'.repeat(Part) + '🎶' + '─'.repeat(30 - Part)}\`\`\``, inline: false })
             .setTimestamp();
 
-        const row = new ActionRowBuilder()
+        const button = client.button.nowplaying;
+
+        const row = new  ActionRowBuilder()
             .addComponents(
-              new ButtonBuilder()
+            new ButtonBuilder()
                 .setCustomId("pause")
-                .setEmoji("⏯")
-                .setStyle(ButtonStyle.Primary)
+                .setLabel(`${button.pause.label}`)
+                .setEmoji(`${button.pause.emoji}`)
+                .setStyle(ButtonStyle[button.pause.style])
             )
             .addComponents(
-              new ButtonBuilder()
+            new ButtonBuilder()
                 .setCustomId("replay")
-                .setEmoji("⬅")
-                .setStyle(ButtonStyle.Success)
+                .setLabel(`${button.replay.label}`)
+                .setEmoji(`${button.replay.emoji}`)
+                .setStyle(ButtonStyle[button.replay.style])
             )
             .addComponents(
-              new ButtonBuilder()
+            new ButtonBuilder()
                 .setCustomId("stop")
-                .setEmoji("✖")
-                .setStyle(ButtonStyle.Danger)
+                .setLabel(`${button.stop.label}`)
+                .setEmoji(`${button.stop.emoji}`)
+                .setStyle(ButtonStyle[button.stop.style])
             )
             .addComponents(
-              new ButtonBuilder()
+            new ButtonBuilder()
                 .setCustomId("skip")
-                .setEmoji("➡")
-                .setStyle(ButtonStyle.Success)
+                .setLabel(`${button.skip.label}`)
+                .setEmoji(`${button.skip.emoji}`)
+                .setStyle(ButtonStyle[button.pause.style])
             )
             .addComponents(
-              new ButtonBuilder()
+            new ButtonBuilder()
                 .setCustomId("loop")
-                .setEmoji("🔄")
-                .setStyle(ButtonStyle.Primary)
+                .setLabel(`${button.loop.label}`)
+                .setEmoji(`${button.loop.emoji}`)
+                .setStyle(ButtonStyle[button.loop.style])
             )
 
         const NEmbed = await msg.edit({ content: " ", embeds: [embeded], components: [row] });
 
+        /// RUN THIS ON SET TO TRUE
         if (realtime === 'true') {
-        client.interval = setInterval(async () => {
-            if (!player.playing) return;
-            const CurrentDuration = formatDuration(player.position);
-            const Part = Math.floor(player.position / song.duration * 30);
-            const Emoji = player.playing ? "🔴 |" : "⏸ |";
+                client.interval = setInterval(async () => {
+                    if (!player.playing) return;
+                    const CurrentDuration = formatDuration(player.position);
+                    const Part = Math.floor(player.position / song.duration * 30);
+                    const Emoji = player.playing ? "🔴 |" : "⏸ |";
 
-            embeded.data.fields[6] = { name: `${client.i18n.get(language, "music", "np_current_duration", {
-                current_duration: CurrentDuration,
-                total_duration: TotalDuration
-            })}`, value: `\`\`\`${Emoji} ${'─'.repeat(Part) + '🎶' + '─'.repeat(30 - Part)}\`\`\`` };
+                    embeded.data.fields[6] = { name: `${client.i18n.get(language, "music", "np_current_duration", {
+                        current_duration: CurrentDuration,
+                        total_duration: TotalDuration
+                    })}`, value: `\`\`\`${Emoji} ${'─'.repeat(Part) + '🎶' + '─'.repeat(30 - Part)}\`\`\`` };
 
-            if (NEmbed) NEmbed.edit({ content: " ", embeds: [embeded], components: [row] })
-        }, 5000);
+                if (NEmbed) NEmbed.edit({ content: " ", embeds: [embeded], components: [row] })
+            }, 5000);
+            /// RUN THIS ON SET TO FALSE
         } else if (realtime === 'false') {
             if (!player.playing) return;
             if (NEmbed) NEmbed.edit({ content: " ", embeds: [embeded], components: [row] });

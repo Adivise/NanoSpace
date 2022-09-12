@@ -49,69 +49,81 @@ module.exports = async (client, player, track, payload) => {
           current_duration: formatduration(track.duration, true),
         })}`, value: `\`\`\`🔴 | 🎶──────────────────────────────\`\`\``, inline: true })
         .setTimestamp();
-      
+
+      const button = client.button.trackStart;
+    
       const row = new  ActionRowBuilder()
         .addComponents(
           new ButtonBuilder()
             .setCustomId("pause")
-            .setEmoji("⏯")
-            .setStyle(ButtonStyle.Success)
+            .setLabel(`${button.pause.label}`)
+            .setEmoji(`${button.pause.emoji}`)
+            .setStyle(ButtonStyle[button.pause.style])
         )
         .addComponents(
           new ButtonBuilder()
             .setCustomId("replay")
-            .setEmoji("⬅")
-            .setStyle(ButtonStyle.Primary)
+            .setLabel(`${button.replay.label}`)
+            .setEmoji(`${button.replay.emoji}`)
+            .setStyle(ButtonStyle[button.replay.style])
         )
         .addComponents(
           new ButtonBuilder()
             .setCustomId("stop")
-            .setEmoji("✖")
-            .setStyle(ButtonStyle.Danger)
+            .setLabel(`${button.stop.label}`)
+            .setEmoji(`${button.stop.emoji}`)
+            .setStyle(ButtonStyle[button.stop.style])
         )
         .addComponents(
           new ButtonBuilder()
             .setCustomId("skip")
-            .setEmoji("➡")
-            .setStyle(ButtonStyle.Primary)
+            .setLabel(`${button.skip.label}`)
+            .setEmoji(`${button.skip.emoji}`)
+            .setStyle(ButtonStyle[button.pause.style])
         )
         .addComponents(
           new ButtonBuilder()
             .setCustomId("loop")
-            .setEmoji("🔄")
-            .setStyle(ButtonStyle.Success)
+            .setLabel(`${button.loop.label}`)
+            .setEmoji(`${button.loop.emoji}`)
+            .setStyle(ButtonStyle[button.loop.style])
         )
       
       const row2 = new  ActionRowBuilder()
         .addComponents(
           new ButtonBuilder()
             .setCustomId("shuffle")
-            .setEmoji("🔀")
-            .setStyle(ButtonStyle.Success)
+            .setLabel(`${button.shuffle.label}`)
+            .setEmoji(`${button.shuffle.emoji}`)
+            .setStyle(ButtonStyle[button.shuffle.style])
         )
         .addComponents(
           new ButtonBuilder()
             .setCustomId("voldown")
-            .setEmoji("🔉")
-            .setStyle(ButtonStyle.Primary)
+            .setLabel(`${button.voldown.label}`)
+            .setEmoji(`${button.voldown.emoji}`)
+            .setStyle(ButtonStyle[button.voldown.style])
         )
         .addComponents(
           new ButtonBuilder()
             .setCustomId("clear")
-            .setEmoji("🗑")
-            .setStyle(ButtonStyle.Danger)
+            .setLabel(`${button.clear.label}`)
+            .setEmoji(`${button.clear.emoji}`)
+            .setStyle(ButtonStyle[button.clear.style])
         )
         .addComponents(
           new ButtonBuilder()
             .setCustomId("volup")
-            .setEmoji("🔊")
-            .setStyle(ButtonStyle.Primary)
+            .setLabel(`${button.volup.label}`)
+            .setEmoji(`${button.volup.emoji}`)
+            .setStyle(ButtonStyle[button.volup.style])
         )
         .addComponents(
           new ButtonBuilder()
             .setCustomId("queue")
-            .setEmoji("📋")
-            .setStyle(ButtonStyle.Success)
+            .setLabel(`${button.queue.label}`)
+            .setEmoji(`${button.queue.emoji}`)
+            .setStyle(ButtonStyle[button.queue.style])
         )
      
       const nplaying = await client.channels.cache.get(player.textChannel).send({ embeds: [embeded], components: [row, row2] });
