@@ -121,6 +121,10 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 - 247 (#247)
 - Previous (#previous)
 - Autoplay (#autoplay)
+- PlaySkip (#playskip [song/url])
+- SearchSkip (#searchskip [song/url])
+- Move (#move [song | position])
+- RemoveTrack (#removetrack, #rs, #rt [position])
 
 ⏺ **Filter Commands!**
 - Bass (#bass)
@@ -160,21 +164,20 @@ After installation or finishes all you can use `node .` to start the bot. or `Ru
 - Import (#import [name])
 - Detail (#detail [name])
 - Remove (#remove [name] [position])
-- Savequeu (#savequeue [name])
+- Savequeue (#savequeue [name])
 - View (#view)
 	
 💎 **Premium Commands!**
-- Premium (#premium [plan] [user id])
+- Profile (#profile)
 - Generate (#generate [plan] [amount])
 - Redeem (#redeem [code])
+- Unpremium (#unpremium [@mention])
+- Setup (#setup)
 	
 📑 **Utilities Commands!**
 - Restart (#restart, #stopbot)
-- DeploySlash (#deploy, #dps) <= only one guild
-- ClearSlash (#cdps) <= work only deployslash
 - Prefix (#prefix [new prefix])
 - Language (#language [lang]) // Example: en, hi
-- DeploySlashGlobal (#deployglobal, #dpsg) <= want change need wait 1 - 2 hrs.
 - Help (#help, #halp [command])
 
 </p>
