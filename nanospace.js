@@ -55,7 +55,7 @@ class MainClient extends Client {
     });
 
     ["aliases", "commands", "premiums"].forEach(x => client[x] = new Collection());
-    ["loadCommand", "loadEvent", "loadPlayer", "loadDatabase", "loadPremium"].forEach(x => require(`./handlers/${x}`)(client));
+    ["loadCommand", "loadEvent", "loadPlayer", "loadDatabase"].forEach(x => require(`./handlers/${x}`)(client));
 
 	}
 		connect() {

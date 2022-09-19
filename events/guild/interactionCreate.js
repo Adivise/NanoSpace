@@ -15,13 +15,7 @@ module.exports = async (client, interaction) => {
         const playChannel = client.channels.cache.get(player.textChannel);
         if (!playChannel) return;
     
-        let guildModel = await GLang.findOne({ guild: playChannel.guild.id });
-        if (!guildModel) { guildModel = await GLang.create({
-                guild: playChannel.guild.id,
-                language: "en",
-            });
-        }
-
+        const guildModel = await GLang.findOne({ guild: channel.guild.id });
         const { language } = guildModel;
 
         const db = await Setup.findOne({ guild: playChannel.guild.id });

@@ -8,7 +8,7 @@ module.exports = async (client) => {
 
     const users = await Premium.find();
     for (let user of users) {
-      client.premiums.set(user.Id, user);
+        client.premiums.set(user.Id, user);
     }
 
     let guilds = client.guilds.cache.size;

@@ -23,15 +23,7 @@ module.exports = async (client, player, track, payload) => {
       const Setup = await GSetup.findOne({ guild: channel.guild.id });
       if (Setup.enable) return;
 
-      let guildModel = await GLang.findOne({
-        guild: channel.guild.id,
-      });
-      if (!guildModel) {
-        guildModel = await GLang.create({
-          guild: channel.guild.id,
-          language: "en",
-        });
-      }
+      const guildModel = await GLang.findOne({ guild: channel.guild.id });
       const { language } = guildModel;
     
       const embeded = new EmbedBuilder()
@@ -79,7 +71,7 @@ module.exports = async (client, player, track, payload) => {
             .setCustomId("skip")
             .setLabel(`${button.skip.label}`)
             .setEmoji(`${button.skip.emoji}`)
-            .setStyle(ButtonStyle[button.pause.style])
+            .setStyle(ButtonStyle[button.skip.style])
         )
         .addComponents(
           new ButtonBuilder()

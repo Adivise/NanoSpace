@@ -15,3 +15,8 @@ redeem_already: "You already are a premium user"
 redeem_title: "Premium Redeemed"
 redeem_desc: "**You have successfully redeemed premium!**\n\n*Expires at*: [`%{expires}`]"
 redeem_invalid: "**The code is invalid. Please try again using valid one!**"
+
+##### UnPremium command #####
+unpremium_mention: "Please mention member!"
+unpremium_already: "**Already are Unpremium! %{user}**"
+unpremium_desc: "**You have successfully Unpremium! %{user}**"

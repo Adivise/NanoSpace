@@ -73,7 +73,7 @@ module.exports = {
                 .setCustomId("skip")
                 .setLabel(`${button.skip.label}`)
                 .setEmoji(`${button.skip.emoji}`)
-                .setStyle(ButtonStyle[button.pause.style])
+                .setStyle(ButtonStyle[button.skip.style])
             )
             .addComponents(
             new ButtonBuilder()
