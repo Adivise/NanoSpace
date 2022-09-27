@@ -1,6 +1,7 @@
 ## 📄 READ THIS
 
-*Slash Commands!* | **[NanoSpacePlus](https://github.com/Adivise/NanoSpacePlus)** (`Have Request System`)
+**THIS PROJECT WILL BE ARCHIVE NOW**
+**[NanoSpacePlus](https://github.com/Adivise/NanoSpacePlus)** (`Use this version is up to date`)
 
 ## 📑 Short Feature
 - [x] Music System
